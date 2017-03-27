@@ -1,10 +1,14 @@
-<h1>
-  {{title}}
-</h1>
-<div>
-  <rxstudio-creation-menu></rxstudio-creation-menu>
+<div fxLayout="column" fxLayoutAlign="stretch" class="app">
+  <div class="header">
+    <h1>
+      {{title}}
+    </h1>
+  </div>
   <rxstudio-control-scene></rxstudio-control-scene>
-  <rxstudio-property-inspector></rxstudio-property-inspector>
-  <rxstudio-scene></rxstudio-scene>
+  <div fxLayout="row" fxFlex>
+    <rxstudio-creation-menu></rxstudio-creation-menu>
+    <rxstudio-scene fxFlex></rxstudio-scene>
+    <rxstudio-property-inspector></rxstudio-property-inspector>
+  </div>
   <rxstudio-status></rxstudio-status>
 </div>

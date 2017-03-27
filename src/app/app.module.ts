@@ -9,6 +9,7 @@ import { CreationMenuComponent } from './creation-menu/creation-menu.component';
 import { ControlSceneComponent } from './control-scene/control-scene.component';
 import { StatusComponent } from './status/status.component';
 import { SceneComponent } from './scene/scene.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SceneComponent } from './scene/scene.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
