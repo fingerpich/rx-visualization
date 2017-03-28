@@ -1,6 +1,8 @@
+import {AppService} from "../app.service";
 declare var d3: any;
+
 export class GraphCreator {
-  consts =  {
+  private consts =  {
     selectedClass: "selected",
     connectClass: "connect-node",
     circleGClass: "conceptG",
@@ -11,7 +13,7 @@ export class GraphCreator {
     ENTER_KEY: 13,
     nodeRadius: 50
   };
-  state = {
+  private state = {
     selectedNode: null,
     selectedEdge: null,
     mouseDownNode: null,
@@ -24,11 +26,17 @@ export class GraphCreator {
     graphMouseDown:false,
   };
 
-  nodes = [];
-  edges = [];
-  dragLine;
-  svg;svgG;circles;paths;drag;
-  constructor(svg, nodes, edges) {
+  private nodes = [];
+  private edges = [];
+  private dragLine;
+  private svg;
+  private svgG;
+  private circles;
+  private paths;
+  private drag;
+  private idct = 0;
+
+  constructor(svg, nodes, edges ,private appService:AppService) {
     const thisGraph = this;
     this.nodes = nodes || [];
     this.edges = edges || [];
@@ -38,7 +46,7 @@ export class GraphCreator {
     this.bindEvents();
   }
 
-  defineArrows() {
+  private defineArrows() {
     // define arrow markers for graph links
     const defs = this.svg.append('svg:defs');
     defs.append('svg:marker')
@@ -68,7 +76,7 @@ export class GraphCreator {
       .attr('d', 'M0,0L0,0')
       .style('marker-end', 'url(#mark-end-arrow)');
   }
-  bindEvents() {
+  private bindEvents() {
     const thisGraph = this;
     // svg nodes and edges
     thisGraph.paths = this.svgG.append("g").selectAll("g");
@@ -132,11 +140,12 @@ export class GraphCreator {
     });
   }
 
-  idct = 0;
-  setIdCt(idct){
+
+  public setIdCt(idct){
     this.idct = idct;
   };
-  serialize() {
+
+  public serialize() {
     const thisGraph = this;
     const saveEdges = [];
     thisGraph.edges.forEach(function (val, i) {
@@ -144,7 +153,7 @@ export class GraphCreator {
     });
     return JSON.stringify({"nodes": thisGraph.nodes, "edges": saveEdges});
   }
-  deserialize(jsonText){
+  public deserialize(jsonText){
     const thisGraph = this;
     const jsonObj = JSON.parse(jsonText);
     thisGraph.deleteGraph(true);
@@ -159,7 +168,7 @@ export class GraphCreator {
     thisGraph.updateGraph();
   }
 
-  dragmove(d) {
+  private dragmove(d) {
     const thisGraph = this;
     if (thisGraph.state.shiftNodeDrag){
       thisGraph.dragLine.attr('d', 'M' + d.x + ',' + d.y + 'L' + d3.mouse(thisGraph.svgG.node())[0] + ',' + d3.mouse(this.svgG.node())[1]);
@@ -170,7 +179,7 @@ export class GraphCreator {
     }
   }
 
-  deleteGraph(skipPrompt){
+  private deleteGraph(skipPrompt){
     const thisGraph = this;
     let doDelete = true;
     if (!skipPrompt){
@@ -184,7 +193,7 @@ export class GraphCreator {
   };
 
   /* insert svg line breaks: taken from http://stackoverflow.com/questions/13241475/how-do-i-include-newlines-in-labels-in-d3-charts */
-  insertTitleLinebreaks (gEl, title) {
+  private insertTitleLinebreaks (gEl, title) {
     const words = title.split(/\s+/g),
       nwords = words.length;
     const el = gEl.append("text")
@@ -200,7 +209,7 @@ export class GraphCreator {
 
 
 // remove edges associated with a node
-  spliceLinksForNode(node) {
+  private spliceLinksForNode(node) {
     const thisGraph = this,
       toSplice = thisGraph.edges.filter(function(l) {
         return (l.source === node || l.target === node);
@@ -210,25 +219,27 @@ export class GraphCreator {
     });
   };
 
-  replaceSelectEdge(d3Path, edgeData){
+  private replaceSelectEdge(d3Path, edgeData){
     const thisGraph = this;
     d3Path.classed(thisGraph.consts.selectedClass, true);
     if (thisGraph.state.selectedEdge){
       thisGraph.removeSelectFromEdge();
     }
     thisGraph.state.selectedEdge = edgeData;
+    this.appService.setSelectedItem(nodeData);
   };
 
-  replaceSelectNode(d3Node, nodeData){
+  private replaceSelectNode(d3Node, nodeData){
     const thisGraph = this;
     d3Node.classed(this.consts.selectedClass, true);
     if (thisGraph.state.selectedNode){
       thisGraph.removeSelectFromNode();
     }
     thisGraph.state.selectedNode = nodeData;
+    this.appService.setSelectedItem(nodeData);
   };
 
-  removeSelectFromNode(){
+  private removeSelectFromNode(){
     const thisGraph = this;
     thisGraph.circles.filter(function(cd){
       return cd.id === thisGraph.state.selectedNode.id;
@@ -236,7 +247,7 @@ export class GraphCreator {
     thisGraph.state.selectedNode = null;
   };
 
-  removeSelectFromEdge(){
+  private removeSelectFromEdge(){
     const thisGraph = this;
     thisGraph.paths.filter(function(cd){
       return cd === thisGraph.state.selectedEdge;
@@ -244,7 +255,7 @@ export class GraphCreator {
     thisGraph.state.selectedEdge = null;
   };
 
-  pathMouseDown (d3path, d){
+  private pathMouseDown (d3path, d){
     const thisGraph = this,
       state = thisGraph.state;
     d3.event.stopPropagation();
@@ -263,7 +274,7 @@ export class GraphCreator {
   };
 
 // mousedown on node
-  circleMouseDown (d3node, d){
+  private circleMouseDown (d3node, d){
     const thisGraph = this,
       state = thisGraph.state;
     d3.event.stopPropagation();
@@ -318,7 +329,7 @@ export class GraphCreator {
   // };
 
 // mouseup on nodes
-  circleMouseUp(d3node, d){
+  private circleMouseUp(d3node, d){
     const thisGraph = this,
       state = thisGraph.state,
       consts = thisGraph.consts;
@@ -378,12 +389,12 @@ export class GraphCreator {
   }; // end of circles mouseup
 
 // mousedown on main svg
-  svgMouseDown(){
+  private svgMouseDown(){
     this.state.graphMouseDown = true;
   };
 
 // mouseup on main svg
-  svgMouseUp(){
+  private svgMouseUp(){
     const thisGraph = this,
       state = thisGraph.state;
     if (state.justScaleTransGraph) {
@@ -414,7 +425,7 @@ export class GraphCreator {
   };
 
 // keydown on main svg
-  svgKeyDown() {
+  private svgKeyDown() {
     const thisGraph = this,
       state = thisGraph.state,
       consts = thisGraph.consts;
@@ -443,12 +454,12 @@ export class GraphCreator {
     }
   };
 
-  svgKeyUp() {
+  private svgKeyUp() {
     this.state.lastKeyDown = -1;
   };
 
 // call to propagate changes to graph
-  updateGraph(){
+  public updateGraph(){
 
     const thisGraph = this,
       consts = thisGraph.consts,
@@ -529,13 +540,13 @@ export class GraphCreator {
     thisGraph.circles.exit().remove();
   };
 
-  zoomed(){
+  private zoomed(){
     this.state.justScaleTransGraph = true;
     d3.select("." + this.consts.graphClass)
       .attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
   };
 
-  updateWindow(width,height){
+  public updateWindow(width,height){
     this.svg.attr("width", width).attr("height", height);
   };
 

@@ -10,6 +10,7 @@ import { ControlSceneComponent } from './control-scene/control-scene.component';
 import { StatusComponent } from './status/status.component';
 import { SceneComponent } from './scene/scene.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import {AppService} from "./app.service";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     HttpModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [
+    AppService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

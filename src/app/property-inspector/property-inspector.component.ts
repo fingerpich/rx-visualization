@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AppService} from "../app.service";
 
 @Component({
   selector: 'rxstudio-property-inspector',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PropertyInspectorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appService:AppService ) { }
 
   ngOnInit() {
+    this.appService.getSelectedItem().subscribe(data =>{
+
+    });
   }
 
 }

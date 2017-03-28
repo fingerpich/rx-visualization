@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AppService} from "../app.service";
 
 @Component({
   selector: 'rxstudio-creation-menu',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreationMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appService:AppService) { }
 
   ngOnInit() {
+  }
+
+  selectOption(option){
+    this.appService.setCreationOption(option);
   }
 
 }
