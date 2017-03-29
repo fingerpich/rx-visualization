@@ -9,7 +9,9 @@
     height:50px;
   }
   rxstudio-creation-menu{
-    width:50px;
+    width:200px;
+    overflow-y: auto;
+    overflow-x:hidden;
   }
   rxstudio-property-inspector{
     width:150px;

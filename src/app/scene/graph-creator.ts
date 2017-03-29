@@ -6,6 +6,7 @@ export class GraphCreator {
     selectedClass: "selected",
     connectClass: "connect-node",
     circleGClass: "conceptG",
+    conectorCircle: "conectorCircle",
     graphClass: "graph",
     activeEditId: "active-editing",
     BACKSPACE_KEY: 8,
@@ -82,6 +83,7 @@ export class GraphCreator {
     thisGraph.paths = this.svgG.append("g").selectAll("g");
     thisGraph.circles = this.svgG.append("g").selectAll("g");
 
+
     thisGraph.drag = d3.drag()
     //to set group origin drag [position
       .subject(function(d){
@@ -92,11 +94,26 @@ export class GraphCreator {
       //   thisGraph.state.justDragged = true;
       //   thisGraph.dragmove.call(thisGraph, args);
       // })
-      .on("drag", function(args){
+      .on("drag", function(d){
+        // const d=d3.select(this.parentNode)
         thisGraph.state.justDragged = true;
-        thisGraph.dragmove.call(thisGraph, args);
+        if(thisGraph.state.shiftNodeDrag){
+          const gMousePos=d3.mouse(thisGraph.svgG.node());
+          thisGraph.dragLine.attr('d', 'M' + d.x + ',' + d.y + 'L' + gMousePos[0] + ',' + gMousePos[1]);
+        }
+        else{
+          d.x += d3.event.dx;
+          d.y +=  d3.event.dy;
+          thisGraph.updateGraph();
+        }
+
+        // thisGraph.dragmove.call(thisGraph, args);
       })
       .on("end", function() {
+        if(thisGraph.state.shiftNodeDrag){
+          thisGraph.state.shiftNodeDrag=false;
+          thisGraph.dragLine.classed('hidden', true)
+        }
         // todo check if edge-mode is selected
       });
 
@@ -111,32 +128,36 @@ export class GraphCreator {
     this.svg.on("mouseup", function(d){thisGraph.svgMouseUp.call(thisGraph, d);});
 
     // listen for dragging
-    const dragSvg = d3.zoom()
-      .on("start", function(){
-        const ael = d3.select("#" + thisGraph.consts.activeEditId).node();
-        if (ael){
-          ael.blur();
-        }
-        if (!d3.event.sourceEvent.shiftKey) d3.select('body').style("cursor", "move");
-      })
-      .on("zoom", function(){
-        if (d3.event.sourceEvent.shiftKey){
-          // TODO  the internal d3 state is still changing
-          return false;
-        } else{
-          thisGraph.zoomed.call(thisGraph);
-        }
-        return true;
-      })
-      .on("end", function(){
-        d3.select('body').style("cursor", "auto");
-      });
+    // const dragSvg = d3.zoom()
+    //   .on("start", function(){
+    //     const ael = d3.select("#" + thisGraph.consts.activeEditId).node();
+    //     if (ael){
+    //       ael.blur();
+    //     }
+    //     if (!d3.event.sourceEvent.shiftKey) d3.select('body').style("cursor", "move");
+    //   })
+    //   .on("zoom", function(){
+    //     if (d3.event.sourceEvent.shiftKey){
+    //       // TODO  the internal d3 state is still changing
+    //       return false;
+    //     } else{
+    //       thisGraph.zoomed.call(thisGraph);
+    //     }
+    //     return true;
+    //   })
+    //   .on("end", function(){
+    //     d3.select('body').style("cursor", "auto");
+    //   });
+    // thisGraph.svg.call(d3.zoom()
+    //   .scaleExtent([1 / 2, 8])
+    //   .on("zoom", ()=>{
+    //     thisGraph.svgG.attr("transform", d3.event.transform);
+    //     thisGraph.svgG.attr("transform", "scale(" + d3.event.scale + ")");
+      // }));
+    // thisGraph.svg.on("dblclick.zoom", null);
 
-    this.svg.call(dragSvg).on("dblclick.zoom", null);
-
-    // handle delete graph
-    d3.select("#delete-graph").on("click", function(){
-      thisGraph.deleteGraph(false);
+    thisGraph.appService.getControlChanges().subscribe((data)=>{
+      if(data=="clear"){thisGraph.deleteGraph(false);}
     });
   }
 
@@ -169,14 +190,7 @@ export class GraphCreator {
   }
 
   private dragmove(d) {
-    const thisGraph = this;
-    if (thisGraph.state.shiftNodeDrag){
-      thisGraph.dragLine.attr('d', 'M' + d.x + ',' + d.y + 'L' + d3.mouse(thisGraph.svgG.node())[0] + ',' + d3.mouse(this.svgG.node())[1]);
-    } else{
-      d.x += d3.event.dx;
-      d.y +=  d3.event.dy;
-      thisGraph.updateGraph();
-    }
+
   }
 
   private deleteGraph(skipPrompt){
@@ -226,7 +240,7 @@ export class GraphCreator {
       thisGraph.removeSelectFromEdge();
     }
     thisGraph.state.selectedEdge = edgeData;
-    this.appService.setSelectedItem(nodeData);
+    this.appService.setSelectedItem(edgeData);
   };
 
   private replaceSelectNode(d3Node, nodeData){
@@ -258,7 +272,7 @@ export class GraphCreator {
   private pathMouseDown (d3path, d){
     const thisGraph = this,
       state = thisGraph.state;
-    d3.event.stopPropagation();
+    // d3.event.stopPropagation();
     state.mouseDownLink = d;
 
     if (state.selectedNode){
@@ -277,11 +291,13 @@ export class GraphCreator {
   private circleMouseDown (d3node, d){
     const thisGraph = this,
       state = thisGraph.state;
-    d3.event.stopPropagation();
+    // d3.event.stopPropagation();
     state.mouseDownNode = d;
-    if (d3.event.shiftKey){
-      state.shiftNodeDrag = d3.event.shiftKey;
-      // reposition dragged directed edge
+    state.shiftNodeDrag=false;
+    const mousePos=d3.mouse(d3node.node());
+    const r=Math.sqrt(mousePos[0]*mousePos[0]+mousePos[1]*mousePos[1]);
+    if((r+10)>thisGraph.consts.nodeRadius){
+      state.shiftNodeDrag=true;
       thisGraph.dragLine.classed('hidden', false)
         .attr('d', 'M' + d.x + ',' + d.y + 'L' + d.x + ',' + d.y);
       return;
@@ -389,8 +405,23 @@ export class GraphCreator {
   }; // end of circles mouseup
 
 // mousedown on main svg
-  private svgMouseDown(){
+  private svgMouseDown() {
     this.state.graphMouseDown = true;
+    var createOption = this.appService.getCreationOption();
+    if (!createOption || createOption == "pan")return;
+    else {
+      const xycoords = d3.mouse(this.svgG.node()),
+        d = {
+          id: this.idct++,
+          title: "new concept",
+          x: xycoords[0], y: xycoords[1]
+        };
+      this.nodes.push(d);
+      this.updateGraph();
+      d3.event.preventDefault();
+      d3.event.stopPropagation();
+      return false;
+    }
   };
 
 // mouseup on main svg
@@ -524,13 +555,18 @@ export class GraphCreator {
       .on("mousedown", function(d){
         thisGraph.circleMouseDown.call(thisGraph, d3.select(this), d);
       })
-      .on("mouseup", function(d){
+      .on("click", function(d){
         thisGraph.circleMouseUp.call(thisGraph, d3.select(this), d);
       })
       .call(thisGraph.drag);
 
     newGs.append("circle")
       .attr("r", String(consts.nodeRadius));
+    // newGs.append("circle").classed(consts.conectorCircle,true)
+    //   .attr("transform", function(d){
+    //     return "translate(" + consts.nodeRadius/1.41 + "," + consts.nodeRadius/1.41 + ")";
+    //   })
+    //   .attr("r", String(consts.nodeRadius/5))
 
     newGs.each(function(d){
       thisGraph.insertTitleLinebreaks(d3.select(this), d.title);

@@ -7,13 +7,16 @@ import {AppService} from "../app.service";
   styleUrls: ['./creation-menu.component.scss']
 })
 export class CreationMenuComponent implements OnInit {
-
+  operators;
+  selectedOption;
   constructor(private appService:AppService) { }
 
   ngOnInit() {
+    this.operators=this.appService.getOperators()
   }
 
-  selectOption(option){
+  selectOperator(option){
+    this.selectedOption=option;
     this.appService.setCreationOption(option);
   }
 

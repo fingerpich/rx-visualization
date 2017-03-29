@@ -14,17 +14,25 @@
       fill: #F6FBFF;
       stroke: #333;
       stroke-width: 2px;
+      &:hover{
+        fill: rgb(200, 238, 241);
+      }
     }
-
-    g.conceptG:hover circle {
-      fill: rgb(200, 238, 241);
-    }
-
     g.selected circle {
       fill: rgb(250, 232, 255);
     }
     g.selected:hover circle {
       fill: rgb(250, 232, 255);
+    }
+
+    g.conceptG .conectorCircle{
+      fill: #F6FBFF;
+      stroke: #333;
+      stroke-width: 1px;
+      &:hover{
+        fill: red;
+        stroke-width: 0px;
+      }
     }
 
     path.link {

@@ -7,12 +7,12 @@ import {AppService} from "../app.service";
   styleUrls: ['./property-inspector.component.scss']
 })
 export class PropertyInspectorComponent implements OnInit {
-
+  selectedItem;
   constructor(private appService:AppService ) { }
 
   ngOnInit() {
     this.appService.getSelectedItem().subscribe(data =>{
-
+      this.selectedItem=data;
     });
   }
 

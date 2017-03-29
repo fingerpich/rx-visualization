@@ -1,0 +1,18 @@
+.selectable{
+  cursor:pointer;
+}
+h5{
+  margin:5px 0 0;
+}
+.operatorOption{
+  color: #07f;
+  padding: 2px;
+  font-size: 12px;
+  transition: ease 0.3s;
+  &.selected{
+    color: black;
+    background: #eee;
+    border-radius: 3px;
+    padding: 2px 10px;
+  }
+}

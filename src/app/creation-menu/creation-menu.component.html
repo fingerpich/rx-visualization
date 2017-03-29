@@ -1,4 +1,11 @@
 <div fxLayout="column">
-  <button>observable</button>
-  <button>subsribe</button>
+  <div *ngFor="let kind of operators">
+    <h5>{{kind.name}}</h5>
+    <div class="selectable operatorOption"
+         [ngClass]="{'selected':selectedOption==op}"
+         (click)="selectOperator(op)"
+         *ngFor="let op of kind.list">
+      {{op}}
+    </div>
+  </div>
 </div>

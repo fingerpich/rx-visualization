@@ -1,5 +1,6 @@
 import {Component, OnInit, ElementRef, Renderer} from '@angular/core';
 import {GraphCreator} from "./graph-creator";
+import {AppService} from "../app.service";
 declare var d3: any;
 
 @Component({
@@ -9,7 +10,7 @@ declare var d3: any;
 })
 export class SceneComponent implements OnInit {
 
-  constructor(public el: ElementRef) { }
+  constructor(public el: ElementRef, private appService:AppService) { }
 
   ngOnInit() {
     const el:HTMLElement = this.el.nativeElement;
@@ -30,7 +31,7 @@ export class SceneComponent implements OnInit {
     const svg = root.append('svg')
       .attr("width", width)
       .attr("height", height);
-    const graph = new GraphCreator(svg, nodes, edges);
+    const graph = new GraphCreator(svg, nodes, edges,this.appService);
     // listen for resize
     window.onresize = function(){graph.updateWindow(el.clientWidth,el.clientHeight);};
     graph.setIdCt(2);

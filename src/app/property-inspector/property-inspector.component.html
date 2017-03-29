@@ -1,3 +1,4 @@
-<p>
-  nothing has selected
-</p>
+<div *ngIf="selectedItem">
+  <div><b>ID:</b><span>{{selectedItem.id}}</span></div>
+  <div><b>title:</b><span>{{selectedItem.title}}</span></div>
+</div>
