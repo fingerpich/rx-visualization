@@ -2,12 +2,25 @@
   cursor:pointer;
 }
 h5{
-  margin:5px 0 0;
+  margin: 0;
+  font-weight: 100;
+  font-size: 11px;
+  color: #adadad;
+  /* background: #e4e4e4; */
+  text-align: center;
+  border-top: 1px solid #efefef;
+  padding: 5px 0 0;
 }
 .operatorOption{
   color: #07f;
-  padding: 2px;
+  padding: 11px;
+  text-align: center;
+  min-width: 33%;
+  line-height: 36px;
+  display: inline;
+  /* float: left; */
   font-size: 12px;
+  -webkit-transition: ease 0.3s;
   transition: ease 0.3s;
   &.selected{
     color: black;

@@ -19,12 +19,7 @@ export class SceneComponent implements OnInit {
     const width=el.clientWidth;
     const height=el.clientHeight;
 
-    const xLoc = width/2 - 25;
-    const yLoc = 100;
-    const nodes = [{title: "new concept", id: 0, x: xLoc, y: yLoc},
-      {title: "new concept", id: 1, x: xLoc, y: yLoc + 200}];
-    const edges = [{source: nodes[1], target: nodes[0]}];
-
+    const {nodes,edges,lastIndex}=this.appService.getInitialData(width,height);
 
     /** MAIN SVG **/
     const root = d3.select(el);
@@ -34,7 +29,7 @@ export class SceneComponent implements OnInit {
     const graph = new GraphCreator(svg, nodes, edges,this.appService);
     // listen for resize
     window.onresize = function(){graph.updateWindow(el.clientWidth,el.clientHeight);};
-    graph.setIdCt(2);
+    graph.setIdCt(lastIndex);
     graph.updateGraph();
   }
 }

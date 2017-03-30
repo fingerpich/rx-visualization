@@ -1,6 +1,6 @@
 .app{
   height:100%;
-  padding:0 10px;
+  padding:0;
 
   .header{
     height:50px;
@@ -14,7 +14,7 @@
     overflow-x:hidden;
   }
   rxstudio-property-inspector{
-    width:150px;
+    width:400px;
   }
   rxstudio-status{
     height:20px;

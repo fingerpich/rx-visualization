@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AppService} from "../app.service";
 
 @Component({
   selector: 'rxstudio-control-scene',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ControlSceneComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appService:AppService) { }
 
   ngOnInit() {
   }
-
+  clearClick(){
+    this.appService.controlScene("clear");
+  }
+  deleteClick(){
+    this.appService.controlScene("delete");
+  }
 }

@@ -5,7 +5,7 @@
          [ngClass]="{'selected':selectedOption==op}"
          (click)="selectOperator(op)"
          *ngFor="let op of kind.list">
-      {{op}}
+      {{op.name}}
     </div>
   </div>
 </div>
