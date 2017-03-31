@@ -29,14 +29,14 @@ export class GraphCreator {
 
   private nodes = [];
   private edges = [];
-  private dragLine;
+  private connectorLine;
+  private connectTarget;
   private svg;
   private svgG;
   private circles;
   private paths;
   private drag;
   private idct = 0;
-  private connectTarget;
 
   constructor(svg, nodes, edges ,private appService:AppService) {
     const thisGraph = this;
@@ -44,9 +44,13 @@ export class GraphCreator {
     this.edges = edges || [];
     this.svg = svg;
     this.svgG = svg.append("g").classed(thisGraph.consts.graphClass, true);
+    this.setIdCounterByNodes();
     this.defineArrows();
     this.bindEvents();
   }
+  private setIdCounterByNodes = () => {
+    this.idct = Math.max.apply(this, this.nodes.map(n => n.id)) + 1;
+  };
 
   private defineArrows() {
     // define arrow markers for graph links
@@ -73,8 +77,8 @@ export class GraphCreator {
       .attr('d', 'M0,-5L10,0L0,5');
 
     // displayed when dragging between nodes
-    this.dragLine = this.svgG.append('svg:path')
-      .attr('class', 'link dragline hidden')
+    this.connectorLine = this.svgG.append('svg:path')
+      .attr('class', 'link hidden')
       .attr('d', 'M0,0L0,0')
       .style('marker-end', 'url(#mark-end-arrow)');
   }
@@ -90,8 +94,8 @@ export class GraphCreator {
       .on("end", this.dragEnd);
 
     // listen for key events
-    d3.select(window).on("keydown", this.svgKeyDown)
-      .on("keyup", this.svgKeyUp);
+    // d3.select(window).on("keydown", this.svgKeyDown)
+    //   .on("keyup", this.svgKeyUp);
     this.svg.on("click", this.svgClick);
 
     // handle zoom
@@ -108,25 +112,20 @@ export class GraphCreator {
     });
   }
 
-
-  public setIdCt(idct){
-    this.idct = idct;
-  };
-
-  public serialize() {
+  public serialize = () => {
     const thisGraph = this;
     const saveEdges = [];
     thisGraph.edges.forEach(function (val, i) {
       saveEdges.push({source: val.source.id, target: val.target.id});
     });
     return JSON.stringify({"nodes": thisGraph.nodes, "edges": saveEdges});
-  }
-  public deserialize(jsonText){
+  };
+  public deserialize = (jsonText) => {
     const thisGraph = this;
     const jsonObj = JSON.parse(jsonText);
     thisGraph.deleteGraph(true);
     thisGraph.nodes = jsonObj.nodes;
-    thisGraph.setIdCt(jsonObj.nodes.length + 1);
+    thisGraph.setIdCounterByNodes();
     const newEdges = jsonObj.edges;
     newEdges.forEach(function(e, i){
       newEdges[i] = {source: thisGraph.nodes.filter(function(n){return n.id == e.source;})[0],
@@ -134,13 +133,13 @@ export class GraphCreator {
     });
     thisGraph.edges = newEdges;
     thisGraph.updateGraph();
-  }
+  };
 
   private dragMove = (d) => {
     this.state.justDragged = true;
     if(this.state.shiftNodeDrag){
       const gMousePos=d3.mouse(this.svgG.node());
-      this.dragLine.attr('d', 'M' + d.x + ',' + d.y + 'L' + gMousePos[0] + ',' + gMousePos[1]);
+      this.connectorLine.attr('d', 'M' + d.x + ',' + d.y + 'L' + gMousePos[0] + ',' + gMousePos[1]);
     }
     else{
       d.x += d3.event.dx;
@@ -157,11 +156,11 @@ export class GraphCreator {
         thisGraph.updateGraph();
       }
       thisGraph.state.shiftNodeDrag=false;
-      thisGraph.dragLine.classed('hidden', true)
+      thisGraph.connectorLine.classed('hidden', true)
     }
   };
 
-  private deleteGraph(skipPrompt){
+  private deleteGraph = (skipPrompt) => {
     const thisGraph = this;
     let doDelete = true;
     if (!skipPrompt){
@@ -173,25 +172,25 @@ export class GraphCreator {
       thisGraph.updateGraph();
     }
   };
-
-  /* insert svg line breaks: taken from http://stackoverflow.com/questions/13241475/how-do-i-include-newlines-in-labels-in-d3-charts */
-  private insertTitleLinebreaks (gEl, title) {
-    const words = title.split(/\s+/g),
-      nwords = words.length;
-    const el = gEl.append("text")
-      .attr("text-anchor","middle")
-      .attr("dy", "-" + (nwords-1)*7.5);
-
-    for (let i = 0; i < words.length; i++) {
-      const tspan = el.append('tspan').text(words[i]);
-      if (i > 0)
-        tspan.attr('x', 0).attr('dy', '15');
+  public removeSelected = () => {
+    const thisGraph = this,
+      state = thisGraph.state,
+      consts = thisGraph.consts;
+    const selectedNode = state.selectedNode,
+      selectedEdge = state.selectedEdge;
+    thisGraph.appService.setSelectedItem(null);
+    if (selectedNode){
+      thisGraph.nodes.splice(thisGraph.nodes.indexOf(selectedNode), 1);
+      thisGraph.spliceLinksForNode(selectedNode);
+      state.selectedNode = null;
+      thisGraph.updateGraph();
+    } else if (selectedEdge){
+      thisGraph.edges.splice(thisGraph.edges.indexOf(selectedEdge), 1);
+      state.selectedEdge = null;
+      thisGraph.updateGraph();
     }
   };
-
-
-// remove edges associated with a node
-  private spliceLinksForNode(node) {
+  private spliceLinksForNode = (node) => {
     const thisGraph = this,
       toSplice = thisGraph.edges.filter(function(l) {
         return (l.source === node || l.target === node);
@@ -201,35 +200,30 @@ export class GraphCreator {
     });
   };
 
-  private replaceSelectEdge(d3Path, edgeData){
+  private selectAnEdge = (d3Path, edgeData) => {
     const thisGraph = this;
     d3Path.classed(thisGraph.consts.selectedClass, true);
     if (thisGraph.state.selectedEdge){
-      thisGraph.removeSelectFromEdge();
+      thisGraph.deselectEdges();
     }
     thisGraph.state.selectedEdge = edgeData;
-    this.appService.setSelectedItem(edgeData);
   };
-
-  private replaceSelectNode(d3Node, nodeData){
+  private selectANode = (d3Node, nodeData) => {
     const thisGraph = this;
     d3Node.classed(this.consts.selectedClass, true);
     if (thisGraph.state.selectedNode){
-      thisGraph.removeSelectFromNode();
+      thisGraph.deselectNodes();
     }
     thisGraph.state.selectedNode = nodeData;
-    this.appService.setSelectedItem(nodeData);
   };
-
-  private removeSelectFromNode(){
+  private deselectNodes = () => {
     const thisGraph = this;
     thisGraph.circles.selectAll('g').filter(function(cd){
       return cd.id === thisGraph.state.selectedNode.id;
     }).classed(thisGraph.consts.selectedClass, false);
     thisGraph.state.selectedNode = null;
   };
-
-  private removeSelectFromEdge(){
+  private deselectEdges = () => {
     const thisGraph = this;
     thisGraph.paths.selectAll('path').filter(function(cd){
       return cd === thisGraph.state.selectedEdge;
@@ -237,64 +231,65 @@ export class GraphCreator {
     thisGraph.state.selectedEdge = null;
   };
 
-  private pathMouseDown (d3path, d){
+  private pathMouseDown = (d3path, d) => {
     const thisGraph = this,
       state = thisGraph.state;
     // d3.event.stopPropagation();
     state.mouseDownLink = d;
 
     if (state.selectedNode){
-      thisGraph.removeSelectFromNode();
+      thisGraph.deselectNodes();
     }
 
     const prevEdge = state.selectedEdge;
     if (!prevEdge || prevEdge !== d){
-      thisGraph.replaceSelectEdge(d3path, d);
+      thisGraph.selectAnEdge(d3path, d);
+      this.appService.setSelectedItem(d);
     } else{
-      thisGraph.removeSelectFromEdge();
+      thisGraph.deselectEdges();
+      this.appService.setSelectedItem(null);
     }
   };
-
-// mousedown on node
-  private circleMouseDown (d3node, d){
+  private isMouseOnCircleCorner = (d3node) => {
+    const mousePos = d3.mouse(d3node.node());
+    const r = Math.sqrt(mousePos[0] * mousePos[0] + mousePos[1] * mousePos[1]);
+    return (r > (this.consts.nodeRadius/1.618));
+  };
+  private circleMouseDown = (d3node, d) => {
     const thisGraph = this,
       state = thisGraph.state;
     // d3.event.stopPropagation();
     state.mouseDownNode = d;
     state.shiftNodeDrag=false;
-    const mousePos=d3.mouse(d3node.node());
-    const r=Math.sqrt(mousePos[0]*mousePos[0]+mousePos[1]*mousePos[1]);
-    if((r+10)>thisGraph.consts.nodeRadius){
+    if(this.isMouseOnCircleCorner(d3node)){
       state.shiftNodeDrag=true;
-      thisGraph.dragLine.classed('hidden', false)
+      thisGraph.connectorLine.classed('hidden', false)
         .attr('d', 'M' + d.x + ',' + d.y + 'L' + d.x + ',' + d.y);
       return;
     }
   };
 
-
-// mouseup on nodes
-  private circleClick(d3node, d){
+  private circleClick = (d3node, d) => {
     const thisGraph = this,
       state = thisGraph.state,
       consts = thisGraph.consts;
     if (state.selectedEdge){
-      thisGraph.removeSelectFromEdge();
+      thisGraph.deselectEdges();
     }
     const prevNode = state.selectedNode;
 
     if (!prevNode || prevNode.id !== d.id){
-      thisGraph.replaceSelectNode(d3node, d);
+      thisGraph.selectANode(d3node, d);
+      this.appService.setSelectedItem(d);
     } else{
-      thisGraph.removeSelectFromNode();
+      thisGraph.deselectNodes();
+      this.appService.setSelectedItem(null);
     }
     state.mouseDownNode = null;
     d3.event.preventDefault();
     d3.event.stopPropagation();
     return false;
-  }; // end of circles mouseup
-
-  //click on the main svg
+  };
   private svgClick = () => {
     var createOption = this.appService.getCreationOption();
     if (!createOption || createOption == "pan")return;
@@ -308,44 +303,10 @@ export class GraphCreator {
       this.nodes.push(d);
       this.updateGraph();
     }
-  }
-
-// keydown on main svg
-  private svgKeyDown = () => {
-    const thisGraph = this,
-      state = thisGraph.state,
-      consts = thisGraph.consts;
-    // make sure repeated key presses don't register for each keydown
-    if(state.lastKeyDown !== -1) return;
-
-    state.lastKeyDown = d3.event.keyCode;
-    const selectedNode = state.selectedNode,
-      selectedEdge = state.selectedEdge;
-
-    switch(d3.event.keyCode) {
-      case consts.BACKSPACE_KEY:
-      case consts.DELETE_KEY:
-        d3.event.preventDefault();
-        if (selectedNode){
-          thisGraph.nodes.splice(thisGraph.nodes.indexOf(selectedNode), 1);
-          thisGraph.spliceLinksForNode(selectedNode);
-          state.selectedNode = null;
-          thisGraph.updateGraph();
-        } else if (selectedEdge){
-          thisGraph.edges.splice(thisGraph.edges.indexOf(selectedEdge), 1);
-          state.selectedEdge = null;
-          thisGraph.updateGraph();
-        }
-        break;
-    }
-  };
-
-  private svgKeyUp = () => {
-    this.state.lastKeyDown = -1;
   };
 
 // call to propagate changes to graph
-  public updateGraph(){
+  public updateGraph = () => {
 
     const thisGraph = this,
       consts = thisGraph.consts,
@@ -368,23 +329,17 @@ export class GraphCreator {
       .append("path")
       .style('marker-end','url(#end-arrow)')
       .classed("link", true)
-      .attr("d", function(d){
+      .attr("d", (d) => {
         return "M" + d.source.x + "," + d.source.y + "L" + d.target.x + "," + d.target.y;
       })
-      .on("mousedown", function(d){
-          thisGraph.pathMouseDown.call(thisGraph, d3.select(this), d);
-        })
-      .on("mouseup", function(d){
-        state.mouseDownLink = null;
-      });
+      .on("mousedown", function(d){thisGraph.pathMouseDown(d3.select(this), d)})
+      .on("mouseup", (d) => { state.mouseDownLink = null; });
 
     // remove old links
     paths.exit().remove();
 
     // update existing nodes
-    const circles = thisGraph.circles.selectAll("g").data(thisGraph.nodes, function(d){
-      return d.id;
-    });
+    const circles = thisGraph.circles.selectAll("g").data(thisGraph.nodes, d => d.id);
     circles.attr("transform", function(d){
       return "translate(" + d.x + "," + d.y + ")";
     });
@@ -397,7 +352,7 @@ export class GraphCreator {
       .attr("transform", function(d){
         return "translate(" + d.x + "," + d.y + ")";
       })
-      .on("mouseover", function(d){
+      .on("mouseover", function(d) {
         if (state.shiftNodeDrag){
           if(!thisGraph.connectTarget){
             thisGraph.connectTarget=d;
@@ -405,44 +360,46 @@ export class GraphCreator {
           }
         }
       })
-      .on("mouseout", function(d){
+      .on("mouseout", function(d) {
         if(thisGraph.connectTarget===d){
           thisGraph.connectTarget=undefined;
           d3.select(this).classed(consts.connectClass, false);
         }
       })
-      .on("mousedown", function(d){
-        thisGraph.circleMouseDown.call(thisGraph, d3.select(this), d);
-      })
-      .on("click", function(d){
-        thisGraph.circleClick.call(thisGraph, d3.select(this), d);
-      })
+      .on("mousedown", function(d){thisGraph.circleMouseDown(d3.select(this), d)})
+      .on("click", function(d){ thisGraph.circleClick(d3.select(this), d)})
       .call(thisGraph.drag);
 
     newGs.append("circle")
+      .attr("class", "outerCircle")
       .attr("r", String(consts.nodeRadius));
-    // newGs.append("circle").classed(consts.conectorCircle,true)
-    //   .attr("transform", function(d){
-    //     return "translate(" + consts.nodeRadius/1.41 + "," + consts.nodeRadius/1.41 + ")";
-    //   })
-    //   .attr("r", String(consts.nodeRadius/5))
 
-    newGs.each(function(d){
-      thisGraph.insertTitleLinebreaks(d3.select(this), d.data.name);
+    newGs.append("circle")
+      .attr("class", "innerCircle")
+      .attr("r", String(consts.nodeRadius/1.618));
+
+    newGs.each(function(d) {
+      GraphCreator.insertTitleLinebreaks(d3.select(this), d.data.name);
     });
 
     // remove old nodes
-    thisGraph.circles.exit().remove();
+    circles.exit().remove();
   };
+  private static insertTitleLinebreaks (gEl, title) {
+    const words = title.split(/\s+/g),
+      nwords = words.length;
+    const el = gEl.append("text")
+      .attr("text-anchor","middle")
+      .attr("dy", "-" + (nwords-1)*7.5);
 
-  private zoomed(){
-    this.state.justScaleTransGraph = true;
-    d3.select("." + this.consts.graphClass)
-      .attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
+    for (let i = 0; i < words.length; i++) {
+      const tspan = el.append('tspan').text(words[i]);
+      if (i > 0)
+        tspan.attr('x', 0).attr('dy', '18');
+    }
   };
 
   public updateWindow(width,height){
     this.svg.attr("width", width).attr("height", height);
   };
-
 }

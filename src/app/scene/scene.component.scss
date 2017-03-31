@@ -1,53 +1,74 @@
+$primaryColor:#ec1e84;
+$linkColor:#555;
+$borderColor:#aaa;
+$selectedColor:$primaryColor;
 :host{
-  background: #f7f7f7;
   border:1px solid #eee;
+
+  .controlScene {
+    position: absolute;
+    padding:5px;
+    z-index: 1;
+    button {
+      border: 1px solid #eaeaea;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 9px;
+      width: 30px;
+      font-size: 22px;
+      height: 30px;
+      color: #07f;
+      line-height: 12px;
+      outline: none;
+    }
+  }
+
   /deep/ svg {
     .conceptG text {
       pointer-events: none;
     }
 
     marker {
-      fill: #333;
+      fill: $linkColor;
     }
+    g.conceptG {
+      cursor:pointer;
+      circle {
+        fill: #fff;
+        &.outerCircle{
+          stroke-width: 1px;
+          stroke: #aaa;
+          &:hover{
+            fill:#eee;
+          }
+        }
+      }
+      text {
+      }
+      &:hover {
 
-    g.conceptG circle {
-      fill: #F6FBFF;
-      stroke: #333;
-      stroke-width: 2px;
-      &:hover{
-        fill: rgb(200, 238, 241);
+      }
+      &.selected {
+        circle {
+          fill: $selectedColor;
+        }
+        .outerCircle:hover {
+          fill: darken($selectedColor, 7%);
+        }
       }
     }
-    g.selected circle {
-      fill: rgb(250, 232, 255);
-    }
-    g.selected:hover circle {
-      fill: rgb(250, 232, 255);
-    }
-
-    g.conceptG .conectorCircle{
-      fill: #F6FBFF;
-      stroke: #333;
-      stroke-width: 1px;
-      &:hover{
-        fill: red;
-        stroke-width: 0px;
-      }
+    g.connect-node circle {
+      fill: #eee;
     }
 
     path.link {
       fill: none;
-      stroke: #333;
+      cursor:pointer;
+      stroke: $linkColor;
       stroke-width: 6px;
-      cursor: default;
     }
 
     path.link:hover {
-      stroke: rgb(94, 196, 204);
-    }
-
-    g.connect-node circle {
-      fill: #BEFFFF;
+      stroke: lighten($linkColor,50%);
     }
 
     path.link.hidden {
@@ -55,7 +76,7 @@
     }
 
     path.link.selected {
-      stroke: rgb(229, 172, 247);
+      stroke: $selectedColor;
     }
   }
 }

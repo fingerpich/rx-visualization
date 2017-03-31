@@ -3,7 +3,21 @@
   padding:0;
 
   .header{
-    height:50px;
+    background: #7d4c61;
+    h1{
+      margin:0;
+      padding: 9px;
+      font-size: 1rem;
+      color:#ec0c8e;
+    }
+    button{
+      border:none;
+      background: #968;
+      color:#eee;
+      border-radius: 3px;
+      margin:5px;
+      padding:5px 15px;
+    }
   }
   rxstudio-control-scene{
     height:50px;

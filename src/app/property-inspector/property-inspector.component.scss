@@ -1,4 +1,9 @@
 :host{
+  .notSelected{
+    color:#666;
+    margin:0;
+    text-align:center;
+  }
   border-top: 1px solid #f1f1f1;
   padding: 10px;
   textarea{

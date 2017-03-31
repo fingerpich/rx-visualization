@@ -1,11 +1,26 @@
-<div *ngIf="selectedItem">
-  <!--<div><b>ID:</b><span>{{selectedItem.id}}</span></div>-->
-  <div><b>title:</b><span>{{selectedItem.data.name}}</span></div>
-  <div><b>code:</b>
-    <div>
-      <textarea [value]="selectedItem.data.cmd"></textarea>
+<div *ngIf="selectedItem; else notSelected">
+  <div *ngIf="selectedItem.data">
+    <!--<div><b>ID:</b><span>{{selectedItem.id}}</span></div>-->
+    <div><b>title:</b><span>{{selectedItem.data.name}}</span></div>
+    <div><b>code:</b>
+      <div>
+        <textarea [value]="selectedItem.data.cmd"></textarea>
+      </div>
+    </div>
+
+    <p>{{selectedItem.data.desc}}</p>
+  </div>
+  <div *ngIf="selectedItem.source">
+    <div>{{selectedItem.source.data.name+'=>'+selectedItem.target.data.name}}</div>
+    <div><b>code:</b>
+      <div>
+        <textarea [value]="selectedItem.source.data.cmd+selectedItem.target.data.cmd"></textarea>
+      </div>
     </div>
   </div>
-
-  <p>{{selectedItem.data.desc}}</p>
 </div>
+<ng-template #notSelected>
+  <div class="notSelected">
+    select a node to see whats going on.
+  </div>
+</ng-template>

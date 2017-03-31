@@ -269,7 +269,6 @@ export class AppService {
       {id: 1, x: xLoc, y: yLoc + 200,data:subscribeOperator}
     ];
     const edges = [{source: nodes[0], target: nodes[1]}];
-    const lastIndex = 2;
-    return {edges, nodes, lastIndex};
+    return {edges, nodes};
   }
 }
