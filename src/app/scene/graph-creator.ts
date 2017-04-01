@@ -150,7 +150,7 @@ export class GraphCreator {
   private dragEnd = (d) => {
     const thisGraph = this;
     if(thisGraph.state.shiftNodeDrag){
-      if(thisGraph.connectTarget){
+      if(thisGraph.connectTarget && (thisGraph.connectTarget!=d)){
         const newEdge = {source: d, target: thisGraph.connectTarget};
         thisGraph.edges.push(newEdge);
         thisGraph.updateGraph();
