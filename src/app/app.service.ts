@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Subject,Observable} from "rxjs";
+import * as NodeTypes from "./node-types";
 
 @Injectable()
 export class AppService {
@@ -17,35 +18,7 @@ export class AppService {
         name: "Creating Observables",
         desc: "Operators that originate new Observables.",
         list: [
-          {
-            name: "Create",
-            link: operatorLinks + "create.html",
-            desc: "create an Observable from scratch by calling observer methods programmatically",
-
-            runner: ({list}) => {
-              const delay = (observer, delay, value) => {
-                setTimeout(() => {
-                  observer.next(value);
-                }, delay || 0);
-              };
-              Observable.create((observer) => {
-                for (let l of list) {
-                  delay(observer, l.time, l.value);
-                }
-              });
-            },
-            propertiesType: [{list: 'list'}],
-            properties: {
-              list: [{t: 0, v: 1}]
-            },
-
-            graphInputs: [],
-            maxInput: 0,
-
-            commandMaker: `
-            function getNexts(value,time){return time? 'setTimeout(function(){observer.next('+l.v+');},'+l.t+')' : 'observer.next('+l.v+');'}}
-            'Observable.create((observer)=>{'+((function(){for(var l in list){getNexts(l)}})())+'})'`,
-          },
+          NodeTypes,
           {
             name: "Defer",
             link: operatorLinks + "defer.html",
