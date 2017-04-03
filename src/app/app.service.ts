@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Subject} from "rxjs";
+import {Subject,Observable} from "rxjs";
 
 @Injectable()
 export class AppService {
@@ -21,8 +21,30 @@ export class AppService {
             name: "Create",
             link: operatorLinks + "create.html",
             desc: "create an Observable from scratch by calling observer methods programmatically",
-            cmd: "Rx.Observable.create((observer)=>{observer.next(1);observer.next(2);})",
-            maxInput: 0
+
+            runner: ({list}) => {
+              const delay = (observer, delay, value) => {
+                setTimeout(() => {
+                  observer.next(value);
+                }, delay || 0);
+              };
+              Observable.create((observer) => {
+                for (let l of list) {
+                  delay(observer, l.time, l.value);
+                }
+              });
+            },
+            propertiesType: [{list: 'list'}],
+            properties: {
+              list: [{t: 0, v: 1}]
+            },
+
+            graphInputs: [],
+            maxInput: 0,
+
+            commandMaker: `
+            function getNexts(value,time){return time? 'setTimeout(function(){observer.next('+l.v+');},'+l.t+')' : 'observer.next('+l.v+');'}}
+            'Observable.create((observer)=>{'+((function(){for(var l in list){getNexts(l)}})())+'})'`,
           },
           {
             name: "Defer",
@@ -234,7 +256,7 @@ export class AppService {
   }
 
   public setCreationOption(selectedCreation) {
-    this.selectedCreationOption=selectedCreation;
+    this.selectedCreationOption = selectedCreation;
   }
 
   public getCreationOption() {
@@ -244,31 +266,60 @@ export class AppService {
   /**
    * setSelectedItem reactive change selected item
    * @param selectedItem : any its an edge or node
-  */
+   */
   public setSelectedItem(selectedItem) {
     this.selectItemSubject.next(selectedItem);
   }
+
   public getSelectedItem() {
     return this.selectItemSubject;
   }
 
-  public controlScene(command){
+  public controlScene(command) {
     this.controlSubject.next(command);
   }
+
   public getControlChanges() {
     return this.controlSubject;
   }
 
-  public getInitialData(width,height) {
-    const createOperator=   this.rxOperators.map(optype => optype.list.filter(op=>op.name=='Create'   )[0]).filter(op=>op)[0];
-    const subscribeOperator=this.rxOperators.map(optype => optype.list.filter(op=>op.name=='Subscribe')[0]).filter(op=>op)[0];
+  public getInitialData(width, height) {
+    const createOperator = this.rxOperators.map(optype => optype.list.filter(op => op.name == 'Create')[0]).filter(op => op)[0];
+    const subscribeOperator = this.rxOperators.map(optype => optype.list.filter(op => op.name == 'Subscribe')[0]).filter(op => op)[0];
     const xLoc = width / 2 - 25;
     const yLoc = 100;
     const nodes = [
-      {id: 0, x: xLoc, y: yLoc, data:createOperator},
-      {id: 1, x: xLoc, y: yLoc + 200,data:subscribeOperator}
+      {id: 0, x: xLoc, y: yLoc, data: createOperator},
+      {id: 1, x: xLoc, y: yLoc + 200, data: subscribeOperator}
     ];
     const edges = [{source: nodes[0], target: nodes[1]}];
     return {edges, nodes};
+  }
+
+  public rebuildRxObjects(nodes, edges) {
+    for (let node of nodes) {
+      if (node.data.rx) {
+        node.data.rx.dispose();
+        node.data.rx = 0;
+      }
+    }
+
+    //make root observables
+    for (let node of nodes) {
+      if (!node.data.rx && node.data.maxInput < 1) {
+        node.data.rx = node.data.runner(node.data.properties);
+      }
+    }
+
+    let notFinished = true;
+    while (notFinished) {
+      notFinished = false;
+      for (let edge of edges) {
+        if (edge.source.rx) {
+          edge.target.data.rx = edge.target.data.runner(edge.target.data.properties);
+          notFinished = true;
+        }
+      }
+    }
   }
 }

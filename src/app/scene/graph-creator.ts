@@ -291,7 +291,7 @@ export class GraphCreator {
     return false;
   };
   private svgClick = () => {
-    var createOption = this.appService.getCreationOption();
+    const createOption = this.appService.getCreationOption();
     if (!createOption || createOption == "pan")return;
     else {
       const xycoords = d3.mouse(this.svgG.node()),
