@@ -9,7 +9,7 @@ export class RefCount {
     return this.graphInputs[0].refCount();
   };
 
-  private static propertiesType: [{}];
+  private static propertiesType = [{}];
   public properties = {};
 
   public graphInputs = [];

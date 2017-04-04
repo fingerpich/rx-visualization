@@ -9,7 +9,7 @@ export class Windowed {
     return this.graphInputs[0].windowed(this.properties.time);
   };
 
-  private static propertiesType: [{debounceTime: 'Number'}];
+  private static propertiesType = [{debounceTime: 'Number'}];
   public properties = {
     time: 50
   };

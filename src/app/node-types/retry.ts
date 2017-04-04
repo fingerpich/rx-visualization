@@ -9,7 +9,7 @@ export class Retry {
     return this.graphInputs[0].retry(retryCount);
   };
 
-  private static propertiesType: [{retryCount: 'Number'}];
+  private static propertiesType = [{retryCount: 'Number'}];
   public properties = {
     retryCount: 3
   };

@@ -5,7 +5,7 @@ export class Create {
   public static link = "http://reactivex.io/documentation/operators/create.html";
   public static desc = "create an Observable from scratch by calling observer methods programmatically";
 
-  public static runner = ({list}) => {
+  public runner = ({list}) => {
     const delay = (observer, delay, value) => {
       setTimeout(() => {
         observer.next(value);

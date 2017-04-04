@@ -11,7 +11,7 @@ export class FlatMap {
     });
   };
 
-  private static propertiesType: [{list: 'list'}];
+  private static propertiesType = [{list: 'list'}];
   public properties = {
     list: [{t: 0}]
   };
