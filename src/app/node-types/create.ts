@@ -1,7 +1,7 @@
 import {Observable} from "rxjs/Rx";
 
-export default class Create {
-  public static name = "Create";
+export class Create {
+  public static title = "Create";
   public static link = "http://reactivex.io/documentation/operators/create.html";
   public static desc = "create an Observable from scratch by calling observer methods programmatically";
 
@@ -11,14 +11,14 @@ export default class Create {
         observer.next(value);
       }, delay || 0);
     };
-    Observable.create((observer) => {
+    return Observable.create((observer) => {
       for (let l of list) {
         delay(observer, l.time, l.value);
       }
     });
   };
 
-  private static propertiesType:[{list:'list'}];
+  private static propertiesType: [{list: 'list'}];
   public properties = {
     list: [{t: 0, v: 1}]
   };
@@ -26,7 +26,15 @@ export default class Create {
   public graphInputs = [];
   public maxInput = 0;
 
-  public commandMaker = `
-            function getNexts(value,time){return time? 'setTimeout(function(){observer.next('+l.v+');},'+l.t+')' : 'observer.next('+l.v+');'}}
-            'Observable.create((observer)=>{'+((function(){for(var l in list){getNexts(l)}})())+'})'`;
+  public commandMaker = () => {
+    const list = this.properties.list;
+    const getNext = ({value, time}) => {
+      return time ? 'setTimeout(function(){observer.next(' + value + ');},' + time + ')' : 'observer.next(' + value + ');'
+    };
+    let s = "";
+    for (let item of list) {
+      s += getNext(<any>item)
+    }
+    return 'Observable.create((observer)=>{' + s + '})';
+  }
 }
