@@ -16,7 +16,7 @@ export class Average {
   public static maxInput = 1;
   public static minInput = 1;
 
-  public static commandMaker = () => {
+  public commandMaker = () => {
     return '.average()';
   }
 }

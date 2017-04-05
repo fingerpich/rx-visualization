@@ -9,7 +9,7 @@ export class Merge {
     return Observable.merge(...this.graphInputs);
   };
 
-  private static propertiesType = [{}];
+  private static propertiesType = [];
   public properties = {};
 
   public graphInputs = [];
