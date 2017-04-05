@@ -30,7 +30,12 @@ export class AppService {
         desc: "Operators that transform items that are emitted by an Observable.",
         list: [
           NodeTypes.BufferWithCount,
-          NodeTypes.FlatMap  //TODO: make its properties
+          NodeTypes.FlatMap,
+          NodeTypes.Map,
+          NodeTypes.Scan,
+          NodeTypes.Pluck,
+          NodeTypes.GroupBy,
+          NodeTypes.WindowWithCount,
         ]
       },
       {

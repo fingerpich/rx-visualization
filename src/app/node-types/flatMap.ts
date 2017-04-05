@@ -6,14 +6,14 @@ export class FlatMap {
   public static desc = "transform the items emitted by an Observable into Observables, then flatten the emissions from those into a single Observable";
 
   public runner = () => {
-    this.graphInputs[0].flatMapLatest(function (x) {
-      return Observable.range(x, 2);
-    });
+    return this.graphInputs[0].flatMap(FlatMap.propertiesType[0].types[this.properties.fi].func);
   };
 
-  private static propertiesType = [{list: 'list'}];
+  private static propertiesType = [{fi: 'function',types:[
+    {name:"x,x+1",func:(x)=>{return Observable.range(x, 2);},text:"(x)=>{return Observable.range(x, 2);}"},
+  ]}];
   public properties = {
-    list: [{t: 0}]
+    fi: 0
   };
 
   public graphInputs = [];
@@ -21,6 +21,6 @@ export class FlatMap {
   public minInput = 1;
 
   public commandMaker = () => {
-    return '.flatMapLatest(function (x) {return Observable.range(x, 2);})';
+    return '.flatMap(' +FlatMap.propertiesType[0].types[this.properties.fi].func + ')';
   }
 }

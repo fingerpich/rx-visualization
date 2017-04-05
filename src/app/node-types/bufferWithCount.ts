@@ -9,14 +9,14 @@ export class BufferWithCount {
     return this.graphInputs[0].bufferWithCount(count, skip);
   };
 
-  private static propertiesType: [{count: 'Number', skip: 'Number'}];
+  private static propertiesType = [{count: 'Number', skip: 'Number'}];
   public properties = {
     count: 3,
     skip: 2
   };
 
   public graphInputs = [];
-  public maxInput = 0;
+  public maxInput = 1;
   public minInput = 1;
 
   public commandMaker = () => {
