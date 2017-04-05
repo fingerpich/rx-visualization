@@ -4,6 +4,10 @@
  * import all node types.
  */
 export * from './create';
+export * from './interval';
+export * from './repeat';
+export * from './range';
+export * from './timer';
 export * from './all';
 export * from './defer';
 export * from './buffer';

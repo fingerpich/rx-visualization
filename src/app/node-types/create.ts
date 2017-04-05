@@ -25,6 +25,7 @@ export class Create {
 
   public graphInputs = [];
   public maxInput = 0;
+  public minInput = 0;
 
   public commandMaker = () => {
     const list = this.properties.list;

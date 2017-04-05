@@ -18,6 +18,7 @@ export class Defer {
 
   public graphInputs = [];
   public maxInput = 0;
+  public minInput = 0;
 
   public commandMaker = () => {
     return 'Observable.defer(() => { return Observable.of(' + this.properties.result + '); });';

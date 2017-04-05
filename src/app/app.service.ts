@@ -18,6 +18,10 @@ export class AppService {
         desc: "Operators that originate new Observables.",
         list: [
           NodeTypes.Create,
+          NodeTypes.Interval,
+          NodeTypes.Timer,
+          NodeTypes.Repeat,
+          NodeTypes.Range,
           NodeTypes.Defer
         ]
       },
@@ -159,7 +163,7 @@ export class AppService {
       notFinished = false;
       for (let edge of edges) {
         if (edge.source.rx) {
-          edge.target.data.rx = edge.target.data.runner(edge.target.data.properties);
+          edge.target.data.rx = edge.target.data.runner();
           notFinished = true;
         }
       }
