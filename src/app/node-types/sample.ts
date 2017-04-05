@@ -1,17 +1,17 @@
 import {Observable} from "rxjs/Rx";
 
-export class Delay {
-  public static title = "Delay";
-  public static link = "http://reactivex.io/documentation/operators/delay.html";
-  public static desc = "shift the emissions from an Observable forward in time by a particular amount";
+export class Sample {
+  public static title = "Sample";
+  public static link = "http://reactivex.io/documentation/operators/sample.html";
+  public static desc = "emit the most recent items emitted by an Observable within periodic time intervals";
 
   public runner = ({}) => {
-    return this.graphInputs[0].delay(new Date(Date.now() + this.properties.delay));
+    return this.graphInputs[0].sample(this.properties.periodicTimeIntervals);
   };
 
-  private static propertiesType = [{delay: "number"}];
+  private static propertiesType = [{periodicTimeIntervals: "number"}];
   public properties = {
-    delay: 1000
+    periodicTimeIntervals: 1000
   };
 
   public graphInputs = [];
@@ -19,6 +19,6 @@ export class Delay {
   public static minInput = 1;
 
   public commandMaker = ({}) => {
-    return '.delay(new Date(Date.now() + ' + this.properties.delay + '))';
+    return '.sample(' + this.properties.periodicTimeIntervals + '))';
   }
 }

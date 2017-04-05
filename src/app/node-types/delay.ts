@@ -9,7 +9,7 @@ export class Delay {
     return this.graphInputs[0].delay(new Date(Date.now() + this.properties.delay));
   };
 
-  private static propertiesType: [{delay: "number"}];
+  private static propertiesType = [{delay: "number"}];
   public properties = {
     delay: 1000
   };

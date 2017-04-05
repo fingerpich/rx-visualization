@@ -1,12 +1,12 @@
 import {Observable} from "rxjs/Rx";
 
-export class Take {
-  public static title = "Take";
-  public static link = "http://reactivex.io/documentation/operators/take.html";
-  public static desc = "emit only the first n items emitted by an Observable";
+export class TakeLast {
+  public static title = "TakeLast";
+  public static link = "http://reactivex.io/documentation/operators/takelast.html";
+  public static desc = "emit only the final n items emitted by an Observable";
 
   public runner = ({}) => {
-    return this.graphInputs[0].take(this.properties.itemCount);
+    return this.graphInputs[0].takeLast(this.properties.itemCount);
   };
 
   private static propertiesType = [{itemCount: "number"}];
@@ -19,6 +19,6 @@ export class Take {
   public static minInput = 1;
 
   public commandMaker = ({}) => {
-    return '.take(' + this.properties.itemCount + '))';
+    return '.takeLast(' + this.properties.itemCount + '))';
   }
 }

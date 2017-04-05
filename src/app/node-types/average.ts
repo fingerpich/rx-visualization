@@ -9,7 +9,7 @@ export class Average {
     return this.graphInputs[0].average();
   };
 
-  private static propertiesType: [{}];
+  private static propertiesType = [{}];
   public properties = {};
 
   public graphInputs = [];
@@ -17,6 +17,6 @@ export class Average {
   public static minInput = 1;
 
   public static commandMaker = () => {
-    return `.average()`;
+    return '.average()';
   }
 }

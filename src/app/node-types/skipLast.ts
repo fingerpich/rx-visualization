@@ -1,17 +1,17 @@
 import {Observable} from "rxjs/Rx";
 
-export class Skip {
-  public static title = "Skip";
-  public static link = "http://reactivex.io/documentation/operators/skip.html";
-  public static desc = "suppress the first n items emitted by an Observable";
+export class SkipLast {
+  public static title = "SkipLast";
+  public static link = "http://reactivex.io/documentation/operators/skiplast.html";
+  public static desc = "suppress the final n items emitted by an Observable";
 
   public runner = ({}) => {
-    return this.graphInputs[0].skip(this.properties.itemCount);
+    return this.graphInputs[0].skipLast(this.properties.itemCount);
   };
 
   private static propertiesType = [{itemCount: "number"}];
   public properties = {
-    itemCount: 1000
+    itemCount: 2
   };
 
   public graphInputs = [];
@@ -19,6 +19,6 @@ export class Skip {
   public static minInput = 1;
 
   public commandMaker = ({}) => {
-    return '.skip(' + this.properties.itemCount + '))';
+    return '.skipLast(' + this.properties.itemCount + '))';
   }
 }

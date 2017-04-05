@@ -44,6 +44,16 @@ export class AppService {
         list: [
           NodeTypes.Debounce,
           NodeTypes.Distinct,
+          NodeTypes.IgnoreElements,
+          NodeTypes.ElementAt,
+          NodeTypes.Filter,
+          NodeTypes.First,
+          NodeTypes.Last,
+          NodeTypes.Sample,
+          NodeTypes.Skip,
+          NodeTypes.SkipLast,
+          NodeTypes.Take,
+          NodeTypes.TakeLast,
         ]
       },
       {
@@ -74,7 +84,7 @@ export class AppService {
         name: "Conditional and Boolean Operators",
         desc: "Operators that evaluate one or more Observables or items emitted by Observables",
         list: [
-          NodeTypes.All,//TODO : property fixing
+          NodeTypes.All,
           NodeTypes.TakeWhile
         ]
       },

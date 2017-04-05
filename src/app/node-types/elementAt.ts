@@ -1,24 +1,22 @@
-import {Observable} from "rxjs/Rx";
-
-export class Interval {
-  public static title = "Interval";
-  public static link = "http://reactivex.io/documentation/operators/interval.html";
-  public static desc = "create an Observable that emits a sequence of integers spaced by a given time interval";
+export class ElementAt {
+  public static title = "ElementAt";
+  public static link = "http://reactivex.io/documentation/operators/elementat.html";
+  public static desc = "emit only item n emitted by an Observable";
 
   public runner = () => {
-    return Observable.interval(this.properties.interval);
+    return this.graphInputs[0].elementAt(this.properties.index);
   };
 
-  private static propertiesType = [{interval: 'Number'}];
+  private static propertiesType = [{index: 'Number'}];
   public properties = {
-    interval:500/* ms */,
+    index:2,
   };
 
   public graphInputs = [];
-  public maxInput = 0;
-  public minInput = 0;
+  public maxInput = 1;
+  public minInput = 1;
 
   public commandMaker = () => {
-    return 'Observable.interval('+this.properties.interval+')';
+    return '.elementAt('+this.properties.index+')';
   }
 }

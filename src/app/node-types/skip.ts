@@ -1,17 +1,17 @@
 import {Observable} from "rxjs/Rx";
 
-export class Sample {
-  public static title = "Sample";
-  public static link = "http://reactivex.io/documentation/operators/sample.html";
-  public static desc = "emit the most recent items emitted by an Observable within periodic time intervals";
+export class Skip {
+  public static title = "Skip";
+  public static link = "http://reactivex.io/documentation/operators/skip.html";
+  public static desc = "suppress the first n items emitted by an Observable";
 
   public runner = ({}) => {
-    return this.graphInputs[0].sample(this.properties.periodicTimeIntervals);
+    return this.graphInputs[0].skip(this.properties.itemCount);
   };
 
-  private static propertiesType = [{periodicTimeIntervals: "number"}];
+  private static propertiesType = [{itemCount: "number"}];
   public properties = {
-    periodicTimeIntervals: 1000
+    itemCount: 2
   };
 
   public graphInputs = [];
@@ -19,6 +19,6 @@ export class Sample {
   public static minInput = 1;
 
   public commandMaker = ({}) => {
-    return '.sample(' + this.properties.periodicTimeIntervals + '))';
+    return '.skip(' + this.properties.itemCount + '))';
   }
 }

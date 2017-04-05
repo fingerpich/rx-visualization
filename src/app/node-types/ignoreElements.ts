@@ -1,37 +1,20 @@
-import {Observable} from "rxjs/Rx";
-
-export class Last {
-  public static title = "Last";
-  public static link = "http://reactivex.io/documentation/operators/last.html";
-  public static desc = "transform the items emitted by an Observable by applying a function to each item";
+export class IgnoreElements {
+  public static title = "IgnoreElements";
+  public static link = "http://reactivex.io/documentation/operators/ignoreElements.html";
+  public static desc = "do not emit any items from an Observable but mirror its termination notification";
 
   public runner = () => {
-    return this.graphInputs[0].last(Last.propertiesType[0].types[this.properties.fi].func);
+    return this.graphInputs[0].ignoreElements();
   };
 
-  private static propertiesType = [{
-    fi: 'function', types: [
-      {
-        name: "even", func: (x, idx, obs) => {
-        return x % 2 === 0;
-      }, text: "(x, idx, obs)=>{return x % 2 === 0;}"
-      },
-      {
-        name: "odd", func: (x, idx, obs) => {
-        return x % 2 === 1;
-      }, text: "(x, idx, obs)=>{return x % 2 === 1;}"
-      },
-    ]
-  }];
-  public properties = {
-    fi: 0,
-  };
+  private static propertiesType = [{}];
+  public properties = {};
 
   public graphInputs = [];
-  public maxInput = 1;
-  public minInput = 1;
+  public static maxInput = 1;
+  public static minInput = 1;
 
-  public commandMaker = () => {
-    return '.last(' + Last.propertiesType[0].types[this.properties.fi].func + ')';
+  public static commandMaker = () => {
+    return '.ignoreElements()';
   }
 }
