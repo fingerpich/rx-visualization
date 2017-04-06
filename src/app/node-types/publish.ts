@@ -9,7 +9,7 @@ export class Publish {
     return this.graphInputs[0].publish();
   };
 
-  private static propertiesType = [{}];
+  private static propertiesType = [];
   public properties = {};
 
   public graphInputs = [];

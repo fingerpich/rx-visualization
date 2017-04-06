@@ -19,7 +19,7 @@ export class Subscribe {
       });
   };
 
-  private static propertiesType = [{}];
+  private static propertiesType = [];
   public properties = {};
 
   public graphInputs = [];

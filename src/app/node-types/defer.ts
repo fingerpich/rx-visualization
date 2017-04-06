@@ -11,7 +11,7 @@ export class Defer {
     });
   };
 
-  private static propertiesType: [{result: 'string'}];
+  private static propertiesType = [{result: 'string'}];
   public properties = {
     result: "42"
   };

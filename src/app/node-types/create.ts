@@ -18,7 +18,7 @@ export class Create {
     });
   };
 
-  private static propertiesType: [{list: 'list'}];
+  private static propertiesType = [{list: 'list'}];
   public properties = {
     list: [{t: 0, v: 1}]
   };

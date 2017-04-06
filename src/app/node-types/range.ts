@@ -9,7 +9,7 @@ export class Range {
     return Observable.range(this.properties.start, this.properties.count);
   };
 
-  private static propertiesType= [{start: 'Number'},{count: 'Number'}];
+  private static propertiesType = [{start: 'Number'}, {count: 'Number'}];
   public properties = {
     start: 0,
     count: 3
@@ -20,6 +20,6 @@ export class Range {
   public minInput = 0;
 
   public commandMaker = () => {
-    return 'Observable.range('+this.properties.start+', '+this.properties.count+')';
+    return 'Observable.range(' + this.properties.start + ', ' + this.properties.count + ')';
   }
 }

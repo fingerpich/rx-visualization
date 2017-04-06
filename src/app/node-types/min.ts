@@ -9,7 +9,7 @@ export class Min {
     return this.graphInputs[0].min();
   };
 
-  private static propertiesType = [{}];
+  private static propertiesType = [];
   public properties = {};
 
   public graphInputs = [];

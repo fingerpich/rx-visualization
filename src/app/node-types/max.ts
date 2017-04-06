@@ -9,7 +9,7 @@ export class Max {
     return this.graphInputs[0].max();
   };
 
-  private static propertiesType = [{}];
+  private static propertiesType = [];
   public properties = {};
 
   public graphInputs = [];

@@ -1,4 +1,4 @@
-import {Observable} from "rxjs/Rx";
+import {Observable, Subject} from "rxjs/Rx";
 
 export class FromEvent {
   public static title = "FromEvent";
@@ -6,13 +6,13 @@ export class FromEvent {
   public static desc = "convert event into Observables";
 
   public runner = () => {
-    return Observable.bindCallback(this.nodeClick);
+    return this.nodeClick;
   };
 
   private static propertiesType = [];
   public properties = {};
 
-  public nodeClick;
+  public nodeClick=new Subject();
   public graphInputs = [];
   public maxInput = 0;
 

@@ -18,11 +18,16 @@ export class AppService {
         desc: "Operators that originate new Observables.",
         list: [
           NodeTypes.Create,
+          NodeTypes.Defer,
+          //Empty/Never/Throw
+          NodeTypes.From,
+          NodeTypes.FromEvent,
           NodeTypes.Interval,
-          NodeTypes.Timer,
-          NodeTypes.Repeat,
+          // NodeTypes.Just,
           NodeTypes.Range,
-          NodeTypes.Defer
+          NodeTypes.Repeat,
+          // NodeTypes.Start,
+          NodeTypes.Timer
         ]
       },
       {
@@ -60,8 +65,13 @@ export class AppService {
         name: "Combining Observables",
         desc: "Operators that work with multiple source Observables to create a single Observable",
         list: [
+          //And/Then/When
+          //CombineLatest
           NodeTypes.Join,
           NodeTypes.Merge,
+          NodeTypes.StartWith,
+          NodeTypes.Switch,
+          NodeTypes.Zip,
         ]
       },
       {
@@ -76,8 +86,17 @@ export class AppService {
         name: "Observable Utility Operators",
         desc: "A toolbox of useful Operators for working with Observables",
         list: [
-          NodeTypes.Subscribe,
           NodeTypes.Delay,
+          NodeTypes.Do,
+          // Materialize/Dematerialize
+          // ObserveOn
+          // Serialize
+          NodeTypes.Subscribe,
+          // NodeTypes.SubscribeOn,
+          // NodeTypes.TimeInterval,
+          NodeTypes.Timeout,
+          // NodeTypes.Timestamp,
+          // NodeTypes.Using,
         ]
       },
       {
@@ -85,29 +104,36 @@ export class AppService {
         desc: "Operators that evaluate one or more Observables or items emitted by Observables",
         list: [
           NodeTypes.All,
-          NodeTypes.TakeWhile
+          NodeTypes.Race,
+          NodeTypes.Contains,
+          NodeTypes.SequenceEqual,
+          NodeTypes.SkipUntil,
+          NodeTypes.SkipWhile,
+          NodeTypes.TakeUntil,
+          NodeTypes.TakeWhile,
         ]
       },
       {
         name: "Mathematical and Aggregate Operators",
         desc: "Operators that operate on the entire sequence of items emitted by an Observable",
         list: [
-          NodeTypes.Average
-        ]
-      },
-      {
-        name: "Backpressure Operators",
-        desc: "strategies for coping with Observables that produce items more rapidly than their observers consume them",
-        list: [
-          NodeTypes.Windowed //TODO: property
+          NodeTypes.Average,
+          // NodeTypes.Concat,
+          NodeTypes.Count,
+          NodeTypes.Max,
+          NodeTypes.Min,
+          // NodeTypes.Reduce,
+          NodeTypes.Sum,
         ]
       },
       {
         name: "Connectable Observable Operators",
         desc: "Specialty Observables that have more precisely-controlled subscription dynamics",
         list: [
+          NodeTypes.Connect,
           NodeTypes.Publish,
           NodeTypes.RefCount,
+          NodeTypes.Replay,
         ]
       }
     ];

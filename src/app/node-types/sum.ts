@@ -9,7 +9,7 @@ export class Sum {
     return this.graphInputs[0].sum();
   };
 
-  private static propertiesType = [{}];
+  private static propertiesType = [];
   public properties = {};
 
   public graphInputs = [];

@@ -9,7 +9,7 @@ export class Debounce {
     return this.graphInputs[0].debounce(this.properties.debounceTime);
   };
 
-  private static propertiesType: [{debounceTime: 'Number'}];
+  private static propertiesType = [{debounceTime: 'Number'}];
   public properties = {
     debounceTime: 500 /* ms */
   };

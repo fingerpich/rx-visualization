@@ -11,7 +11,7 @@ export class Catch {
     });
   };
 
-  private static propertiesType: [{}];
+  private static propertiesType = [];
   public properties = {};
 
   public graphInputs = [];

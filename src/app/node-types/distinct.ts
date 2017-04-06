@@ -9,7 +9,7 @@ export class Distinct {
     return this.graphInputs[0].distinct();
   };
 
-  private static propertiesType: [{}];
+  private static propertiesType = [];
   public properties = {};
 
   public graphInputs = [];

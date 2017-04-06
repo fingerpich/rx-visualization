@@ -9,7 +9,7 @@ export class Average {
     return this.graphInputs[0].average();
   };
 
-  private static propertiesType = [{}];
+  private static propertiesType = [];
   public properties = {};
 
   public graphInputs = [];

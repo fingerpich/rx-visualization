@@ -9,7 +9,7 @@ export class Pluck {
     return this.graphInputs[0].pluck(this.properties.propName);
   };
 
-  private static propertiesType: [{propName: "string"}];
+  private static propertiesType = [{propName: "string"}];
   public properties = {
     propName: "x"
   };
