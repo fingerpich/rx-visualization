@@ -9,7 +9,7 @@ export class WindowWithCount {
     return this.graphInputs[0].windowWithCount(count, skip);
   };
 
-  private static propertiesType = [{count: 'Number', skip: 'Number'}];
+  private static propertiesType = [{name:"count",type: 'number'}, {name:"skip",type: 'number'}];
   public properties = {
     count: 3,
     skip: 2
@@ -19,7 +19,7 @@ export class WindowWithCount {
   public maxInput = 1;
   public minInput = 1;
 
-  public commandMaker = () => {
+  public toString = () => {
     const {count, skip}=this.properties;
     return '.windowWithCount(' + count + ', ' + skip + ')';
   }

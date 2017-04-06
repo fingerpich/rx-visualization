@@ -9,7 +9,7 @@ export class From {
     return Observable.from(this.properties.list);
   };
 
-  private static propertiesType = [{list: '[string]'}];
+  private static propertiesType = [{name:"list",type:'list'}];
   public properties = {
     list: [1,2,3]
   };
@@ -17,7 +17,7 @@ export class From {
   public graphInputs = [];
   public maxInput = 0;
 
-  public commandMaker = () => {
+  public toString = () => {
     return 'Observable.from('+this.properties.list.join(",")+')';
   }
 }

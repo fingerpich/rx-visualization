@@ -16,4 +16,7 @@ export class PropertyInspectorComponent implements OnInit {
     });
   }
 
+  dataChanged() {
+    this.appService.rebuildRxObjects();
+  }
 }

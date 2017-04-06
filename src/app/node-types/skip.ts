@@ -9,7 +9,7 @@ export class Skip {
     return this.graphInputs[0].skip(this.properties.itemCount);
   };
 
-  private static propertiesType = [{itemCount: "number"}];
+  private static propertiesType = [{name:"itemCount",type: "number"}];
   public properties = {
     itemCount: 2
   };
@@ -18,7 +18,7 @@ export class Skip {
   public static maxInput = 1;
   public static minInput = 1;
 
-  public commandMaker = ({}) => {
+  public toString = ({}) => {
     return '.skip(' + this.properties.itemCount + '))';
   }
 }

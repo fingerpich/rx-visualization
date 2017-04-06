@@ -18,7 +18,7 @@ export class SkipUntil {
   public static maxInput = 2;
   public static minInput = 2;
 
-  public commandMaker = ({}) => {
-    return '.skipUntil('+this.graphInputs[1].commandMaker()+')';
+  public toString = ({}) => {
+    return '.skipUntil('+this.graphInputs[1].toString()+')';
   }
 }

@@ -9,7 +9,7 @@ export class Timer {
     return Observable.timer(this.properties.delay,this.properties.interval);
   };
 
-  private static propertiesType = [{delay: 'Number'},{interval: 'Number'}];
+  private static propertiesType = [{name:"delay",type: 'number'},{name:"interval",type: 'number'}];
   public properties = {
     delay:200/* ms */,
     interval:500/* ms */,
@@ -19,7 +19,7 @@ export class Timer {
   public maxInput = 0;
   public minInput = 0;
 
-  public commandMaker = () => {
+  public toString = () => {
     return 'Observable.timer('+this.properties.delay+', '+this.properties.interval+')';
   }
 }

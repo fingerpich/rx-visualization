@@ -9,7 +9,7 @@ export class Retry {
     return this.graphInputs[0].retry(retryCount);
   };
 
-  private static propertiesType = [{retryCount: 'Number'}];
+  private static propertiesType = [{name:"retryCount",type: 'number'}];
   public properties = {
     retryCount: 3
   };
@@ -18,7 +18,7 @@ export class Retry {
   public static maxInput = 1;
   public static minInput = 1;
 
-  public commandMaker = ({}) => {
+  public toString = ({}) => {
     return '.retry(' + this.properties.retryCount + ');';
   }
 }

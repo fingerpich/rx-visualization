@@ -9,7 +9,7 @@ export class Interval {
     return Observable.interval(this.properties.interval);
   };
 
-  private static propertiesType = [{interval: 'Number'}];
+  private static propertiesType = [{name:"interval",type: 'number'}];
   public properties = {
     interval:500/* ms */,
   };
@@ -18,7 +18,7 @@ export class Interval {
   public maxInput = 0;
   public minInput = 0;
 
-  public commandMaker = () => {
+  public toString = () => {
     return 'Observable.interval('+this.properties.interval+')';
   }
 }

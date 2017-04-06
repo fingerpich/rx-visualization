@@ -8,7 +8,7 @@ export class TakeUntil {
   };
 
   private static propertiesType = [{
-    fi: 'function', types: [
+    name:"fi",type: 'function', types: [
       {
         name: "ST6", func: (x) => {
         return x < 6;
@@ -24,7 +24,7 @@ export class TakeUntil {
   public static maxInput = 1;
   public static minInput = 1;
 
-  public commandMaker = () => {
-    return '.takeUntil(' + TakeUntil.propertiesType[0].types[this.properties.fi].func + ')';
+  public toString = () => {
+    return '.takeUntil(' + TakeUntil.propertiesType[0].types[this.properties.fi].text + ')';
   };
 }

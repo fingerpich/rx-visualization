@@ -9,7 +9,7 @@ export class Delay {
     return this.graphInputs[0].delay(new Date(Date.now() + this.properties.delay));
   };
 
-  private static propertiesType = [{delay: "number"}];
+  private static propertiesType = [{name:"delay",type: "number"}];
   public properties = {
     delay: 1000
   };
@@ -18,7 +18,7 @@ export class Delay {
   public static maxInput = 1;
   public static minInput = 1;
 
-  public commandMaker = ({}) => {
+  public toString = ({}) => {
     return '.delay(new Date(Date.now() + ' + this.properties.delay + '))';
   }
 }

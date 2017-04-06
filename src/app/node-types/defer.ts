@@ -11,7 +11,7 @@ export class Defer {
     });
   };
 
-  private static propertiesType = [{result: 'string'}];
+  private static propertiesType = [{name:"result",type: 'string'}];
   public properties = {
     result: "42"
   };
@@ -20,7 +20,7 @@ export class Defer {
   public maxInput = 0;
   public minInput = 0;
 
-  public commandMaker = () => {
+  public toString = () => {
     return 'Observable.defer(() => { return Observable.of(' + this.properties.result + '); });';
   }
 }

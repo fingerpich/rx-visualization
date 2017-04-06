@@ -13,11 +13,11 @@ export class Timeout {
   };
 
   private static propertiesType = [
-    {fi: 'function',types:[
+    {name:"fi",type: 'function',types:[
       {name:"text",func:'Timeout has occurred.',text:'Timeout has occurred.'},
       {name:"promise",func:()=>{},text:"()=>{Observable.timer(0)}"},
     ]},
-    {time:'Number',types:null},
+    {time:'number',types:null},
   ];
   public properties = {
     fi: 0,
@@ -28,7 +28,7 @@ export class Timeout {
   public static maxInput = 2;
   public static minInput = 2;
 
-  public commandMaker = () => {
+  public toString = () => {
     return '.timeout('+this.properties.time+', '+  Timeout.propertiesType[1].types[this.properties.fi].text+')';
   }
 }

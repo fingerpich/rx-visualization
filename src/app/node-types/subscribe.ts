@@ -26,7 +26,7 @@ export class Subscribe {
   public static maxInput = 1;
   public static minInput = 1;
 
-  public commandMaker = ({}) => {
+  public toString = ({}) => {
     return `.subscribe(
       function (x) { console.log('Next: %s', x); },/* on next*/
       function (err) { console.log('Error: %s', err); }, /* on error*/

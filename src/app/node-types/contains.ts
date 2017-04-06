@@ -4,26 +4,27 @@ export class Contains {
   public static desc = "emit only item n emitted by an Observable";
 
   public runner = () => {
-    return this.graphInputs[0].contains(this.properties.item);
+    return this.graphInputs[0].contains(Contains.propertiesType[0].types[this.properties.item].func);
   };
 
   private static propertiesType = [
-    {item: 'function',types:[
-      {name:"num",func:2,text:'2'},
-      {name:"text",func:"text",text:"'text'"},
-    ]},
-    {item:'Number',types:null},
+    {
+      name: "item", type: 'function', types: [
+      {name: "num", func: 2, text: '2'},
+      {name: "text", func: "text", text: "'text'"},
+    ]
+    }
   ];
 
   public properties = {
-    item: 2,
+    item: 0,
   };
 
   public graphInputs = [];
   public maxInput = 1;
   public minInput = 1;
 
-  public commandMaker = () => {
-    return '.contains(' + this.properties.item + ')';
+  public toString = () => {
+    return '.contains(' + Contains.propertiesType[0].types[this.properties.item].text + ')';
   }
 }

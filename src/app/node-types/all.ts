@@ -8,7 +8,7 @@ export class All {
   };
 
   private static propertiesType = [{
-    fi: 'function', types: [
+    name: "fi", type: 'function', types: [
       {
         name: "GT6", func: (x) => {
         return x > 6;
@@ -24,7 +24,7 @@ export class All {
   public static maxInput = 1;
   public static minInput = 1;
 
-  public commandMaker = () => {
-    return '.every(' + All.propertiesType[0].types[this.properties.fi].func + ')';
+  public toString = () => {
+    return '.every(' + All.propertiesType[0].types[this.properties.fi].text + ')';
   };
 }

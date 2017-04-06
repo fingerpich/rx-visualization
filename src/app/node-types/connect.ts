@@ -19,7 +19,7 @@ export class Connect {
   public maxInput = 1;
   public minInput = 1;
 
-  public commandMaker = () => {
+  public toString = () => {
     return '.connect()';
   }
 }

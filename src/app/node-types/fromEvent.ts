@@ -16,7 +16,7 @@ export class FromEvent {
   public graphInputs = [];
   public maxInput = 0;
 
-  public commandMaker = () => {
+  public toString = () => {
     return ".fromEvent(input, 'click');";
   }
 }

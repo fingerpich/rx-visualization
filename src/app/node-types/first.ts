@@ -10,7 +10,7 @@ export class First {
   };
 
   private static propertiesType = [{
-    fi: 'function', types: [
+    name: "fi", type: 'function', types: [
       {
         name: "even", func: (x, idx, obs) => {
         return x % 2 === 0;
@@ -31,7 +31,7 @@ export class First {
   public maxInput = 1;
   public minInput = 1;
 
-  public commandMaker = () => {
-    return '.first(' + First.propertiesType[0].types[this.properties.fi].func + ')';
+  public toString = () => {
+    return '.first(' + First.propertiesType[0].types[this.properties.fi].text + ')';
   }
 }

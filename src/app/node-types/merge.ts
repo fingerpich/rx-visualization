@@ -16,7 +16,7 @@ export class Merge {
   public static maxInput = 300;
   public static minInput = 2;
 
-  public commandMaker = ({}) => {
+  public toString = ({}) => {
     return 'Observable.mergeDelayError(' + this.graphInputs.join(",") + ')';
   }
 }

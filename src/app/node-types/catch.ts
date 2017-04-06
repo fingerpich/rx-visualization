@@ -18,7 +18,7 @@ export class Catch {
   public static maxInput = 1;
   public static minInput = 1;
 
-  public commandMaker = ({}) => {
+  public toString = ({}) => {
     return `.catch((err)=>{return "err:"+err;});`;
   }
 }

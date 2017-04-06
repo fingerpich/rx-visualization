@@ -7,7 +7,7 @@ export class ElementAt {
     return this.graphInputs[0].elementAt(this.properties.index);
   };
 
-  private static propertiesType = [{index: 'Number'}];
+  private static propertiesType = [{name:"index",type: 'number'}];
   public properties = {
     index:2,
   };
@@ -16,7 +16,7 @@ export class ElementAt {
   public maxInput = 1;
   public minInput = 1;
 
-  public commandMaker = () => {
+  public toString = () => {
     return '.elementAt('+this.properties.index+')';
   }
 }

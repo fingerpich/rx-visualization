@@ -9,7 +9,7 @@ export class Map {
     return this.graphInputs[0].map(Map.propertiesType[0].types[this.properties.fi].func);
   };
 
-  private static propertiesType = [{fi: 'function',types:[
+  private static propertiesType = [{name:"fi",type: 'function',types:[
     {name:"2x",func:(x)=>{return x*2;},text:"(x)=>{return x*2;}"},
     {name:"x2",func:(x)=>{return x*x;},text:"(x)=>{return x*x;}"},
     {name:"x3",func:(x)=>{return x*x*x;},text:"(x)=>{return x*x*x;}"},
@@ -23,7 +23,7 @@ export class Map {
   public maxInput = 1;
   public minInput = 1;
 
-  public commandMaker = () => {
-    return '.map(' +Map.propertiesType[0].types[this.properties.fi].func + ')';
+  public toString = () => {
+    return '.map(' +Map.propertiesType[0].types[this.properties.fi].text + ')';
   }
 }

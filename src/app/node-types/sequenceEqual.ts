@@ -17,7 +17,7 @@ export class SequenceEqual {
   public static maxInput = 2;
   public static minInput = 2;
 
-  public commandMaker = ({}) => {
-    return '.join('+this.graphInputs[1].commandMaker()+')';
+  public toString = ({}) => {
+    return '.join('+this.graphInputs[1].toString()+')';
   }
 }

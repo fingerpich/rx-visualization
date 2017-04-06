@@ -148,7 +148,7 @@ export class AppService {
   }
 
   public getCreationOption() {
-    return this.selectedCreationOption
+    return new (this.selectedCreationOption)();
   }
 
   /**
@@ -171,6 +171,8 @@ export class AppService {
     return this.controlSubject;
   }
 
+  private nodesList;
+  private edgeList;
   public getInitialData(width, height) {
     const createOperator = this.rxOperators.map(optype => optype.list.filter(op => op.name == 'Create')[0]).filter(op => op)[0];
     const subscribeOperator = this.rxOperators.map(optype => optype.list.filter(op => op.name == 'Subscribe')[0]).filter(op => op)[0];
@@ -181,10 +183,15 @@ export class AppService {
       {id: 1, x: xLoc, y: yLoc + 200, data: subscribeOperator}
     ];
     const edges = [{source: nodes[0], target: nodes[1]}];
+    this.nodesList=nodes;
+    this.edgeList=edges;
     return {edges, nodes};
   }
 
-  public rebuildRxObjects(nodes, edges) {
+  public rebuildRxObjects() {
+    const nodes=this.nodesList;
+    const edges=this.edgeList;
+
     for (let node of nodes) {
       if (node.data.rx) {
         node.data.rx.dispose();

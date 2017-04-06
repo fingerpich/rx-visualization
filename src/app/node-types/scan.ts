@@ -7,7 +7,7 @@ export class Scan {
     return this.graphInputs[0].map(Scan.propertiesType[0].types[this.properties.fi].func);
   };
 
-  private static propertiesType = [{fi: 'function',types:[
+  private static propertiesType = [{name:"fi",type: 'function',types:[
     {name:"sum",func:(acc, x) => { return acc + x; },text:"(acc, x) => { return acc + x; }"},
     {name:"time",func:(acc, x) => { return acc * x; },text:"(acc, x) => { return acc * x; }"},
   ]}];
@@ -19,7 +19,7 @@ export class Scan {
   public maxInput = 1;
   public minInput = 1;
 
-  public commandMaker = () => {
-    return '.scan(' + Scan.propertiesType[0].types[this.properties.fi].func + ')';
+  public toString = () => {
+    return '.scan(' + Scan.propertiesType[0].types[this.properties.fi].text + ')';
   }
 }

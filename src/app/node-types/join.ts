@@ -15,13 +15,13 @@ export class Join {
   };
 
   private static propertiesType = [
-    {fi1: 'function',types:[
+    {name:"fi1",type: 'function',types:[
     {name:"timeout",func:()=>{Observable.timer(0)},text:"()=>{Observable.timer(0)}"},
   ]},
-    {fi2: 'function',types:[
+    {name:"fi2",type: 'function',types:[
       {name:"timeout",func:()=>{Observable.timer(0)},text:"()=>{Observable.timer(0)}"},
     ]},
-    {fi3: 'function',types:[
+    {name:"fi3",type: 'function',types:[
       {name:"timeout",func:(x,y)=>{return x+y},text:"(x+y)=>{return x+y}"},
     ]},
   ];
@@ -35,11 +35,11 @@ export class Join {
   public static maxInput = 2;
   public static minInput = 2;
 
-  public commandMaker = ({}) => {
-    return '.join('+this.graphInputs[1].commandMaker()
-      +', '+Join.propertiesType[1].types[this.properties.fi3].func
-      +', '+Join.propertiesType[2].types[this.properties.fi3].func
-      +', '+Join.propertiesType[3].types[this.properties.fi3].func
+  public toString = ({}) => {
+    return '.join('+this.graphInputs[1].toString()
+      +', '+Join.propertiesType[1].types[this.properties.fi3].text
+      +', '+Join.propertiesType[2].types[this.properties.fi3].text
+      +', '+Join.propertiesType[3].types[this.properties.fi3].text
       +')';
   }
 }

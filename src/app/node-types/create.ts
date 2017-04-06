@@ -18,7 +18,7 @@ export class Create {
     });
   };
 
-  private static propertiesType = [{list: 'list'}];
+  private static propertiesType = [{name:"list",type: 'list'}];
   public properties = {
     list: [{t: 0, v: 1}]
   };
@@ -27,7 +27,7 @@ export class Create {
   public maxInput = 0;
   public minInput = 0;
 
-  public commandMaker = () => {
+  public toString = () => {
     const list = this.properties.list;
     const getNext = ({value, time}) => {
       return time ? 'setTimeout(function(){observer.next(' + value + ');},' + time + ')' : 'observer.next(' + value + ');'

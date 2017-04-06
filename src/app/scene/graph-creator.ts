@@ -40,8 +40,8 @@ export class GraphCreator {
 
   constructor(svg, nodes, edges ,private appService:AppService) {
     const thisGraph = this;
-    this.nodes = nodes || [];
-    this.edges = edges || [];
+    this.nodes = nodes;
+    this.edges = edges;
     this.svg = svg;
     this.svgG = svg.append("g").classed(thisGraph.consts.graphClass, true);
     this.setIdCounterByNodes();
@@ -167,8 +167,8 @@ export class GraphCreator {
       doDelete = window.confirm("Press OK to delete this graph");
     }
     if(doDelete){
-      thisGraph.nodes = [];
-      thisGraph.edges = [];
+      while(thisGraph.nodes.length)thisGraph.nodes.pop();
+      while(thisGraph.edges.length)thisGraph.edges.pop();
       thisGraph.updateGraph();
     }
   };

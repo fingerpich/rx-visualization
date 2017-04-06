@@ -9,7 +9,7 @@ export class Pluck {
     return this.graphInputs[0].pluck(this.properties.propName);
   };
 
-  private static propertiesType = [{propName: "string"}];
+  private static propertiesType = [{name:"propName",type: "string"}];
   public properties = {
     propName: "x"
   };
@@ -18,7 +18,7 @@ export class Pluck {
   public static maxInput = 1;
   public static minInput = 1;
 
-  public commandMaker = ({}) => {
+  public toString = ({}) => {
     return '.pluck(' + this.properties.propName + '))';
   }
 }

@@ -1,24 +1,61 @@
 <div *ngIf="selectedItem; else notSelected">
+
+  <!--Node Properties-->
   <div *ngIf="selectedItem.data">
     <!--<div><b>ID:</b><span>{{selectedItem.id}}</span></div>-->
-    <div><b>title:</b><span>{{selectedItem.data.name}}</span></div>
-    <div><b>code:</b>
-      <div>
-        <textarea [value]="selectedItem.data.cmd"></textarea>
+    <div class="operatorInfo">
+      <b>title:</b><span>{{selectedItem.data.title}}</span>
+      <a [href]="selectedItem.data.link">link</a>
+      <p>{{selectedItem.data.desc}}</p>
+    </div>
+    <div class="properiesEditor">
+      <div *ngFor="let propType of selectedItem.data.propertiesType">
+
+        <div *ngIf="propType.type=='number'">
+          <b>{{propType.name}}</b>
+          <input type="number" [(ngModel)]="selectedItem.data.properties[propType.name]" (change)="dataChanged()">
+        </div>
+
+        <div *ngIf="propType.type=='string'">
+          <b>{{propType.name}}</b>
+          <input [(ngModel)]="selectedItem.data.properties[propType.name]" (change)="dataChanged()">
+        </div>
+
+        <div *ngIf="propType.type=='function'">
+          <b>{{propType.name}}</b>
+          <select (change)="dataChanged()">
+            <option *ngFor="let opt of propType.types" [title]="opt.desc">opt.name</option>
+          </select>
+        </div>
+
+        <div *ngIf="propType.type=='list'">
+          <b>{{propType.name}}</b>
+          <a (click)="selectedItem.data.properties[propType.name].push('')">add</a>
+          <ul>
+            <li *ngFor="let item of selectedItem.data.properties[propType.name]">
+              <input [(ngModel)]="item" (change)="dataChanged()">
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-
-    <p>{{selectedItem.data.desc}}</p>
+    <div class="codeGenerated">
+        <textarea [value]="selectedItem.data.toString()"></textarea>
+    </div>
   </div>
+
+
+  <!--EDGE Properties-->
   <div *ngIf="selectedItem.source">
     <div>{{selectedItem.source.data.name+'=>'+selectedItem.target.data.name}}</div>
     <div><b>code:</b>
       <div>
-        <textarea [value]="selectedItem.source.data.cmd+selectedItem.target.data.cmd"></textarea>
+        <textarea [value]="selectedItem.source.data.toString()+selectedItem.target.data.toString()"></textarea>
       </div>
     </div>
   </div>
 </div>
+
 <ng-template #notSelected>
   <div class="notSelected">
     select a node to see whats going on.

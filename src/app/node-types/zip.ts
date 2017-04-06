@@ -9,7 +9,7 @@ export class Zip {
     return Observable.zip(...this.graphInputs,Zip.propertiesType[0].types[this.properties.fi].func);
   };
 
-  private static propertiesType = [{fi: 'function',types:[
+  private static propertiesType = [{name:"fi",type: 'function',types:[
     {name:"join",func:(...args)=>{return args.join(',');},text:"(...args)=>{return args.join(',');}"},
   ]}];
   public properties = {
@@ -20,7 +20,7 @@ export class Zip {
   public static maxInput = 300;
   public static minInput = 2;
 
-  public commandMaker = ({}) => {
+  public toString = ({}) => {
     return 'Observable.zip('+this.graphInputs.join(",")+', '+Zip.propertiesType[0].types[this.properties.fi].text+')';
   }
 }

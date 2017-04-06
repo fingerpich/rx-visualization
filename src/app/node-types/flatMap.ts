@@ -9,9 +9,15 @@ export class FlatMap {
     return this.graphInputs[0].flatMap(FlatMap.propertiesType[0].types[this.properties.fi].func);
   };
 
-  private static propertiesType = [{fi: 'function',types:[
-    {name:"x,x+1",func:(x)=>{return Observable.range(x, 2);},text:"(x)=>{return Observable.range(x, 2);}"},
-  ]}];
+  private static propertiesType = [{
+    name: "fi", type: 'function', types: [
+      {
+        name: "x,x+1", func: (x) => {
+        return Observable.range(x, 2);
+      }, text: "(x)=>{return Observable.range(x, 2);}"
+      },
+    ]
+  }];
   public properties = {
     fi: 0
   };
@@ -20,7 +26,7 @@ export class FlatMap {
   public maxInput = 1;
   public minInput = 1;
 
-  public commandMaker = () => {
-    return '.flatMap(' +FlatMap.propertiesType[0].types[this.properties.fi].func + ')';
+  public toString = () => {
+    return '.flatMap(' + FlatMap.propertiesType[0].types[this.properties.fi].text + ')';
   }
 }

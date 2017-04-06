@@ -16,7 +16,7 @@ export class RefCount {
   public static maxInput = 1;
   public static minInput = 1;
 
-  public static commandMaker = () => {
+  public static toString = () => {
     return '.refCount()';
   }
 }

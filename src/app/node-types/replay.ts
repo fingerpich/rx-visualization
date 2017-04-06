@@ -9,7 +9,7 @@ export class Replay {
 
   private static propertiesType = [
     {
-      transFunc: 'function',
+    name:"transFunc",type: 'function',
       types: [
         {
           name: "num", func: (x) => {
@@ -21,12 +21,12 @@ export class Replay {
       desc: "a transforming function that takes an item emitted by the source Observable as its parameter and returns an item to be emitted by the resulting Observable"
     },
     {
-      bufferSize: 'Number',
+      name:"bufferSize",type: 'number',
       types: null,
       desc: 'the maximum number of items to buffer and replay to subsequent observers'
     },
-    {window: 'Number', types: null, desc: 'the maximum number of items to buffer and replay to subsequent observers'},
-    {scheduler: 'Number', types: null, desc: 'the Scheduler on which this operator will operate'},
+    {name:"window",type: 'number', types: null, desc: 'the maximum number of items to buffer and replay to subsequent observers'},
+    {name:"scheduler",type: 'number', types: null, desc: 'the Scheduler on which this operator will operate'},
   ];
 
   public properties = {
@@ -40,7 +40,7 @@ export class Replay {
   public maxInput = 1;
   public minInput = 1;
 
-  public commandMaker = () => {
-    return '.replay(' + Replay.propertiesType[0].types[this.properties.transFunc].func + ', ' + this.properties.bufferSize + ', ' + this.properties.window + ', ' + this.properties.scheduler + ')';
+  public toString = () => {
+    return '.replay(' + Replay.propertiesType[0].types[this.properties.transFunc].text + ', ' + this.properties.bufferSize + ', ' + this.properties.window + ', ' + this.properties.scheduler + ')';
   }
 }

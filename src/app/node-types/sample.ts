@@ -9,7 +9,7 @@ export class Sample {
     return this.graphInputs[0].sample(this.properties.periodicTimeIntervals);
   };
 
-  private static propertiesType = [{periodicTimeIntervals: "number"}];
+  private static propertiesType = [{name:"periodicTimeIntervals",type: "number"}];
   public properties = {
     periodicTimeIntervals: 1000
   };
@@ -18,7 +18,7 @@ export class Sample {
   public static maxInput = 1;
   public static minInput = 1;
 
-  public commandMaker = ({}) => {
+  public toString = ({}) => {
     return '.sample(' + this.properties.periodicTimeIntervals + '))';
   }
 }

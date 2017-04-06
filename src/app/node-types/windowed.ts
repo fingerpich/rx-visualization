@@ -9,7 +9,7 @@ export class Windowed {
     return this.graphInputs[0].windowed(this.properties.time);
   };
 
-  private static propertiesType = [{debounceTime: 'Number'}];
+  private static propertiesType = [{name:"debounceTime",type: 'number'}];
   public properties = {
     time: 50
   };
@@ -18,7 +18,7 @@ export class Windowed {
   public static maxInput = 1;
   public static minInput = 1;
 
-  public commandMaker = () => {
+  public toString = () => {
     return '.debounce(' + this.properties.time + ')';
   }
 }

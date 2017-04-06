@@ -10,20 +10,22 @@ export class Count {
   };
 
   private static propertiesType = [
-    {fi: 'function',types:[
-      {name:"all",func:()=>true,text:'()=>true'},
-      {name:"gt6",func:x=>x>6,text:"x=>x>6"},
-    ]},
+    {
+      name: "fi", type: 'function', types: [
+      {name: "all", func: () => true, text: '()=>true'},
+      {name: "gt6", func: x => x > 6, text: "x=>x>6"},
+    ]
+    },
   ];
   public properties = {
-    fi:0
+    fi: 0
   };
 
   public graphInputs = [];
   public static maxInput = 1;
   public static minInput = 1;
 
-  public commandMaker = () => {
-    return '.count('+Count.propertiesType[0].types[this.properties.fi].text+')';
+  public toString = () => {
+    return '.count(' + Count.propertiesType[0].types[this.properties.fi].text + ')';
   }
 }

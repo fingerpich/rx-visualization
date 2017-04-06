@@ -16,7 +16,7 @@ export class Race {
   public static maxInput = 300;
   public static minInput = 2;
 
-  public commandMaker = ({}) => {
+  public toString = ({}) => {
     return 'Observable.race(' + this.graphInputs.join(",") + ')';
   }
 }

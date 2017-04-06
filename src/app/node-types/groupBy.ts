@@ -10,22 +10,25 @@ export class GroupBy {
 
   private static propertiesType = [
     {
-      fi1: 'function', desc: 'a function that accepts an item from the source Observable and returns its key'
-      , types: [
-      {
-        name: "getCode", func: (x) => {
-        return x.code;
-      }, text: "(x)=>{return x.code;}"
-      },
-      {
-        name: "getX", func: (x) => {
-        return x.x;
-      }, text: "(x)=>{return x.x;}"
-      },
-    ]
+      name: "fi1",
+      type: 'function',
+      desc: 'a function that accepts an item from the source Observable and returns its key'
+      ,
+      types: [
+        {
+          name: "getCode", func: (x) => {
+          return x.code;
+        }, text: "(x)=>{return x.code;}"
+        },
+        {
+          name: "getX", func: (x) => {
+          return x.x;
+        }, text: "(x)=>{return x.x;}"
+        },
+      ]
     },
     {
-      fi2: 'function',
+      name: "fi2", type: 'function',
       desc: 'a function that accepts an item from the source Observable and returns an item to be emitted in its place by one of the resulting Observables',
       types: [
         {
@@ -41,7 +44,7 @@ export class GroupBy {
       ]
     },
     {
-      fi3: 'function',
+      name: "fi3", type: 'function',
       desc: 'a function used to compare two keys for identity (that is, whether items with two keys should be emitted on the same Observable)',
       types: [
         {
@@ -67,7 +70,7 @@ export class GroupBy {
   public maxInput = 1;
   public minInput = 1;
 
-  public commandMaker = () => {
-    return '.map(' + GroupBy.propertiesType[0].types[this.properties.fi1].func + ', ' + GroupBy.propertiesType[0].types[this.properties.fi1].func + ')';
+  public toString = () => {
+    return '.map(' + GroupBy.propertiesType[0].types[this.properties.fi1].text + ', ' + GroupBy.propertiesType[0].types[this.properties.fi1].text + ')';
   }
 }
