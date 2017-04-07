@@ -379,7 +379,7 @@ export class GraphCreator {
       .attr("r", String(consts.nodeRadius/1.618));
 
     newGs.each(function(d) {
-      GraphCreator.insertTitleLinebreaks(d3.select(this), d.data.name);
+      GraphCreator.insertTitleLinebreaks(d3.select(this), d.data.data.title);
     });
 
     // remove old nodes

@@ -5,22 +5,23 @@ export class Create {
   public static link = "http://reactivex.io/documentation/operators/create.html";
   public static desc = "create an Observable from scratch by calling observer methods programmatically";
 
-  public runner = ({list}) => {
+  public data=Create;
+  public runner = () => {
     const delay = (observer, delay, value) => {
       setTimeout(() => {
         observer.next(value);
       }, delay || 0);
     };
     return Observable.create((observer) => {
-      for (let l of list) {
+      for (let l of this.properties.list) {
         delay(observer, l.time, l.value);
       }
     });
   };
 
-  private static propertiesType = [{name:"list",type: 'list'}];
+  public static propertiesType = [{name:"list",type: 'list', params:[{name:'time',type:'Number'},{name:'value',type:'Number'}]}];
   public properties = {
-    list: [{t: 0, v: 1}]
+    list: [{time: 0, value: 1}]
   };
 
   public graphInputs = [];

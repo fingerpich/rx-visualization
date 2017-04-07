@@ -174,13 +174,11 @@ export class AppService {
   private nodesList;
   private edgeList;
   public getInitialData(width, height) {
-    const createOperator = this.rxOperators.map(optype => optype.list.filter(op => op.name == 'Create')[0]).filter(op => op)[0];
-    const subscribeOperator = this.rxOperators.map(optype => optype.list.filter(op => op.name == 'Subscribe')[0]).filter(op => op)[0];
     const xLoc = width / 2 - 25;
     const yLoc = 100;
     const nodes = [
-      {id: 0, x: xLoc, y: yLoc, data: createOperator},
-      {id: 1, x: xLoc, y: yLoc + 200, data: subscribeOperator}
+      {id: 0, x: xLoc, y: yLoc, data: new NodeTypes.Create()},
+      {id: 1, x: xLoc, y: yLoc + 200, data: new NodeTypes.Subscribe()}
     ];
     const edges = [{source: nodes[0], target: nodes[1]}];
     this.nodesList=nodes;

@@ -4,7 +4,7 @@ export class Subscribe {
   public static title = "Subscribe";
   public static link = "http://reactivex.io/documentation/operators/subscribe.html";
   public static desc = "operate upon the emissions and notifications from an Observable";
-
+public data=Subscribe;
   public runner = ({}) => {
     this.graphInputs[0].subscribe(
       function (x) {
@@ -19,7 +19,7 @@ export class Subscribe {
       });
   };
 
-  private static propertiesType = [];
+  public static propertiesType = [];
   public properties = {};
 
   public graphInputs = [];

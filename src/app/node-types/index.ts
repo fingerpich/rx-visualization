@@ -51,7 +51,6 @@ export * from './subscribe';
 export * from './sum';
 export * from './switch';
 export * from './take';
-export * from './take';
 export * from './takeLast';
 export * from './takeUntil';
 export * from './takeWhile';
