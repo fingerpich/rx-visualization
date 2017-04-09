@@ -1,15 +1,11 @@
-import {Observable} from "rxjs/Rx";
-
 export class Count {
-  public static title = "Average";
-  public static link = "http://reactivex.io/documentation/operators/Count.html";
-  public static desc = "count the number of items emitted by the source Observable and emit only this value";
+  protected static title = "Average";
+  protected static link = "http://reactivex.io/documentation/operators/Count.html";
+  protected static desc = "count the number of items emitted by the source Observable and emit only this value";
+  protected static maxInput = 1;
+  protected static minInput = 1;
 
-  public runner = () => {
-    return this.graphInputs[0].count(Count.propertiesType[0].types[this.properties.fi].func);
-  };
-
-  private static propertiesType = [
+  protected static propertiesType = [
     {
       name: "fi", type: 'function', types: [
       {name: "all", func: () => true, text: '()=>true'},
@@ -17,15 +13,17 @@ export class Count {
     ]
     },
   ];
+
+  public runner = () => {
+    return this.graphInputs[0].count(Count.propertiesType[0].types[this.properties.fi].func);
+  };
+  public toString = () => {
+    return '.count(' + Count.propertiesType[0].types[this.properties.fi].text + ')';
+  };
+
+
   public properties = {
     fi: 0
   };
-
   public graphInputs = [];
-  public static maxInput = 1;
-  public static minInput = 1;
-
-  public toString = () => {
-    return '.count(' + Count.propertiesType[0].types[this.properties.fi].text + ')';
-  }
 }

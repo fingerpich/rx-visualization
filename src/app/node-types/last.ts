@@ -1,15 +1,13 @@
 import {Observable} from "rxjs/Rx";
 
 export class Last {
-  public static title = "Last";
-  public static link = "http://reactivex.io/documentation/operators/last.html";
-  public static desc = "emit only the last item (or the last item that meets some condition) emitted by an Observable";
+  protected static title = "Last";
+  protected static link = "http://reactivex.io/documentation/operators/last.html";
+  protected static desc = "emit only the last item (or the last item that meets some condition) emitted by an Observable";
+  protected static maxInput = 1;
+  protected static minInput = 1;
 
-  public runner = () => {
-    return this.graphInputs[0].last(Last.propertiesType[0].types[this.properties.fi].func);
-  };
-
-  private static propertiesType = [{
+  protected  static propertiesType = [{
     name:"fi",type: 'function', types: [
       {
         name: "even", func: (x, idx, obs) => {
@@ -23,15 +21,17 @@ export class Last {
       },
     ]
   }];
+
+  public runner = () => {
+    return this.graphInputs[0].last(Last.propertiesType[0].types[this.properties.fi].func);
+  };
+  public toString = () => {
+    return '.last(' + Last.propertiesType[0].types[this.properties.fi].text + ')';
+  };
+
+
   public properties = {
     fi: 0,
   };
-
   public graphInputs = [];
-  public maxInput = 1;
-  public minInput = 1;
-
-  public toString = () => {
-    return '.last(' + Last.propertiesType[0].types[this.properties.fi].text + ')';
-  }
 }

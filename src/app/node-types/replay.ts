@@ -2,10 +2,8 @@ export class Replay {
   public static title = "Replay";
   public static link = "http://reactivex.io/documentation/operators/replay.html";
   public static desc = "ensure that all observers see the same sequence of emitted items, even if they subscribe after the Observable has begun emitting items";
-
-  public runner = () => {
-    return this.graphInputs[0].replay(Replay.propertiesType[0].types[this.properties.transFunc].func, this.properties.bufferSize, this.properties.window, this.properties.scheduler);
-  };
+  public maxInput = 1;
+  public minInput = 1;
 
   private static propertiesType = [
     {
@@ -29,18 +27,19 @@ export class Replay {
     {name:"scheduler",type: 'number', types: null, desc: 'the Scheduler on which this operator will operate'},
   ];
 
+  public runner = () => {
+    return this.graphInputs[0].replay(Replay.propertiesType[0].types[this.properties.transFunc].func, this.properties.bufferSize, this.properties.window, this.properties.scheduler);
+  };
+  public toString = () => {
+    return '.replay(' + Replay.propertiesType[0].types[this.properties.transFunc].text + ', ' + this.properties.bufferSize + ', ' + this.properties.window + ', ' + this.properties.scheduler + ')';
+  };
+
+
   public properties = {
     transFunc: 0,
     bufferSize: 2,
     window: null,
     scheduler: null
   };
-
   public graphInputs = [];
-  public maxInput = 1;
-  public minInput = 1;
-
-  public toString = () => {
-    return '.replay(' + Replay.propertiesType[0].types[this.properties.transFunc].text + ', ' + this.properties.bufferSize + ', ' + this.properties.window + ', ' + this.properties.scheduler + ')';
-  }
 }

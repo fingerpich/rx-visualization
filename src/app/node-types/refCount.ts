@@ -1,22 +1,22 @@
 import {Observable} from "rxjs/Rx";
 
 export class RefCount {
-  public static title = "RefCount";
-  public static link = "http://reactivex.io/documentation/operators/refcount.html";
-  public static desc = "make a Connectable Observable behave like an ordinary Observable";
+  protected static title = "RefCount";
+  protected static link = "http://reactivex.io/documentation/operators/refcount.html";
+  protected static desc = "make a Connectable Observable behave like an ordinary Observable";
+  protected static maxInput = 1;
+  protected static minInput = 1;
+
+  protected static propertiesType = [];
 
   public runner = () => {
     return this.graphInputs[0].refCount();
   };
-
-  private static propertiesType = [];
-  public properties = {};
-
-  public graphInputs = [];
-  public static maxInput = 1;
-  public static minInput = 1;
-
   public static toString = () => {
     return '.refCount()';
-  }
+  };
+
+
+  public properties = {};
+  public graphInputs = [];
 }

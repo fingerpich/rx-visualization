@@ -3,12 +3,12 @@
   <!--Node Properties-->
   <div *ngIf="selectedItem.data">
     <div class="operatorInfo">
-      <b>title:</b><span>{{selectedItem.data.data.title}}</span>
-      <a [href]="selectedItem.data.data.link">link</a>
-      <p>{{selectedItem.data.data.desc}}</p>
+      <b>title:</b><span>{{selectedItem.data.title}}</span>
+      <a [href]="selectedItem.data.link">link</a>
+      <p>{{selectedItem.data.desc}}</p>
     </div>
     <div class="properiesEditor">
-      <div *ngFor="let propType of selectedItem.data.data.propertiesType">
+      <div *ngFor="let propType of selectedItem.data.propertiesType">
 
         <div *ngIf="propType.type=='number'">
           <b>{{propType.name}}</b>

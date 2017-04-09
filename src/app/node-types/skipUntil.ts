@@ -1,24 +1,22 @@
-import {Observable} from "rxjs/Rx";
-
 export class SkipUntil {
-  public static title = "SkipUntil";
-  public static link = "http://reactivex.io/documentation/operators/SkipUntil.html";
-  public static desc = " discard items emitted by an Observable until a second Observable emits an item";
+  protected static title = "SkipUntil";
+  protected static link = "http://reactivex.io/documentation/operators/SkipUntil.html";
+  protected static desc = " discard items emitted by an Observable until a second Observable emits an item";
+  protected static maxInput = 2;
+  protected static minInput = 2;
+
+  protected static propertiesType = [];
 
   public runner = () => {
     return this.graphInputs[0].skipUntil(
       this.graphInputs[1]/* the second observable connected to this block */,
     )
   };
-
-  private static propertiesType = [];
-  public properties = {};
-
-  public graphInputs = [];
-  public static maxInput = 2;
-  public static minInput = 2;
-
   public toString = ({}) => {
     return '.skipUntil('+this.graphInputs[1].toString()+')';
-  }
+  };
+
+
+  public properties = {};
+  public graphInputs = [];
 }

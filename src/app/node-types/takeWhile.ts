@@ -1,15 +1,13 @@
 import {Observable} from "rxjs/Rx";
 
 export class TakeWhile {
-  public static title = "TakeWhile";
-  public static link = "http://reactivex.io/documentation/operators/takewhile.html";
-  public static desc = "discard items emitted by an Observable after a specified condition becomes false";
+  protected static title = "TakeWhile";
+  protected static link = "http://reactivex.io/documentation/operators/takewhile.html";
+  protected static desc = "discard items emitted by an Observable after a specified condition becomes false";
+  protected static maxInput = 1;
+  protected static minInput = 1;
 
-  public runner = ({}) => {
-    return this.graphInputs[0].takeWhile(TakeWhile.propertiesType[0].types[this.properties.fi].func);
-  };
-
-  private static propertiesType = [{
+  protected static propertiesType = [{
     name:"fi",type: 'function', types: [
       {
         name: "ST6", func: (x) => {
@@ -18,15 +16,18 @@ export class TakeWhile {
       },
     ]
   }];
+
+  public runner = ({}) => {
+    return this.graphInputs[0].takeWhile(TakeWhile.propertiesType[0].types[this.properties.fi].func);
+  };
+  public toString = ({}) => {
+    return '.takeWhile(' + TakeWhile.propertiesType[0].types[this.properties.fi].text + ')';
+  };
+
+
   public properties = {
     fi: 0,
   };
 
   public graphInputs = [];
-  public static maxInput = 1;
-  public static minInput = 1;
-
-  public toString = ({}) => {
-    return '.takeWhile(' + TakeWhile.propertiesType[0].types[this.properties.fi].text + ')';
-  }
 }

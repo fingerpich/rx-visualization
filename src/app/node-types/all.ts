@@ -1,13 +1,11 @@
 export class All {
-  public static title = "All";
-  public static link = "http://reactivex.io/documentation/operators/all.html";
-  public static desc = "determine whether all items emitted by an Observable meet some criteria";
+  protected static title = "All";
+  protected static link = "http://reactivex.io/documentation/operators/all.html";
+  protected static desc = "determine whether all items emitted by an Observable meet some criteria";
+  protected static maxInput = 1;
+  protected static minInput = 1;
 
-  public runner = () => {
-    return this.graphInputs[0].every(All.propertiesType[0].types[this.properties.fi].func);
-  };
-
-  private static propertiesType = [{
+  protected static propertiesType = [{
     name: "fi", type: 'function', types: [
       {
         name: "GT6", func: (x) => {
@@ -16,15 +14,18 @@ export class All {
       },
     ]
   }];
-  public properties = {
-    fi: 0,
+
+  public runner = () => {
+    return this.graphInputs[0].every(All.propertiesType[0].types[this.properties.fi].func);
   };
-
-  public graphInputs = [];
-  public static maxInput = 1;
-  public static minInput = 1;
-
   public toString = () => {
     return '.every(' + All.propertiesType[0].types[this.properties.fi].text + ')';
   };
+
+
+
+  public properties = {
+    fi: 0,
+  };
+  public graphInputs = [];
 }

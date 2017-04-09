@@ -1,24 +1,24 @@
 import {Observable} from "rxjs/Rx";
 
 export class Windowed {
-  public static title = "Windowed";
-  public static link = "http://reactivex.io/documentation/operators/backpressure.html";
-  public static desc = "allows the ControlledObservable to run somewhat ahead of the observer from time to time";
+  protected static title = "Windowed";
+  protected static link = "http://reactivex.io/documentation/operators/backpressure.html";
+  protected static desc = "allows the ControlledObservable to run somewhat ahead of the observer from time to time";
+  protected static maxInput = 1;
+  protected static minInput = 1;
+
+  protected static propertiesType = [{name:"debounceTime",type: 'number'}];
 
   public runner = () => {
     return this.graphInputs[0].windowed(this.properties.time);
   };
+  public toString = () => {
+    return '.debounce(' + this.properties.time + ')';
+  };
 
-  private static propertiesType = [{name:"debounceTime",type: 'number'}];
+
   public properties = {
     time: 50
   };
-
   public graphInputs = [];
-  public static maxInput = 1;
-  public static minInput = 1;
-
-  public toString = () => {
-    return '.debounce(' + this.properties.time + ')';
-  }
 }

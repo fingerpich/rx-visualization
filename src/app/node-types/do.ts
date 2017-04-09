@@ -1,15 +1,13 @@
 import {Observer} from "rxjs";
 
 export class Do {
-  public static title = "Do";
-  public static link = "http://reactivex.io/documentation/operators/do.html";
-  public static desc = "register an action to take upon a variety of Observable lifecycle events";
+  protected static title = "Do";
+  protected static link = "http://reactivex.io/documentation/operators/do.html";
+  protected static desc = "register an action to take upon a variety of Observable lifecycle events";
+  protected static maxInput = 1;
+  protected static minInput = 1;
 
-  public runner = () => {
-    return this.graphInputs[0].do(Do.propertiesType[0].types[this.properties.fi].func);
-  };
-
-  private static propertiesType = [{
+  protected static propertiesType = [{
     name: "fi", type: 'function', types: [
       {
         name: "observer",
@@ -28,15 +26,17 @@ export class Do {
       },
     ]
   }];
-  public properties = {
-    fi: 0,
+
+  public runner = () => {
+    return this.graphInputs[0].do(Do.propertiesType[0].types[this.properties.fi].func);
   };
-
-  public graphInputs = [];
-  public static maxInput = 1;
-  public static minInput = 1;
-
   public toString = () => {
     return '.do(' + Do.propertiesType[0].types[this.properties.fi].text + ')';
   };
+
+
+  public properties = {
+    fi: 0,
+  };
+  public graphInputs = [];
 }

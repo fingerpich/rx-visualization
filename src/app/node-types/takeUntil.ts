@@ -1,13 +1,11 @@
 export class TakeUntil {
-  public static title = "TakeUntil";
-  public static link = "http://reactivex.io/documentation/operators/TakeUntil.html";
-  public static desc = "discard any items emitted by an Observable after a second Observable emits an item or terminates";
+  protected static title = "TakeUntil";
+  protected static link = "http://reactivex.io/documentation/operators/TakeUntil.html";
+  protected static desc = "discard any items emitted by an Observable after a second Observable emits an item or terminates";
+  protected static maxInput = 1;
+  protected static minInput = 1;
 
-  public runner = () => {
-    return this.graphInputs[0].takeUntil(TakeUntil.propertiesType[0].types[this.properties.fi].func);
-  };
-
-  private static propertiesType = [{
+  protected static propertiesType = [{
     name:"fi",type: 'function', types: [
       {
         name: "ST6", func: (x) => {
@@ -16,15 +14,17 @@ export class TakeUntil {
       },
     ]
   }];
-  public properties = {
-    fi: 0,
+
+  public runner = () => {
+    return this.graphInputs[0].takeUntil(TakeUntil.propertiesType[0].types[this.properties.fi].func);
   };
-
-  public graphInputs = [];
-  public static maxInput = 1;
-  public static minInput = 1;
-
   public toString = () => {
     return '.takeUntil(' + TakeUntil.propertiesType[0].types[this.properties.fi].text + ')';
   };
+
+
+  public properties = {
+    fi: 0,
+  };
+  public graphInputs = [];
 }

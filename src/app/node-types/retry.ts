@@ -1,24 +1,24 @@
 import {Observable} from "rxjs/Rx";
 
 export class Retry {
-  public static title = "Retry";
-  public static link = "http://reactivex.io/documentation/operators/retry.html";
-  public static desc = "if a source Observable sends an onError notification, resubscribe to it in the hopes that it will complete without error";
+  protected static title = "Retry";
+  protected static link = "http://reactivex.io/documentation/operators/retry.html";
+  protected static desc = "if a source Observable sends an onError notification, resubscribe to it in the hopes that it will complete without error";
+  protected static maxInput = 1;
+  protected static minInput = 1;
+
+  protected static propertiesType = [{name:"retryCount",type: 'number'}];
 
   public runner = ({retryCount}) => {
     return this.graphInputs[0].retry(retryCount);
   };
+  public toString = ({}) => {
+    return '.retry(' + this.properties.retryCount + ');';
+  };
 
-  private static propertiesType = [{name:"retryCount",type: 'number'}];
+
   public properties = {
     retryCount: 3
   };
-
   public graphInputs = [];
-  public static maxInput = 1;
-  public static minInput = 1;
-
-  public toString = ({}) => {
-    return '.retry(' + this.properties.retryCount + ');';
-  }
 }

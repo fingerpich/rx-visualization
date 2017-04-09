@@ -1,22 +1,22 @@
 import {Observable} from "rxjs/Rx";
 
 export class Max {
-  public static title = "Max";
-  public static link = "http://reactivex.io/documentation/operators/max.html";
-  public static desc = "determine, and emit, the maximum-valued item emitted by an Observable";
+  protected static title = "Max";
+  protected static link = "http://reactivex.io/documentation/operators/max.html";
+  protected static desc = "determine, and emit, the maximum-valued item emitted by an Observable";
+  protected static minInput = 1;
+  protected static maxInput = 1;
+
+  protected static propertiesType = [];
 
   public runner = () => {
     return this.graphInputs[0].max();
   };
-
-  private static propertiesType = [];
-  public properties = {};
-
-  public graphInputs = [];
-  public static maxInput = 1;
-  public static minInput = 1;
-
   public toString = () => {
     return '.max()';
-  }
+  };
+
+
+  public properties = {};
+  public graphInputs = [];
 }

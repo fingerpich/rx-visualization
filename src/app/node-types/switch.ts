@@ -1,20 +1,20 @@
 export class Switch {
-  public static title = "Switch";
-  public static link = "http://reactivex.io/documentation/operators/switch.html";
-  public static desc = "convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently-emitted of those Observables";
+  protected static title = "Switch";
+  protected static link = "http://reactivex.io/documentation/operators/switch.html";
+  protected static desc = "convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently-emitted of those Observables";
+  protected static maxInput = 1;
+  protected static minInput = 1;
+
+  protected static propertiesType = [];
 
   public runner = () => {
     return this.graphInputs[0].switch();
   };
-
-  public static propertiesType = [];
-  public properties = {};
-
-  public graphInputs = [];
-  public static maxInput = 1;
-  public static minInput = 1;
-
   public static toString = () => {
     return '.switch()';
-  }
+  };
+
+
+  public properties = {};
+  public graphInputs = [];
 }

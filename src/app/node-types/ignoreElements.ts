@@ -1,20 +1,20 @@
 export class IgnoreElements {
-  public static title = "IgnoreElements";
-  public static link = "http://reactivex.io/documentation/operators/ignoreElements.html";
-  public static desc = "do not emit any items from an Observable but mirror its termination notification";
+  protected static title = "IgnoreElements";
+  protected static link = "http://reactivex.io/documentation/operators/ignoreElements.html";
+  protected static desc = "do not emit any items from an Observable but mirror its termination notification";
+  protected static maxInput = 1;
+  protected static minInput = 1;
+
+  protected static propertiesType = [];
 
   public runner = () => {
     return this.graphInputs[0].ignoreElements();
   };
-
-  private static propertiesType = [];
-  public properties = {};
-
-  public graphInputs = [];
-  public static maxInput = 1;
-  public static minInput = 1;
-
   public static toString = () => {
     return '.ignoreElements()';
-  }
+  };
+
+
+  public properties = {};
+  public graphInputs = [];
 }

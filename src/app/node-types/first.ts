@@ -1,15 +1,13 @@
 import {Observable} from "rxjs/Rx";
 
 export class First {
-  public static title = "First";
-  public static link = "http://reactivex.io/documentation/operators/first.html";
-  public static desc = "transform the items emitted by an Observable by applying a function to each item";
+  protected static title = "First";
+  protected static link = "http://reactivex.io/documentation/operators/first.html";
+  protected static desc = "transform the items emitted by an Observable by applying a function to each item";
+  protected static maxInput = 1;
+  protected static minInput = 1;
 
-  public runner = () => {
-    return this.graphInputs[0].first(First.propertiesType[0].types[this.properties.fi].func);
-  };
-
-  private static propertiesType = [{
+  protected static propertiesType = [{
     name: "fi", type: 'function', types: [
       {
         name: "even", func: (x, idx, obs) => {
@@ -23,15 +21,17 @@ export class First {
       },
     ]
   }];
+
+  public runner = () => {
+    return this.graphInputs[0].first(First.propertiesType[0].types[this.properties.fi].func);
+  };
+  public toString = () => {
+    return '.first(' + First.propertiesType[0].types[this.properties.fi].text + ')';
+  };
+
+
   public properties = {
     fi: 0,
   };
-
   public graphInputs = [];
-  public maxInput = 1;
-  public minInput = 1;
-
-  public toString = () => {
-    return '.first(' + First.propertiesType[0].types[this.properties.fi].text + ')';
-  }
 }

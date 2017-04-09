@@ -1,22 +1,19 @@
-import {Observable} from "rxjs/Rx";
-
 export class Average {
-  public static title = "Average";
-  public static link = "http://reactivex.io/documentation/operators/average.html";
-  public static desc = "discard items emitted by an Observable after a specified condition becomes false";
+  protected static title = "Average";
+  protected static link = "http://reactivex.io/documentation/operators/average.html";
+  protected static desc = "discard items emitted by an Observable after a specified condition becomes false";
+  protected static maxInput = 1;
+  protected static minInput = 1;
+
+  protected static propertiesType = [];
 
   public runner = () => {
     return this.graphInputs[0].average();
   };
-
-  private static propertiesType = [];
-  public properties = {};
-
-  public graphInputs = [];
-  public static maxInput = 1;
-  public static minInput = 1;
-
   public toString = () => {
     return '.average()';
-  }
+  };
+
+  public properties = {};
+  public graphInputs = [];
 }

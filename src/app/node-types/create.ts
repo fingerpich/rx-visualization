@@ -1,11 +1,15 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Create {
-  public static title = "Create";
-  public static link = "http://reactivex.io/documentation/operators/create.html";
-  public static desc = "create an Observable from scratch by calling observer methods programmatically";
+export class Create extends RxNode{
+  protected static title = "Create";
+  protected static link = "http://reactivex.io/documentation/operators/create.html";
+  protected static desc = "create an Observable from scratch by calling observer methods programmatically";
+  protected static maxInput = 0;
+  protected static minInput = 0;
 
-  public data=Create;
+  protected static propertiesType = [{name:"list",type: 'list', params:[{name:'time',type:'Number'},{name:'value',type:'Number'}]}];
+
   public runner = () => {
     const delay = (observer, delay, value) => {
       setTimeout(() => {
@@ -18,16 +22,6 @@ export class Create {
       }
     });
   };
-
-  public static propertiesType = [{name:"list",type: 'list', params:[{name:'time',type:'Number'},{name:'value',type:'Number'}]}];
-  public properties = {
-    list: [{time: 0, value: 1}]
-  };
-
-  public graphInputs = [];
-  public maxInput = 0;
-  public minInput = 0;
-
   public toString = () => {
     const list = this.properties.list;
     const getNext = ({value, time}) => {
@@ -38,5 +32,10 @@ export class Create {
       s += getNext(<any>item)
     }
     return 'Observable.create((observer)=>{' + s + '})';
-  }
+  };
+
+  public properties = {
+    list: [{time: 0, value: 1}]
+  };
+  public graphInputs = [];
 }

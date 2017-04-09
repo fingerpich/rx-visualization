@@ -1,24 +1,24 @@
 import {Observable} from "rxjs/Rx";
 
 export class Sample {
-  public static title = "Sample";
-  public static link = "http://reactivex.io/documentation/operators/sample.html";
-  public static desc = "emit the most recent items emitted by an Observable within periodic time intervals";
+  protected static title = "Sample";
+  protected static link = "http://reactivex.io/documentation/operators/sample.html";
+  protected static desc = "emit the most recent items emitted by an Observable within periodic time intervals";
+  protected static maxInput = 1;
+  protected static minInput = 1;
+
+  protected static propertiesType = [{name:"periodicTimeIntervals",type: "number"}];
 
   public runner = ({}) => {
     return this.graphInputs[0].sample(this.properties.periodicTimeIntervals);
   };
+  public toString = ({}) => {
+    return '.sample(' + this.properties.periodicTimeIntervals + '))';
+  };
 
-  private static propertiesType = [{name:"periodicTimeIntervals",type: "number"}];
+
   public properties = {
     periodicTimeIntervals: 1000
   };
-
   public graphInputs = [];
-  public static maxInput = 1;
-  public static minInput = 1;
-
-  public toString = ({}) => {
-    return '.sample(' + this.properties.periodicTimeIntervals + '))';
-  }
 }

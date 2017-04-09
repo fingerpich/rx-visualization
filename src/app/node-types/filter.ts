@@ -1,15 +1,11 @@
-import {Observable} from "rxjs/Rx";
-
 export class Filter {
-  public static title = "Filter";
-  public static link = "http://reactivex.io/documentation/operators/filter.html";
-  public static desc = "transform the items emitted by an Observable by applying a function to each item";
+  protected static title = "Filter";
+  protected static link = "http://reactivex.io/documentation/operators/filter.html";
+  protected static desc = "transform the items emitted by an Observable by applying a function to each item";
+  protected static maxInput = 1;
+  protected static minInput = 1;
 
-  public runner = () => {
-    return this.graphInputs[0].filter(Filter.propertiesType[0].types[this.properties.fi].func);
-  };
-
-  private static propertiesType = [{
+  protected static propertiesType = [{
     name: "fi", type: 'function', types: [
       {
         name: "even", func: (x, idx, obs) => {
@@ -23,15 +19,17 @@ export class Filter {
       },
     ]
   }];
+
+  public runner = () => {
+    return this.graphInputs[0].filter(Filter.propertiesType[0].types[this.properties.fi].func);
+  };
+  public toString = () => {
+    return '.filter(' + Filter.propertiesType[0].types[this.properties.fi].text + ')';
+  };
+
+
   public properties = {
     fi: 0,
   };
-
   public graphInputs = [];
-  public maxInput = 1;
-  public minInput = 1;
-
-  public toString = () => {
-    return '.filter(' + Filter.propertiesType[0].types[this.properties.fi].text + ')';
-  }
 }

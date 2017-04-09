@@ -1,22 +1,22 @@
 import {Observable} from "rxjs/Rx";
 
 export class Merge {
-  public static title = "Merge";
-  public static link = "http://reactivex.io/documentation/operators/merge.html";
-  public static desc = "combine multiple Observables into one by merging their emissions";
+  protected static title = "Merge";
+  protected static link = "http://reactivex.io/documentation/operators/merge.html";
+  protected static desc = "combine multiple Observables into one by merging their emissions";
+  protected static maxInput = 300;
+  protected static minInput = 2;
+
+  protected static propertiesType = [];
 
   public runner = ({}) => {
     return Observable.merge(...this.graphInputs);
   };
-
-  private static propertiesType = [];
-  public properties = {};
-
-  public graphInputs = [];
-  public static maxInput = 300;
-  public static minInput = 2;
-
   public toString = ({}) => {
     return 'Observable.mergeDelayError(' + this.graphInputs.join(",") + ')';
-  }
+  };
+
+
+  public properties = {};
+  public graphInputs = [];
 }

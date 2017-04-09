@@ -1,12 +1,10 @@
 import {Observable} from "rxjs";
 export class GroupBy {
-  public static title = "GroupBy";
-  public static link = "http://reactivex.io/documentation/operators/groupBy.html";
-  public static desc = "divide an Observable into a set of Observables that each emit a different subset of items from the original Observable";
-
-  public runner = () => {
-    return this.graphInputs[0].map(GroupBy.propertiesType[0].types[this.properties.fi1].func, GroupBy.propertiesType[1].types[this.properties.fi2].func);
-  };
+  protected static title = "GroupBy";
+  protected static link = "http://reactivex.io/documentation/operators/groupBy.html";
+  protected static desc = "divide an Observable into a set of Observables that each emit a different subset of items from the original Observable";
+  protected static maxInput = 1;
+  protected static minInput = 1;
 
   private static propertiesType = [
     {
@@ -60,17 +58,19 @@ export class GroupBy {
       ]
     },
   ];
+
+  public runner = () => {
+    return this.graphInputs[0].map(GroupBy.propertiesType[0].types[this.properties.fi1].func, GroupBy.propertiesType[1].types[this.properties.fi2].func);
+  };
+  public toString = () => {
+    return '.map(' + GroupBy.propertiesType[0].types[this.properties.fi1].text + ', ' + GroupBy.propertiesType[0].types[this.properties.fi1].text + ')';
+  };
+
+
   public properties = {
     fi1: 0,
     fi2: 0,
     fi3: 0,
   };
-
   public graphInputs = [];
-  public maxInput = 1;
-  public minInput = 1;
-
-  public toString = () => {
-    return '.map(' + GroupBy.propertiesType[0].types[this.properties.fi1].text + ', ' + GroupBy.propertiesType[0].types[this.properties.fi1].text + ')';
-  }
 }
