@@ -7,11 +7,13 @@ export class AppService {
   private selectedCreationOption;
   private selectItemSubject;
   private controlSubject;
+  private itemSubscriptor;
   private rxOperators;
 
   constructor() {
     this.selectItemSubject = new Subject();
     this.controlSubject = new Subject();
+    this.itemSubscriptor = new Subject();
     this.rxOperators = [
       {
         name: "Creating Observables",
@@ -171,6 +173,14 @@ export class AppService {
     return this.controlSubject;
   }
 
+  public getItemSubscribe(){
+    return this.itemSubscriptor;
+  }
+
+  public subscribeItem(node,data){
+    this.itemSubscriptor.next({node,data});
+  }
+
   private nodesList;
   private edgeList;
   public getInitialData(width, height) {
@@ -189,6 +199,11 @@ export class AppService {
   public rebuildRxObjects() {
     const nodes=this.nodesList;
     const edges=this.edgeList;
+    const doDelay=(ob)=>{
+      return ob.delay(200).flatMap(function (x) {
+        return Observable.from(x).delay(200);
+      })
+    };
 
     for (let node of nodes) {
       if (node.data.rx) {
@@ -200,19 +215,31 @@ export class AppService {
     //make root observables
     for (let node of nodes) {
       if (!node.data.rx && node.data.maxInput < 1) {
-        node.data.rx = node.data.runner(node.data.properties);
+        node.data.rx = doDelay(node.data.runner(node.data.properties));
       }
     }
 
+    //connect nodes by edges
     let notFinished = true;
     while (notFinished) {
       notFinished = false;
       for (let edge of edges) {
         if (edge.source.rx) {
-          edge.target.data.rx = edge.target.data.runner();
+          edge.target.data.rx = doDelay(edge.target.data.runner());
           notFinished = true;
         }
       }
     }
+    const nodeSubscriptor = (node) => {
+      if (node.data.rx) {
+        node.data.rx.subscribe((data)=>{
+          this.subscribeItem(node,data);
+        })
+      }
+    };
+    for (let node of nodes) {
+      nodeSubscriptor(node);
+    }
+
   }
 }
