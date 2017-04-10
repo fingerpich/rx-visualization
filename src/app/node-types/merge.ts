@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Merge {
+export class Merge extends RxNode {
   protected static title = "Merge";
   protected static link = "http://reactivex.io/documentation/operators/merge.html";
   protected static desc = "combine multiple Observables into one by merging their emissions";

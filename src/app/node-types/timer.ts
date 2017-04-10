@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Timer {
+export class Timer extends RxNode {
   protected static title = "Timer";
   protected static link = "http://reactivex.io/documentation/operators/timer.html";
   protected static desc = "create an Observable that emits a particular item after a given delay";
@@ -16,7 +17,7 @@ export class Timer {
     return 'Observable.timer('+this.properties.delay+', '+this.properties.interval+')';
   };
 
-  
+
   public properties = {
     delay:200/* ms */,
     interval:500/* ms */,

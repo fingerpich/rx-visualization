@@ -1,6 +1,7 @@
 import {Observer} from "rxjs";
+import {RxNode} from "./rxNode";
 
-export class Do {
+export class Do extends RxNode {
   protected static title = "Do";
   protected static link = "http://reactivex.io/documentation/operators/do.html";
   protected static desc = "register an action to take upon a variety of Observable lifecycle events";

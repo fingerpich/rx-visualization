@@ -1,6 +1,7 @@
 import {Observable, Subject} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class FromEvent {
+export class FromEvent extends RxNode {
   protected static title = "FromEvent";
   protected static link = "http://reactivex.io/documentation/operators/from.html";
   protected static desc = "convert event into Observables";

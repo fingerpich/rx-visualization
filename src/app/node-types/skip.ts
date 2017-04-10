@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Skip {
+export class Skip extends RxNode {
   protected static title = "Skip";
   protected static link = "http://reactivex.io/documentation/operators/skip.html";
   protected static desc = "suppress the first n items emitted by an Observable";

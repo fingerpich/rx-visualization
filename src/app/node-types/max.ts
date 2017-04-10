@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Max {
+export class Max extends RxNode {
   protected static title = "Max";
   protected static link = "http://reactivex.io/documentation/operators/max.html";
   protected static desc = "determine, and emit, the maximum-valued item emitted by an Observable";

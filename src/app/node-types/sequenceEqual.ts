@@ -1,5 +1,6 @@
 
-export class SequenceEqual {
+import {RxNode} from "./rxNode";
+export class SequenceEqual extends RxNode {
   protected static title = "SequenceEqual";
   protected static link = "http://reactivex.io/documentation/operators/sequenceEqual.html";
   protected static desc = "determine whether two Observables emit the same sequence of items";

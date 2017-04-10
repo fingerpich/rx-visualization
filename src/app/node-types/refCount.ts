@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class RefCount {
+export class RefCount extends RxNode {
   protected static title = "RefCount";
   protected static link = "http://reactivex.io/documentation/operators/refcount.html";
   protected static desc = "make a Connectable Observable behave like an ordinary Observable";

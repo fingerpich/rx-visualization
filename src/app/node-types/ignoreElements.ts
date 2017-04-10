@@ -1,4 +1,5 @@
-export class IgnoreElements {
+import {RxNode} from "./rxNode";
+export class IgnoreElements extends RxNode {
   protected static title = "IgnoreElements";
   protected static link = "http://reactivex.io/documentation/operators/ignoreElements.html";
   protected static desc = "do not emit any items from an Observable but mirror its termination notification";

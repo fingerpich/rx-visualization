@@ -1,4 +1,5 @@
-export class ElementAt {
+import {RxNode} from "./rxNode";
+export class ElementAt extends RxNode {
   protected static title = "ElementAt";
   protected static link = "http://reactivex.io/documentation/operators/elementat.html";
   protected static desc = "emit only item n emitted by an Observable";

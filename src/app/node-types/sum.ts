@@ -1,4 +1,5 @@
-export class Sum {
+import {RxNode} from "./rxNode";
+export class Sum extends RxNode {
   protected static title = "Sum";
   protected static link = "http://reactivex.io/documentation/operators/sum.html";
   protected static desc = "calculates the sum of numbers emitted by an Observable and emits this sum";

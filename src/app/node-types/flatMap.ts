@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class FlatMap {
+export class FlatMap extends RxNode {
   protected static title = "FlatMap";
   protected static link = "http://reactivex.io/documentation/operators/flatmap.html";
   protected static desc = "transform the items emitted by an Observable into Observables, then flatten the emissions from those into a single Observable";

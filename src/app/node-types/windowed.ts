@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Windowed {
+export class Windowed extends RxNode {
   protected static title = "Windowed";
   protected static link = "http://reactivex.io/documentation/operators/backpressure.html";
   protected static desc = "allows the ControlledObservable to run somewhat ahead of the observer from time to time";

@@ -1,4 +1,5 @@
-export class SkipWhile {
+import {RxNode} from "./rxNode";
+export class SkipWhile extends RxNode {
   protected static title = "SkipWhile";
   protected static link = "http://reactivex.io/documentation/operators/SkipWhile.html";
   protected static desc = "discard items emitted by an Observable until a specified condition becomes false";

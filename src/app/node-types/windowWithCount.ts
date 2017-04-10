@@ -1,10 +1,11 @@
 
-export class WindowWithCount {
+import {RxNode} from "./rxNode";
+export class WindowWithCount extends RxNode {
   protected static title = "WindowWithCount";
   protected static link = "http://reactivex.io/documentation/operators/window.html";
   protected static desc = "periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time";
-  protected maxInput = 1;
-  protected minInput = 1;
+  protected static maxInput = 1;
+  protected static minInput = 1;
 
   protected static propertiesType = [{name:"count",type: 'number'}, {name:"skip",type: 'number'}];
 

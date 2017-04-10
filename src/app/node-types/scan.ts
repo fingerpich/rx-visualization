@@ -1,4 +1,5 @@
-export class Scan {
+import {RxNode} from "./rxNode";
+export class Scan extends RxNode {
   protected static title = "scan";
   protected static link = "http://reactivex.io/documentation/operators/scan.html";
   protected static desc = "apply a function to each item emitted by an Observable, sequentially, and emit each successive value";

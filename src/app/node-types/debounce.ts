@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Debounce {
+export class Debounce extends RxNode {
   protected static title = "Debounce";
   protected static link = "http://reactivex.io/documentation/operators/debounce.html";
   protected static desc = "only emit an item from an Observable if a particular timespan has passed without it emitting another item";

@@ -1,4 +1,5 @@
-export class Count {
+import {RxNode} from "./rxNode";
+export class Count extends RxNode {
   protected static title = "Average";
   protected static link = "http://reactivex.io/documentation/operators/Count.html";
   protected static desc = "count the number of items emitted by the source Observable and emit only this value";

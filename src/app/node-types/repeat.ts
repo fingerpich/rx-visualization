@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Repeat {
+export class Repeat extends RxNode {
   protected static title = "Repeat";
   protected static link = "http://reactivex.io/documentation/operators/repeat.html";
   protected static desc = "create an Observable that emits a particular item multiple times";

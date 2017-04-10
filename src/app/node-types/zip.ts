@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Zip {
+export class Zip extends RxNode {
   protected static title = "Zip";
   protected static link = "http://reactivex.io/documentation/operators/zip.html";
   protected static desc = "combine the emissions of multiple Observables together via a specified function and emit single items for each combination based on the results of this function";

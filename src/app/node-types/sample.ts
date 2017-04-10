@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Sample {
+export class Sample extends RxNode {
   protected static title = "Sample";
   protected static link = "http://reactivex.io/documentation/operators/sample.html";
   protected static desc = "emit the most recent items emitted by an Observable within periodic time intervals";

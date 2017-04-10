@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Range {
+export class Range extends RxNode {
   protected static title = "Range";
   protected static link = "http://reactivex.io/documentation/operators/range.html";
   protected static desc = "create an Observable that emits a particular range of sequential integers";

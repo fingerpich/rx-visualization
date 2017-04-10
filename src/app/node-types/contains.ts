@@ -1,9 +1,10 @@
-export class Contains {
+import {RxNode} from "./rxNode";
+export class Contains extends RxNode {
   protected static title = "Contains";
   protected static link = "http://reactivex.io/documentation/operators/contains.html";
   protected static desc = "emit only item n emitted by an Observable";
-  protected maxInput = 1;
-  protected minInput = 1;
+  protected static maxInput = 1;
+  protected static minInput = 1;
 
   protected static propertiesType = [
     {

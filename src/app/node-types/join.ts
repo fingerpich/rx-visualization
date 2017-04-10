@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Join {
+export class Join extends RxNode {
   protected static title = "Join";
   protected static link = "http://reactivex.io/documentation/operators/join.html";
   protected static desc = "combine items emitted by two Observables whenever an item from one Observable is emitted during a time window defined according to an item emitted by the other Observable";

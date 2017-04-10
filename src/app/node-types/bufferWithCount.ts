@@ -1,6 +1,5 @@
-import {Observable} from "rxjs/Rx";
-
-export class BufferWithCount {
+import {RxNode} from "./rxNode";
+export class BufferWithCount extends RxNode {
   protected static title = "BufferWithCount";
   protected static link = "http://reactivex.io/documentation/operators/buffer.html";
   protected static desc = "periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time";

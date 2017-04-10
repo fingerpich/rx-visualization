@@ -1,4 +1,5 @@
-export class All {
+import {RxNode} from "./rxNode";
+export class All extends RxNode{
   protected static title = "All";
   protected static link = "http://reactivex.io/documentation/operators/all.html";
   protected static desc = "determine whether all items emitted by an Observable meet some criteria";

@@ -1,12 +1,13 @@
 import {Observable} from "rxjs";
-export class GroupBy {
+import {RxNode} from "./rxNode";
+export class GroupBy extends RxNode {
   protected static title = "GroupBy";
   protected static link = "http://reactivex.io/documentation/operators/groupBy.html";
   protected static desc = "divide an Observable into a set of Observables that each emit a different subset of items from the original Observable";
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  private static propertiesType = [
+  protected static propertiesType = [
     {
       name: "fi1",
       type: 'function',

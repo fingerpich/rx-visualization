@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class TakeWhile {
+export class TakeWhile extends RxNode {
   protected static title = "TakeWhile";
   protected static link = "http://reactivex.io/documentation/operators/takewhile.html";
   protected static desc = "discard items emitted by an Observable after a specified condition becomes false";

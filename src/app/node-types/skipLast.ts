@@ -1,4 +1,5 @@
-export class SkipLast {
+import {RxNode} from "./rxNode";
+export class SkipLast extends RxNode {
   protected static title = "SkipLast";
   protected static link = "http://reactivex.io/documentation/operators/skiplast.html";
   protected static desc = "suppress the final n items emitted by an Observable";

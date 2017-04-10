@@ -1,4 +1,5 @@
-export class StartWith {
+import {RxNode} from "./rxNode";
+export class StartWith extends RxNode{
   protected static title = "StartWith";
   protected static link = "http://reactivex.io/documentation/operators/startwith.html";
   protected static desc = "emit a specified sequence of items before beginning to emit the items from the source Observable";

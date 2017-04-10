@@ -1,4 +1,5 @@
-export class Catch {
+import {RxNode} from "./rxNode";
+export class Catch extends RxNode {
   protected static title = "Catch";
   protected static link = "http://reactivex.io/documentation/operators/catch.html";
   protected static desc = "recover from an onError notification by continuing the sequence without error";

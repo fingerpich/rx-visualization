@@ -1,4 +1,5 @@
-export class Distinct {
+import {RxNode} from "./rxNode";
+export class Distinct extends RxNode {
   protected static title = "Distinct";
   protected static link = "http://reactivex.io/documentation/operators/distinct.html";
   protected static desc = "suppress duplicate items emitted by an Observable";

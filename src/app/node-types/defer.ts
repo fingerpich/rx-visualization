@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Defer {
+export class Defer extends RxNode {
   protected static title = "Defer";
   protected static link = "http://reactivex.io/documentation/operators/defer.html";
   protected static desc = "do not create the Observable until the observer subscribes, and create a fresh Observable for each observer";

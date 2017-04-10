@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Publish {
+export class Publish extends RxNode {
   protected static title = "Publish";
   protected static link = "http://reactivex.io/documentation/operators/publish.html";
   protected static desc = "convert an ordinary Observable into a connectable Observable";

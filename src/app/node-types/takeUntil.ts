@@ -1,4 +1,5 @@
-export class TakeUntil {
+import {RxNode} from "./rxNode";
+export class TakeUntil extends RxNode {
   protected static title = "TakeUntil";
   protected static link = "http://reactivex.io/documentation/operators/TakeUntil.html";
   protected static desc = "discard any items emitted by an Observable after a second Observable emits an item or terminates";

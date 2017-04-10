@@ -1,11 +1,12 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class From {
+export class From extends RxNode {
   protected static title = "From";
   protected static link = "http://reactivex.io/documentation/operators/from.html";
   protected static desc = "convert various other objects and data types into Observables";
-  protected maxInput = 0;
-  protected minInput = 0;
+  protected static maxInput = 0;
+  protected static minInput = 0;
 
   protected static propertiesType = [{name:"list",type:'list'}];
 

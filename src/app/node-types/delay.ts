@@ -1,4 +1,5 @@
-export class Delay {
+import {RxNode} from "./rxNode";
+export class Delay extends RxNode {
   protected static title = "Delay";
   protected static link = "http://reactivex.io/documentation/operators/delay.html";
   protected static desc = "shift the emissions from an Observable forward in time by a particular amount";

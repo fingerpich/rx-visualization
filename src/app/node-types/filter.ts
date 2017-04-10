@@ -1,4 +1,5 @@
-export class Filter {
+import {RxNode} from "./rxNode";
+export class Filter extends RxNode {
   protected static title = "Filter";
   protected static link = "http://reactivex.io/documentation/operators/filter.html";
   protected static desc = "transform the items emitted by an Observable by applying a function to each item";

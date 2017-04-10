@@ -32,12 +32,12 @@
           <a (click)="selectedItem.data.properties[propType.name].push('')">add</a>
           <ul>
             <li *ngFor="let prop of selectedItem.data.properties[propType.name]">
-              <div *ngIf="propType.params; else singleInput">
-                <!--<input *ngFor="let param of propType.params" [(ngModel)]="prop[param]" (change)="dataChanged()">-->
+              <div *ngIf="propType.params">
+                <input *ngFor="let param of propType.params" [(ngModel)]="propType.params[index][param]" (change)="dataChanged()"/>
               </div>
-              <ng-template #singleInput>
-                <!--<input [(ngModel)]="prop" (change)="dataChanged()">-->
-              </ng-template>
+              <div *ngIf="!propType.params">
+                <input [(ngModel)]="selectedItem.data.properties[propType.name][index]" (change)="dataChanged()"/>
+              </div>
             </li>
           </ul>
         </div>

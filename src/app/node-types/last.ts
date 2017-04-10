@@ -1,6 +1,7 @@
 import {Observable} from "rxjs/Rx";
+import {RxNode} from "./rxNode";
 
-export class Last {
+export class Last extends RxNode {
   protected static title = "Last";
   protected static link = "http://reactivex.io/documentation/operators/last.html";
   protected static desc = "emit only the last item (or the last item that meets some condition) emitted by an Observable";

@@ -1,11 +1,12 @@
-export class Replay {
-  public static title = "Replay";
-  public static link = "http://reactivex.io/documentation/operators/replay.html";
-  public static desc = "ensure that all observers see the same sequence of emitted items, even if they subscribe after the Observable has begun emitting items";
-  public maxInput = 1;
-  public minInput = 1;
+import {RxNode} from "./rxNode";
+export class Replay extends RxNode {
+  protected static title = "Replay";
+  protected static link = "http://reactivex.io/documentation/operators/replay.html";
+  protected static desc = "ensure that all observers see the same sequence of emitted items, even if they subscribe after the Observable has begun emitting items";
+  protected static maxInput = 1;
+  protected static minInput = 1;
 
-  private static propertiesType = [
+  protected static propertiesType = [
     {
     name:"transFunc",type: 'function',
       types: [
