@@ -35,7 +35,9 @@ export class Create extends RxNode{
   };
 
   public properties = {
-    list: [{time: 0, value: 1}]
+    list: [
+      {time: 0, value: 1}
+      ]
   };
   public graphInputs = [];
 }

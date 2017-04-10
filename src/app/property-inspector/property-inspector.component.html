@@ -10,16 +10,19 @@
     <div class="properiesEditor">
       <div *ngFor="let propType of selectedItem.data.propertiesType">
 
+        <!--number type-->
         <div *ngIf="propType.type=='number'">
           <b>{{propType.name}}</b>
-          <input type="number" [(ngModel)]="selectedItem.data.properties[propType.name]" (change)="dataChanged()">
+          <input [placeholder]="propType.name" [title]="propType.desc" type="number" [(ngModel)]="selectedItem.data.properties[propType.name]" (change)="dataChanged()">
         </div>
 
+        <!--string type-->
         <div *ngIf="propType.type=='string'">
           <b>{{propType.name}}</b>
-          <input [(ngModel)]="selectedItem.data.properties[propType.name]" (change)="dataChanged()">
+          <input [placeholder]="propType.name" [title]="propType.desc" [(ngModel)]="selectedItem.data.properties[propType.name]" (change)="dataChanged()">
         </div>
 
+        <!--function type-->
         <div *ngIf="propType.type=='function'">
           <b>{{propType.name}}</b>
           <select (change)="dataChanged()">
@@ -27,20 +30,19 @@
           </select>
         </div>
 
+        <!--list type-->
         <div *ngIf="propType.type=='list'">
           <b>{{propType.name}}</b>
-          <a (click)="selectedItem.data.properties[propType.name].push('')">add</a>
+          <a (click)="selectedItem.data.properties[propType.name].push({})">add</a>
           <ul>
             <li *ngFor="let prop of selectedItem.data.properties[propType.name]">
               <div *ngIf="propType.params">
-                <input *ngFor="let param of propType.params" [(ngModel)]="propType.params[index][param]" (change)="dataChanged()"/>
-              </div>
-              <div *ngIf="!propType.params">
-                <input [(ngModel)]="selectedItem.data.properties[propType.name][index]" (change)="dataChanged()"/>
+                <input *ngFor="let param of propType.params" [type]="param.type" [(ngModel)]="prop[param.name]" [placeholder]="param.name" (change)="dataChanged()"/>
               </div>
             </li>
           </ul>
         </div>
+
       </div>
     </div>
     <div class="codeGenerated">
