@@ -12,7 +12,8 @@ export class GraphCreator {
     BACKSPACE_KEY: 8,
     DELETE_KEY: 46,
     ENTER_KEY: 13,
-    nodeRadius: 50
+    nodeRadius: 50,
+    animateTime:3000
   };
   private state = {
     selectedNode: null,
@@ -35,6 +36,7 @@ export class GraphCreator {
   private svgG;
   private circles;
   private paths;
+  private resultCircles;
   private drag;
   private idct = 0;
 
@@ -44,9 +46,25 @@ export class GraphCreator {
     this.edges = edges;
     this.svg = svg;
     this.svgG = svg.append("g").classed(thisGraph.consts.graphClass, true);
+    this.appService.getItemSubscribe().subscribe(({node, data}) => {
+      // update existing nodes
+      const resultCircle = thisGraph.resultCircles
+        .append("circle");
+      resultCircle
+        .attr("r", String(this.consts.nodeRadius))
+        .attr("transform", function (d) {
+          return "translate(" + (node.x + thisGraph.consts.nodeRadius) + "," + node.y + ")";
+        }).transition().duration(thisGraph.consts.animateTime)
+        .attr("transform", function (d) {
+          return "translate(" + (node.x + thisGraph.consts.nodeRadius + thisGraph.consts.nodeRadius / 1.618) + "," + node.y + ")";
+        })
+        .attr('opacity', 0.1).remove();
+      GraphCreator.insertTitleLinebreaks(resultCircle, data);
+    });
     this.setIdCounterByNodes();
     this.defineArrows();
     this.bindEvents();
+    this.appService.rebuildRxObjects();
   }
   private setIdCounterByNodes = () => {
     this.idct = Math.max.apply(this, this.nodes.map(n => n.id)) + 1;
@@ -85,6 +103,7 @@ export class GraphCreator {
   private bindEvents() {
     const thisGraph = this;
     // svg nodes and edges
+    thisGraph.resultCircles = this.svgG.append("g");
     thisGraph.paths = this.svgG.append("g");
     thisGraph.circles = this.svgG.append("g");
 
@@ -154,6 +173,7 @@ export class GraphCreator {
         const newEdge = {source: d, target: thisGraph.connectTarget};
         thisGraph.edges.push(newEdge);
         thisGraph.updateGraph();
+        thisGraph.appService.rebuildRxObjects();
       }
       thisGraph.state.shiftNodeDrag=false;
       thisGraph.connectorLine.classed('hidden', true)
@@ -302,6 +322,7 @@ export class GraphCreator {
         };
       this.nodes.push(d);
       this.updateGraph();
+      this.appService.rebuildRxObjects();
     }
   };
 
