@@ -1,4 +1,7 @@
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {SampleFunctions} from "./sample-functions";
 export class All extends RxNode{
   protected static title = "All";
   protected static link = "http://reactivex.io/documentation/operators/all.html";
@@ -6,27 +9,21 @@ export class All extends RxNode{
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{
-    name: "fi", type: 'function', types: [
-      {
-        name: "GT6", func: (x) => {
-        return x > 6;
-      }, text: "(x)=>{return x > 6;}"
-      },
-    ]
-  }];
+  protected static propertiesType = new PropertyType("filterCondition",PropertyTypeEnum.Method,[
+    SampleFunctions.GT6
+  ],'');
 
   public runner = () => {
-    return this.graphInputs[0].every(All.propertiesType[0].types[this.properties.fi].func);
+    return this.graphInputs[0].every(All.propertiesType.params[this.properties.filterCondition].func);
   };
   public toString = () => {
-    return '.every(' + All.propertiesType[0].types[this.properties.fi].text + ')';
+    return '.every(' + All.propertiesType.params[this.properties.filterCondition].text + ')';
   };
 
 
 
   public properties = {
-    fi: 0,
+    filterCondition: 0,
   };
   public graphInputs = [];
 }

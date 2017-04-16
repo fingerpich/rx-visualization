@@ -1,4 +1,6 @@
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
 export class BufferWithCount extends RxNode {
   protected static title = "BufferWithCount";
   protected static link = "http://reactivex.io/documentation/operators/buffer.html";
@@ -6,7 +8,11 @@ export class BufferWithCount extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{name:"count",type: 'number'},{name:"skip",type: 'number'}];
+  protected static propertiesType = new PropertyType("parameters",PropertyTypeEnum.Object,[
+      new PropertyType("count",PropertyTypeEnum.Number),
+      new PropertyType("skip",PropertyTypeEnum.Number)
+    ],
+    "");
 
   public runner = ({count, skip}) => {
     return this.graphInputs[0].bufferWithCount(count, skip);

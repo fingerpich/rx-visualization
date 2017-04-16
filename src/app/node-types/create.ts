@@ -1,5 +1,7 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {PropertyType} from "./property-type";
 
 export class Create extends RxNode{
   protected static title = "Create";
@@ -8,7 +10,13 @@ export class Create extends RxNode{
   protected static maxInput = 0;
   protected static minInput = 0;
 
-  protected static propertiesType = [{name:"list",type: 'list', params:[{name:'time',type:'Number'},{name:'value',type:'Number'}]}];
+  // protected static propertiesType = [{name:"list",type: 'list', params:[{name:'time',type:'Number'},{name:'value',type:'Number'}]}];
+  protected static propertiesType = new PropertyType("list",PropertyTypeEnum.List,
+    new PropertyType("object",PropertyTypeEnum.Object,[
+      new PropertyType("time",PropertyTypeEnum.Number),
+      new PropertyType("value",PropertyTypeEnum.Number)
+    ],"")
+  ,"");
 
   public runner = () => {
     const delay = (observer, delay, value) => {

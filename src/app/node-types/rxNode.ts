@@ -1,11 +1,13 @@
-export class RxNode {
-  protected static title="a";
-  protected static link ="a";
-  protected static desc ="s";
-  protected static maxInput = 0;
-  protected static minInput = 0;
+import {PropertyType} from "./property-type";
 
-  protected static propertiesType =[{}];
+export class RxNode {
+  protected static title : string;
+  protected static link : string;
+  protected static desc : string;
+  protected static maxInput : Number;
+  protected static minInput : Number;
+
+  protected static propertiesType :PropertyType;
 
   get title():string {
     return (<typeof RxNode>this.constructor).title;
@@ -18,7 +20,7 @@ export class RxNode {
   }
   get link():string { return (<typeof RxNode>this.constructor).link; }
   get desc():string { return (<typeof RxNode>this.constructor).desc; }
-  get propertiesType():Array<Object> {
+  get propertiesType():PropertyType {
     return (<typeof RxNode>this.constructor).propertiesType;
   }
 
