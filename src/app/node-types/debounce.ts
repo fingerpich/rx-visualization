@@ -1,5 +1,7 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
 
 export class Debounce extends RxNode {
   protected static title = "Debounce";
@@ -8,7 +10,7 @@ export class Debounce extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{name:"debounceTime",type: 'number'}];
+  protected static propertiesType = new PropertyType("debounceTime",PropertyTypeEnum.Number);
 
   public runner = () => {
     return this.graphInputs[0].debounce(this.properties.debounceTime);

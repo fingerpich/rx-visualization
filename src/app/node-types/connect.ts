@@ -7,7 +7,7 @@ export class Connect extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [];
+  protected static propertiesType = null;
 
   public runner = () => {
     return this.nodeClick.subscribe(() => {
@@ -16,7 +16,7 @@ export class Connect extends RxNode {
   };
   public toString = () => {
     return '.connect()';
-  }
+  };
 
 
   public properties = {};
