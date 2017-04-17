@@ -1,5 +1,7 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
 
 export class Interval extends RxNode {
   protected static title = "Interval";
@@ -8,7 +10,7 @@ export class Interval extends RxNode {
   protected static maxInput = 0;
   protected static minInput = 0;
 
-  protected static propertiesType = [{name:"interval",type: 'number'}];
+  protected static propertiesType = new PropertyType("interval",PropertyTypeEnum.Number);
 
   public runner = () => {
     return Observable.interval(this.properties.interval);

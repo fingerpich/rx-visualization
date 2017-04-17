@@ -1,5 +1,7 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {PropertyType} from "./property-type";
 
 export class Timer extends RxNode {
   protected static title = "Timer";
@@ -8,7 +10,10 @@ export class Timer extends RxNode {
   protected static maxInput = 0;
   protected static minInput = 0;
 
-  protected static propertiesType = [{name:"delay",type: 'number'},{name:"interval",type: 'number'}];
+  protected static propertiesType = new PropertyType("object",PropertyTypeEnum.Object,[
+    new PropertyType("delay",PropertyTypeEnum.Number),
+    new PropertyType("interval",PropertyTypeEnum.Number)
+  ],"");
 
   public runner = () => {
     return Observable.timer(this.properties.delay,this.properties.interval);

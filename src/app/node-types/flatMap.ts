@@ -1,5 +1,8 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {SampleFunctions} from "./sample-functions";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {PropertyType} from "./property-type";
 
 export class FlatMap extends RxNode {
   protected static title = "FlatMap";
@@ -8,26 +11,22 @@ export class FlatMap extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{
-    name: "fi", type: 'function', types: [
-      {
-        name: "x,x+1", func: (x) => {
-        return Observable.range(x, 2);
-      }, text: "(x)=>{return Observable.range(x, 2);}"
-      },
-    ]
-  }];
+  protected static propertiesType = new PropertyType("observabler",PropertyTypeEnum.Method,[
+    SampleFunctions.RANGE2,
+    SampleFunctions.RANGE3,
+    SampleFunctions.RANGE5,
+  ],'');
 
   public runner = () => {
-    return this.graphInputs[0].flatMap(FlatMap.propertiesType[0].types[this.properties.fi].func);
+    return this.graphInputs[0].flatMap(FlatMap.propertiesType[0].types[this.properties.observabler].func);
   };
   public toString = () => {
-    return '.flatMap(' + FlatMap.propertiesType[0].types[this.properties.fi].text + ')';
+    return '.flatMap(' + FlatMap.propertiesType[0].types[this.properties.observabler].text + ')';
   };
 
 
   public properties = {
-    fi: 0
+    observabler: 0
   };
   public graphInputs = [];
 }

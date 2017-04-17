@@ -1,5 +1,8 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {SampleFunctions} from "./sample-functions";
 
 export class Timeout extends RxNode {
   protected static title = "Timeout";
@@ -8,27 +11,24 @@ export class Timeout extends RxNode {
   protected static maxInput = 2;
   protected static minInput = 2;
 
-  protected static propertiesType = [
-    {name:"fi",type: 'function',types:[
-      {name:"text",func:'Timeout has occurred.',text:'Timeout has occurred.'},
-      {name:"promise",func:()=>{},text:"()=>{Observable.timer(0)}"},
-    ]},
-    {time:'number',types:null},
-  ];
+  protected static propertiesType = new PropertyType("object",PropertyTypeEnum.Object,[
+    new PropertyType("time",PropertyTypeEnum.Number),
+    new PropertyType("timeoutResult",PropertyTypeEnum.String)
+  ],"");
 
   public runner = () => {
     return this.graphInputs[0].timeout(
       this.properties.time,
-      Timeout.propertiesType[1].types[this.properties.fi].func,
+      this.properties.timeoutResult,
     )
   };
   public toString = () => {
-    return '.timeout('+this.properties.time+', '+  Timeout.propertiesType[1].types[this.properties.fi].text+')';
+    return '.timeout('+this.properties.time+', '+  this.properties.timeoutResult+')';
   };
 
 
   public properties = {
-    fi: 0,
+    timeoutResult: "Timeout has occurred.",
     time: 1000,
   };
   public graphInputs = [];

@@ -1,5 +1,7 @@
 
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
 export class WindowWithCount extends RxNode {
   protected static title = "WindowWithCount";
   protected static link = "http://reactivex.io/documentation/operators/window.html";
@@ -7,7 +9,10 @@ export class WindowWithCount extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{name:"count",type: 'number'}, {name:"skip",type: 'number'}];
+  protected static propertiesType = new PropertyType("object",PropertyTypeEnum.Object,[
+    new PropertyType("count",PropertyTypeEnum.Number),
+    new PropertyType("skip",PropertyTypeEnum.Number)
+  ],"");
 
   public runner = ({count, skip}) => {
     return this.graphInputs[0].windowWithCount(count, skip);

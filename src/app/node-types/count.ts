@@ -1,4 +1,7 @@
 import {RxNode} from "./rxNode";
+import {SampleFunctions} from "./sample-functions";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {PropertyType} from "./property-type";
 export class Count extends RxNode {
   protected static title = "Average";
   protected static link = "http://reactivex.io/documentation/operators/Count.html";
@@ -6,25 +9,21 @@ export class Count extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [
-    {
-      name: "fi", type: 'function', types: [
-      {name: "all", func: () => true, text: '()=>true'},
-      {name: "gt6", func: x => x > 6, text: "x=>x>6"},
-    ]
-    },
-  ];
+  protected static propertiesType = new PropertyType("filterFunc",PropertyTypeEnum.Method,[
+    SampleFunctions.ALL,
+    SampleFunctions.GT6
+  ],'');
 
   public runner = () => {
-    return this.graphInputs[0].count(Count.propertiesType[0].types[this.properties.fi].func);
+    return this.graphInputs[0].count(Count.propertiesType[0].types[this.properties.filterFunc].func);
   };
   public toString = () => {
-    return '.count(' + Count.propertiesType[0].types[this.properties.fi].text + ')';
+    return '.count(' + Count.propertiesType[0].types[this.properties.filterFunc].text + ')';
   };
 
 
   public properties = {
-    fi: 0
+    filterFunc: 0
   };
   public graphInputs = [];
 }

@@ -8,7 +8,7 @@ export class FromEvent extends RxNode {
   protected static maxInput = 0;
   protected static minInput = 0;
 
-  protected static propertiesType = [];
+  protected static propertiesType = null;
 
   public runner = () => {
     return this.nodeClick;

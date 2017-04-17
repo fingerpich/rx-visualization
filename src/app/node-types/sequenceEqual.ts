@@ -7,7 +7,7 @@ export class SequenceEqual extends RxNode {
   protected static maxInput = 2;
   protected static minInput = 2;
 
-  protected static propertiesType = [];
+  protected static propertiesType = null;
 
   public runner = () => {
     return this.graphInputs[0].sequenceEqual(

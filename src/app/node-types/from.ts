@@ -1,5 +1,7 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
 
 export class From extends RxNode {
   protected static title = "From";
@@ -8,7 +10,9 @@ export class From extends RxNode {
   protected static maxInput = 0;
   protected static minInput = 0;
 
-  protected static propertiesType = [{name:"list",type: 'list', params:[{name:'number',type:'number'}]}];
+  protected static propertiesType = new PropertyType("list",PropertyTypeEnum.List,
+    new PropertyType("number",PropertyTypeEnum.Number)
+    ,"");
 
   public runner = () => {
     return Observable.from(this.properties.list);
@@ -20,8 +24,7 @@ export class From extends RxNode {
 
   public properties = {
     list: [
-      {number:1},
-      {number:2}
+      1,2
       ]
   };
   public graphInputs = [];

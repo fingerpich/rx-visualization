@@ -8,7 +8,7 @@ export class Merge extends RxNode {
   protected static maxInput = 300;
   protected static minInput = 2;
 
-  protected static propertiesType = [];
+  protected static propertiesType = null;
 
   public runner = ({}) => {
     return Observable.merge(...this.graphInputs);

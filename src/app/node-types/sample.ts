@@ -1,5 +1,7 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
 
 export class Sample extends RxNode {
   protected static title = "Sample";
@@ -8,7 +10,7 @@ export class Sample extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{name:"periodicTimeIntervals",type: "number"}];
+  protected static propertiesType = new PropertyType("periodicTimeIntervals",PropertyTypeEnum.Number);
 
   public runner = ({}) => {
     return this.graphInputs[0].sample(this.properties.periodicTimeIntervals);

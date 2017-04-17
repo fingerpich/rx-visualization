@@ -1,5 +1,7 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
 
 export class TakeLast extends RxNode {
   protected static title = "TakeLast";
@@ -8,7 +10,7 @@ export class TakeLast extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{name:"itemCount",type: "number"}];
+  protected static propertiesType = new PropertyType("itemCount",PropertyTypeEnum.Number);
 
   public runner = ({}) => {
     return this.graphInputs[0].takeLast(this.properties.itemCount);

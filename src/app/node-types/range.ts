@@ -1,5 +1,7 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
 
 export class Range extends RxNode {
   protected static title = "Range";
@@ -8,7 +10,10 @@ export class Range extends RxNode {
   protected static maxInput = 0;
   protected static minInput = 0;
 
-  protected static propertiesType = [{name:"start",type: 'number'}, {name:"count",type: 'number'}];
+  protected static propertiesType = new PropertyType("object",PropertyTypeEnum.Object,[
+    new PropertyType("start",PropertyTypeEnum.Number),
+    new PropertyType("count",PropertyTypeEnum.Number)
+  ],"");
 
   public runner = () => {
     return Observable.range(this.properties.start, this.properties.count);

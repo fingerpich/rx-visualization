@@ -1,4 +1,6 @@
 import {RxNode} from "./rxNode";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {PropertyType} from "./property-type";
 export class Delay extends RxNode {
   protected static title = "Delay";
   protected static link = "http://reactivex.io/documentation/operators/delay.html";
@@ -6,7 +8,7 @@ export class Delay extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{name:"delay",type: "number"}];
+  protected static propertiesType = new PropertyType("delay",PropertyTypeEnum.Number);
 
   public runner = ({}) => {
     return this.graphInputs[0].delay(new Date(Date.now() + this.properties.delay));

@@ -1,4 +1,7 @@
 import {RxNode} from "./rxNode";
+import {SampleFunctions} from "./sample-functions";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {PropertyType} from "./property-type";
 export class Map extends RxNode {
   protected static title = "Map";
   protected static link = "http://reactivex.io/documentation/operators/map.html";
@@ -6,23 +9,23 @@ export class Map extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{name:"fi",type: 'function',types:[
-    {name:"2x",func:(x)=>{return x*2;},text:"(x)=>{return x*2;}"},
-    {name:"x2",func:(x)=>{return x*x;},text:"(x)=>{return x*x;}"},
-    {name:"x3",func:(x)=>{return x*x*x;},text:"(x)=>{return x*x*x;}"},
-    {name:"x+hello",func:(x)=>{return x+' hello';},text:"(x)=>{return x+' hello';}"},
-  ]}];
+  protected static propertiesType = new PropertyType("mapFunc",PropertyTypeEnum.Method,[
+    SampleFunctions.X2,
+    SampleFunctions.Xpoint2,
+    SampleFunctions.X3,
+    SampleFunctions.HELLOX,
+  ],'');
 
   public runner = () => {
-    return this.graphInputs[0].map(Map.propertiesType[0].types[this.properties.fi].func);
+    return this.graphInputs[0].map(Map.propertiesType[0].types[this.properties.mapFunc].func);
   };
   public toString = () => {
-    return '.map(' +Map.propertiesType[0].types[this.properties.fi].text + ')';
+    return '.map(' +Map.propertiesType[0].types[this.properties.mapFunc].text + ')';
   };
 
 
   public properties = {
-    fi: 0,
+    mapFunc: 0,
   };
   public graphInputs = [];
 }

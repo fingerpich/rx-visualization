@@ -1,4 +1,6 @@
 import {RxNode} from "./rxNode";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {PropertyType} from "./property-type";
 export class SkipLast extends RxNode {
   protected static title = "SkipLast";
   protected static link = "http://reactivex.io/documentation/operators/skiplast.html";
@@ -6,7 +8,7 @@ export class SkipLast extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{name:"itemCount",type: "number"}];
+  protected static propertiesType = new PropertyType("itemCount",PropertyTypeEnum.Number);
 
   public runner = ({}) => {
     return this.graphInputs[0].skipLast(this.properties.itemCount);

@@ -8,7 +8,7 @@ export class RefCount extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [];
+  protected static propertiesType = null;
 
   public runner = () => {
     return this.graphInputs[0].refCount();

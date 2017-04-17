@@ -1,5 +1,7 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
 
 export class Defer extends RxNode {
   protected static title = "Defer";
@@ -8,7 +10,7 @@ export class Defer extends RxNode {
   protected static maxInput = 0;
   protected static minInput = 0;
 
-  protected static propertiesType = [{name:"result",type: 'string'}];
+  protected static propertiesType = new PropertyType("result",PropertyTypeEnum.String);
 
   public runner = () => {
     return Observable.defer(() => {

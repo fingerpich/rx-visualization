@@ -1,5 +1,7 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {PropertyType} from "./property-type";
 
 export class Repeat extends RxNode {
   protected static title = "Repeat";
@@ -8,7 +10,10 @@ export class Repeat extends RxNode {
   protected static maxInput = 0;
   protected static minInput = 0;
 
-  protected static propertiesType = [{name:"itemToRepeat",type: 'any'}, {name:"count",type: 'number'}];
+  protected static propertiesType = new PropertyType("object",PropertyTypeEnum.Object,[
+    new PropertyType("itemToRepeat",PropertyTypeEnum.String),
+    new PropertyType("count",PropertyTypeEnum.Number)
+  ],"");
 
   public runner = () => {
     // return Observable.repeat(this.properties.itemToRepeat, this.properties.count);

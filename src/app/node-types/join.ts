@@ -1,5 +1,8 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {SampleFunctions} from "./sample-functions";
 
 export class Join extends RxNode {
   protected static title = "Join";
@@ -8,17 +11,19 @@ export class Join extends RxNode {
   protected static maxInput = 2;
   protected static minInput = 2;
 
-  protected static propertiesType = [
-    {name:"fi1",type: 'function',types:[
-    {name:"timeout",func:()=>{Observable.timer(0)},text:"()=>{Observable.timer(0)}"},
-  ]},
-    {name:"fi2",type: 'function',types:[
-      {name:"timeout",func:()=>{Observable.timer(0)},text:"()=>{Observable.timer(0)}"},
-    ]},
-    {name:"fi3",type: 'function',types:[
-      {name:"timeout",func:(x,y)=>{return x+y},text:"(x+y)=>{return x+y}"},
-    ]},
-  ];
+  protected static propertiesType =new PropertyType("object",PropertyTypeEnum.Object,[
+    new PropertyType("ObKey",PropertyTypeEnum.Method,[
+      SampleFunctions.TIMEOUT0,
+      SampleFunctions.TIMEOUT,
+    ],'a function that accepts an item from the source Observable and returns an Observable whose lifespan governs the duration during which that item will combine with items from the second Observable'),
+    new PropertyType("ObKey",PropertyTypeEnum.Method,[
+      SampleFunctions.TIMEOUT0,
+      SampleFunctions.TIMEOUT,
+    ],'a function that accepts an item from the second Observable and returns an Observable whose lifespan governs the duration during which that item will combine with items from the first Observable'),
+    new PropertyType("ObKey",PropertyTypeEnum.Method,[
+      SampleFunctions.XplusY,
+    ],'a function that accepts an item from the first Observable and an item from the second Observable and returns an item to be emitted by the Observable returned from join'),
+  ],'');
 
   public runner = () => {
     return this.graphInputs[0].join(

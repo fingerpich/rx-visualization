@@ -1,5 +1,8 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {SampleFunctions} from "./sample-functions";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {PropertyType} from "./property-type";
 
 export class First extends RxNode {
   protected static title = "First";
@@ -8,31 +11,23 @@ export class First extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{
-    name: "fi", type: 'function', types: [
-      {
-        name: "even", func: (x, idx, obs) => {
-        return x % 2 === 0;
-      }, text: "(x, idx, obs)=>{return x % 2 === 0;}"
-      },
-      {
-        name: "odd", func: (x, idx, obs) => {
-        return x % 2 === 1;
-      }, text: "(x, idx, obs)=>{return x % 2 === 1;}"
-      },
-    ]
-  }];
+  protected static propertiesType = new PropertyType("filter",PropertyTypeEnum.Method,[
+    SampleFunctions.EVEN,
+    SampleFunctions.ODD,
+    SampleFunctions.ALL,
+    SampleFunctions.GT6,
+  ],'');
 
   public runner = () => {
-    return this.graphInputs[0].first(First.propertiesType[0].types[this.properties.fi].func);
+    return this.graphInputs[0].first(First.propertiesType[0].types[this.properties.filter].func);
   };
   public toString = () => {
-    return '.first(' + First.propertiesType[0].types[this.properties.fi].text + ')';
+    return '.first(' + First.propertiesType[0].types[this.properties.filter].text + ')';
   };
 
 
   public properties = {
-    fi: 0,
+    filter: 0,
   };
   public graphInputs = [];
 }

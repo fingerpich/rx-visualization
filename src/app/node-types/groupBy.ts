@@ -1,5 +1,8 @@
 import {Observable} from "rxjs";
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {SampleFunctions} from "./sample-functions";
 export class GroupBy extends RxNode {
   protected static title = "GroupBy";
   protected static link = "http://reactivex.io/documentation/operators/groupBy.html";
@@ -7,58 +10,20 @@ export class GroupBy extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [
-    {
-      name: "fi1",
-      type: 'function',
-      desc: 'a function that accepts an item from the source Observable and returns its key'
-      ,
-      types: [
-        {
-          name: "getCode", func: (x) => {
-          return x.code;
-        }, text: "(x)=>{return x.code;}"
-        },
-        {
-          name: "getX", func: (x) => {
-          return x.x;
-        }, text: "(x)=>{return x.x;}"
-        },
-      ]
-    },
-    {
-      name: "fi2", type: 'function',
-      desc: 'a function that accepts an item from the source Observable and returns an item to be emitted in its place by one of the resulting Observables',
-      types: [
-        {
-          name: "getCode", func: (x) => {
-          return x.code;
-        }, text: "(x)=>{return x.code;}"
-        },
-        {
-          name: "getX", func: (x) => {
-          return x.x;
-        }, text: "(x)=>{return x.x;}"
-        },
-      ]
-    },
-    {
-      name: "fi3", type: 'function',
-      desc: 'a function used to compare two keys for identity (that is, whether items with two keys should be emitted on the same Observable)',
-      types: [
-        {
-          name: "timeout", func: (x) => {
-          return Observable.timer(2000);
-        }, text: "(x)=>{return x.code;}"
-        },
-        {
-          name: "nothing", func: (x) => {
-          return x;
-        }, text: "(x)=>{return x;}"
-        },
-      ]
-    },
-  ];
+  protected static propertiesType =new PropertyType("object",PropertyTypeEnum.Object,[
+    new PropertyType("ObKey",PropertyTypeEnum.Method,[
+      SampleFunctions.GET_X,
+      SampleFunctions.GET_CODE,
+    ],'a function that accepts an item from the source Observable and returns its key'),
+    new PropertyType("ObKey",PropertyTypeEnum.Method,[
+      SampleFunctions.GET_X,
+      SampleFunctions.GET_CODE,
+    ],'a function that accepts an item from the source Observable and returns an item to be emitted in its place by one of the resulting Observables'),
+    new PropertyType("ObKey",PropertyTypeEnum.Method,[
+      SampleFunctions.TIMEOUT,
+      SampleFunctions.NOTHING,
+    ],'a function used to compare two keys for identity (that is, whether items with two keys should be emitted on the same Observable)'),
+  ],'');
 
   public runner = () => {
     return this.graphInputs[0].map(GroupBy.propertiesType[0].types[this.properties.fi1].func, GroupBy.propertiesType[1].types[this.properties.fi2].func);

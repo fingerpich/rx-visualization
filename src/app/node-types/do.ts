@@ -1,5 +1,8 @@
 import {Observer} from "rxjs";
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {SampleFunctions} from "./sample-functions";
 
 export class Do extends RxNode {
   protected static title = "Do";
@@ -8,36 +11,21 @@ export class Do extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{
-    name: "fi", type: 'function', types: [
-      {
-        name: "observer",
-        func: [
-          function (x) {
-            console.log('Do Next: %s', x);
-          },
-          function (err) {
-            console.log('Do Error: %s', err);
-          },
-          function () {
-            console.log('Do Completed');
-          }
-        ]
-        , text: "(x)=>{return x > 6;}"
-      },
-    ]
-  }];
+  protected static propertiesType = new PropertyType("action",PropertyTypeEnum.Method,[
+    SampleFunctions.X2,
+    SampleFunctions.X3,
+  ],'');
 
   public runner = () => {
-    return this.graphInputs[0].do(Do.propertiesType[0].types[this.properties.fi].func);
+    return this.graphInputs[0].do(Do.propertiesType[0].types[this.properties.action].func);
   };
   public toString = () => {
-    return '.do(' + Do.propertiesType[0].types[this.properties.fi].text + ')';
+    return '.do(' + Do.propertiesType[0].types[this.properties.action].text + ')';
   };
 
 
   public properties = {
-    fi: 0,
+    action: 0,
   };
   public graphInputs = [];
 }

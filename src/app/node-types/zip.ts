@@ -1,5 +1,8 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {SampleFunctions} from "./sample-functions";
 
 export class Zip extends RxNode {
   protected static title = "Zip";
@@ -8,9 +11,9 @@ export class Zip extends RxNode {
   protected static maxInput = 300;
   protected static minInput = 2;
 
-  protected static propertiesType = [{name:"fi",type: 'function',types:[
-    {name:"join",func:(...args)=>{return args.join(',');},text:"(...args)=>{return args.join(',');}"},
-  ]}];
+  protected static propertiesType = new PropertyType("zipFunction",PropertyTypeEnum.Method,[
+    SampleFunctions.ZIP1,
+  ],'');
 
   public runner = ({}) => {
     return Observable.zip(...this.graphInputs,Zip.propertiesType[0].types[this.properties.fi].func);

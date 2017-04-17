@@ -1,5 +1,8 @@
 import {Observable} from "rxjs/Rx";
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {SampleFunctions} from "./sample-functions";
 
 export class TakeWhile extends RxNode {
   protected static title = "TakeWhile";
@@ -8,26 +11,22 @@ export class TakeWhile extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{
-    name:"fi",type: 'function', types: [
-      {
-        name: "ST6", func: (x) => {
-        return x < 6;
-      }, text: "(x)=>{return x > 6;}"
-      },
-    ]
-  }];
+  protected static propertiesType = new PropertyType("whileFilter",PropertyTypeEnum.Method,[
+    SampleFunctions.ST6,
+    SampleFunctions.ALL,
+    SampleFunctions.GT6,
+  ],'');
 
   public runner = ({}) => {
-    return this.graphInputs[0].takeWhile(TakeWhile.propertiesType[0].types[this.properties.fi].func);
+    return this.graphInputs[0].takeWhile(TakeWhile.propertiesType[0].types[this.properties.whileFilter].func);
   };
   public toString = ({}) => {
-    return '.takeWhile(' + TakeWhile.propertiesType[0].types[this.properties.fi].text + ')';
+    return '.takeWhile(' + TakeWhile.propertiesType[0].types[this.properties.whileFilter].text + ')';
   };
 
 
   public properties = {
-    fi: 0,
+    whileFilter: 0,
   };
 
   public graphInputs = [];

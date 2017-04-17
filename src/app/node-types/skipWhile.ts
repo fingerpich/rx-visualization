@@ -1,4 +1,7 @@
 import {RxNode} from "./rxNode";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {PropertyType} from "./property-type";
+import {SampleFunctions} from "./sample-functions";
 export class SkipWhile extends RxNode {
   protected static title = "SkipWhile";
   protected static link = "http://reactivex.io/documentation/operators/SkipWhile.html";
@@ -6,26 +9,22 @@ export class SkipWhile extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [{
-    name:"fi",type: 'function', types: [
-      {
-        name: "ST6", func: (x) => {
-        return x < 6;
-      }, text: "(x)=>{return x > 6;}"
-      },
-    ]
-  }];
+  protected static propertiesType = new PropertyType("whileFilter",PropertyTypeEnum.Method,[
+    SampleFunctions.ST6,
+    SampleFunctions.ALL,
+    SampleFunctions.GT6,
+  ],'');
 
   public runner = () => {
-    return this.graphInputs[0].skipWhile(SkipWhile.propertiesType[0].types[this.properties.fi].func);
+    return this.graphInputs[0].skipWhile(SkipWhile.propertiesType[0].types[this.properties.whileFilter].func);
   };
   public toString = () => {
-    return '.skipWhile(' + SkipWhile.propertiesType[0].types[this.properties.fi].text + ')';
+    return '.skipWhile(' + SkipWhile.propertiesType[0].types[this.properties.whileFilter].text + ')';
   };
 
 
   public properties = {
-    fi: 0,
+    whileFilter: 0,
   };
   public graphInputs = [];
 }

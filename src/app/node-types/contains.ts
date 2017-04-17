@@ -1,4 +1,7 @@
 import {RxNode} from "./rxNode";
+import {PropertyType} from "./property-type";
+import {PropertyTypeEnum} from "./propertyType.enum";
+import {SampleFunctions} from "./sample-functions";
 export class Contains extends RxNode {
   protected static title = "Contains";
   protected static link = "http://reactivex.io/documentation/operators/contains.html";
@@ -6,20 +9,13 @@ export class Contains extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = [
-    {
-      name: "item", type: 'function', types: [
-      {name: "num", func: 2, text: '2'},
-      {name: "text", func: "text", text: "'text'"},
-    ]
-    }
-  ];
+  protected static propertiesType = new PropertyType("item",PropertyTypeEnum.String);
 
   public runner = () => {
-    return this.graphInputs[0].contains(Contains.propertiesType[0].types[this.properties.item].func);
+    return this.graphInputs[0].contains(this.properties.item);
   };
   public toString = () => {
-    return '.contains(' + Contains.propertiesType[0].types[this.properties.item].text + ')';
+    return '.contains(' + this.properties.item + ')';
   };
 
 

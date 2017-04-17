@@ -8,7 +8,7 @@ export class Race extends RxNode {
   protected static maxInput = 300;
   protected static minInput = 2;
 
-  protected static propertiesType = [];
+  protected static propertiesType = null;
 
   public runner = () => {
     return Observable.race(...this.graphInputs);
