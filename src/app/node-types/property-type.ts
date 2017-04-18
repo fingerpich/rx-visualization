@@ -10,4 +10,19 @@ export class PropertyType{
     this.params=params;
     this.description=description;
   }
+  isNumber() {
+    return this.type==PropertyTypeEnum.Number;
+  }
+  isString() {
+    return this.type==PropertyTypeEnum.String;
+  }
+  isMethod() {
+    return this.type==PropertyTypeEnum.Method;
+  }
+  isObject() {
+    return this.type==PropertyTypeEnum.Object;
+  }
+  isList() {
+    return this.type==PropertyTypeEnum.List;
+  }
 }

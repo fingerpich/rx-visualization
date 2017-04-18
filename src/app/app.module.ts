@@ -11,6 +11,7 @@ import { StatusComponent } from './status/status.component';
 import { SceneComponent } from './scene/scene.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {AppService} from "./app.service";
+import { PropertyComponentComponent } from './property-inspector/property-component/property-component.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {AppService} from "./app.service";
     CreationMenuComponent,
     ControlSceneComponent,
     StatusComponent,
-    SceneComponent
+    SceneComponent,
+    PropertyComponentComponent
   ],
   imports: [
     BrowserModule,

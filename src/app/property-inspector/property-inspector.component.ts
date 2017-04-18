@@ -15,8 +15,4 @@ export class PropertyInspectorComponent implements OnInit {
       this.selectedItem=data;
     });
   }
-
-  dataChanged() {
-    this.appService.rebuildRxObjects();
-  }
 }
