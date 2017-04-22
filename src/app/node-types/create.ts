@@ -12,7 +12,7 @@ export class Create extends RxNode{
 
   // protected static propertiesType = [{name:"list",type: 'list', params:[{name:'time',type:'Number'},{name:'value',type:'Number'}]}];
   protected static propertiesType = new PropertyType("list",PropertyTypeEnum.List,
-    new PropertyType("object",PropertyTypeEnum.Object,[
+    new PropertyType("",PropertyTypeEnum.Object,[
       new PropertyType("time",PropertyTypeEnum.Number),
       new PropertyType("value",PropertyTypeEnum.Number)
     ],"")

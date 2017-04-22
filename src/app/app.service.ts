@@ -201,14 +201,15 @@ export class AppService {
     const edges=this.edgeList;
     const doDelay=(ob)=>{
       return ob.delay(200).flatMap(function (x) {
-        return Observable.from(x).delay(200);
+        return Observable.of(x).delay(200);
       })
     };
 
     for (let node of nodes) {
-      if (node.data.rx) {
-        node.data.rx.dispose();
+      if (node.data.rxo) {
+        node.data.rxo.dispose && node.data.rxo.dispose();
         node.data.rx = 0;
+        node.data.rxo = 0;
       }
     }
 
@@ -232,7 +233,7 @@ export class AppService {
     }
     const nodeSubscriptor = (node) => {
       if (node.data.rx) {
-        node.data.rx.subscribe((data)=>{
+        node.data.rxo=node.data.rx.subscribe((data)=>{
           this.subscribeItem(node,data);
         })
       }

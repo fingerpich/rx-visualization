@@ -7,10 +7,8 @@
       <a [href]="selectedItem.data.link">link</a>
       <p>{{selectedItem.data.desc}}</p>
     </div>
-    <div class="properiesEditor">
-      <div *ngFor="let propType of selectedItem.data.propertiesType">
-        <rxstudio-property-component [properties]="selectedItem.data.properties" [type]="propType"></rxstudio-property-component>
-      </div>
+    <div class="properiesEditor" *ngIf="selectedItem.data.propertiesType">
+        <rxstudio-property-component [properties]="selectedItem.data.properties" [type]="selectedItem.data.propertiesType"></rxstudio-property-component>
     </div>
     <div class="codeGenerated">
         <textarea [value]="selectedItem.data.toString()"></textarea>

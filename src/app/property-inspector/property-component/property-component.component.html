@@ -1,17 +1,17 @@
 <!--number type-->
-<div *ngIf="propertyType.isNumber()">
+<div *ngIf="propertyType.isNumber()" class="simpleInput">
   <b>{{propertyType.name}}</b>
   <input [placeholder]="propertyType.name" [title]="propertyType.description" type="number" [(ngModel)]="properties[propertyType.name]" (change)="dataChanged()">
 </div>
 
 <!--string type-->
-<div *ngIf="propertyType.isString()">
+<div *ngIf="propertyType.isString()" class="simpleInput">
   <b>{{propertyType.name}}</b>
   <input [placeholder]="propertyType.name" [title]="propertyType.description" [(ngModel)]="properties[propertyType.name]" (change)="dataChanged()">
 </div>
 
 <!--function type-->
-<div *ngIf="propertyType.isMethod()">
+<div *ngIf="propertyType.isMethod()" class="methodInput">
   <b>{{propertyType.name}}</b>
   <select (change)="dataChanged()">
     <option *ngFor="let opt of propertyType.params" [title]="opt.desc">opt.name</option>
@@ -19,21 +19,21 @@
 </div>
 
 <!--list type-->
-<div *ngIf="propertyType.isList()">
+<div *ngIf="propertyType.isList()" class="listInput">
   <b>{{propertyType.name}}</b>
-  <a (click)="properties[propertyType.name].push({})">add</a>
-  <ul>
-    <li *ngFor="let prop of properties[propertyType.name]">
-      <rxstudio-property-component [type]="propertyType.params" [properties]="properties[propertyType.name]"></rxstudio-property-component>
+  <a class="addButton" (click)="properties[propertyType.name].push({})">add</a>
+  <ul class="list">
+    <li class="listRow" *ngFor="let prop of properties[propertyType.name]">
+      <rxstudio-property-component [type]="propertyType.params" [properties]="prop"></rxstudio-property-component>
     </li>
   </ul>
 </div>
 
 <!--Object type-->
-<div *ngIf="propertyType.isObject()">
+<div *ngIf="propertyType.isObject()" class="objectInput">
   <b>{{propertyType.name}}</b>
-  <ul>
-    <li *ngFor="let objPropType of propertyType.params">
+  <ul class="obj">
+    <li class="objProp" *ngFor="let objPropType of propertyType.params">
       <rxstudio-property-component [type]="objPropType" [properties]="properties"></rxstudio-property-component>
     </li>
   </ul>

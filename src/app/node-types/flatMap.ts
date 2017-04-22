@@ -18,10 +18,10 @@ export class FlatMap extends RxNode {
   ],'');
 
   public runner = () => {
-    return this.graphInputs[0].flatMap(FlatMap.propertiesType[0].types[this.properties.observabler].func);
+    return this.graphInputs[0].flatMap(FlatMap.propertiesType.params[this.properties.observabler].func);
   };
   public toString = () => {
-    return '.flatMap(' + FlatMap.propertiesType[0].types[this.properties.observabler].text + ')';
+    return '.flatMap(' + FlatMap.propertiesType.params[this.properties.observabler].text + ')';
   };
 
 

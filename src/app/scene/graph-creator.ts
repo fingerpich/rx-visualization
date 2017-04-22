@@ -407,11 +407,12 @@ export class GraphCreator {
     circles.exit().remove();
   };
   private static insertTitleLinebreaks (gEl, title) {
-    const words = title.split(/\s+/g),
+    if (typeof title == 'undefined') title = "value";
+    const words = title.toString().split(/\s+/g),
       nwords = words.length;
     const el = gEl.append("text")
-      .attr("text-anchor","middle")
-      .attr("dy", "-" + (nwords-1)*7.5);
+      .attr("text-anchor", "middle")
+      .attr("dy", "-" + (nwords - 1) * 7.5);
 
     for (let i = 0; i < words.length; i++) {
       const tspan = el.append('tspan').text(words[i]);
