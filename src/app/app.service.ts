@@ -225,7 +225,7 @@ export class AppService {
     while (notFinished) {
       notFinished = false;
       for (let edge of edges) {
-        if (edge.source.rx) {
+        if (edge.source.data.rx) {
           edge.target.data.rx = doDelay(edge.target.data.runner());
           notFinished = true;
         }
