@@ -225,14 +225,14 @@ export class AppService {
     let notFinished = true;
     while (notFinished) {
       notFinished = false;
-      const nodesNeedsRx = nodes.filter(n => !n.rx);
+      const nodesNeedsRx = nodes.filter(n => !n.data.rx);
       for (let eachNode of nodesNeedsRx) {
         let eachNodeSources = edges.filter(e => e.target == eachNode).map(e => e.source);
 
         let couldInitRx =
             eachNodeSources.length <= eachNode.data.maxInput &&
             eachNodeSources.length >= eachNode.data.minInput &&
-            eachNodeSources.reduce((n, hasRx) => n.rx && hasRx, true);
+            eachNodeSources.every( n => n.data.rx );
 
         if (couldInitRx) {
           eachNode.data.graphInputs = eachNodeSources.map(node => node.data.rx);

@@ -22,6 +22,7 @@ export class Subscribe extends RxNode{
         console.log('Completed');
         /* on complete*/
       });
+    return this.graphInputs[0];
   };
   public toString = () => {
     return `.subscribe(
