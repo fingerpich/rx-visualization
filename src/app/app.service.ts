@@ -205,6 +205,7 @@ export class AppService {
       })
     };
 
+    //DISPOSE existed rx objects
     for (let node of nodes) {
       if (node.data.rxo) {
         node.data.rxo.dispose && node.data.rxo.dispose();
@@ -213,21 +214,31 @@ export class AppService {
       }
     }
 
-    //make root observables
+    //Make Creator Observables
     for (let node of nodes) {
-      if (!node.data.rx && node.data.maxInput < 1) {
+      if (!node.data.rx && node.data.maxInput == 0) {
         node.data.rx = doDelay(node.data.runner(node.data.properties));
       }
     }
 
-    //connect nodes by edges
+    //Connect Nodes By Edges
     let notFinished = true;
     while (notFinished) {
       notFinished = false;
-      for (let edge of edges) {
-        if (edge.source.rx) {
-          edge.target.data.rx = doDelay(edge.target.data.runner());
+      const nodesNeedsRx = nodes.filter(n => !n.rx);
+      for (let eachNode of nodesNeedsRx) {
+        let eachNodeSources = edges.filter(e => e.target == eachNode).map(e => e.source);
+
+        let couldInitRx =
+            eachNodeSources.length <= eachNode.data.maxInput &&
+            eachNodeSources.length >= eachNode.data.minInput &&
+            eachNodeSources.reduce((n, hasRx) => n.rx && hasRx, true);
+
+        if (couldInitRx) {
+          eachNode.data.graphInputs = eachNodeSources.map(node => node.data.rx);
+          eachNode.data.rx = doDelay(eachNode.data.runner());
           notFinished = true;
+          break;
         }
       }
     }
