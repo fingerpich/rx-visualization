@@ -177,8 +177,17 @@ export class AppService {
     return this.itemSubscriptor;
   }
 
+  private resultsArray=[];
   public subscribeItem(node,data){
-    this.itemSubscriptor.next({node,data});
+    let index=this.resultsArray.indexOf(d=>d.data.id==data.id);
+    if(index>-1){
+      let lastData=this.resultsArray[index];
+      this.resultsArray[index]={node,data,lastData:lastData.data,lastNode:lastData.node};
+    }
+    else{
+      this.resultsArray.push({node,data});
+    }
+    this.itemSubscriptor.next(this.resultsArray);
   }
 
   private nodesList;
@@ -199,9 +208,16 @@ export class AppService {
   public rebuildRxObjects() {
     const nodes=this.nodesList;
     const edges=this.edgeList;
+    let cntr = 1;
+    const makeObject = x => {
+      if(x.id) return x;
+      else {
+        return {x:x,id:cntr++};
+      }
+    };
     const doDelay=(ob)=>{
       return ob.delay(200).flatMap(function (x) {
-        return Observable.of(x).delay(200);
+        return Observable.of(makeObject(x)).delay(200);
       })
     };
 
@@ -242,6 +258,8 @@ export class AppService {
         }
       }
     }
+
+
     const nodeSubscriptor = (node) => {
       if (node.data.rx) {
         node.data.rxo=node.data.rx.subscribe((data)=>{

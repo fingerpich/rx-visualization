@@ -46,21 +46,7 @@ export class GraphCreator {
     this.edges = edges;
     this.svg = svg;
     this.svgG = svg.append("g").classed(thisGraph.consts.graphClass, true);
-    this.appService.getItemSubscribe().subscribe(({node, data}) => {
-      // update existing nodes
-      const resultCircle = thisGraph.resultCircles
-        .append("circle");
-      resultCircle
-        .attr("r", String(this.consts.nodeRadius))
-        .attr("transform", function (d) {
-          return "translate(" + (node.x + thisGraph.consts.nodeRadius) + "," + node.y + ")";
-        }).transition().duration(thisGraph.consts.animateTime)
-        .attr("transform", function (d) {
-          return "translate(" + (node.x + thisGraph.consts.nodeRadius + thisGraph.consts.nodeRadius / 1.618) + "," + node.y + ")";
-        })
-        .attr('opacity', 0.1).remove();
-      GraphCreator.insertTitleLinebreaks(resultCircle, data);
-    });
+    this.appService.getItemSubscribe().subscribe(this.showResults);
     this.setIdCounterByNodes();
     this.defineArrows();
     this.bindEvents();
@@ -406,6 +392,40 @@ export class GraphCreator {
     // remove old nodes
     circles.exit().remove();
   };
+
+  private showResults = (resultList) => {
+    // {node, data}
+    // update existing nodes
+    const thisGraph=this;
+    const resultCircle = thisGraph.resultCircles.selectAll("g").data(resultList, d => d.data.id);
+    resultCircle
+      .filter(d=>d.lastNode)
+      .attr('opacity', 1)
+      .transition()
+      .duration(thisGraph.consts.animateTime)
+      .attr("transform", d=>"translate(" + (d.node.x + thisGraph.consts.nodeRadius) + "," + d.node.y + ")")
+      .attr('opacity', 0.1);
+
+    resultCircle
+      .filter(d=>!d.lastNode)
+      .attr("transform", d=>"translate(" + (d.node.x + thisGraph.consts.nodeRadius) + "," + d.node.y + ")")
+      .transition()
+      .duration(thisGraph.consts.animateTime)
+      .attr("transform", d=>"translate(" + (d.node.x + thisGraph.consts.nodeRadius + thisGraph.consts.nodeRadius / 1.618) + "," + d.node.y + ")")
+      .attr('opacity', 0.1);
+
+    resultCircle.exit().remove();
+
+    const newGs= resultCircle.enter()
+      .append("g");
+    let circle=newGs
+      .append("circle")
+      .attr("r", String(this.consts.nodeRadius/1.618));
+    newGs.each(function(d) {
+      GraphCreator.insertTitleLinebreaks(d3.select(this), d.data.x);
+    });
+  };
+
   private static insertTitleLinebreaks (gEl, title) {
     if (typeof title == 'undefined') title = "value";
     const words = title.toString().split(/\s+/g),
