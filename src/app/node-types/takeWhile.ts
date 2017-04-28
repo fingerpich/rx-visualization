@@ -18,10 +18,10 @@ export class TakeWhile extends RxNode {
   ],'');
 
   public runner = ({}) => {
-    return this.graphInputs[0].takeWhile(TakeWhile.propertiesType[0].types[this.properties.whileFilter].func);
+    return this.graphInputs[0].takeWhile(TakeWhile.propertiesType.params[this.properties.whileFilter].func);
   };
   public toString = ({}) => {
-    return '.takeWhile(' + TakeWhile.propertiesType[0].types[this.properties.whileFilter].text + ')';
+    return '.takeWhile(' + TakeWhile.propertiesType.params[this.properties.whileFilter].text + ')';
   };
 
 

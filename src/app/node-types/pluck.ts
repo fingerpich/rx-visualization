@@ -12,10 +12,10 @@ export class Pluck extends RxNode {
 
   protected static propertiesType = new PropertyType("propName",PropertyTypeEnum.String);
 
-  public runner = ({}) => {
+  public runner = () => {
     return this.graphInputs[0].pluck(this.properties.propName);
   };
-  public toString = ({}) => {
+  public toString = () => {
     return '.pluck(' + this.properties.propName + '))';
   };
 

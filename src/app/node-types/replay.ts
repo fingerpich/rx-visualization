@@ -20,10 +20,10 @@ export class Replay extends RxNode {
   ],"");
 
   public runner = () => {
-    return this.graphInputs[0].replay(Replay.propertiesType[0].types[this.properties.transFunc].func, this.properties.bufferSize, this.properties.window, this.properties.scheduler);
+    return this.graphInputs[0].replay(Replay.propertiesType.params[this.properties.transFunc].func, this.properties.bufferSize, this.properties.window, this.properties.scheduler);
   };
   public toString = () => {
-    return '.replay(' + Replay.propertiesType[0].types[this.properties.transFunc].text + ', ' + this.properties.bufferSize + ', ' + this.properties.window + ', ' + this.properties.scheduler + ')';
+    return '.replay(' + Replay.propertiesType.params[this.properties.transFunc].text + ', ' + this.properties.bufferSize + ', ' + this.properties.window + ', ' + this.properties.scheduler + ')';
   };
 
 

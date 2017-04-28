@@ -15,10 +15,10 @@ export class Count extends RxNode {
   ],'');
 
   public runner = () => {
-    return this.graphInputs[0].count(Count.propertiesType[0].types[this.properties.filterFunc].func);
+    return this.graphInputs[0].count(Count.propertiesType.params[this.properties.filterFunc].func);
   };
   public toString = () => {
-    return '.count(' + Count.propertiesType[0].types[this.properties.filterFunc].text + ')';
+    return '.count(' + Count.propertiesType.params[this.properties.filterFunc].text + ')';
   };
 
 

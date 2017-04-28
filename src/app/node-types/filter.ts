@@ -17,10 +17,10 @@ export class Filter extends RxNode {
   ],'');
 
   public runner = () => {
-    return this.graphInputs[0].filter(Filter.propertiesType[0].types[this.properties.filter].func);
+    return this.graphInputs[0].filter(Filter.propertiesType.params[this.properties.filter].func);
   };
   public toString = () => {
-    return '.filter(' + Filter.propertiesType[0].types[this.properties.filter].text + ')';
+    return '.filter(' + Filter.propertiesType.params[this.properties.filter].text + ')';
   };
 
 

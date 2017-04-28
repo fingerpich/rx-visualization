@@ -26,10 +26,10 @@ export class GroupBy extends RxNode {
   ],'');
 
   public runner = () => {
-    return this.graphInputs[0].map(GroupBy.propertiesType[0].types[this.properties.fi1].func, GroupBy.propertiesType[1].types[this.properties.fi2].func);
+    return this.graphInputs[0].map(GroupBy.propertiesType.params[this.properties.fi1].func, GroupBy.propertiesType[1].types[this.properties.fi2].func);
   };
   public toString = () => {
-    return '.map(' + GroupBy.propertiesType[0].types[this.properties.fi1].text + ', ' + GroupBy.propertiesType[0].types[this.properties.fi1].text + ')';
+    return '.map(' + GroupBy.propertiesType.params[this.properties.fi1].text + ', ' + GroupBy.propertiesType.params[this.properties.fi1].text + ')';
   };
 
 
