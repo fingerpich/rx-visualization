@@ -27,6 +27,15 @@ $selectedColor:$primaryColor;
       pointer-events: none;
     }
 
+    .resultItems{
+      circle{
+        fill:#07f;
+      }
+      text{
+        fill:white;
+      }
+    }
+
     marker {
       fill: $linkColor;
     }

@@ -13,7 +13,7 @@ export class GraphCreator {
     DELETE_KEY: 46,
     ENTER_KEY: 13,
     nodeRadius: 50,
-    animateTime:3000
+    animateTime:300
   };
   private state = {
     selectedNode: null,
@@ -89,7 +89,7 @@ export class GraphCreator {
   private bindEvents() {
     const thisGraph = this;
     // svg nodes and edges
-    thisGraph.resultCircles = this.svgG.append("g");
+    thisGraph.resultCircles = this.svgG.append("g").attr("class","resultItems");
     thisGraph.paths = this.svgG.append("g");
     thisGraph.circles = this.svgG.append("g");
 
@@ -298,7 +298,7 @@ export class GraphCreator {
   };
   private svgClick = () => {
     const createOption = this.appService.getCreationOption();
-    if (!createOption || createOption == "pan")return;
+    if (!createOption || createOption == "pan")return true;
     else {
       const xycoords = d3.mouse(this.svgG.node()),
         d = {
@@ -399,28 +399,26 @@ export class GraphCreator {
     const thisGraph=this;
     const resultCircle = thisGraph.resultCircles.selectAll("g").data(resultList, d => d.data.id);
     resultCircle
-      .filter(d=>d.lastNode)
-      .attr('opacity', 1)
-      .transition()
-      .duration(thisGraph.consts.animateTime)
-      .attr("transform", d=>"translate(" + (d.node.x + thisGraph.consts.nodeRadius) + "," + d.node.y + ")")
-      .attr('opacity', 0.1);
-
-    resultCircle
-      .filter(d=>!d.lastNode)
-      .attr("transform", d=>"translate(" + (d.node.x + thisGraph.consts.nodeRadius) + "," + d.node.y + ")")
       .transition()
       .duration(thisGraph.consts.animateTime)
       .attr("transform", d=>"translate(" + (d.node.x + thisGraph.consts.nodeRadius + thisGraph.consts.nodeRadius / 1.618) + "," + d.node.y + ")")
-      .attr('opacity', 0.1);
+      .attr('opacity', 0.8)
+      .select('text').text(d=>d.data.x);
 
     resultCircle.exit().remove();
 
     const newGs= resultCircle.enter()
       .append("g");
+    newGs
+      .attr('opacity', 1)
+      .attr("transform", d=>"translate(" + (d.node.x + thisGraph.consts.nodeRadius) + "," + d.node.y + ")")
+      .transition()
+      .duration(thisGraph.consts.animateTime)
+      .attr("transform", d=>"translate(" + (d.node.x + thisGraph.consts.nodeRadius + thisGraph.consts.nodeRadius / 1.618) + "," + d.node.y + ")")
+      .attr('opacity', 0.8);
     let circle=newGs
       .append("circle")
-      .attr("r", String(this.consts.nodeRadius/1.618));
+      .attr("r", String(this.consts.nodeRadius/2.618));
     newGs.each(function(d) {
       GraphCreator.insertTitleLinebreaks(d3.select(this), d.data.x);
     });
