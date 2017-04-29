@@ -164,6 +164,9 @@ export class GraphCreator {
       thisGraph.state.shiftNodeDrag=false;
       thisGraph.connectorLine.classed('hidden', true)
     }
+    else{
+      this.showResults(null);
+    }
   };
 
   private deleteGraph = (skipPrompt) => {
@@ -393,10 +396,14 @@ export class GraphCreator {
     circles.exit().remove();
   };
 
+  lastResultList;
   private showResults = (resultList) => {
     // {node, data}
     // update existing nodes
-    const thisGraph=this;
+    resultList = resultList || this.lastResultList;
+    if (!resultList) return;
+    this.lastResultList = resultList;
+    const thisGraph = this;
     const resultCircle = thisGraph.resultCircles.selectAll("g").data(resultList, d => d.data.id);
     resultCircle
       .transition()
@@ -407,7 +414,7 @@ export class GraphCreator {
 
     resultCircle.exit().remove();
 
-    const newGs= resultCircle.enter()
+    const newGs = resultCircle.enter()
       .append("g");
     newGs
       .attr('opacity', 1)
@@ -416,10 +423,10 @@ export class GraphCreator {
       .duration(thisGraph.consts.animateTime)
       .attr("transform", d=>"translate(" + (d.node.x + thisGraph.consts.nodeRadius + thisGraph.consts.nodeRadius / 1.618) + "," + d.node.y + ")")
       .attr('opacity', 0.8);
-    let circle=newGs
+    let circle = newGs
       .append("circle")
-      .attr("r", String(this.consts.nodeRadius/2.618));
-    newGs.each(function(d) {
+      .attr("r", String(this.consts.nodeRadius / 2.618));
+    newGs.each(function (d) {
       GraphCreator.insertTitleLinebreaks(d3.select(this), d.data.x);
     });
   };
