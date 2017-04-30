@@ -17,10 +17,10 @@ export class Map extends RxNode {
   ],'');
 
   public runner = () => {
-    return this.graphInputs[0].map(Map.propertiesType[0].types[this.properties.mapFunc].func);
+    return this.graphInputs[0].map(Map.propertiesType.params[this.properties.mapFunc].func);
   };
   public toString = () => {
-    return '.map(' +Map.propertiesType[0].types[this.properties.mapFunc].text + ')';
+    return '.map(' +Map.propertiesType.params[this.properties.mapFunc].text + ')';
   };
 
 

@@ -150,7 +150,7 @@ export class AppService {
   }
 
   public getCreationOption() {
-    return new (this.selectedCreationOption)();
+    if (this.selectedCreationOption) return new (this.selectedCreationOption)();
   }
 
   /**
@@ -173,25 +173,27 @@ export class AppService {
     return this.controlSubject;
   }
 
-  public getItemSubscribe(){
+  public getItemSubscribe() {
     return this.itemSubscriptor;
   }
 
-  private resultsArray=[];
-  public subscribeItem(node,data){
-    let index=this.resultsArray.indexOf(d=>d.data.id==data.id);
-    if(index>-1){
-      let lastData=this.resultsArray[index];
-      this.resultsArray[index]={node,data,lastData:lastData.data,lastNode:lastData.node};
+  private resultsArray = [];
+
+  public subscribeItem(node, data) {
+    let index = this.resultsArray.findIndex(d=>(d.data.id == data.id));
+    if (index > -1) {
+      let lastData = this.resultsArray[index];
+      this.resultsArray[index] = {node, data, lastData: lastData.data, lastNode: lastData.node};
     }
-    else{
-      this.resultsArray.push({node,data});
+    else {
+      this.resultsArray.push({node, data});
     }
     this.itemSubscriptor.next(this.resultsArray);
   }
 
   private nodesList;
   private edgeList;
+
   public getInitialData(width, height) {
     const xLoc = width / 2 - 25;
     const yLoc = 100;
@@ -200,31 +202,36 @@ export class AppService {
       {id: 1, x: xLoc, y: yLoc + 200, data: new NodeTypes.Subscribe()}
     ];
     const edges = [{source: nodes[0], target: nodes[1]}];
-    this.nodesList=nodes;
-    this.edgeList=edges;
+    this.nodesList = nodes;
+    this.edgeList = edges;
     return {edges, nodes};
   }
 
+  private cntr = 1;
   public rebuildRxObjects() {
-    const nodes=this.nodesList;
-    const edges=this.edgeList;
-    let cntr = 1;
+    const nodes = this.nodesList;
+    const edges = this.edgeList;
+    this.resultsArray = [];
     const makeObject = x => {
-      if(x.id) return x;
+      if (x.id) return x;
       else {
-        return {x:x,id:cntr++};
+        return {x: x, id: this.cntr++};
       }
     };
-    const doDelay=(ob)=>{
-      return ob.delay(200).flatMap(function (x) {
-        return Observable.of(makeObject(x)).delay(200);
-      })
+    const doDelay = (ob)=> {
+      return Observable.zip(
+        ob.flatMap(function (x) {
+          return Observable.of(makeObject(x));
+        }),
+        Observable.interval(200),
+        c=>c
+      );
     };
 
     //DISPOSE existed rx objects
     for (let node of nodes) {
       if (node.data.rxo) {
-        node.data.rxo.dispose && node.data.rxo.dispose();
+        node.data.rxo.unsubscribe && node.data.rxo.unsubscribe();
         node.data.rx = 0;
         node.data.rxo = 0;
       }
@@ -233,7 +240,7 @@ export class AppService {
     //Make Creator Observables
     for (let node of nodes) {
       if (!node.data.rx && node.data.maxInput == 0) {
-        node.data.rx = doDelay(node.data.runner(node.data.properties));
+        node.data.rx = doDelay(node.data.runner()).share();
       }
     }
 
@@ -246,13 +253,13 @@ export class AppService {
         let eachNodeSources = edges.filter(e => e.target == eachNode).map(e => e.source);
 
         let couldInitRx =
-            eachNodeSources.length <= eachNode.data.maxInput &&
-            eachNodeSources.length >= eachNode.data.minInput &&
-            eachNodeSources.every( n => n.data.rx );
+          eachNodeSources.length <= eachNode.data.maxInput &&
+          eachNodeSources.length >= eachNode.data.minInput &&
+          eachNodeSources.every(n => n.data.rx);
 
         if (couldInitRx) {
           eachNode.data.graphInputs = eachNodeSources.map(node => node.data.rx);
-          eachNode.data.rx = doDelay(eachNode.data.runner());
+          eachNode.data.rx = doDelay(eachNode.data.runner()).share();
           notFinished = true;
           break;
         }
@@ -262,8 +269,8 @@ export class AppService {
 
     const nodeSubscriptor = (node) => {
       if (node.data.rx) {
-        node.data.rxo=node.data.rx.subscribe((data)=>{
-          this.subscribeItem(node,data);
+        node.data.rxo = node.data.rx.subscribe((data)=> {
+          this.subscribeItem(node, data);
         })
       }
     };

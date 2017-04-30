@@ -14,7 +14,7 @@ export class TakeUntil extends RxNode {
     );
   };
   public toString = () => {
-    return '.takeUntil(' + TakeUntil.propertiesType[0].types[this.properties.fi].text + ')';
+    return '.takeUntil(' + TakeUntil.propertiesType.params[this.properties.fi].text + ')';
   };
 
 

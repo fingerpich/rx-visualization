@@ -16,10 +16,10 @@ export class SkipWhile extends RxNode {
   ],'');
 
   public runner = () => {
-    return this.graphInputs[0].skipWhile(SkipWhile.propertiesType[0].types[this.properties.whileFilter].func);
+    return this.graphInputs[0].skipWhile(SkipWhile.propertiesType.params[this.properties.whileFilter].func);
   };
   public toString = () => {
-    return '.skipWhile(' + SkipWhile.propertiesType[0].types[this.properties.whileFilter].text + ')';
+    return '.skipWhile(' + SkipWhile.propertiesType.params[this.properties.whileFilter].text + ')';
   };
 
 

@@ -28,7 +28,7 @@ export class Join extends RxNode {
   public runner = () => {
     return this.graphInputs[0].join(
       this.graphInputs[1]/* the second observable connected to this block */,
-      Join.propertiesType[0].types[this.properties.fi1].func,
+      Join.propertiesType.params[this.properties.fi1].func,
       Join.propertiesType[1].types[this.properties.fi2].func,
       Join.propertiesType[2].types[this.properties.fi3].func,
     )

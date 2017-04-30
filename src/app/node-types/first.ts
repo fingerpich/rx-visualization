@@ -19,10 +19,10 @@ export class First extends RxNode {
   ],'');
 
   public runner = () => {
-    return this.graphInputs[0].first(First.propertiesType[0].types[this.properties.filter].func);
+    return this.graphInputs[0].first(First.propertiesType.params[this.properties.filter].func);
   };
   public toString = () => {
-    return '.first(' + First.propertiesType[0].types[this.properties.filter].text + ')';
+    return '.first(' + First.propertiesType.params[this.properties.filter].text + ')';
   };
 
 

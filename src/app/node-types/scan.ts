@@ -15,10 +15,10 @@ export class Scan extends RxNode {
   ],'');
 
   public runner = () => {
-    return this.graphInputs[0].map(Scan.propertiesType[0].types[this.properties.scanFunc].func);
+    return this.graphInputs[0].map(Scan.propertiesType.params[this.properties.scanFunc].func);
   };
   public toString = () => {
-    return '.scan(' + Scan.propertiesType[0].types[this.properties.scanFunc].text + ')';
+    return '.scan(' + Scan.propertiesType.params[this.properties.scanFunc].text + ')';
   };
 
 
