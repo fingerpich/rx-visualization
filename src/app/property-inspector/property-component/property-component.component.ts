@@ -16,6 +16,6 @@ export class PropertyComponentComponent implements OnInit {
   ngOnInit() {
   }
   dataChanged() {
-    this.appService.rebuildRxObjects();
+    this.appService.refreshRxObjects();
   }
 }

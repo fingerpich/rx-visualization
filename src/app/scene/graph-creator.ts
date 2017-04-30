@@ -50,7 +50,7 @@ export class GraphCreator {
     this.setIdCounterByNodes();
     this.defineArrows();
     this.bindEvents();
-    this.appService.rebuildRxObjects();
+    this.appService.refreshRxObjects();
   }
   private setIdCounterByNodes = () => {
     this.idct = Math.max.apply(this, this.nodes.map(n => n.id)) + 1;
@@ -159,7 +159,7 @@ export class GraphCreator {
         const newEdge = {source: d, target: thisGraph.connectTarget};
         thisGraph.edges.push(newEdge);
         thisGraph.updateGraph();
-        thisGraph.appService.rebuildRxObjects();
+        thisGraph.appService.refreshRxObjects();
       }
       thisGraph.state.shiftNodeDrag=false;
       thisGraph.connectorLine.classed('hidden', true)
@@ -311,7 +311,7 @@ export class GraphCreator {
         };
       this.nodes.push(d);
       this.updateGraph();
-      this.appService.rebuildRxObjects();
+      this.appService.refreshRxObjects();
     }
   };
 
