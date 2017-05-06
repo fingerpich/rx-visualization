@@ -8,11 +8,26 @@ export class AppService {
   private selectItemSubject;
   private controlSubject;
   private itemSubscriptor;
+  private showColdStreamBool;
 
   constructor() {
     this.selectItemSubject = new Subject();
     this.controlSubject = new Subject();
     this.itemSubscriptor = new Subject();
+    this.showColdStreamBool=false;
+  }
+
+
+  public get showColdStream():boolean{
+    return this.showColdStreamBool;
+  }
+  public set showColdStream(value:boolean){
+    this.showColdStreamBool = value;
+  }
+  public toggleShowColdStream(){
+    this.showColdStreamBool = this.showColdStreamBool;
+    this.refreshRxObjects();
+    return this.showColdStreamBool;
   }
 
   public getOperators() {
@@ -118,9 +133,16 @@ export class AppService {
     //Show what has been subscribed
     const nodeSubscriptor = (node) => {
       if (node.data.rx) {
-        node.data.rxo = node.data.rx.subscribe((data)=> {
-          this.subscribeItem(node, data);
-        })
+        if(this.showColdStreamBool){
+          node.data.rxo = node.data.rx.map((data)=> {
+            this.subscribeItem(node, data);
+          })
+        }
+        else {
+          node.data.rxo = node.data.rx.subscribe((data)=> {
+            this.subscribeItem(node, data);
+          })
+        }
       }
     };
 

@@ -1,4 +1,10 @@
-<div class="controlScene">
-  <button (click)="showCreationMenu()">+</button>
-  <button (click)="removeSelectedItem()" title="remove selected item">-</button>
+<div class="controlScene" fxLayout="row" fxLayoutAlign="spaceBetween center">
+  <div class="checks">
+    <button (click)="showCreationMenu()" [class.active]="showColdStream">+</button>
+    <button (click)="toggleShowColdobservable()" [class.active]="showColdStream" title="remove selected item">cold</button>
+  </div>
+  <div class="buttons">
+    <button (click)="removeSelectedItem()" class="rtl" title="remove selected item">-</button>
+    <button (click)="replay()" class="rtl" title="replay">=></button>
+  </div>
 </div>

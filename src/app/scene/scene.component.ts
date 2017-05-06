@@ -10,7 +10,7 @@ declare var d3: any;
 })
 export class SceneComponent implements OnInit {
   private graphEditor;
-
+  private showColdStream;
   constructor(public el: ElementRef, private appService:AppService) { }
 
   ngOnInit() {
@@ -32,6 +32,14 @@ export class SceneComponent implements OnInit {
     const thisComponent=this;
     window.onresize = function(){thisComponent.graphEditor.updateWindow(el.clientWidth,el.clientHeight);};
   }
+
+  toggleShowColdobservable(){
+    this.showColdStream=this.appService.toggleShowColdStream();
+  }
+  replay(){
+    this.appService.refreshRxObjects();
+  }
+
   removeSelectedItem() {
     this.graphEditor.removeSelected();
   }
