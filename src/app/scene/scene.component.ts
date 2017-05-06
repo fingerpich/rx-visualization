@@ -11,6 +11,9 @@ declare var d3: any;
 export class SceneComponent implements OnInit {
   private graphEditor;
   private showColdStream;
+  private seralizedUrl;
+  private showUrlBox;
+
   constructor(public el: ElementRef, private appService:AppService) { }
 
   ngOnInit() {
@@ -36,8 +39,19 @@ export class SceneComponent implements OnInit {
   toggleShowColdobservable(){
     this.showColdStream=this.appService.toggleShowColdStream();
   }
+
   replay(){
     this.appService.refreshRxObjects();
+  }
+
+  deserialize(){
+    return this.graphEditor.deserialize();
+  }
+  serialize():string{
+    let serialized = this.graphEditor.serialize();
+    this.seralizedUrl = serialized;
+    this.showUrlBox=true;
+    return serialized;
   }
 
   removeSelectedItem() {
