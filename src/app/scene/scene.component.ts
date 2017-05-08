@@ -11,6 +11,7 @@ declare var d3: any;
 export class SceneComponent implements OnInit {
   private graphEditor;
   private showColdStream;
+  private showCreationMenu;
   private seralizedUrl;
   private showUrlBox;
 
@@ -40,6 +41,7 @@ export class SceneComponent implements OnInit {
     this.showColdStream=this.appService.toggleShowColdStream();
   }
 
+
   replay(){
     this.appService.refreshRxObjects();
   }
@@ -57,8 +59,8 @@ export class SceneComponent implements OnInit {
   removeSelectedItem() {
     this.graphEditor.removeSelected();
   }
-  showCreationMenu() {
-
+  showCreationMenuToggle() {
+    this.showCreationMenu = !this.showCreationMenu;
   }
 }
 

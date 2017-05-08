@@ -25,7 +25,7 @@ export class AppService {
     this.showColdStreamBool = value;
   }
   public toggleShowColdStream(){
-    this.showColdStreamBool = this.showColdStreamBool;
+    this.showColdStreamBool = !this.showColdStreamBool;
     this.refreshRxObjects();
     return this.showColdStreamBool;
   }

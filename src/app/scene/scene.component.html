@@ -1,13 +1,13 @@
-<div class="controlScene" fxLayout="row" fxLayoutAlign="spaceBetween center">
+<div class="controlScene" fxLayout="row" fxLayoutAlign="space-between center">
   <div class="checks">
-    <button (click)="showCreationMenu()" [class.active]="showColdStream">+</button>
+    <button (click)="showCreationMenuToggle()" [class.active]="showCreationMenu">+</button>
     <button (click)="toggleShowColdobservable()" [class.active]="showColdStream" title="remove selected item">cold</button>
   </div>
   <div class="buttons">
     <button (click)="removeSelectedItem()" title="remove selected item">-</button>
     <button (click)="replay()" title="replay">=></button>
     <button (click)="serialize()"  title="share">>></button>
-    <div *ng-If="showUrlBox">
+    <div *ngIf="showUrlBox">
       <input [value]="seralizedUrl">
     </div>
   </div>
