@@ -18,7 +18,7 @@
 
   <!--EDGE Properties-->
   <div *ngIf="selectedItem.source">
-    <div>{{selectedItem.source.data.name+'=>'+selectedItem.target.data.name}}</div>
+    <div>{{selectedItem.source.data.constructor.name+'=>'+selectedItem.target.data.constructor.name}}</div>
     <div><b>code:</b>
       <div>
         <textarea [value]="selectedItem.source.data.toString()+selectedItem.target.data.toString()"></textarea>

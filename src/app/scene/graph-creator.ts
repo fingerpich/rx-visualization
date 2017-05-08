@@ -1,4 +1,5 @@
 import {AppService} from "../app.service";
+import * as NodeTypes from "../node-types";
 declare var d3: any;
 
 export class GraphCreator {
@@ -123,13 +124,26 @@ export class GraphCreator {
     thisGraph.edges.forEach(function (val, i) {
       saveEdges.push({source: val.source.id, target: val.target.id});
     });
-    return JSON.stringify({"nodes": thisGraph.nodes, "edges": saveEdges});
+    let nodesData=thisGraph.nodes.map(node=>{
+      return {
+        id:node.id,
+        x:node.x||0,
+        y:node.y||0,
+        node_type:node.data.constructor.name,
+        properties:node.data.properties,
+      }
+    });
+    return JSON.stringify({"nodes": nodesData, "edges": saveEdges});
   };
   public deserialize = (jsonText) => {
     const thisGraph = this;
     const jsonObj = JSON.parse(jsonText);
     thisGraph.deleteGraph(true);
-    thisGraph.nodes = jsonObj.nodes;
+    let nodesData = jsonObj.nodes.map(node=>{
+      node.data = new(NodeTypes[node.node_type]);
+      node.data.properties = node.properties;
+    });
+    thisGraph.nodes = nodesData;
     thisGraph.setIdCounterByNodes();
     const newEdges = jsonObj.edges;
     newEdges.forEach(function(e, i){
