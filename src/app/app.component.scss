@@ -19,8 +19,27 @@
       padding:5px 15px;
     }
   }
-  rxstudio-control-scene{
-    height:50px;
+  .sceneContainer {
+    border:1px solid #eee;
+    .controlScene {
+      padding: 5px;
+      button {
+        border: 1px solid #eaeaea;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 9px;
+        min-width: 30px;
+        height: 30px;
+        color: #07f;
+        line-height: 12px;
+        font-size: 12px;
+        font-weight: bold;
+        outline: none;
+        &.active {
+          background: #0077bb;
+          color: white;
+        }
+      }
+    }
   }
   rxstudio-creation-menu{
     width:200px;

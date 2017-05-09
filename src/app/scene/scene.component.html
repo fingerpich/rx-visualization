@@ -1,14 +1,1 @@
-<div class="controlScene" fxLayout="row" fxLayoutAlign="space-between center">
-  <div class="checks">
-    <button (click)="showCreationMenuToggle()" [class.active]="showCreationMenu">+</button>
-    <button (click)="toggleShowColdobservable()" [class.active]="showColdStream" title="show cold observables">cold</button>
-  </div>
-  <div class="buttons">
-    <button (click)="removeSelectedItem()" title="remove selected item">-</button>
-    <button (click)="replay()" title="replay">=></button>
-    <button (click)="serialize()"  title="share">>></button>
-    <div *ngIf="showUrlBox">
-      <input [value]="seralizedUrl">
-    </div>
-  </div>
-</div>
+

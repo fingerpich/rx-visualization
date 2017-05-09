@@ -3,31 +3,7 @@ $linkColor:#555;
 $borderColor:#aaa;
 $selectedColor:$primaryColor;
 :host{
-  border:1px solid #eee;
   position: relative;
-
-  .controlScene {
-    width:100%;
-    position: absolute;
-    padding:5px;
-    z-index: 1;
-    button {
-      border: 1px solid #eaeaea;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 9px;
-      min-width: 30px;
-      height: 30px;
-      color: #07f;
-      line-height: 12px;
-      font-size: 12px;
-      font-weight: bold;
-      outline: none;
-      &.active{
-        background: #0077bb;
-        color:white;
-      }
-    }
-  }
 
   /deep/ svg {
     .conceptG text {
