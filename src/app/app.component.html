@@ -3,7 +3,7 @@
     <h1>
       {{title}}
     </h1>
-    <button (click)="share()"  title="share">share</button>
+    <button (click)="share()"  title="share">share <i class="material-icons">share</i></button>
     <!--<div *ngIf="showUrlBox">-->
       <!--<input [value]="seralizedUrl">-->
     <!--</div>-->
@@ -14,12 +14,12 @@
     <div fxFlex fxLayout="column" class="sceneContainer">
       <div fxFlex="40px" class="controlScene" fxLayout="row" fxLayoutAlign="space-between center">
         <div class="checks">
-          <button (click)="showCreationMenuToggle()" [class.active]="showCreationMenu">+</button>
-          <button (click)="toggleShowColdobservable()" [class.active]="showColdStream" title="show cold observables">cold</button>
+          <button (click)="showCreationMenuToggle()" [class.active]="showCreationMenu" title="show tools"><i class="material-icons">build</i></button>
+          <button (click)="toggleShowColdobservable()" [class.active]="showColdStream" title="show cold observables"><i class="material-icons">skip_next</i></button>
         </div>
         <div class="buttons">
-          <button (click)="removeSelectedItem()" title="remove selected item">-</button>
-          <button (click)="replay()" title="replay">=></button>
+          <button (click)="removeSelectedItem()" title="remove selected item"><i class="material-icons">delete</i></button>
+          <button (click)="replay()" title="replay"><i class="material-icons">repeat</i></button>
         </div>
       </div>
       <rxstudio-scene fxFlex></rxstudio-scene>

@@ -1,42 +1,53 @@
+$headColor:#746;
+$rxColor:#ec0c8e;
+$borderColor:#eee;
+$backColor:#fff;
+
 .app{
   height:100%;
   padding:0;
 
   .header{
-    background: #7d4c61;
+    background: $headColor;
     h1{
       margin:0;
       padding: 9px;
       font-size: 1rem;
-      color:#ec0c8e;
+      color:$rxColor;
     }
     button{
       border:none;
-      background: #968;
+      background: lighten($headColor,10%);
       color:#eee;
       border-radius: 3px;
       margin:5px;
       padding:5px 15px;
+      i{
+        font-size:inherit;
+      }
     }
   }
   .sceneContainer {
-    border:1px solid #eee;
+    border:1px solid $borderColor;
     .controlScene {
       padding: 5px;
       button {
-        border: 1px solid #eaeaea;
-        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid $borderColor;
+        background: darken($backColor,5%);
         border-radius: 9px;
         min-width: 30px;
         height: 30px;
-        color: #07f;
+        color: $rxColor;
         line-height: 12px;
-        font-size: 12px;
+        font-size: 1rem;
         font-weight: bold;
         outline: none;
+        i{
+          font-size:inherit;
+        }
         &.active {
-          background: #0077bb;
-          color: white;
+          background: $rxColor;
+          color: $backColor;
         }
       }
     }
