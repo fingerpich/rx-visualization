@@ -24,6 +24,7 @@
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
     "d3": "^4.7.4",
+    "ngx-clipboard": "^8.0.2",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },

@@ -12,6 +12,7 @@ import { StatusComponent } from './status/status.component';
 import { SceneComponent } from './scene/scene.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {AppService} from "./app.service";
+import { ClipboardModule } from 'ngx-clipboard';
 import { PropertyComponentComponent } from './property-inspector/property-component/property-component.component';
 import { ContainerComponent } from './container/container.component';
 const appRoutes: Routes = [
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
+    ClipboardModule,
     FlexLayoutModule
   ],
   providers: [

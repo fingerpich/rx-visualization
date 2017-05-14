@@ -8,7 +8,7 @@
           <h2>Share</h2>
           <div class="copyBox">
             <input #inputTarget [value]="serializedUrl">
-            <button >copy</button>
+            <button [ngxClipboard]="inputTarget">copy</button>
           </div>
         </div>
       </div>
