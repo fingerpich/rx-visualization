@@ -37,8 +37,8 @@ export class SceneComponent implements OnInit {
     window.onresize = function(){thisComponent.graphEditor.updateWindow(el.clientWidth,el.clientHeight);};
   }
 
-  deserialize(){
-    return this.graphEditor.deserialize();
+  deserialize(data){
+    return this.graphEditor.deserialize(data);
   }
   serialize():string{
     return this.graphEditor.serialize();

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { PropertyInspectorComponent } from './property-inspector/property-inspector.component';
@@ -12,7 +13,12 @@ import { SceneComponent } from './scene/scene.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {AppService} from "./app.service";
 import { PropertyComponentComponent } from './property-inspector/property-component/property-component.component';
-
+import { ContainerComponent } from './container/container.component';
+const appRoutes: Routes = [
+  { path: '', component: ContainerComponent },
+  { path: 'load/:data', component: ContainerComponent },
+  // { path: '**', component: PageNotFoundComponent }
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,12 +27,14 @@ import { PropertyComponentComponent } from './property-inspector/property-compon
     ControlSceneComponent,
     StatusComponent,
     SceneComponent,
-    PropertyComponentComponent
+    PropertyComponentComponent,
+    ContainerComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    RouterModule.forRoot(appRoutes),
     FlexLayoutModule
   ],
   providers: [
