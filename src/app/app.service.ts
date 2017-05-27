@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Subject,Observable} from "rxjs";
-import * as NodeTypes from "./node-types";
-import {RxHelper} from "./rx-helper"
+import {Subject, Observable} from 'rxjs';
+import * as NodeTypes from './node-types';
+import {RxHelper} from './rx-helper';
 @Injectable()
 export class AppService {
   private selectedCreationOption;
@@ -9,22 +9,27 @@ export class AppService {
   private controlSubject;
   private itemSubscriptor;
   private showColdStreamBool;
+  private cntr = 1;
+  private delayBetweenEmittedItem = 200;
+  private resultsArray = [];
+  private nodesList;
+  private edgeList;
 
   constructor() {
     this.selectItemSubject = new Subject();
     this.controlSubject = new Subject();
     this.itemSubscriptor = new Subject();
-    this.showColdStreamBool=false;
+    this.showColdStreamBool = false;
   }
 
 
-  public get showColdStream():boolean{
+  public get showColdStream(): boolean{
     return this.showColdStreamBool;
   }
-  public set showColdStream(value:boolean){
+  public set showColdStream(value: boolean){
     this.showColdStreamBool = value;
   }
-  public toggleShowColdStream(){
+  public toggleShowColdStream() {
     this.showColdStreamBool = !this.showColdStreamBool;
     this.refreshRxObjects();
     return this.showColdStreamBool;
@@ -39,7 +44,9 @@ export class AppService {
   }
 
   public getCreationOption() {
-    if (this.selectedCreationOption) return new (this.selectedCreationOption)();
+    if (this.selectedCreationOption) {
+      return new (this.selectedCreationOption)();
+    }
   }
 
   /**
@@ -66,22 +73,16 @@ export class AppService {
     return this.itemSubscriptor;
   }
 
-  private resultsArray = [];
-
   public subscribeItem(node, data) {
-    let index = this.resultsArray.findIndex(d=>(d.data.id == data.id));
+    const index = this.resultsArray.findIndex(d => (d.data.id === data.id));
     if (index > -1) {
-      let lastData = this.resultsArray[index];
+      const lastData = this.resultsArray[index];
       this.resultsArray[index] = {node, data, lastData: lastData.data, lastNode: lastData.node};
-    }
-    else {
+    } else {
       this.resultsArray.push({node, data});
     }
     this.itemSubscriptor.next(this.resultsArray);
   }
-
-  private nodesList;
-  private edgeList;
 
   public getInitialData(width, height) {
     const xLoc = width / 2 - 25;
@@ -96,7 +97,7 @@ export class AppService {
     return {edges, nodes};
   }
 
-  public get delay():number {
+  public get delay(): number {
     return this.delayBetweenEmittedItem;
   }
   public set delay(value) {
@@ -104,8 +105,6 @@ export class AppService {
     this.refreshRxObjects();
   }
 
-  private cntr = 1;
-  private delayBetweenEmittedItem = 200;
 
   public refreshRxObjects() {
     const nodes = this.nodesList;
@@ -113,64 +112,64 @@ export class AppService {
     this.resultsArray = [];
 
     const getEmittedItemAsObject = x => {
-      if (x.id) return x;
-      else {
+      if (x.id) {
+        return x;
+      } else {
         return {x: x, id: this.cntr++};
       }
     };
 
 
-    const makeGapBetweenEmittedItems = (ob)=> {
+    const makeGapBetweenEmittedItems = (ob) => {
       return Observable.zip(
         ob.flatMap(function (x) {
           return Observable.of(getEmittedItemAsObject(x));
         }),
         Observable.interval(this.delayBetweenEmittedItem),
-        c=>c
+        c => c
       );
     };
 
-    //Show what has been subscribed
+    // Show what has been subscribed
     const nodeSubscriptor = (node) => {
       if (node.data.rx) {
-        if(this.showColdStreamBool){
-          node.data.rxo = node.data.rx.map((data)=> {
+        if ((node.data.title !== 'Subscribe') && this.showColdStreamBool) {
+          node.data.rxo = node.data.rx.map((data) => {
             this.subscribeItem(node, data);
-          })
-        }
-        else {
-          node.data.rxo = node.data.rx.subscribe((data)=> {
+          });
+        } else {
+          node.data.rxo = node.data.rx.subscribe((data) => {
             this.subscribeItem(node, data);
-          })
+          });
         }
       }
     };
 
-    //DISPOSE existed rx objects
+    // DISPOSE existed rx objects
     for (let node of nodes) {
       if (node.data.rxo) {
-        node.data.rxo.unsubscribe && node.data.rxo.unsubscribe();
+        if (node.data.rxo.unsubscribe) { node.data.rxo.unsubscribe(); }
         node.data.rx = 0;
         node.data.rxo = 0;
       }
     }
 
-    //Make Creator Observables
+    // Make Creator Observables
     for (let node of nodes) {
-      if (!node.data.rx && node.data.maxInput == 0) {
+      if (!node.data.rx && node.data.maxInput === 0) {
         node.data.rx = makeGapBetweenEmittedItems(node.data.runner()).share();
       }
     }
 
-    //Connect Nodes By Edges
+    // Connect Nodes By Edges
     let notFinished = true;
     while (notFinished) {
       notFinished = false;
       const nodesNeedsRx = nodes.filter(n => !n.data.rx);
       for (let eachNode of nodesNeedsRx) {
-        let eachNodeSources = edges.filter(e => e.target == eachNode).map(e => e.source);
+        const eachNodeSources = edges.filter(e => e.target === eachNode).map(e => e.source);
 
-        let couldInitRx =
+        const couldInitRx =
           eachNodeSources.length <= eachNode.data.maxInput &&
           eachNodeSources.length >= eachNode.data.minInput &&
           eachNodeSources.every(n => n.data.rx);

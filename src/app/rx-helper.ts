@@ -1,15 +1,13 @@
-import * as NodeTypes from "./node-types";
+import * as NodeTypes from './node-types';
 export class RxHelper {
-  constructor(){
-  }
   public static operators = [
     {
-      name: "Creating Observables",
-      desc: "Operators that originate new Observables.",
+      name: 'Creating Observables',
+      desc: 'Operators that originate new Observables.',
       list: [
         NodeTypes.Create,
         NodeTypes.Defer,
-        //Empty/Never/Throw
+        // Empty/Never/Throw
         NodeTypes.From,
         NodeTypes.FromEvent,
         NodeTypes.Interval,
@@ -21,8 +19,8 @@ export class RxHelper {
       ]
     },
     {
-      name: "Transforming Observables",
-      desc: "Operators that transform items that are emitted by an Observable.",
+      name: 'Transforming Observables',
+      desc: 'Operators that transform items that are emitted by an Observable.',
       list: [
         NodeTypes.BufferWithCount,
         NodeTypes.FlatMap,
@@ -34,8 +32,8 @@ export class RxHelper {
       ]
     },
     {
-      name: "Filtering Observables",
-      desc: "Operators that selectively emit items from a source Observable.",
+      name: 'Filtering Observables',
+      desc: 'Operators that selectively emit items from a source Observable.',
       list: [
         NodeTypes.Debounce,
         NodeTypes.Distinct,
@@ -52,11 +50,11 @@ export class RxHelper {
       ]
     },
     {
-      name: "Combining Observables",
-      desc: "Operators that work with multiple source Observables to create a single Observable",
+      name: 'Combining Observables',
+      desc: 'Operators that work with multiple source Observables to create a single Observable',
       list: [
-        //And/Then/When
-        //CombineLatest
+        // And/Then/When
+        // CombineLatest
         NodeTypes.Join,
         NodeTypes.Merge,
         NodeTypes.StartWith,
@@ -65,16 +63,16 @@ export class RxHelper {
       ]
     },
     {
-      name: "Error Handling Operators",
-      desc: "Operators that help to recover from error notifications from an Observable",
+      name: 'Error Handling Operators',
+      desc: 'Operators that help to recover from error notifications from an Observable',
       list: [
         NodeTypes.Catch,
         NodeTypes.Retry
       ]
     },
     {
-      name: "Observable Utility Operators",
-      desc: "A toolbox of useful Operators for working with Observables",
+      name: 'Observable Utility Operators',
+      desc: 'A toolbox of useful Operators for working with Observables',
       list: [
         NodeTypes.Delay,
         NodeTypes.Do,
@@ -90,8 +88,8 @@ export class RxHelper {
       ]
     },
     {
-      name: "Conditional and Boolean Operators",
-      desc: "Operators that evaluate one or more Observables or items emitted by Observables",
+      name: 'Conditional and Boolean Operators',
+      desc: 'Operators that evaluate one or more Observables or items emitted by Observables',
       list: [
         NodeTypes.All,
         NodeTypes.Race,
@@ -104,8 +102,8 @@ export class RxHelper {
       ]
     },
     {
-      name: "Mathematical and Aggregate Operators",
-      desc: "Operators that operate on the entire sequence of items emitted by an Observable",
+      name: 'Mathematical and Aggregate Operators',
+      desc: 'Operators that operate on the entire sequence of items emitted by an Observable',
       list: [
         NodeTypes.Average,
         // NodeTypes.Concat,
@@ -117,8 +115,8 @@ export class RxHelper {
       ]
     },
     {
-      name: "Connectable Observable Operators",
-      desc: "Specialty Observables that have more precisely-controlled subscription dynamics",
+      name: 'Connectable Observable Operators',
+      desc: 'Specialty Observables that have more precisely-controlled subscription dynamics',
       list: [
         NodeTypes.Connect,
         NodeTypes.Publish,
@@ -127,8 +125,9 @@ export class RxHelper {
       ]
     }
   ];
-  public static getRxOperator(){
+  public static getRxOperator() {
     return this.operators;
   }
-
+  constructor() {
+  }
 }
