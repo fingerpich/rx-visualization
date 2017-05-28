@@ -8,7 +8,7 @@ export class AppService {
   private selectItemSubject;
   private controlSubject;
   private itemSubscriptor;
-  private showColdStreamBool;
+  private allNodesAreHot;
   private cntr = 1;
   private delayBetweenEmittedItem = 200;
   private resultsArray = [];
@@ -19,20 +19,20 @@ export class AppService {
     this.selectItemSubject = new Subject();
     this.controlSubject = new Subject();
     this.itemSubscriptor = new Subject();
-    this.showColdStreamBool = false;
+    this.allNodesAreHot = true;
   }
 
 
   public get showColdStream(): boolean{
-    return this.showColdStreamBool;
+    return !this.allNodesAreHot;
   }
   public set showColdStream(value: boolean){
-    this.showColdStreamBool = value;
+    this.allNodesAreHot = !value;
   }
   public toggleShowColdStream() {
-    this.showColdStreamBool = !this.showColdStreamBool;
+    this.allNodesAreHot = !this.allNodesAreHot;
     this.refreshRxObjects();
-    return this.showColdStreamBool;
+    return this.allNodesAreHot;
   }
 
   public getOperators() {
@@ -120,24 +120,23 @@ export class AppService {
     };
 
 
-    const makeGapBetweenEmittedItems = (ob) => {
+    const makeGapBetweenEmittedItems = (node, ob) => {
       return Observable.zip(
         ob.flatMap(function (x) {
           return Observable.of(getEmittedItemAsObject(x));
         }),
         Observable.interval(this.delayBetweenEmittedItem),
-        c => c
+        (c) => {
+          this.subscribeItem(node, c);
+          return c;
+        }
       );
     };
 
     // Show what has been subscribed
     const nodeSubscriptor = (node) => {
       if (node.data.rx) {
-        if ((node.data.title !== 'Subscribe') && this.showColdStreamBool) {
-          node.data.rxo = node.data.rx.map((data) => {
-            this.subscribeItem(node, data);
-          });
-        } else {
+        if ((node.data.title === 'Subscribe') || this.allNodesAreHot) {
           node.data.rxo = node.data.rx.subscribe((data) => {
             this.subscribeItem(node, data);
           });
@@ -157,7 +156,8 @@ export class AppService {
     // Make Creator Observables
     for (let node of nodes) {
       if (!node.data.rx && node.data.maxInput === 0) {
-        node.data.rx = makeGapBetweenEmittedItems(node.data.runner()).share();
+        node.data.rx = makeGapBetweenEmittedItems(node, node.data.runner());
+        if (this.allNodesAreHot) { node.data.rx = node.data.rx.share(); }
       }
     }
 
@@ -176,7 +176,8 @@ export class AppService {
 
         if (couldInitRx) {
           eachNode.data.graphInputs = eachNodeSources.map(node => node.data.rx);
-          eachNode.data.rx = makeGapBetweenEmittedItems(eachNode.data.runner()).share();
+          eachNode.data.rx = makeGapBetweenEmittedItems(eachNode, eachNode.data.runner());
+          if (this.allNodesAreHot) { eachNode.data.rx = eachNode.data.rx.share(); }
           notFinished = true;
           break;
         }
