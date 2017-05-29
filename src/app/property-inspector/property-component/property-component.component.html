@@ -13,8 +13,8 @@
 <!--function type-->
 <div *ngIf="propertyType.isMethod()" class="methodInput">
   <b>{{propertyType.name}}</b>
-  <select (change)="dataChanged()">
-    <option *ngFor="let opt of propertyType.params" [title]="opt.desc">opt.name</option>
+  <select (change)="dataChanged()" [(ngModel)]="properties[propertyType.name]">
+    <option *ngFor="let opt of propertyType.params ; let optionIndex = index" [value]="optionIndex" [title]="opt.desc">{{opt.name}}</option>
   </select>
 </div>
 

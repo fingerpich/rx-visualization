@@ -32,7 +32,7 @@ export class AppService {
   public toggleShowColdStream() {
     this.allNodesAreHot = !this.allNodesAreHot;
     this.refreshRxObjects();
-    return this.allNodesAreHot;
+    return !this.allNodesAreHot;
   }
 
   public getOperators() {
@@ -148,13 +148,13 @@ export class AppService {
     for (let node of nodes) {
       if (node.data.rxo) {
         if (node.data.rxo.unsubscribe) { node.data.rxo.unsubscribe(); }
-        node.data.rx = 0;
         node.data.rxo = 0;
       }
+      if (node.data.rx) { node.data.rx = 0; }
     }
 
     // Make Creator Observables
-    for (let node of nodes) {
+    for (const node of nodes) {
       if (!node.data.rx && node.data.maxInput === 0) {
         node.data.rx = makeGapBetweenEmittedItems(node, node.data.runner());
         if (this.allNodesAreHot) { node.data.rx = node.data.rx.share(); }
@@ -166,7 +166,7 @@ export class AppService {
     while (notFinished) {
       notFinished = false;
       const nodesNeedsRx = nodes.filter(n => !n.data.rx);
-      for (let eachNode of nodesNeedsRx) {
+      for (const eachNode of nodesNeedsRx) {
         const eachNodeSources = edges.filter(e => e.target === eachNode).map(e => e.source);
 
         const couldInitRx =
@@ -183,10 +183,8 @@ export class AppService {
         }
       }
     }
-
-    for (let node of nodes) {
+    for (const node of nodes) {
       nodeSubscriptor(node);
     }
-
   }
 }

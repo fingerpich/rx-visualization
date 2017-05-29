@@ -1,17 +1,21 @@
-import {Observable} from "rxjs/Rx";
-import {RxNode} from "./rxNode";
+import {Observable} from 'rxjs/Rx';
+import {RxNode} from './rxNode';
 
-export class Subscribe extends RxNode{
-  protected static title = "Subscribe";
-  protected static link = "http://reactivex.io/documentation/operators/subscribe.html";
-  protected static desc = "operate upon the emissions and notifications from an Observable";
+export class Subscribe extends RxNode {
+  protected static title = 'Subscribe';
+  protected static link = 'http://reactivex.io/documentation/operators/subscribe.html';
+  protected static desc = 'operate upon the emissions and notifications from an Observable';
   protected static maxInput = 1;
   protected static minInput = 1;
 
   protected static propertiesType = null;
 
+  public properties = {};
+  public graphInputs = [];
+
   public runner = () => {
-    this.graphInputs[0].subscribe(
+    const thisObservable = this.graphInputs[0];
+    thisObservable.subscribe(
       function (x) {
         console.log('Next: %s', x);
       }, /* on next*/
@@ -22,8 +26,9 @@ export class Subscribe extends RxNode{
         console.log('Completed');
         /* on complete*/
       });
-    return this.graphInputs[0];
+    return thisObservable;
   };
+
   public toString = () => {
     return `.subscribe(
       function (x) { console.log('Next: %s', x); },/* on next*/
@@ -31,8 +36,4 @@ export class Subscribe extends RxNode{
       function () { console.log('Completed');/* on complete*/
       });`;
   };
-
-
-  public properties = {};
-  public graphInputs = [];
 }

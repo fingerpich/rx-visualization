@@ -1,6 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
-import {PropertyType} from "../../node-types/property-type";
-import {AppService} from "../../app.service";
+import {PropertyType} from '../../node-types/property-type';
+import {AppService} from '../../app.service';
 
 @Component({
   selector: 'rxstudio-property-component',
@@ -8,10 +8,10 @@ import {AppService} from "../../app.service";
   styleUrls: ['./property-component.component.scss']
 })
 export class PropertyComponentComponent implements OnInit {
-  @Input() properties:any;
-  @Input('type') propertyType:PropertyType;
-
-  constructor(private appService:AppService ) { }
+  @Input() properties: any;
+  @Input('type') propertyType: PropertyType;
+  optionIndex;
+  constructor(private appService: AppService ) { }
 
   ngOnInit() {
   }
