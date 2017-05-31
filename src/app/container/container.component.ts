@@ -36,10 +36,6 @@ export class ContainerComponent implements OnInit {
     this.appService.refreshRxObjects();
   }
 
-  toggleShowColdobservable() {
-    this.showColdStream = this.appService.toggleShowColdStream();
-  }
-
   share() {
     this.serializedUrl = this.sceneComponent.serialize();
   }

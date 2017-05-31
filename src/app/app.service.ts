@@ -8,7 +8,6 @@ export class AppService {
   private selectItemSubject;
   private controlSubject;
   private itemSubscriptor;
-  private allNodesAreHot;
   private cntr = 1;
   private delayBetweenEmittedItem = 200;
   private resultsArray = [];
@@ -19,20 +18,6 @@ export class AppService {
     this.selectItemSubject = new Subject();
     this.controlSubject = new Subject();
     this.itemSubscriptor = new Subject();
-    this.allNodesAreHot = true;
-  }
-
-
-  public get showColdStream(): boolean{
-    return !this.allNodesAreHot;
-  }
-  public set showColdStream(value: boolean){
-    this.allNodesAreHot = !value;
-  }
-  public toggleShowColdStream() {
-    this.allNodesAreHot = !this.allNodesAreHot;
-    this.refreshRxObjects();
-    return !this.allNodesAreHot;
   }
 
   public getOperators() {
@@ -133,19 +118,8 @@ export class AppService {
       );
     };
 
-    // Show what has been subscribed
-    const nodeSubscriptor = (node) => {
-      if (node.data.rx) {
-        if ((node.data.title === 'Subscribe') || this.allNodesAreHot) {
-          node.data.rxo = node.data.rx.subscribe((data) => {
-            this.subscribeItem(node, data);
-          });
-        }
-      }
-    };
-
     // DISPOSE existed rx objects
-    for (let node of nodes) {
+    for (const node of nodes) {
       if (node.data.rxo) {
         if (node.data.rxo.unsubscribe) { node.data.rxo.unsubscribe(); }
         node.data.rxo = 0;
@@ -153,17 +127,19 @@ export class AppService {
       if (node.data.rx) { node.data.rx = 0; }
     }
 
+    let levelcounter = 1;
     // Make Creator Observables
     for (const node of nodes) {
       if (!node.data.rx && node.data.maxInput === 0) {
         node.data.rx = makeGapBetweenEmittedItems(node, node.data.runner());
-        if (this.allNodesAreHot) { node.data.rx = node.data.rx.share(); }
+        node.data.level = levelcounter;
       }
     }
 
     // Connect Nodes By Edges
     let notFinished = true;
     while (notFinished) {
+      levelcounter++;
       notFinished = false;
       const nodesNeedsRx = nodes.filter(n => !n.data.rx);
       for (const eachNode of nodesNeedsRx) {
@@ -177,14 +153,11 @@ export class AppService {
         if (couldInitRx) {
           eachNode.data.graphInputs = eachNodeSources.map(node => node.data.rx);
           eachNode.data.rx = makeGapBetweenEmittedItems(eachNode, eachNode.data.runner());
-          if (this.allNodesAreHot) { eachNode.data.rx = eachNode.data.rx.share(); }
+          eachNode.data.level = levelcounter;
           notFinished = true;
           break;
         }
       }
-    }
-    for (const node of nodes) {
-      nodeSubscriptor(node);
     }
   }
 }

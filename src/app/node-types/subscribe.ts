@@ -14,7 +14,8 @@ export class Subscribe extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    const thisObservable = this.graphInputs[0];
+    // const thisObservable = this.graphInputs[0];
+    const thisObservable = this.graphInputs[0].map(x => x);
     thisObservable.subscribe(
       function (x) {
         console.log('Next: %s', x);
