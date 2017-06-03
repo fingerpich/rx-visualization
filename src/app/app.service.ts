@@ -96,42 +96,16 @@ export class AppService {
     const edges = this.edgeList;
     this.resultsArray = [];
 
-    const getEmittedItemAsObject = x => {
-      if (x.id) {
-        return x;
-      } else {
-        return {x: x, id: this.cntr++};
-      }
-    };
-
-
-    const makeGapBetweenEmittedItems = (node, ob) => {
-      return Observable.zip(
-        ob.flatMap(function (x) {
-          return Observable.of(getEmittedItemAsObject(x));
-        }),
-        Observable.interval(this.delayBetweenEmittedItem),
-        (c) => {
-          this.subscribeItem(node, c);
-          return c;
-        }
-      );
-    };
-
-    // DISPOSE existed rx objects
+    // DISPOSE created rx objects
     for (const node of nodes) {
-      if (node.data.rxo) {
-        if (node.data.rxo.unsubscribe) { node.data.rxo.unsubscribe(); }
-        node.data.rxo = 0;
-      }
-      if (node.data.rx) { node.data.rx = 0; }
+      node.data.dispose();
     }
 
     let levelcounter = 1;
     // Make Creator Observables
     for (const node of nodes) {
       if (!node.data.rx && node.data.maxInput === 0) {
-        node.data.rx = makeGapBetweenEmittedItems(node, node.data.runner());
+        node.data.run(node, (n, ob) => { this.subscribeItem(n, ob); });
         node.data.level = levelcounter;
       }
     }
@@ -152,7 +126,7 @@ export class AppService {
 
         if (couldInitRx) {
           eachNode.data.graphInputs = eachNodeSources.map(node => node.data.rx);
-          eachNode.data.rx = makeGapBetweenEmittedItems(eachNode, eachNode.data.runner());
+          eachNode.data.run(eachNode, (n, ob) => { this.subscribeItem(n, ob); });
           eachNode.data.level = levelcounter;
           notFinished = true;
           break;
