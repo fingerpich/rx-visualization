@@ -23,6 +23,6 @@ export class Repeat extends RxNode {
     return this.graphInputs[0].repeat(this.properties.count);
   }
   public toString = () => {
-    return '.repeat(' + ', ' + this.properties.count + ')';
+    return '.repeat(' + this.properties.count + ')';
   }
 }

@@ -13,6 +13,7 @@ export class RxNode {
   public static cntr = 1;
 
   public rxo: any;
+  public level: any;
   public rx: any;
   public properties: Object;
   public graphInputs: Array<Object>;
@@ -34,10 +35,10 @@ export class RxNode {
     return (<typeof RxNode>this.constructor).propertiesType;
   }
 
-  public run(node, subscribeItem) {
+  public run(node, level, subscribeItem) {
     this.rxo = this.runner();
     this.rx = Observable.zip(
-      this.rxo.flatMap(function (x) {
+      this.rxo.flatMap((x) => {
         x = x.id ? x : {x: x, id: RxNode.cntr++};
         return Observable.of(x);
       }),
@@ -47,10 +48,22 @@ export class RxNode {
         return c;
       }
     );
+    this.level = level;
   }
+
   public dispose() {
     if (this.rxo && this.rxo.unsubscribe) {
       this.rxo.unsubscribe();
+      this.rxo = undefined;
     }
+    if (this.rx) {
+      this.rx = undefined;
+    }
+  }
+
+  public areInputsReady(nodeInputs) {
+    return nodeInputs.length <= this.maxInput &&
+      nodeInputs.length >= this.minInput &&
+      nodeInputs.every(n => n.data.rx);
   }
 }

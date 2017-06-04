@@ -15,18 +15,24 @@ export class Subscribe extends RxNode {
 
   public runner = () => {
     // const thisObservable = this.graphInputs[0];
-    const thisObservable = this.graphInputs[0].map(x => x);
-    thisObservable.subscribe(
-      function (x) {
-        console.log('Next: %s', x);
-      }, /* on next*/
-      function (err) {
-        console.log('Error: %s', err);
-      }, /* on error*/
-      function () {
-        console.log('Completed');
-        /* on complete*/
-      });
+    const thisObservable = this.graphInputs[0].map((x)=>{
+      x.subscribed = true;
+      return x;
+    });
+    setTimeout(()=>{
+      // thisObservable.subscribe(
+      this.rx.subscribe(
+        function (x) {
+          console.log('Next: %s', x);
+        }, /* on next*/
+        function (err) {
+          console.log('Error: %s', err);
+        }, /* on error*/
+        function () {
+          console.log('Completed');
+          /* on complete*/
+        });
+    });
     return thisObservable;
   };
 

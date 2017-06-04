@@ -17,12 +17,11 @@ export class SampleFunctions {
   public static GT6 = new SampleFunction('Greater than 6', x => x.x > 6, 'x => x>6');
   public static ST6 = new SampleFunction('Smaller than 6', x => x.x < 6, 'x => x<6');
   public static ALL = new SampleFunction('all', () => true, '() => true');
-  public static X2 = new SampleFunction('x2', (x) => {
-    return x.x * x.x;
-  } , '(x) => x * x');
-  public static Xpoint2 = new SampleFunction('2x', (x) => 2 * x.x, '(x) => 2 * x');
-  public static X3 = new SampleFunction('x3', (x) => x.x * x.x * x.x, '(x) => x * x * x');
-  public static HELLOX = new SampleFunction('helloX', (x) => x.x + 'hello', '(x) => x + "hello"');
+  public static X2 = new SampleFunction('x2', (x) => { x.x = x.x * x.x; return x; } , '(x) => x * x');
+  public static Xpoint2 = new SampleFunction('2x', (x) => {x.x = 2 * x.x; return x;}, '(x) => 2 * x');
+  public static X3 = new SampleFunction('x3', (x) => { x.x = x.x * x.x * x.x; return x}, '(x) => x * x * x');
+  public static HELLOX = new SampleFunction('helloX', (x) => {x.x = x.x + 'hello'; return x;}, '(x) => x + "hello"');
+
   public static EVEN = new SampleFunction('even', (x) => x.x % 2 === 0, '(x) => x % 2 === 0');
   public static ODD = new SampleFunction('odd', (x) => x.x % 2 === 1, '(x) => x % 2 === 1');
   public static RANGE2 = new SampleFunction('range2', (x) => Observable.range(x.x, 2), '(x) => Rx.Observable.range(x, 2)');

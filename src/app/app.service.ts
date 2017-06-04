@@ -58,7 +58,7 @@ export class AppService {
     return this.itemSubscriptor;
   }
 
-  public subscribeItem(node, data) {
+  public subscribeItem = (node, data) => {
     const index = this.resultsArray.findIndex(d => (d.data.id === data.id));
     if (index > -1) {
       const lastData = this.resultsArray[index];
@@ -105,8 +105,7 @@ export class AppService {
     // Make Creator Observables
     for (const node of nodes) {
       if (!node.data.rx && node.data.maxInput === 0) {
-        node.data.run(node, (n, ob) => { this.subscribeItem(n, ob); });
-        node.data.level = levelcounter;
+        node.data.run(node, levelcounter, this.subscribeItem);
       }
     }
 
@@ -117,17 +116,10 @@ export class AppService {
       notFinished = false;
       const nodesNeedsRx = nodes.filter(n => !n.data.rx);
       for (const eachNode of nodesNeedsRx) {
-        const eachNodeSources = edges.filter(e => e.target === eachNode).map(e => e.source);
-
-        const couldInitRx =
-          eachNodeSources.length <= eachNode.data.maxInput &&
-          eachNodeSources.length >= eachNode.data.minInput &&
-          eachNodeSources.every(n => n.data.rx);
-
-        if (couldInitRx) {
-          eachNode.data.graphInputs = eachNodeSources.map(node => node.data.rx);
-          eachNode.data.run(eachNode, (n, ob) => { this.subscribeItem(n, ob); });
-          eachNode.data.level = levelcounter;
+        const nodeInputs = edges.filter(e => e.target === eachNode).map(e => e.source);
+        if (eachNode.data.areInputsReady(nodeInputs)) {
+          eachNode.data.graphInputs = nodeInputs.map(node => node.data.rx);
+          eachNode.data.run(eachNode, levelcounter, this.subscribeItem);
           notFinished = true;
           break;
         }
