@@ -13,7 +13,6 @@ export class RxHelper {
         NodeTypes.Interval,
         // NodeTypes.Just,
         NodeTypes.Range,
-        NodeTypes.Repeat,
         // NodeTypes.Start,
         NodeTypes.Timer
       ]
@@ -27,6 +26,7 @@ export class RxHelper {
         NodeTypes.Map,
         NodeTypes.Scan,
         NodeTypes.Pluck,
+        NodeTypes.Repeat,
         NodeTypes.GroupBy,
         NodeTypes.WindowWithCount,
       ]
