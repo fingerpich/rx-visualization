@@ -21,7 +21,7 @@ export class RxHelper {
       name: 'Transforming Observables',
       desc: 'Operators that transform items that are emitted by an Observable.',
       list: [
-        NodeTypes.BufferWithCount,
+        NodeTypes.BufferCount,
         NodeTypes.FlatMap,
         NodeTypes.Map,
         NodeTypes.Scan,

@@ -5,7 +5,7 @@
  */
 export * from './all';
 export * from './average';
-export * from './bufferWithCount';
+export * from './bufferCount';
 export * from './catch';
 export * from './connect';
 export * from './contains';
