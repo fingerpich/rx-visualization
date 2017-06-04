@@ -6,6 +6,7 @@ import {RxHelper} from './rx-helper';
 export class AppService {
   private selectedCreationOption;
   private selectItemSubject;
+  public removeItemSubject;
   private controlSubject;
   private itemSubscriptor;
   private cntr = 1;
@@ -16,6 +17,7 @@ export class AppService {
 
   constructor() {
     this.selectItemSubject = new Subject();
+    this.removeItemSubject = new Subject();
     this.controlSubject = new Subject();
     this.itemSubscriptor = new Subject();
   }
@@ -32,6 +34,10 @@ export class AppService {
     if (this.selectedCreationOption) {
       return new (this.selectedCreationOption)();
     }
+  }
+
+  public removeSelectedItem() {
+    this.removeItemSubject.next();
   }
 
   /**

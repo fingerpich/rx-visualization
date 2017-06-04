@@ -1,10 +1,17 @@
 .simpleInput{
-  width:196px;
+  text-align: center;
   b{
-    color:#555;
+    color: #6f6f6f;
+    font-weight: 100;
+    font-size: 12px;
   }
   input{
-    width:190px;
+    min-width: 40px;
+    max-width: 100px;
+    padding: 7px;
+    border: 1px solid #ddd;
+    margin: 2px;
+    text-align: center;
   }
 }
 .methodInput{
@@ -14,14 +21,12 @@
   .addButton{
     padding:5px;
     cursor:pointer;
-    color:#07b;
+    color:#07f;
   }
   ul.list{
     list-style: none;
     margin: 0 0px 10px;
     padding: 4px 3px 10px;
-    border: 1px solid silver;
-    background: rgba(0, 0, 0, 0.04);
     li.listRow{
     }
   }
@@ -29,12 +34,15 @@
 .objectInput{
   ul.obj{
     list-style: none;
-    margin:0;
-    padding:0;
-    clear: both;
-    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    /* clear: both; */
+    /* overflow: hidden; */
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
     li.objProp{
-      float:left;
+      flex: 1 1 auto;
     }
   }
 }

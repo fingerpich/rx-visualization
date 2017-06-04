@@ -1,19 +1,45 @@
 :host{
+
+  border-top: 1px solid #f1f1f1;
+  padding: 10px;
+
   .notSelected{
     color:#666;
     margin:0;
     text-align:center;
   }
-  border-top: 1px solid #f1f1f1;
-  padding: 10px;
-  textarea{
-    width:99%;
-    min-height: 100px;
-    padding: 0;
-    font-size: 10px;
+
+  button.remove{
+    border: none;
+    background: #eee;
+    border-radius: 50%;
+    padding: 3px 6px;
+    float: right;
+    color: #f00;
+    outline: none;
   }
+
   p{
-    font-size: 12px;
+    font-size: 13px;
+    color: #444;
+    margin: 0 auto 1rem;
+  }
+  a{
+    text-decoration: none;
+    color: #07f;
+    cursor: pointer;
+  }
+  .codeGenerated{
+    background: #eee;
+    padding: 5px;
     color: #555;
+    font-size: 0.75rem;
+  }
+  .navigate{
+    display: inline-flex;
+    vertical-align: middle;
+    *{
+      line-height: 1rem;
+    }
   }
 }

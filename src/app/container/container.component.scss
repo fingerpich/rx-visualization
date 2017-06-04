@@ -6,6 +6,7 @@ $backColor:#fff;
 .app{
   height:100%;
   padding:0;
+  overflow: hidden;
 
   .header{
     background: $headColor;
@@ -28,27 +29,31 @@ $backColor:#fff;
     }
   }
   .sceneContainer {
+    position: relative;
     border:1px solid $borderColor;
-    .controlScene {
-      padding: 5px;
-      button {
-        border: 1px solid $borderColor;
-        background: darken($backColor,5%);
-        border-radius: 9px;
-        min-width: 30px;
-        height: 30px;
-        color: $rxColor;
-        line-height: 12px;
-        font-size: 1rem;
-        font-weight: bold;
-        outline: none;
-        i{
-          font-size:inherit;
-        }
-        &.active {
-          background: $rxColor;
-          color: $backColor;
-        }
+    button {
+      border: none;
+      color: #ffffff;
+      background: $rxColor;
+      border-radius: 50%;
+      padding: 8px 9px 8px 10px;
+      outline: none;
+      position: absolute;
+      z-index: 1;
+      width: 45px;
+      height: 45px;
+      &.active {
+        background: $rxColor;
+        color: $backColor;
+      }
+      &.replay{
+        right:0;
+        background: none;
+        color: #333;
+      }
+      &.add{
+        right:15px;
+        bottom:15px;
       }
     }
   }

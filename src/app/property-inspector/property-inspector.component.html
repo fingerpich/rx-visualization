@@ -3,26 +3,29 @@
   <!--Node Properties-->
   <div *ngIf="selectedItem.data">
     <div class="operatorInfo">
-      <b>title:</b><span>{{selectedItem.data.title}}</span>
-      <a [href]="selectedItem.data.link">link</a>
+      <button (click)="removeSelectedItem()" title="remove selected item" class="remove"><i class="material-icons">delete</i></button>
+      <a [href]="selectedItem.data.link" target="_blank"><strong>{{selectedItem.data.title}}</strong></a>
       <p>{{selectedItem.data.desc}}</p>
     </div>
     <div class="properiesEditor" *ngIf="selectedItem.data.propertiesType">
         <rxstudio-property-component [properties]="selectedItem.data.properties" [type]="selectedItem.data.propertiesType"></rxstudio-property-component>
     </div>
     <div class="codeGenerated">
-        <textarea [value]="selectedItem.data.toString()"></textarea>
+        <code>{{selectedItem.data.toString()}}</code>
     </div>
   </div>
 
 
   <!--EDGE Properties-->
   <div *ngIf="selectedItem.source">
-    <div>{{selectedItem.source.data.constructor.name+'=>'+selectedItem.target.data.constructor.name}}</div>
-    <div><b>code:</b>
-      <div>
-        <textarea [value]="selectedItem.source.data.toString()+selectedItem.target.data.toString()"></textarea>
-      </div>
+    <button (click)="removeSelectedItem()" title="remove selected item" class="remove"><i class="material-icons">delete</i></button>
+    <div class="navigate">
+      <span>{{selectedItem.source.data.constructor.name}}</span>
+      <i class="material-icons">arrow_forward</i>
+      <span>{{selectedItem.target.data.constructor.name}}</span>
+    </div>
+    <div class="codeGenerated">
+      <code>{{selectedItem.source.data.toString()+selectedItem.target.data.toString()}}</code>
     </div>
   </div>
 </div>

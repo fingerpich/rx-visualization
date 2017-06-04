@@ -117,7 +117,7 @@ export class GraphCreator {
     // listen for key events
     // d3.select(window).on('keydown', this.svgKeyDown)
     //   .on('keyup', this.svgKeyUp);
-    this.svg.on('click', this.svgClick);
+    this.svg.on('mousedown', this.svgClick);
 
     // handle zoom
     thisGraph.svg.call(d3.zoom()
@@ -130,6 +130,9 @@ export class GraphCreator {
     // get control commands
     thisGraph.appService.getControlChanges().subscribe((data) => {
       if (data === 'clear') { thisGraph.deleteGraph(false); }
+    });
+    thisGraph.appService.removeItemSubject.subscribe((data) => {
+      thisGraph.removeSelected();
     });
   }
 
@@ -210,11 +213,11 @@ export class GraphCreator {
     }
   }
   public removeSelected = () => {
-    const thisGraph = this,
-      state = thisGraph.state,
-      consts = thisGraph.consts;
-    const selectedNode = state.selectedNode,
-      selectedEdge = state.selectedEdge;
+    const thisGraph = this;
+    const state = thisGraph.state;
+    const selectedNode = state.selectedNode;
+    const selectedEdge = state.selectedEdge;
+
     thisGraph.appService.setSelectedItem(null);
     if (selectedNode) {
       thisGraph.nodes.splice(thisGraph.nodes.indexOf(selectedNode), 1);
@@ -328,13 +331,12 @@ export class GraphCreator {
     return false;
   }
   private svgClick = () => {
-    const createOption = this.appService.getCreationOption();
-    if (!createOption || createOption === 'pan') { return true; }
-    else {
+    const creationElement = this.appService.getCreationOption();
+    if (creationElement) {
       const xycoords = d3.mouse(this.svgG.node()),
         d = {
           id: this.idct++,
-          data: createOption,
+          data: creationElement,
           x: xycoords[0], y: xycoords[1]
         };
       this.nodes.push(d);

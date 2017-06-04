@@ -28,10 +28,6 @@ export class ContainerComponent implements OnInit {
     });
   }
 
-  removeSelectedItem() {
-    this.sceneComponent.removeSelectedItem();
-  }
-
   replay() {
     this.appService.refreshRxObjects();
   }

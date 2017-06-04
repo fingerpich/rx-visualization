@@ -15,4 +15,8 @@ export class PropertyInspectorComponent implements OnInit {
       this.selectedItem=data;
     });
   }
+
+  removeSelectedItem() {
+    this.appService.removeSelectedItem();
+  }
 }
