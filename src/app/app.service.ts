@@ -9,7 +9,6 @@ export class AppService {
   public removeItemSubject;
   private controlSubject;
   private itemSubscriptor;
-  private cntr = 1;
   private delayBetweenEmittedItem = 200;
   private resultsArray = [];
   private nodesList;
