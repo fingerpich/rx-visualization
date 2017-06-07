@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Subject, Observable} from 'rxjs';
+import {Subject, Observable} from 'rxjs/Rx';
 import * as NodeTypes from './node-types';
 import {RxHelper} from './rx-helper';
+import {RxNode} from './node-types/rxNode';
+import {GraphCreator} from './scene/graph-creator';
 @Injectable()
 export class AppService {
   private selectedCreationOption;
@@ -9,7 +11,6 @@ export class AppService {
   public removeItemSubject;
   private controlSubject;
   private itemSubscriptor;
-  private delayBetweenEmittedItem = 200;
   private resultsArray = [];
   private nodesList;
   private edgeList;
@@ -63,15 +64,26 @@ export class AppService {
     return this.itemSubscriptor;
   }
 
+  private addNextResult(index, nextResult) {
+    const resultsArray = this.resultsArray;
+    resultsArray[index].nexts.push(nextResult);
+    setTimeout(() => {
+      const firstNext = resultsArray[index].nexts.shift();
+      resultsArray[index].node = firstNext.node;
+      resultsArray[index].data = firstNext.data;
+
+      this.itemSubscriptor.next(resultsArray);
+    }, GraphCreator.animateTime * resultsArray[index].nexts.length);
+  }
   public subscribeItem = (node, data) => {
-    const index = this.resultsArray.findIndex(d => (d.data.id === data.id));
+    const resultsArray = this.resultsArray;
+    const index = resultsArray.findIndex(d => (d.data.id === data.id));
     if (index > -1) {
-      const lastData = this.resultsArray[index];
-      this.resultsArray[index] = {node, data, lastData: lastData.data, lastNode: lastData.node};
+      this.addNextResult(index, {node, data});
     } else {
-      this.resultsArray.push({node, data});
+      resultsArray.push({node, data, nexts: []});
     }
-    this.itemSubscriptor.next(this.resultsArray);
+    this.itemSubscriptor.next(resultsArray);
   }
 
   public getInitialData(width, height) {
@@ -88,10 +100,10 @@ export class AppService {
   }
 
   public get delay(): number {
-    return this.delayBetweenEmittedItem;
+    return GraphCreator.animateTime;
   }
   public set delay(value) {
-    this.delayBetweenEmittedItem = value;
+    GraphCreator.animateTime = value;
     this.refreshRxObjects();
   }
 

@@ -3,6 +3,8 @@ import * as NodeTypes from '../node-types';
 declare var d3: any;
 
 export class GraphCreator {
+  public static animateTime = 400;
+
   private consts =  {
     selectedClass: 'selected',
     connectClass: 'connect-node',
@@ -14,7 +16,6 @@ export class GraphCreator {
     DELETE_KEY: 46,
     ENTER_KEY: 13,
     nodeRadius: 50,
-    animateTime: 300
   };
   private state = {
     selectedNode: null,
@@ -448,7 +449,7 @@ export class GraphCreator {
     }
     resultCircle
       .transition()
-      .duration(thisGraph.consts.animateTime)
+      .duration(GraphCreator.animateTime / 2)
       .attr('transform', d => getTranslate(d, false))
       .attr('opacity', 0.8)
       .select('text').text(d => d.data.x);
@@ -461,7 +462,7 @@ export class GraphCreator {
       .attr('opacity', 1)
       .attr('transform', d => getTranslate(d, true))
       .transition()
-      .duration(thisGraph.consts.animateTime)
+      .duration(GraphCreator.animateTime / 2)
       .attr('transform', d => getTranslate(d, false))
       .attr('opacity', 0.8);
     const circle = newGs

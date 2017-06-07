@@ -15,11 +15,11 @@ export class Subscribe extends RxNode {
 
   public runner = () => {
     // const thisObservable = this.graphInputs[0];
-    const thisObservable = this.graphInputs[0].map((x)=>{
+    const thisObservable = this.graphInputs[0].map((x) => {
       x.subscribed = true;
       return x;
     });
-    setTimeout(()=>{
+    setTimeout(() => {
       // thisObservable.subscribe(
       this.rx.subscribe(
         function (x) {
@@ -34,7 +34,7 @@ export class Subscribe extends RxNode {
         });
     });
     return thisObservable;
-  };
+  }
 
   public toString = () => {
     return `.subscribe(
@@ -42,5 +42,5 @@ export class Subscribe extends RxNode {
       function (err) { console.log('Error: %s', err); }, /* on error*/
       function () { console.log('Completed');/* on complete*/
       });`;
-  };
+  }
 }

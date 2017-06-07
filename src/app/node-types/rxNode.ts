@@ -10,7 +10,7 @@ export class RxNode {
 
   protected static propertiesType: PropertyType;
 
-  public static cntr = 1;
+  private static cntr = 1;
 
   public rxo: any;
   public level: any;
@@ -18,7 +18,6 @@ export class RxNode {
   public properties: Object;
   public graphInputs: Array<Object>;
   public runner;
-  private delayBetweenEmittedItem = 200;
 
   get title(): string {
     return (<typeof RxNode>this.constructor).title;
@@ -37,17 +36,13 @@ export class RxNode {
 
   public run(node, level, subscribeItem) {
     this.rxo = this.runner();
-    this.rx = Observable.zip(
-      this.rxo.flatMap((x) => {
-        x = x.id ? x : {x: x, id: RxNode.cntr++};
-        return Observable.of(x);
-      }),
-      Observable.interval(this.delayBetweenEmittedItem),
-      (c) => {
-        subscribeItem(node, c);
-        return c;
+    this.rx = this.rxo.map((x) => {
+      if (!x.id) {
+        x = {x: x, id: RxNode.cntr++};
       }
-    );
+      subscribeItem(node, JSON.parse(JSON.stringify(x)));
+      return x;
+    });
     this.level = level;
   }
 
