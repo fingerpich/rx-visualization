@@ -17,12 +17,14 @@ $backColor:#fff;
       color:$rxColor;
     }
     button{
-      border:none;
-      background: lighten($headColor,10%);
-      color:#eee;
+      border: none;
+      background: #ec0c8e;
+      color: #ffffff;
+      font-weight: bold;
       border-radius: 3px;
-      margin:5px;
-      padding:5px 15px;
+      font-size: 16px;
+      margin: 5px;
+      padding: 5px 15px;
       i{
         font-size:inherit;
       }
@@ -87,8 +89,8 @@ $backColor:#fff;
     border:1px solid silver;
     border-radius: 3px;
     .shareBoxContainer{
-      padding: 10px;
-      h2{
+      padding: 20px 30px;
+      h5{
         margin:0;
       }
       div.copyBox {

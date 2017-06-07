@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {SceneComponent} from "../scene/scene.component";
-import {AppService} from "../app.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {SceneComponent} from '../scene/scene.component';
+import {AppService} from '../app.service';
+import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-rxstudio-container',
@@ -32,8 +32,12 @@ export class ContainerComponent implements OnInit {
     this.appService.refreshRxObjects();
   }
 
+  shortenURL(serialized) {
+    return serialized;
+  }
   share() {
-    this.serializedUrl = this.sceneComponent.serialize();
+    const serialized = this.sceneComponent.serialize();
+    this.serializedUrl = 'load/' + this.shortenURL(serialized);
   }
 
   showCreationMenuToggle() {

@@ -155,22 +155,24 @@ export class GraphCreator {
     return JSON.stringify({'nodes': nodesData, 'edges': saveEdges});
   }
 
-  public deserialize = (jsonText) => {
+  public deserialize = (jsonObj) => {
     const thisGraph = this;
-    const jsonObj = JSON.parse(jsonText);
+    // const jsonObj = JSON.parse(jsonText);
     thisGraph.deleteGraph(true);
     const nodesData = jsonObj.nodes.map(node => {
-      node.data = new(NodeTypes[node.node_type]);
+      node.data = new (NodeTypes[node.node_type])();
       node.data.properties = node.properties;
+      return node;
     });
-    thisGraph.nodes = nodesData;
+    [].push.apply(thisGraph.nodes, nodesData);
     thisGraph.setIdCounterByNodes();
     const newEdges = jsonObj.edges;
     newEdges.forEach(function(e, i){
       newEdges[i] = {source: thisGraph.nodes.filter(function(n){return n.id === e.source; })[0],
         target: thisGraph.nodes.filter(function(n){return n.id === e.target; })[0]};
     });
-    thisGraph.edges = newEdges;
+
+    [].push.apply(thisGraph.edges, newEdges);
     thisGraph.updateGraph();
   }
 
