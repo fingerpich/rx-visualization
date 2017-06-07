@@ -1,23 +1,22 @@
-import {Observable} from "rxjs/Rx";
-import {RxNode} from "./rxNode";
+import {Observable} from 'rxjs/Rx';
+import {RxNode} from './rxNode';
 
 export class Merge extends RxNode {
-  protected static title = "Merge";
-  protected static link = "http://reactivex.io/documentation/operators/merge.html";
-  protected static desc = "combine multiple Observables into one by merging their emissions";
+  protected static title = 'Merge';
+  protected static link = 'http://reactivex.io/documentation/operators/merge.html';
+  protected static desc = 'combine multiple Observables into one by merging their emissions';
   protected static maxInput = 300;
   protected static minInput = 2;
 
   protected static propertiesType = null;
 
-  public runner = ({}) => {
-    return Observable.merge(...this.graphInputs);
-  };
-  public toString = ({}) => {
-    return 'Observable.mergeDelayError(' + this.graphInputs.join(",") + ')';
-  };
-
-
   public properties = {};
   public graphInputs = [];
+
+  public runner = ({}) => {
+    return Observable.merge(...this.graphInputs);
+  }
+  public toString = ({}) => {
+    return 'Observable.mergeDelayError(' + this.graphInputs.join(',') + ')';
+  }
 }
