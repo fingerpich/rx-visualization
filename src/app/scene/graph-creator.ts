@@ -118,7 +118,17 @@ export class GraphCreator {
     // listen for key events
     // d3.select(window).on('keydown', this.svgKeyDown)
     //   .on('keyup', this.svgKeyUp);
-    this.svg.on('mousedown', this.svgClick);
+    thisGraph.svg.on('mousedown', this.svgClick);
+    thisGraph.svg.on(
+      "mouseover", (d) => {
+        if(this.appService.getCreationOption()) {
+          thisGraph.svg.style("cursor", "crosshair");
+          /*semicolon here*/
+        }
+        else{
+          thisGraph.svg.style("cursor", "pointer");
+        }
+      });
 
     // handle zoom
     thisGraph.svg.call(d3.zoom()
@@ -334,8 +344,9 @@ export class GraphCreator {
     return false;
   }
   private svgClick = () => {
-    const creationElement = this.appService.getCreationOption();
-    if (creationElement) {
+    const nodeClass = this.appService.getCreationOption();
+    if(nodeClass){
+      const creationElement = new (nodeClass)();
       const xycoords = d3.mouse(this.svgG.node()),
         d = {
           id: this.idct++,
@@ -345,6 +356,7 @@ export class GraphCreator {
       this.nodes.push(d);
       this.updateGraph();
       this.appService.refreshRxObjects();
+      this.appService.setCreationOption(null);
     }
   }
 

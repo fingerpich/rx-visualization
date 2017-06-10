@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import {Subject, Observable} from 'rxjs/Rx';
 import * as NodeTypes from './node-types';
-import {RxHelper} from './rx-helper';
-import {RxNode} from './node-types/rxNode';
 import {GraphCreator} from './scene/graph-creator';
+
 @Injectable()
 export class AppService {
   private selectedCreationOption;
   private selectItemSubject;
-  public removeItemSubject;
   private controlSubject;
   private itemSubscriptor;
   private resultsArray = [];
   private nodesList;
   private edgeList;
+
+  public removeItemSubject;
 
   constructor() {
     this.selectItemSubject = new Subject();
@@ -22,18 +22,12 @@ export class AppService {
     this.itemSubscriptor = new Subject();
   }
 
-  public getOperators() {
-    return RxHelper.getRxOperator();
-  }
-
   public setCreationOption(selectedCreation) {
     this.selectedCreationOption = selectedCreation;
   }
 
   public getCreationOption() {
-    if (this.selectedCreationOption) {
-      return new (this.selectedCreationOption)();
-    }
+    return this.selectedCreationOption;
   }
 
   public removeSelectedItem() {

@@ -125,7 +125,7 @@ export class RxHelper {
       ]
     }
   ];
-  public static getRxOperator() {
+  public static getRxOperators() {
     return this.operators;
   }
   constructor() {

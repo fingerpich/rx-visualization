@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AppService} from "../app.service";
+import {RxHelper} from "../rx-helper";
 
 @Component({
   selector: 'rxstudio-creation-menu',
@@ -12,7 +13,7 @@ export class CreationMenuComponent implements OnInit {
   constructor(private appService:AppService) { }
 
   ngOnInit() {
-    this.operators=this.appService.getOperators()
+    this.operators = RxHelper.getRxOperators();
   }
 
   selectOperator(option){
