@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {AppService} from "../app.service";
-import {RxHelper} from "../rx-helper";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AppService} from '../app.service';
+import {RxHelper} from '../rx-helper';
 
 @Component({
   selector: 'rxstudio-creation-menu',
@@ -10,15 +10,18 @@ import {RxHelper} from "../rx-helper";
 export class CreationMenuComponent implements OnInit {
   operators;
   selectedOption;
-  constructor(private appService:AppService) { }
+  @Output() onSelect = new EventEmitter();
+
+  constructor(private appService: AppService) { }
 
   ngOnInit() {
     this.operators = RxHelper.getRxOperators();
   }
 
-  selectOperator(option){
-    this.selectedOption=option;
+  selectOperator(option) {
+    this.selectedOption = option;
     this.appService.setCreationOption(option);
+    this.onSelect.emit(option);
   }
 
 }

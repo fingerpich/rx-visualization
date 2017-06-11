@@ -16,13 +16,13 @@
   </div>
   <!--<rxstudio-control-scene></rxstudio-control-scene>-->
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
-    <rxstudio-creation-menu *ngIf="showCreationMenu"></rxstudio-creation-menu>
-    <div fxFlex fxLayout="column" class="sceneContainer">
+    <div fxFlex class="sceneContainer">
       <button (click)="showCreationMenuToggle()" [class.active]="showCreationMenu" title="show tools" class="add">
         <i class="material-icons">add</i>
       </button>
       <button (click)="replay()" title="replay" class="replay"><i class="material-icons">play_circle_outline</i></button>
       <rxstudio-scene fxFlex></rxstudio-scene>
+      <rxstudio-creation-menu (onSelect)="showCreationMenu=false" *ngIf="showCreationMenu"></rxstudio-creation-menu>
     </div>
     <rxstudio-property-inspector></rxstudio-property-inspector>
   </div>
