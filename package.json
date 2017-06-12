@@ -9,8 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:demo": "rm -rf dist/*.js && ng build --prod --bh /rx-studio/",
-    "releaseDemo": "rm -rf dist && mkdir dist && cd dist && git init && git remote add origin https://github.com/fingerpich/rxstudio && git fetch && git checkout master && npm run build:demo"
+    "build:demo": "rm -rf dist/*.js && ng build --prod --bh /rx-studio/"
   },
   "private": true,
   "dependencies": {

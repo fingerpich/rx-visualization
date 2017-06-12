@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="stretch" class="app">
-  <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
-    <h1>RX Studio</h1>
+  <div class="header">
+
     <button (click)="share()"  title="share">share <i class="material-icons">share</i></button>
     <div class="overlay" *ngIf="serializedUrl" (click)="serializedUrl='';">
       <div class="shareBox" (click)="$event.stopPropagation();">
@@ -24,7 +24,7 @@
       <rxstudio-scene fxFlex></rxstudio-scene>
       <rxstudio-creation-menu (onSelect)="showCreationMenu=false" *ngIf="showCreationMenu"></rxstudio-creation-menu>
     </div>
-    <rxstudio-property-inspector></rxstudio-property-inspector>
+    <rxstudio-property-inspector fxFlex="30%"></rxstudio-property-inspector>
   </div>
   <!--<rxstudio-status></rxstudio-status>-->
 </div>

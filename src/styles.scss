@@ -7,3 +7,14 @@ html, body{
 body{
   margin:0;
 }
+
+@media only screen and (max-width: 400px) {
+  .project-name{
+    left: -43px!important;
+    top: -23px!important;
+  }
+  .git-link{
+    left: -60px!important;
+    top: 15px!important;
+  }
+}

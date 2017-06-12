@@ -40,7 +40,7 @@ export class Create extends RxNode {
   public toString = () => {
     const list = this.properties.list;
     const getNext = ({value, time}) => {
-      return time ? 'setTimeout(function(){observer.next(' + value + ');},' + time + ')' : 'observer.next(' + value + ');';
+      return time ? 'setTimeout(function(){ observer.next(' + value + ');},' + time + ')' : ' observer.next(' + value + ');';
     };
     let s = '';
     for (const item of list) {
