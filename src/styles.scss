@@ -10,11 +10,13 @@ body{
 
 @media only screen and (max-width: 400px) {
   .project-name{
-    left: -43px!important;
-    top: -23px!important;
+    left: -49px!important;
+    top: -34px!important;
   }
   .git-link{
-    left: -60px!important;
-    top: 15px!important;
+    left: -65px !important;
+    top: 20px !important;
+    font-size: 0.5rem!important;
+    padding: 5px 45px!important;
   }
 }

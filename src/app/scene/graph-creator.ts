@@ -120,13 +120,12 @@ export class GraphCreator {
     //   .on('keyup', this.svgKeyUp);
     thisGraph.svg.on('mousedown', this.svgClick);
     thisGraph.svg.on(
-      "mouseover", (d) => {
-        if(this.appService.getCreationOption()) {
-          thisGraph.svg.style("cursor", "crosshair");
+      'mouseover', (d) => {
+        if (this.appService.getCreationOption()) {
+          thisGraph.svg.style('cursor', 'crosshair');
           /*semicolon here*/
-        }
-        else{
-          thisGraph.svg.style("cursor", "pointer");
+        } else {
+          thisGraph.svg.style('cursor', 'pointer');
         }
       });
 
