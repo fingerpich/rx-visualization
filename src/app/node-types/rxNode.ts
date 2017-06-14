@@ -35,8 +35,7 @@ export class RxNode {
   }
 
   public run(node, level, subscribeItem) {
-    this.rxo = this.runner();
-    this.rx = this.rxo.map((x) => {
+    this.rx = this.runner().map((x) => {
       if (!x.id) {
         x = {x: x, id: RxNode.cntr++};
       }
@@ -47,8 +46,10 @@ export class RxNode {
   }
 
   public dispose() {
-    if (this.rxo && this.rxo.unsubscribe) {
-      this.rxo.unsubscribe();
+    if (this.rxo) {
+      if (this.rxo.unsubscribe) {
+        this.rxo.unsubscribe();
+      }
       this.rxo = undefined;
     }
     if (this.rx) {

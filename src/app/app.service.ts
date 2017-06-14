@@ -10,6 +10,7 @@ export class AppService {
   private controlSubject;
   private itemSubscriptor;
   private resultsArray = [];
+  private resultTimeouts = [];
   private nodesList;
   private edgeList;
 
@@ -58,16 +59,22 @@ export class AppService {
     return this.itemSubscriptor;
   }
 
+  private distroyTimeouts() {
+    let rt = 0;
+    while (rt = this.resultTimeouts.pop()) {
+      clearTimeout(rt);
+    }
+  }
   private addNextResult(index, nextResult) {
     const resultsArray = this.resultsArray;
     resultsArray[index].nexts.push(nextResult);
-    setTimeout(() => {
+    this.resultTimeouts.push(setTimeout(() => {
       const firstNext = resultsArray[index].nexts.shift();
       resultsArray[index].node = firstNext.node;
       resultsArray[index].data = firstNext.data;
 
       this.itemSubscriptor.next(resultsArray);
-    }, GraphCreator.animateTime * resultsArray[index].nexts.length);
+    }, GraphCreator.animateTime * resultsArray[index].nexts.length));
   }
   public subscribeItem = (node, data) => {
     const resultsArray = this.resultsArray;
@@ -111,6 +118,8 @@ export class AppService {
     for (const node of nodes) {
       node.data.dispose();
     }
+    while (this.resultsArray.pop()) {}
+    this.distroyTimeouts();
 
     let levelcounter = 1;
     // Make Creator Observables
