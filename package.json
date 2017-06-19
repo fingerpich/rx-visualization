@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:demo": "rm -rf dist/*.js && ng build --prod --bh /rx-studio/"
+    "build:demo": "rm -rf ./dist/*.js && ng build --prod --bh /rx-studio/"
   },
   "private": true,
   "dependencies": {
