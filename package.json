@@ -9,14 +9,14 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:demo": "rm -rf ./dist/*.js && ng build --prod --bh /rx-studio/"
+    "build:demo": "ng build --no-delete-output-path --prod  --bh /rx-studio/"
   },
   "private": true,
   "dependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/core": "^4.0.0",
-    "@angular/flex-layout": "^2.0.0-rc.1",
+    "@angular/flex-layout": "^2.0.0-beta.8",
     "@angular/forms": "^4.0.0",
     "@angular/http": "^4.0.0",
     "@angular/platform-browser": "^4.0.0",
