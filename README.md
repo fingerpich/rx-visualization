@@ -1,4 +1,7 @@
 # Rxstudio
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a50eeb043584886b60f961426032030)](https://www.codacy.com/app/zarei-bs/rx-studio?utm_source=github.com&utm_medium=referral&utm_content=fingerpich/rx-studio&utm_campaign=badger)
+
 Visualizing Reactive Programming.
 [DEMO](https://fingerpich.github.io/rx-studio/)
 
