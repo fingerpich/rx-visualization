@@ -4,7 +4,7 @@ Visualizing Reactive Programming.
 
 [![dependencies-quality]( https://david-dm.org/fingerpich/rx-studio.svg)](https://david-dm.org/fingerpich/rx-studio)
 [![development-dependencies-quality](https://david-dm.org/fingerpich/rx-studio/dev-status.svg)](https://david-dm.org/fingerpich/rx-studio#info=devDependencies)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/72a073fa893f4f0b823f41106c9e4f56)](https://www.codacy.com/app/zarei-bs/jalali-angular-datepicker?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fingerpich/jalali-angular-datepicker&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a50eeb043584886b60f961426032030)](https://www.codacy.com/app/zarei-bs/rx-studio?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fingerpich/rx-studio&amp;utm_campaign=Badge_Grade)
 
 ## Introduction
 Reactive Programming is getting a lot of attention these days.
