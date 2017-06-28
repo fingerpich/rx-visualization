@@ -37,11 +37,10 @@ export class ContainerComponent implements OnInit {
   }
   share() {
     const serialized = this.sceneComponent.serialize();
-    this.serializedUrl = 'load/' + this.shortenURL(serialized);
+    this.serializedUrl = 'https://fingerpich.github.io/rx-flow/load/' + this.shortenURL(serialized);
   }
 
   showCreationMenuToggle() {
     this.showCreationMenu = !this.showCreationMenu;
   }
-
 }
