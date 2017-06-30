@@ -14,8 +14,16 @@ export class Publish extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].publish();
+    const thisObservable = this.graphInputs[0].map((x) => {
+      x.published = true;
+      return x;
+    });
+    setTimeout(() => {
+      this.rxo = this.rx.publish();
+    });
+    return thisObservable;
   }
+
   public toString = () => {
     return '.publish()';
   }

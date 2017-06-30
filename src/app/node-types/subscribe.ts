@@ -20,7 +20,6 @@ export class Subscribe extends RxNode {
       return x;
     });
     setTimeout(() => {
-      // thisObservable.subscribe(
       this.rxo = this.rx.subscribe(
         function (x) {
           console.log('Next: %s', x);
