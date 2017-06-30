@@ -1,12 +1,14 @@
-# Rxstudio
+# Rx Flow
+
 Visualizing Reactive Programming.
-[DEMO](https://fingerpich.github.io/rx-studio/)
+[**DEMO**](https://fingerpich.github.io/rx-studio/)
 
 [![dependencies-quality]( https://david-dm.org/fingerpich/rx-studio.svg)](https://david-dm.org/fingerpich/rx-studio)
 [![development-dependencies-quality](https://david-dm.org/fingerpich/rx-studio/dev-status.svg)](https://david-dm.org/fingerpich/rx-studio#info=devDependencies)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a50eeb043584886b60f961426032030)](https://www.codacy.com/app/zarei-bs/rx-studio?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fingerpich/rx-studio&amp;utm_campaign=Badge_Grade)
 
 ## Introduction
+
 Reactive Programming is getting a lot of attention these days.
 But there’s a sizeable learning curve involved while you try and get your head to think in streams instead of imperative sequential processes.
 This app allows you to visualize and make it easier to learn.
