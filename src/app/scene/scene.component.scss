@@ -1,4 +1,4 @@
-$primaryColor:#ec1e84;
+$primaryColor:#ddd;
 $linkColor:#555;
 $borderColor:#aaa;
 $selectedColor:$primaryColor;
@@ -12,7 +12,7 @@ $selectedColor:$primaryColor;
 
     .resultItems{
       circle{
-        fill:#07f;
+        fill: #07f;
       }
       text{
         fill:white;
@@ -25,12 +25,15 @@ $selectedColor:$primaryColor;
     g.conceptG {
       cursor:pointer;
       circle {
+        transition:fill 0.3s ease;
         fill: #fff;
         &.outerCircle{
+          transition:all 0.3s ease;
           stroke-width: 1px;
-          stroke: #aaa;
+          stroke: #bbb;
           &:hover{
             fill:#eee;
+            stroke: #eee;
           }
         }
       }
@@ -41,6 +44,7 @@ $selectedColor:$primaryColor;
       }
       &.selected {
         circle {
+          transition:fill 0.3s ease;
           fill: $selectedColor;
         }
         .outerCircle:hover {
@@ -49,6 +53,7 @@ $selectedColor:$primaryColor;
       }
     }
     g.connect-node circle {
+      transition:fill 0.3s ease;
       fill: #eee;
     }
 

@@ -426,7 +426,8 @@ export class GraphCreator {
 
     newGs.append('circle')
       .attr('class', 'outerCircle')
-      .attr('r', String(consts.nodeRadius));
+      .attr('r', String(consts.nodeRadius))
+      .append('title').text('drag ')
 
     newGs.append('circle')
       .attr('class', 'innerCircle')
@@ -464,7 +465,7 @@ export class GraphCreator {
       .transition()
       .duration(GraphCreator.animateTime / 2)
       .attr('transform', d => getTranslate(d, false))
-      .attr('opacity', 0.8)
+      .attr('opacity', 0.6)
       .select('text').text(d => d.data.x);
 
     resultCircle.exit().remove();
@@ -477,7 +478,7 @@ export class GraphCreator {
       .transition()
       .duration(GraphCreator.animateTime / 2)
       .attr('transform', d => getTranslate(d, false))
-      .attr('opacity', 0.8);
+      .attr('opacity', 0.6);
     const circle = newGs
       .append('circle')
       .attr('r', String(this.consts.nodeRadius / 2.618));

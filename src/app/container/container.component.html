@@ -5,9 +5,9 @@
     <div class="overlay" *ngIf="serializedUrl" (click)="serializedUrl='';">
       <div class="shareBox" (click)="$event.stopPropagation();">
         <div class="shareBoxContainer">
-          <h5>Share your work</h5>
+          <h5>copy the link to access your work</h5>
           <div class="copyBox">
-            <input #inputTarget [value]="serializedUrl">
+            <input #inputTarget (click)="inputTarget.select()" [value]="serializedUrl">
             <button [ngxClipboard]="inputTarget">copy</button>
           </div>
         </div>
