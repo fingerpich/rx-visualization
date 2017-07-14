@@ -1,3 +1,4 @@
+@import '../../common';
 $headColor:#746;
 $rxColor:#ec0c8e;
 $borderColor:#eee;
@@ -9,19 +10,23 @@ $backColor:#fff;
   overflow: hidden;
 
   .header{
-    background: #f5f5f5;;
+    background: $primaryColor;;
     text-align: right;
     button{
       border: none;
-      background: #07f;
+      background: $primaryColor;
+      outline: none;
       color: #ffffff;
       font-weight: bold;
       border-radius: 3px;
       font-size: 0.7rem;
-      margin: 1px;
-      padding: 10px 15px;
+      margin: 4px;
+      padding: 12px 15px;
       i{
         font-size:inherit;
+      }
+      &:hover{
+        background: lighten($primaryColor,10%);
       }
     }
   }
@@ -35,8 +40,6 @@ $backColor:#fff;
     }
     button {
       border: none;
-      color: #ffffff;
-      background: #07f;
       border-radius: 50%;
       padding: 8px 9px 8px 10px;
       outline: none;
@@ -47,11 +50,13 @@ $backColor:#fff;
       &.replay{
         right:0;
         background: none;
-        color: #07f;
+        color: $primaryColor;
       }
       &.add{
         right:15px;
         bottom:15px;
+        background: $primaryColor;
+        color: #ffffff;
       }
     }
   }
@@ -94,7 +99,7 @@ $backColor:#fff;
         input {
           flex: 1 1 auto;
           padding: 12px 7px;
-          border: 1px solid #07f;
+          border: 1px solid $primaryColor;
           color:#444;
         }
         button {

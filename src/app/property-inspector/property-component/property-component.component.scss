@@ -1,3 +1,4 @@
+@import '../../../common';
 .simpleInput{
   text-align: center;
   b{
@@ -21,7 +22,7 @@
   .addButton{
     padding:5px;
     cursor:pointer;
-    color:#07f;
+    color: $primaryColor;
   }
   ul.list{
     list-style: none;

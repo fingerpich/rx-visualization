@@ -1,7 +1,13 @@
-$primaryColor:#ddd;
-$linkColor:#555;
-$borderColor:#aaa;
-$selectedColor:$primaryColor;
+@import "../../common";
+$linkColor: #555;
+$borderColor: $linkColor;
+$outerCircleHoverColor: #eee;
+
+$hoveredLink: lighten($primaryColor, 20%);
+
+$selectedColor: lighten($primaryColor, 20%);
+$selectedLink: lighten($primaryColor, 10%);
+$selectedBorder: lighten($primaryColor, 50%);
 :host{
   position: relative;
 
@@ -27,17 +33,21 @@ $selectedColor:$primaryColor;
       circle {
         transition:fill 0.3s ease;
         fill: #fff;
+        &:hover {
+          fill: $outerCircleHoverColor;
+        }
         &.outerCircle{
           transition:all 0.3s ease;
           stroke-width: 1px;
-          stroke: #bbb;
+          stroke: $borderColor;
           &:hover{
-            fill:#eee;
-            stroke: #eee;
+            fill:$outerCircleHoverColor;
+            stroke: $outerCircleHoverColor;
           }
         }
       }
       text {
+        fill:$borderColor;
       }
       &:hover {
 
@@ -46,15 +56,21 @@ $selectedColor:$primaryColor;
         circle {
           transition:fill 0.3s ease;
           fill: $selectedColor;
+          &.outerCircle {
+            stroke: $selectedColor;
+            &:hover {
+              fill: darken($selectedColor, 7%);
+            }
+          }
         }
-        .outerCircle:hover {
-          fill: darken($selectedColor, 7%);
+        text {
+          fill:#fff;
         }
       }
     }
     g.connect-node circle {
       transition:fill 0.3s ease;
-      fill: #eee;
+      fill: $outerCircleHoverColor;
     }
 
     path.link {
@@ -65,7 +81,7 @@ $selectedColor:$primaryColor;
     }
 
     path.link:hover {
-      stroke: lighten($linkColor,50%);
+      stroke: $hoveredLink;
     }
 
     path.link.hidden {
@@ -73,7 +89,7 @@ $selectedColor:$primaryColor;
     }
 
     path.link.selected {
-      stroke: $selectedColor;
+      stroke: $selectedLink;
     }
   }
 }

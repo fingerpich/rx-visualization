@@ -1,3 +1,4 @@
+@import '../../common';
 :host{
 
   border-top: 1px solid #f1f1f1;
@@ -11,11 +12,11 @@
 
   button.remove{
     border: none;
-    background: #eee;
+    background: none;
     border-radius: 50%;
     padding: 3px 6px;
     float: right;
-    color: #f00;
+    color: $primaryColor;
     outline: none;
   }
 
@@ -26,14 +27,14 @@
   }
   a{
     text-decoration: underline;
-    color: #038;
+    color: darken($primaryColor, 30%);
     cursor: pointer;
   }
   .codeGenerated{
-    background: #eee;
-    padding: 5px;
+    padding: 10px;
     color: #555;
-    font-size: 0.75rem;
+    font-weight: bold;
+    font-size: 0.9rem;
     overflow: auto;
   }
   .navigate{
