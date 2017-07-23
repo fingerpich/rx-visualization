@@ -2,7 +2,7 @@
 <div class="operators-container">
   <div class="operators-group" *ngFor="let kind of operators">
     <h5>{{kind.name}}</h5>
-    <span class="selectable operatorOption"
+    <span class="selectable operatorOption" [ngClass]="{'cool':op.title === 'Subscribe','hot':op.title === 'Publish'}"
          [ngClass]="{'selected':selectedOption==op}"
          (click)="selectOperator(op)"
          *ngFor="let op of kind.list">

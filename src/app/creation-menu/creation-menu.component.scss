@@ -12,10 +12,14 @@
     background: rgba(0,0,0,0.05);
     z-index: 4;
   }
+  @keyframes slideUp {
+    from {height: 0%;overflow-y: hidden;}
+    to {height: 61%;overflow-y: hidden;}
+  }
   .operators-container {
-    min-width: 300px;
-    max-width: 600px;
-    max-height: 100%;
+    height: 61%;
+    animation-name: slideUp;
+    animation-duration: 0.3s;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -29,23 +33,30 @@
       text-align: center;
       padding: 20px 0 0;
       h5 {
-        margin: 0;
+        margin: -7px;
         font-weight: 100;
         font-size: 0.9rem;
-        color: #adadad;
+        color: #bdbdbd;
         text-align: center;
         padding: 0;
       }
       .operatorOption {
-        color: #07f;
+        color: #404040;
         padding: 8px;
         font-size: 0.9rem;
         line-height: 1.6rem;
         display: inline;
         -webkit-transition: ease 0.2s;
         transition: ease 0.2s;
+        &.cool{
+          color: blue;
+        }
+        &.hot{
+          color: red;
+        }
         &:hover{
           background: rgba(0, 0, 0, 0.07);
+          color: #07f;
           border-radius: 50%;
         }
         &.selected{
