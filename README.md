@@ -1,17 +1,18 @@
 # Rx Flow
 
-Visualizing Reactive Programming.
+Visualizing Reactive Programming using rxjs.
 [**DEMO**](https://fingerpich.github.io/rx-flow/)
 
 [![dependencies-quality]( https://david-dm.org/fingerpich/rx-flow.svg)](https://david-dm.org/fingerpich/rx-flow)
 [![development-dependencies-quality](https://david-dm.org/fingerpich/rx-flow/dev-status.svg)](https://david-dm.org/fingerpich/rx-flow#info=devDependencies)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a50eeb043584886b60f961426032030)](https://www.codacy.com/app/zarei-bs/rx-studio?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fingerpich/rx-studio&amp;utm_campaign=Badge_Grade)
 
-## Introduction
+## How to learn reactive programming using rx (js, java, swift , ...) 
 
-Reactive Programming is getting a lot of attention these days.
-But there’s a sizeable learning curve involved while you try and get your head to think in streams instead of imperative sequential processes.
-This app allows you see streams and understand how rx functions work.
+Reactivex is An API for asynchronous programming with observable streams and it is getting a lot of attention 
+But there’s a sizeable learning curve.
+This web application tries to visualize reactivex function and streams 
+which present functions and their relation as a directed graph.
 
 ## Example
 
