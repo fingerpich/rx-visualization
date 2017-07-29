@@ -3,7 +3,7 @@ import {SampleFunctions} from './sample-functions';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
 export class Count extends RxNode {
-  protected static title = 'Average';
+  protected static title = 'Count';
   protected static link = 'http://reactivex.io/documentation/operators/Count.html';
   protected static desc = 'count the number of items emitted by the source Observable and emit only this value';
   protected static maxInput = 1;

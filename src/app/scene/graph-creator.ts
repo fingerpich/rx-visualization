@@ -161,7 +161,7 @@ export class GraphCreator {
         id: node.id,
         x: node.x || 0,
         y: node.y || 0,
-        node_type: node.data.constructor.name,
+        node_type: node.data.title,
         properties: node.data.properties,
       };
     });
