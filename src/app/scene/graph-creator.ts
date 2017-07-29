@@ -39,6 +39,7 @@ export class GraphCreator {
   private circles;
   private paths;
   private resultCircles;
+  private lastResultList;
   private drag;
   private idct = 0;
   private static insertTitleLinebreaks (gEl, title) {
@@ -71,7 +72,7 @@ export class GraphCreator {
   }
   private setIdCounterByNodes = () => {
     this.idct = Math.max.apply(this, this.nodes.map(n => n.id)) + 1;
-  }
+  };
 
   private defineArrows() {
     // define arrow markers for graph links
@@ -143,6 +144,9 @@ export class GraphCreator {
     });
     thisGraph.appService.removeItemSubject.subscribe((data) => {
       thisGraph.removeSelected();
+      this.lastResultList = null;
+      this.showResults([]);
+      this.appService.refreshRxObjects();
     });
   }
 
@@ -162,7 +166,7 @@ export class GraphCreator {
       };
     });
     return JSON.stringify({'nodes': nodesData, 'edges': saveEdges});
-  }
+  };
 
   public deserialize = (jsonObj) => {
     const thisGraph = this;
@@ -183,7 +187,7 @@ export class GraphCreator {
 
     [].push.apply(thisGraph.edges, newEdges);
     thisGraph.updateGraph();
-  }
+  };
 
   private dragMove = (d) => {
     this.state.justDragged = true;
@@ -195,7 +199,7 @@ export class GraphCreator {
       d.y +=  d3.event.dy;
       this.updateGraph();
     }
-  }
+  };
   private dragEnd = (d) => {
     const thisGraph = this;
     if (thisGraph.state.shiftNodeDrag) {
@@ -210,7 +214,7 @@ export class GraphCreator {
     } else {
       this.showResults(null);
     }
-  }
+  };
 
   private deleteGraph = (skipPrompt) => {
     const thisGraph = this;
@@ -223,7 +227,7 @@ export class GraphCreator {
       while (thisGraph.edges.length) { thisGraph.edges.pop(); }
       thisGraph.updateGraph();
     }
-  }
+  };
   public removeSelected = () => {
     const thisGraph = this;
     const state = thisGraph.state;
@@ -241,7 +245,7 @@ export class GraphCreator {
       state.selectedEdge = null;
       thisGraph.updateGraph();
     }
-  }
+  };
   private spliceLinksForNode = (node) => {
     const thisGraph = this,
       toSplice = thisGraph.edges.filter(function(l) {
@@ -250,7 +254,7 @@ export class GraphCreator {
     toSplice.map(function(l) {
       thisGraph.edges.splice(thisGraph.edges.indexOf(l), 1);
     });
-  }
+  };
 
   private selectAnEdge = (d3Path, edgeData) => {
     const thisGraph = this;
@@ -259,7 +263,7 @@ export class GraphCreator {
       thisGraph.deselectEdges();
     }
     thisGraph.state.selectedEdge = edgeData;
-  }
+  };
   private selectANode = (d3Node, nodeData) => {
     const thisGraph = this;
     d3Node.classed(this.consts.selectedClass, true);
@@ -267,21 +271,21 @@ export class GraphCreator {
       thisGraph.deselectNodes();
     }
     thisGraph.state.selectedNode = nodeData;
-  }
+  };
   private deselectNodes = () => {
     const thisGraph = this;
     thisGraph.circles.selectAll('g').filter(function(cd){
       return cd.id === thisGraph.state.selectedNode.id;
     }).classed(thisGraph.consts.selectedClass, false);
     thisGraph.state.selectedNode = null;
-  }
+  };
   private deselectEdges = () => {
     const thisGraph = this;
     thisGraph.paths.selectAll('path').filter(function(cd){
       return cd === thisGraph.state.selectedEdge;
     }).classed(thisGraph.consts.selectedClass, false);
     thisGraph.state.selectedEdge = null;
-  }
+  };
 
   private pathMouseDown = (d3path, d) => {
     const thisGraph = this,
@@ -301,12 +305,12 @@ export class GraphCreator {
       thisGraph.deselectEdges();
       this.appService.setSelectedItem(null);
     }
-  }
+  };
   private isMouseOnCircleCorner = (d3node) => {
     const mousePos = d3.mouse(d3node.node());
     const r = Math.sqrt(mousePos[0] * mousePos[0] + mousePos[1] * mousePos[1]);
     return (r > (this.consts.nodeRadius / 1.618));
-  }
+  };
   private circleMouseDown = (d3node, d) => {
     const thisGraph = this,
       state = thisGraph.state;
@@ -319,7 +323,7 @@ export class GraphCreator {
         .attr('d', 'M' + d.x + ',' + d.y + 'L' + d.x + ',' + d.y);
       return;
     }
-  }
+  };
 
   private circleClick = (d3node, d) => {
     const thisGraph = this,
@@ -341,10 +345,10 @@ export class GraphCreator {
     d3.event.preventDefault();
     d3.event.stopPropagation();
     return false;
-  }
+  };
   private svgClick = () => {
     const nodeClass = this.appService.getCreationOption();
-    if(nodeClass){
+    if (nodeClass) {
       const creationElement = new (nodeClass)();
       const xycoords = d3.mouse(this.svgG.node()),
         d = {
@@ -357,7 +361,7 @@ export class GraphCreator {
       this.appService.refreshRxObjects();
       this.appService.setCreationOption(null);
     }
-  }
+  };
 
 // call to propagate changes to graph
   public updateGraph = () => {
@@ -439,9 +443,8 @@ export class GraphCreator {
 
     // remove old nodes
     circles.exit().remove();
-  }
+  };
 
-  private lastResultList;
   private showResults = (resultList) => {
     // {node, data}
     // update existing nodes
@@ -460,7 +463,7 @@ export class GraphCreator {
       let y = d.node.y;
       y += distance * Math.cos(d.data.id / 5);
       return 'translate(' + x + ',' + y + ')';
-    }
+    };
     resultCircle
       .transition()
       .duration(GraphCreator.animateTime / 2)
@@ -485,7 +488,7 @@ export class GraphCreator {
     newGs.each(function (d) {
       GraphCreator.insertTitleLinebreaks(d3.select(this), d.data.x);
     });
-  }
+  };
 
   public updateWindow(width, height) {
     this.svg.attr('width', width).attr('height', height);
