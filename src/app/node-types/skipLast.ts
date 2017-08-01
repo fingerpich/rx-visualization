@@ -16,7 +16,7 @@ export class SkipLast extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].skipLast(this.properties.itemCount);
+    return this.graphInputs[0].observable.skipLast(this.properties.itemCount);
   }
   public toString = ({}) => {
     return '.skipLast(' + this.properties.itemCount + '))';

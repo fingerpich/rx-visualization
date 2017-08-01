@@ -24,7 +24,7 @@ export class Timeout extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].timeout(
+    return this.graphInputs[0].observable.timeout(
       this.properties.time,
       this.properties.timeoutResult,
     );

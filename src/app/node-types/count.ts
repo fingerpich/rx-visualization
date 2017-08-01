@@ -20,7 +20,7 @@ export class Count extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].count(Count.propertiesType.params[this.properties.filterFunc].func);
+    return this.graphInputs[0].observable.count(Count.propertiesType.params[this.properties.filterFunc].func);
   }
   public toString = () => {
     return '.count(' + Count.propertiesType.params[this.properties.filterFunc].text + ')';

@@ -20,7 +20,7 @@ export class Repeat extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].repeat(this.properties.count);
+    return this.graphInputs[0].observable.repeat(this.properties.count);
   }
   public toString = () => {
     return '.repeat(' + this.properties.count + ')';

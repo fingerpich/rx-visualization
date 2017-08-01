@@ -12,7 +12,7 @@ export class Sum extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].sum();
+    return this.graphInputs[0].observable.sum();
   }
   public toString = () => {
     return '.sum()';

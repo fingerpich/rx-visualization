@@ -15,7 +15,7 @@ export class Subscribe extends RxNode {
 
   public runner = () => {
     // const thisObservable = this.graphInputs[0];
-    const thisObservable = this.graphInputs[0].map((x) => {
+    const thisObservable = this.graphInputs[0].observable.map((x) => {
       x.subscribed = true;
       return x;
     });

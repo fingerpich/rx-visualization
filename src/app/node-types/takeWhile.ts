@@ -23,7 +23,7 @@ export class TakeWhile extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].takeWhile(TakeWhile.propertiesType.params[this.properties.whileFilter].func);
+    return this.graphInputs[0].observable.takeWhile(TakeWhile.propertiesType.params[this.properties.whileFilter].func);
   }
   public toString = ({}) => {
     return '.takeWhile(' + TakeWhile.propertiesType.params[this.properties.whileFilter].text + ')';

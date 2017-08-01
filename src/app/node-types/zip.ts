@@ -22,9 +22,11 @@ export class Zip extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return Observable.zip(...this.graphInputs, Zip.propertiesType.params[this.properties.fi].func);
+    return Observable.zip(...this.graphInputs.map(gi => gi.observable), Zip.propertiesType.params[this.properties.fi].func);
   }
   public toString = ({}) => {
-    return 'Observable.zip(' + this.graphInputs.join(',') + ', ' + Zip.propertiesType.params[this.properties.fi].text + ')';
+    return 'Observable.zip(' +
+      this.graphInputs.map(gi => gi.node.data.title).join(',') + ', ' +
+      Zip.propertiesType.params[this.properties.fi].text + ')';
   }
 }

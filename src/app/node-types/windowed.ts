@@ -18,7 +18,7 @@ export class Windowed extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].windowed(this.properties.time);
+    return this.graphInputs[0].observable.windowed(this.properties.time);
   }
   public toString = () => {
     return '.debounce(' + this.properties.time + ')';

@@ -22,7 +22,7 @@ export class Do extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].do(Do.propertiesType.params[this.properties.action].func);
+    return this.graphInputs[0].observable.do(Do.propertiesType.params[this.properties.action].func);
   }
   public toString = () => {
     return '.do(' + Do.propertiesType.params[this.properties.action].text + ')';

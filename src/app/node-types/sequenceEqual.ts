@@ -13,8 +13,8 @@ export class SequenceEqual extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].sequenceEqual(
-      this.graphInputs[1]/* the second observable connected to this block */,
+    return this.graphInputs[0].observable.sequenceEqual(
+      this.graphInputs[1].observable/* the second observable connected to this block */,
     );
   }
   public toString = ({}) => {

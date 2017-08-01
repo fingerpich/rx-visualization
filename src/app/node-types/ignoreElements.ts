@@ -12,9 +12,9 @@ export class IgnoreElements extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].ignoreElements();
+    return this.graphInputs[0].observable.ignoreElements();
   }
-  public static toString = () => {
+  public toString = () => {
     return '.ignoreElements()';
   }
 }

@@ -12,7 +12,7 @@ export class Distinct extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].distinct();
+    return this.graphInputs[0].observable.distinct();
   }
   public toString = () => {
     return `.distinct()`;

@@ -138,7 +138,7 @@ export class AppService {
       for (const eachNode of nodesNeedsRx) {
         const nodeInputs = edges.filter(e => e.target === eachNode).map(e => e.source);
         if (eachNode.data.areInputsReady(nodeInputs)) {
-          eachNode.data.graphInputs = nodeInputs.map(node => node.data.rx);
+          eachNode.data.graphInputs = nodeInputs.map(node => { return {observable: node.data.rx , node: node}; } );
           eachNode.data.run(eachNode, levelcounter, this.subscribeItem);
           notFinished = true;
           break;

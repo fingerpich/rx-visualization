@@ -15,9 +15,9 @@ export class Race extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return Observable.race(...this.graphInputs);
+    return Observable.race(this.graphInputs.map(gi => gi.observable));
   }
   public toString = ({}) => {
-    return 'Observable.race(' + this.graphInputs.join(',') + ')';
+    return 'Observable.race(' + this.graphInputs.map(gi => gi.node.data.title).join(',') + ')';
   }
 }

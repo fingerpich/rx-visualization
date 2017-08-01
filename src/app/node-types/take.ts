@@ -18,7 +18,7 @@ export class Take extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].take(this.properties.itemCount);
+    return this.graphInputs[0].observable.take(this.properties.itemCount);
   }
   public toString = ({}) => {
     return '.take(' + this.properties.itemCount + '))';

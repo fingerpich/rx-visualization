@@ -16,7 +16,7 @@ export class StartWith extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].startwith(this.properties.startWith);
+    return this.graphInputs[0].observable.startwith(this.properties.startWith);
   }
   public toString = () => {
     return '.startwith(' + this.properties.startWith + ')';

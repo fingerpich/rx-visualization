@@ -12,7 +12,7 @@ export class Catch extends RxNode {
   public properties = {};
 
   public runner = ({}) => {
-    return this.graphInputs[0].catch((err) => {
+    return this.graphInputs[0].observable.catch((err) => {
       return 'err:' + err;
     });
   }

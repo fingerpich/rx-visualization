@@ -37,15 +37,15 @@ export class Join extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].join(
-      this.graphInputs[1]/* the second observable connected to this block */,
+    return this.graphInputs[0].observable.join(
+      this.graphInputs[1].observable/* the second observable connected to this block */,
       Join.propertiesType.params[this.properties.fi1].func,
       Join.propertiesType[1].types[this.properties.fi2].func,
       Join.propertiesType[2].types[this.properties.fi3].func,
     );
   }
   public toString = ({}) => {
-    return '.join(' + this.graphInputs[1].toString()
+    return '.join(' + this.graphInputs[1].node.data.toString()
       + ', ' + Join.propertiesType[1].types[this.properties.fi3].text
       + ', ' + Join.propertiesType[2].types[this.properties.fi3].text
       + ', ' + Join.propertiesType[3].types[this.properties.fi3].text

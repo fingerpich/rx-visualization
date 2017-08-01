@@ -22,7 +22,7 @@ export class WindowWithCount extends RxNode {
   public graphInputs = [];
 
   public runner = ({count, skip}) => {
-    return this.graphInputs[0].windowWithCount(count, skip);
+    return this.graphInputs[0].observable.windowWithCount(count, skip);
   }
   public toString = () => {
     const {count, skip} = this.properties;

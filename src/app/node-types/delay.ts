@@ -16,7 +16,7 @@ export class Delay extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].delay(new Date(Date.now() + this.properties.delay));
+    return this.graphInputs[0].observable.delay(new Date(Date.now() + this.properties.delay));
   }
   public toString = ({}) => {
     return '.delay(new Date(Date.now() + ' + this.properties.delay + '))';

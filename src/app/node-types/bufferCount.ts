@@ -22,7 +22,7 @@ export class BufferCount extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].bufferCount(this.properties.count, this.properties.skip);
+    return this.graphInputs[0].observable.bufferCount(this.properties.count, this.properties.skip);
   }
 
   public toString = () => {

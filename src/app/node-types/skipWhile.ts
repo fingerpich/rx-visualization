@@ -21,7 +21,7 @@ export class SkipWhile extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].skipWhile(SkipWhile.propertiesType.params[this.properties.whileFilter].func);
+    return this.graphInputs[0].observable.skipWhile(SkipWhile.propertiesType.params[this.properties.whileFilter].func);
   }
   public toString = () => {
     return '.skipWhile(' + SkipWhile.propertiesType.params[this.properties.whileFilter].text + ')';

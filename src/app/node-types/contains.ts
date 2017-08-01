@@ -17,7 +17,7 @@ export class Contains extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].contains(this.properties.item);
+    return this.graphInputs[0].observable.contains(this.properties.item);
   }
   public toString = () => {
     return '.contains(' + this.properties.item + ')';

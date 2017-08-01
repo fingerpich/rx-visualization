@@ -35,7 +35,7 @@ export class GroupBy extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].map(
+    return this.graphInputs[0].observable.map(
       GroupBy.propertiesType.params[this.properties.fi1].func,
       GroupBy.propertiesType[1].types[this.properties.fi2].func);
   }

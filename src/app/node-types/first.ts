@@ -22,7 +22,7 @@ export class First extends RxNode {
   };
   public graphInputs = [];
   public runner = () => {
-    return this.graphInputs[0].first(First.propertiesType.params[this.properties.filter].func);
+    return this.graphInputs[0].observable.first(First.propertiesType.params[this.properties.filter].func);
   }
   public toString = () => {
     return '.first(' + First.propertiesType.params[this.properties.filter].text + ')';

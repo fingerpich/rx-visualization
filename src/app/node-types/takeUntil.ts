@@ -14,8 +14,8 @@ export class TakeUntil extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].takeUntil(
-      this.graphInputs[1]/* the second observable connected to this block */,
+    return this.graphInputs[0].observable.takeUntil(
+      this.graphInputs[1].observable/* the second observable connected to this block */,
     );
   }
   public toString = () => {

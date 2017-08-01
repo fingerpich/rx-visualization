@@ -13,7 +13,7 @@ export class RefCount extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].refCount();
+    return this.graphInputs[0].observable.refCount();
   }
   public toString = () => {
     return '.refCount()';

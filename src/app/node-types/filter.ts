@@ -20,7 +20,7 @@ export class Filter extends RxNode {
   };
   public graphInputs = [];
   public runner = () => {
-    return this.graphInputs[0].filter(Filter.propertiesType.params[this.properties.filter].func);
+    return this.graphInputs[0].observable.filter(Filter.propertiesType.params[this.properties.filter].func);
   }
   public toString = () => {
     return '.filter(' + Filter.propertiesType.params[this.properties.filter].text + ')';

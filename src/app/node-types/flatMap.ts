@@ -23,7 +23,7 @@ export class FlatMap extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].flatMap(FlatMap.propertiesType.params[this.properties.observabler].func);
+    return this.graphInputs[0].observable.flatMap(FlatMap.propertiesType.params[this.properties.observabler].func);
   }
   public toString = () => {
     return '.flatMap(' + FlatMap.propertiesType.params[this.properties.observabler].text + ')';

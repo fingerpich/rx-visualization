@@ -37,5 +37,5 @@ export class SampleFunctions {
   public static TRANS3 = new SampleFunction('transform1', (x) => x.take(2).repeat(3), '(x) => x.take(2).repeat(3)');
   public static SCAN_SUM = new SampleFunction('scanSum', (acc, x) => acc + x.x, '(acc,x) => acc + x');
   public static SCAN_TIME = new SampleFunction('scanTime', (acc, x) => acc * x.x, '(acc,x) => acc * x');
-  public static ZIP1 = new SampleFunction('scanTime', (...args) => args.join(','), '(...args) => args.join(",")');
+  public static ZIP1 = new SampleFunction('scanTime', (...args) => args.map(x => x.x).join(','), '(...args) => args.join(",")');
 }

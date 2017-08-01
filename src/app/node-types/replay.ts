@@ -32,7 +32,7 @@ export class Replay extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].replay(Replay.propertiesType.params[this.properties.transFunc].func,
+    return this.graphInputs[0].observable.replay(Replay.propertiesType.params[this.properties.transFunc].func,
       this.properties.bufferSize, this.properties.window, this.properties.scheduler);
   }
   public toString = () => {

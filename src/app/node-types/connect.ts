@@ -15,7 +15,7 @@ export class Connect extends RxNode {
 
   public runner = () => {
     return this.nodeClick.subscribe(() => {
-      this.graphInputs[0].connect();
+      this.graphInputs[0].observable.connect();
     });
   }
   public toString = () => {

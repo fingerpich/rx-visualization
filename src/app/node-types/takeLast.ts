@@ -18,7 +18,7 @@ export class TakeLast extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].takeLast(this.properties.itemCount);
+    return this.graphInputs[0].observable.takeLast(this.properties.itemCount);
   }
   public toString = ({}) => {
     return '.takeLast(' + this.properties.itemCount + '))';

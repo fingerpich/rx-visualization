@@ -19,7 +19,7 @@ export class All extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].every(All.propertiesType.params[this.properties.filterCondition].func);
+    return this.graphInputs[0].observable.every(All.propertiesType.params[this.properties.filterCondition].func);
   }
   public toString = () => {
     return '.every(' + All.propertiesType.params[this.properties.filterCondition].text + ')';

@@ -18,7 +18,7 @@ export class Pluck extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].pluck(this.properties.propName);
+    return this.graphInputs[0].observable.pluck(this.properties.propName);
   }
   public toString = () => {
     return '.pluck(' + this.properties.propName + '))';

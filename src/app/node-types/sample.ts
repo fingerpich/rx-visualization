@@ -18,7 +18,7 @@ export class Sample extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].sample(this.properties.periodicTimeIntervals);
+    return this.graphInputs[0].observable.sample(this.properties.periodicTimeIntervals);
   }
   public toString = ({}) => {
     return '.sample(' + this.properties.periodicTimeIntervals + '))';

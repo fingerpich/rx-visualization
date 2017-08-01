@@ -17,7 +17,7 @@ export class Debounce extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].debounce(this.properties.debounceTime);
+    return this.graphInputs[0].observable.debounce(this.properties.debounceTime);
   }
   public toString = () => {
     return '.debounce(' + this.properties.debounceTime + ')';

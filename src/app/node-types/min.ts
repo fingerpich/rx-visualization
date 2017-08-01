@@ -14,7 +14,7 @@ export class Min extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].min();
+    return this.graphInputs[0].observable.min();
   }
   public toString = () => {
     return '.min()';

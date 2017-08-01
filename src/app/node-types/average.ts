@@ -12,7 +12,7 @@ export class Average extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].average();
+    return this.graphInputs[0].observable.average();
   }
   public toString = () => {
     return '.average()';

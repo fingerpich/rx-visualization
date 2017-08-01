@@ -16,7 +16,7 @@ export class ElementAt extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].elementAt(this.properties.index);
+    return this.graphInputs[0].observable.elementAt(this.properties.index);
   }
   public toString = () => {
     return '.elementAt(' + this.properties.index + ')';

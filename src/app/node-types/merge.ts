@@ -14,9 +14,9 @@ export class Merge extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return Observable.merge(...this.graphInputs);
+    return Observable.merge(...this.graphInputs.map(gi => gi.observable));
   }
   public toString = ({}) => {
-    return 'Observable.mergeDelayError(' + this.graphInputs.join(',') + ')';
+    return 'Observable.mergeDelayError(' + this.graphInputs.map(gi => gi.node.data.title).join(',') + ')';
   }
 }

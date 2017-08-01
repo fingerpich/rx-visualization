@@ -19,7 +19,7 @@ export class Retry extends RxNode {
   public graphInputs = [];
 
   public runner = ({retryCount}) => {
-    return this.graphInputs[0].retry(retryCount);
+    return this.graphInputs[0].observable.retry(retryCount);
   }
   public toString = ({}) => {
     return '.retry(' + this.properties.retryCount + ');';

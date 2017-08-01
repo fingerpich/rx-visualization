@@ -24,7 +24,7 @@ export class Last extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].last(Last.propertiesType.params[this.properties.filter].func);
+    return this.graphInputs[0].observable.last(Last.propertiesType.params[this.properties.filter].func);
   }
   public toString = () => {
     return '.last(' + Last.propertiesType.params[this.properties.filter].text + ')';

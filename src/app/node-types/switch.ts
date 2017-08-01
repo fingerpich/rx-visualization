@@ -14,9 +14,9 @@ export class Switch extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].switch();
+    return this.graphInputs[0].observable.switch();
   }
-  public static toString = () => {
+  public toString = () => {
     return '.switch()';
   }
 }

@@ -14,7 +14,7 @@ export class Max extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].max();
+    return this.graphInputs[0].observable.max();
   }
   public toString = () => {
     return '.max()';

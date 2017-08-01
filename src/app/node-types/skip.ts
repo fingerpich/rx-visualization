@@ -18,7 +18,7 @@ export class Skip extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].skip(this.properties.itemCount);
+    return this.graphInputs[0].observable.skip(this.properties.itemCount);
   }
   public toString = ({}) => {
     return '.skip(' + this.properties.itemCount + '))';
