@@ -13,10 +13,16 @@
     border: 1px solid #ddd;
     margin: 2px;
     text-align: center;
+    color:#0af;
   }
 }
 .methodInput{
-
+  select{
+    border:0;
+    outline:0;
+    color:#0af;
+    border-bottom: 1px solid #0af;
+  }
 }
 .listInput{
   .addButton{

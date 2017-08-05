@@ -11,16 +11,16 @@ export class GroupBy extends RxNode {
   protected static minInput = 1;
 
   protected static propertiesType = new PropertyType('object', PropertyTypeEnum.Object, [
-    new PropertyType('ObKey', PropertyTypeEnum.Method, [
+    new PropertyType('keySelector', PropertyTypeEnum.Method, [
       SampleFunctions.GET_X,
       SampleFunctions.GET_CODE,
     ], 'a function that accepts an item from the source Observable and returns its key'),
-    new PropertyType('ObKey', PropertyTypeEnum.Method, [
+    new PropertyType('elementSelector', PropertyTypeEnum.Method, [
       SampleFunctions.GET_X,
       SampleFunctions.GET_CODE,
     ], 'a function that accepts an item from the source Observable and returns an item to be ' +
       'emitted in its place by one of the resulting Observables'),
-    new PropertyType('ObKey', PropertyTypeEnum.Method, [
+    new PropertyType('durationSelector', PropertyTypeEnum.Method, [
       SampleFunctions.TIMEOUT,
       SampleFunctions.NOTHING,
     ], 'a function used to compare two keys for identity (that is, whether items with two keys ' +
@@ -28,21 +28,23 @@ export class GroupBy extends RxNode {
   ], '');
 
   public properties = {
-    fi1: 0,
-    fi2: 0,
-    fi3: 0,
+    keySelector: 0,
+    elementSelector: 0,
+    durationSelector: 0,
   };
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.map(
-      GroupBy.propertiesType.params[this.properties.fi1].func,
-      GroupBy.propertiesType[1].types[this.properties.fi2].func);
+    return this.graphInputs[0].observable.groupBy(
+      GroupBy.propertiesType.params[0].params[this.properties.keySelector].func,
+      GroupBy.propertiesType.params[1].params[this.properties.elementSelector].func,
+      GroupBy.propertiesType.params[2].params[this.properties.durationSelector].func);
   }
   public toString = () => {
-    return '.map(' +
-      GroupBy.propertiesType.params[this.properties.fi1].text + ', ' +
-      GroupBy.propertiesType.params[this.properties.fi1].text +
+    return '.groupBy(' +
+      GroupBy.propertiesType.params[0].params[this.properties.keySelector].text + ', ' +
+      GroupBy.propertiesType.params[1].params[this.properties.elementSelector].text + ', ' +
+      GroupBy.propertiesType.params[2].params[this.properties.durationSelector].text +
       ')';
   }
 }
