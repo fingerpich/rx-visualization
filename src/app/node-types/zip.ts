@@ -17,16 +17,16 @@ export class Zip extends RxNode {
   ], '');
 
   public properties = {
-    fi: 0
+    zipFunction: 0
   };
   public graphInputs = [];
 
   public runner = ({}) => {
-    return Observable.zip(...this.graphInputs.map(gi => gi.observable), Zip.propertiesType.params[this.properties.fi].func);
+    return Observable.zip(...this.graphInputs.map(gi => gi.observable), Zip.propertiesType.params[this.properties.zipFunction].func);
   }
   public toString = ({}) => {
     return 'Observable.zip(' +
       this.graphInputs.map(gi => gi.node.data.title).join(',') + ', ' +
-      Zip.propertiesType.params[this.properties.fi].text + ')';
+      Zip.propertiesType.params[this.properties.zipFunction].text + ')';
   }
 }

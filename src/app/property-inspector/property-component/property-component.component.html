@@ -1,7 +1,7 @@
 <!--number type-->
 <div *ngIf="propertyType.isNumber()" class="simpleInput">
   <b>{{propertyType.name}}</b>
-  <input [placeholder]="propertyType.name" [title]="propertyType.description" type="number" [(ngModel)]="properties[propertyType.name]" (change)="dataChanged()">
+  <input [placeholder]="propertyType.name" [title]="propertyType.description" [(ngModel)]="properties[propertyType.name]" (change)="dataChanged()" type="number">
 </div>
 
 <!--string type-->
