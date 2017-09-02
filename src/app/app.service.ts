@@ -11,8 +11,8 @@ export class AppService {
   private itemSubscriptor;
   private resultsArray = [];
   private resultTimeouts = [];
-  private nodesList;
-  private edgeList;
+  private nodesList = [];
+  private edgeList = [];
 
   public removeItemSubject;
 
@@ -87,16 +87,17 @@ export class AppService {
     this.itemSubscriptor.next(resultsArray);
   }
 
-  public getInitialData(width, height) {
-    const xLoc = width / 2 - 25;
+  public getData() {
+    return {edges: this.edgeList, nodes: this.nodesList};
+  }
+  public getDefaultSampleData() {
+    const xLoc = window.innerWidth / (window.innerWidth < 600 ? 2 : 3);
     const yLoc = 100;
     const nodes = [
-      {id: 0, x: xLoc, y: yLoc, data: new NodeTypes.Create()},
-      {id: 1, x: xLoc, y: yLoc + 200, data: new NodeTypes.Subscribe()}
+      {id: 0, x: xLoc, y: yLoc, node_type: 'Create', properties: {list: [{time: 0, value: 1}]}},
+      {id: 1, x: xLoc, y: yLoc + 200, node_type: 'Subscribe', properties: {}}
     ];
-    const edges = [{source: nodes[0], target: nodes[1]}];
-    this.nodesList = nodes;
-    this.edgeList = edges;
+    const edges = [{source: 0, target: 1}];
     return {edges, nodes};
   }
 

@@ -24,6 +24,8 @@ export class ContainerComponent implements OnInit {
       if (data) {
         const jsonObj = JSON.parse(data);
         this.sceneComponent.deserialize(jsonObj);
+      } else {
+        this.sceneComponent.deserialize(this.appService.getDefaultSampleData());
       }
     });
   }

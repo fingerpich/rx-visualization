@@ -58,8 +58,9 @@ export class GraphCreator {
     }
   };
 
-  constructor(svg, nodes, edges , private appService: AppService) {
+  constructor(svg, private appService: AppService) {
     const thisGraph = this;
+    const {nodes, edges} = this.appService.getData();
     this.nodes = nodes;
     this.edges = edges;
     this.svg = svg;
@@ -170,7 +171,6 @@ export class GraphCreator {
 
   public deserialize = (jsonObj) => {
     const thisGraph = this;
-    // const jsonObj = JSON.parse(jsonText);
     thisGraph.deleteGraph(true);
     const nodesData = jsonObj.nodes.map(node => {
       node.data = new (NodeTypes[node.node_type])();

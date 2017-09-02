@@ -22,7 +22,6 @@ export class SceneComponent implements OnInit {
       const el: HTMLElement = this.el.nativeElement;
       const width = el.clientWidth;
       const height = el.clientHeight;
-      const {nodes, edges} = this.appService.getInitialData(width, height);
 
       /** MAIN SVG **/
       const root = d3.select(el);
@@ -30,7 +29,7 @@ export class SceneComponent implements OnInit {
         .attr('width', width)
         .attr('height', height);
 
-      this.graphEditor = new GraphCreator(svg, nodes, edges, this.appService);
+      this.graphEditor = new GraphCreator(svg, this.appService);
       this.graphEditor.updateGraph();
 
       // listen for resize
