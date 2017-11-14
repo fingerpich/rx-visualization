@@ -1,4 +1,4 @@
-import { Subject} from 'rxjs/Rx';
+import { Subject} from 'rxjs/Subject';
 import {RxNode} from './rxNode';
 export class Connect extends RxNode {
   protected static title = 'Connect';

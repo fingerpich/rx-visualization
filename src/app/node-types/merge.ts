@@ -1,4 +1,4 @@
-import {Observable} from 'rxjs/Rx';
+import {Observable} from 'rxjs/Observable';
 import {RxNode} from './rxNode';
 
 export class Merge extends RxNode {

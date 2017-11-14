@@ -1,4 +1,4 @@
-import {Observable} from 'rxjs/Rx';
+import {Observable} from 'rxjs/Observable';
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';

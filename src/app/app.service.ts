@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Subject, Observable} from 'rxjs/Rx';
+import {Subject} from 'rxjs/Subject';
 import * as NodeTypes from './node-types';
 import {GraphCreator} from './scene/graph-creator';
 

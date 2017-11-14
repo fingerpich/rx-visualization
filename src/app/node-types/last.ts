@@ -1,4 +1,3 @@
-import {Observable} from 'rxjs/Rx';
 import {RxNode} from './rxNode';
 import {SampleFunctions} from './sample-functions';
 import {PropertyType} from './property-type';

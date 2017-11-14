@@ -1,4 +1,4 @@
-import {Observable, Subject} from 'rxjs/Rx';
+import {Subject} from 'rxjs/Subject';
 import {RxNode} from './rxNode';
 
 export class FromEvent extends RxNode {

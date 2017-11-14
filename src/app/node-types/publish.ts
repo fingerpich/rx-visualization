@@ -1,4 +1,3 @@
-import {Observable} from 'rxjs/Rx';
 import {RxNode} from './rxNode';
 
 export class Publish extends RxNode {
