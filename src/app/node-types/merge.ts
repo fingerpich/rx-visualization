@@ -1,6 +1,6 @@
 import {Observable} from 'rxjs/Observable';
 import {RxNode} from './rxNode';
-import 'rxjs/add/operator/merge';
+import 'rxjs/add/observable/merge';
 
 export class Merge extends RxNode {
   protected static title = 'Merge';

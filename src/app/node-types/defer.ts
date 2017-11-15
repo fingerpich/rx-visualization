@@ -2,6 +2,8 @@ import {Observable} from 'rxjs/Observable';
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
+import 'rxjs/add/observable/defer';
+import 'rxjs/add/observable/of';
 
 export class Defer extends RxNode {
   protected static title = 'Defer';
