@@ -1,4 +1,5 @@
 import {RxNode} from './rxNode';
+import 'rxjs/add/operator/map';
 
 export class Subscribe extends RxNode {
   protected static title = 'Subscribe';

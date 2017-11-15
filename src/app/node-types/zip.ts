@@ -3,6 +3,7 @@ import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
+import 'rxjs/add/observable/zip';
 
 export class Zip extends RxNode {
   protected static title = 'Zip';

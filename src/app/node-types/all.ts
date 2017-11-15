@@ -2,6 +2,7 @@ import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
+import 'rxjs/add/operator/every';
 export class All extends RxNode {
   protected static title = 'All';
   protected static link = 'http://reactivex.io/documentation/operators/all.html';

@@ -1,6 +1,8 @@
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import 'rxjs/add/operator/elementAt';
+
 export class ElementAt extends RxNode {
   protected static title = 'ElementAt';
   protected static link = 'http://reactivex.io/documentation/operators/elementat.html';

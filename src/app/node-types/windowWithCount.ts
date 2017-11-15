@@ -2,6 +2,8 @@
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
+import 'rxjs/add/operator/windowCount';
+
 export class WindowWithCount extends RxNode {
   protected static title = 'WindowWithCount';
   protected static link = 'http://reactivex.io/documentation/operators/window.html';

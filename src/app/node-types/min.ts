@@ -1,4 +1,5 @@
 import {RxNode} from './rxNode';
+import 'rxjs/add/operator/min';
 
 export class Min extends RxNode {
   protected static title = 'Min';

@@ -2,6 +2,8 @@ import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
+import 'rxjs/add/operator/scan';
+
 export class Scan extends RxNode {
   protected static title = 'Scan';
   protected static link = 'http://reactivex.io/documentation/operators/scan.html';

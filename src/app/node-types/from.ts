@@ -2,6 +2,7 @@ import {Observable} from 'rxjs/Observable';
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
+import 'rxjs/add/observable/from';
 
 export class From extends RxNode {
   protected static title = 'From';

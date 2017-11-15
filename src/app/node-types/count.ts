@@ -2,6 +2,8 @@ import {RxNode} from './rxNode';
 import {SampleFunctions} from './sample-functions';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import 'rxjs/add/operator/count';
+
 export class Count extends RxNode {
   protected static title = 'Count';
   protected static link = 'http://reactivex.io/documentation/operators/Count.html';

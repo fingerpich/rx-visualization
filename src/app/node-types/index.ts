@@ -4,7 +4,6 @@
  * import all node types.
  */
 export * from './all';
-export * from './average';
 export * from './bufferCount';
 export * from './catch';
 export * from './connect';

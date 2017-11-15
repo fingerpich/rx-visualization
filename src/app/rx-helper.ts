@@ -105,7 +105,6 @@ export class RxHelper {
       name: 'Mathematical and Aggregate Operators',
       desc: 'Operators that operate on the entire sequence of items emitted by an Observable',
       list: [
-        NodeTypes.Average,
         // NodeTypes.Concat,
         NodeTypes.Count,
         NodeTypes.Max,

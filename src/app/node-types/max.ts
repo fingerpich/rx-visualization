@@ -1,4 +1,5 @@
 import {RxNode} from './rxNode';
+import 'rxjs/add/operator/max';
 
 export class Max extends RxNode {
   protected static title = 'Max';

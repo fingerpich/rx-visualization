@@ -1,4 +1,5 @@
 import {RxNode} from './rxNode';
+import 'rxjs/add/operator/publish';
 
 export class Publish extends RxNode {
   protected static title = 'Publish';

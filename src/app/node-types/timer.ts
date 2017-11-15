@@ -2,6 +2,7 @@ import {Observable} from 'rxjs/Observable';
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import 'rxjs/add/observable/timer';
 
 export class Timer extends RxNode {
   protected static title = 'Timer';

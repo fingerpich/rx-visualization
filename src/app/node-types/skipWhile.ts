@@ -2,6 +2,8 @@ import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
 import {SampleFunctions} from './sample-functions';
+import 'rxjs/add/operator/skipWhile';
+
 export class SkipWhile extends RxNode {
   protected static title = 'SkipWhile';
   protected static link = 'http://reactivex.io/documentation/operators/SkipWhile.html';

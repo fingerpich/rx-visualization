@@ -1,4 +1,6 @@
 import {RxNode} from './rxNode';
+import 'rxjs/add/operator/distinct';
+
 export class Distinct extends RxNode {
   protected static title = 'Distinct';
   protected static link = 'http://reactivex.io/documentation/operators/distinct.html';

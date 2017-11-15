@@ -1,6 +1,8 @@
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import 'rxjs/add/operator/delay';
+
 export class Delay extends RxNode {
   protected static title = 'Delay';
   protected static link = 'http://reactivex.io/documentation/operators/delay.html';

@@ -2,6 +2,7 @@ import {RxNode} from './rxNode';
 import {SampleFunctions} from './sample-functions';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import 'rxjs/add/operator/filter';
 
 export class First extends RxNode {
   protected static title = 'First';

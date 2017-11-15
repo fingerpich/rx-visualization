@@ -1,4 +1,6 @@
 import {RxNode} from './rxNode';
+import 'rxjs/add/operator/catch';
+
 export class Catch extends RxNode {
   protected static title = 'Catch';
   protected static link = 'http://reactivex.io/documentation/operators/catch.html';

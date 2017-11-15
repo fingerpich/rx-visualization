@@ -1,4 +1,6 @@
 import {RxNode} from './rxNode';
+import 'rxjs/add/operator/skipUntil';
+
 export class SkipUntil extends RxNode {
   protected static title = 'SkipUntil';
   protected static link = 'http://reactivex.io/documentation/operators/SkipUntil.html';

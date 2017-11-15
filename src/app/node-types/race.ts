@@ -1,5 +1,6 @@
 import {Observable} from 'rxjs/Observable';
 import {RxNode} from './rxNode';
+import 'rxjs/add/operator/race';
 
 export class Race extends RxNode {
   protected static title = 'Race';

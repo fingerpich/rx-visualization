@@ -1,6 +1,8 @@
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import 'rxjs/add/operator/skipLast';
+
 export class SkipLast extends RxNode {
   protected static title = 'SkipLast';
   protected static link = 'http://reactivex.io/documentation/operators/skiplast.html';

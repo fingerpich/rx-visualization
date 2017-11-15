@@ -2,6 +2,8 @@ import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
+import 'rxjs/add/operator/filter';
+
 export class Filter extends RxNode {
   protected static title = 'Filter';
   protected static link = 'http://reactivex.io/documentation/operators/filter.html';

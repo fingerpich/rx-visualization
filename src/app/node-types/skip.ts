@@ -1,6 +1,7 @@
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
+import 'rxjs/add/operator/skip';
 
 export class Skip extends RxNode {
   protected static title = 'Skip';

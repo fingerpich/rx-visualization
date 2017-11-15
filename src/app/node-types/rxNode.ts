@@ -1,5 +1,5 @@
 import {PropertyType} from './property-type';
-import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 export class RxNode {
   protected static title: string;

@@ -1,4 +1,6 @@
 import {RxNode} from './rxNode';
+import 'rxjs/add/operator/ignoreElements';
+
 export class IgnoreElements extends RxNode {
   protected static title = 'IgnoreElements';
   protected static link = 'http://reactivex.io/documentation/operators/ignoreElements.html';

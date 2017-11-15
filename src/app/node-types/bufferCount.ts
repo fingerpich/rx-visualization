@@ -1,6 +1,7 @@
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
+import 'rxjs/add/operator/bufferCount';
 
 export class BufferCount extends RxNode {
   protected static title = 'BufferCount';

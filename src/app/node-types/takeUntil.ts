@@ -1,4 +1,6 @@
 import {RxNode} from './rxNode';
+import 'rxjs/add/operator/takeUntil';
+
 export class TakeUntil extends RxNode {
   protected static title = 'TakeUntil';
   protected static link = 'http://reactivex.io/documentation/operators/TakeUntil.html';

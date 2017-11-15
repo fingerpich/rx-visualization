@@ -1,6 +1,8 @@
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import 'rxjs/add/operator/startWith';
+
 export class StartWith extends RxNode {
   protected static title = 'StartWith';
   protected static link = 'http://reactivex.io/documentation/operators/startwith.html';

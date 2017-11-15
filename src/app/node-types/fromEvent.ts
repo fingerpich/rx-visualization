@@ -1,5 +1,6 @@
 import {Subject} from 'rxjs/Subject';
 import {RxNode} from './rxNode';
+import 'rxjs/add/observable/fromEvent';
 
 export class FromEvent extends RxNode {
   protected static title = 'FromEvent';

@@ -2,6 +2,7 @@ import {Observable} from 'rxjs/Observable';
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
+import 'rxjs/add/observable/range';
 
 export class Range extends RxNode {
   protected static title = 'Range';

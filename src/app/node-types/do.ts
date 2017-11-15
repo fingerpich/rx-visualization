@@ -1,8 +1,8 @@
-import {Observer} from 'rxjs';
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
+import 'rxjs/add/operator/do';
 
 export class Do extends RxNode {
   protected static title = 'Do';

@@ -2,6 +2,8 @@ import {RxNode} from './rxNode';
 import {SampleFunctions} from './sample-functions';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
+import 'rxjs/add/operator/last';
+
 
 export class Last extends RxNode {
   protected static title = 'Last';

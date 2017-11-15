@@ -2,6 +2,8 @@ import {RxNode} from './rxNode';
 import {SampleFunctions} from './sample-functions';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import 'rxjs/add/operator/map';
+
 export class Map extends RxNode {
   protected static title = 'Map';
   protected static link = 'http://reactivex.io/documentation/operators/map.html';

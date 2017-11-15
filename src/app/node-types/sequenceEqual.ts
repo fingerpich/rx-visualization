@@ -1,5 +1,6 @@
-
 import {RxNode} from './rxNode';
+import 'rxjs/add/operator/sequenceEqual';
+
 export class SequenceEqual extends RxNode {
   protected static title = 'SequenceEqual';
   protected static link = 'http://reactivex.io/documentation/operators/sequenceEqual.html';

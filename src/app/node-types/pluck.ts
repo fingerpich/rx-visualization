@@ -1,6 +1,7 @@
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import 'rxjs/add/operator/pluck';
 
 export class Pluck extends RxNode {
   protected static title = 'Pluck';

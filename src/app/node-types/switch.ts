@@ -1,4 +1,6 @@
 import {RxNode} from './rxNode';
+import 'rxjs/add/operator/switch';
+
 export class Switch extends RxNode {
   protected static title = 'Switch';
   protected static link = 'http://reactivex.io/documentation/operators/switch.html';
