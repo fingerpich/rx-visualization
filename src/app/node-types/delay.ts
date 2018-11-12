@@ -1,9 +1,10 @@
+import { delay } from 'rxjs/operators';
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+
 export class Delay extends RxNode {
   protected static title = 'Delay';
-  protected static link = 'http://reactivex.io/documentation/operators/delay.html';
   protected static desc = 'shift the emissions from an Observable forward in time by a particular amount';
   protected static maxInput = 1;
   protected static minInput = 1;
@@ -16,9 +17,9 @@ export class Delay extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].observable.delay(new Date(Date.now() + this.properties.delay));
+    return this.graphInputs[0].observable.pipe(delay(this.properties.delay));
   }
   public toString = ({}) => {
-    return '.delay(new Date(Date.now() + ' + this.properties.delay + '))';
+    return `.pipe(delay(${this.properties.delay}))`;
   }
 }

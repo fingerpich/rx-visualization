@@ -1,11 +1,10 @@
-import {Observable} from 'rxjs/Observable';
+import {from, of} from 'rxjs';
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 
 export class From extends RxNode {
   protected static title = 'From';
-  protected static link = 'http://reactivex.io/documentation/operators/from.html';
   protected static desc = 'convert various other objects and data types into Observables';
   protected static maxInput = 0;
   protected static minInput = 0;
@@ -22,9 +21,9 @@ export class From extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return Observable.from(this.properties.list);
+    return from(of(this.properties.list));
   }
   public toString = () => {
-    return 'Observable.from(' + this.properties.list.join(',') + ')';
+    return `from(${this.properties.list.join(',')})`;
   }
 }

@@ -1,7 +1,8 @@
 import {Component, OnInit, ElementRef, Renderer} from '@angular/core';
 import {GraphCreator} from './graph-creator';
 import {AppService} from '../app.service';
-declare var d3: any;
+// declare var d3: any;
+import * as d3 from 'd3';
 
 @Component({
   selector: 'rxstudio-scene',
@@ -29,7 +30,11 @@ export class SceneComponent implements OnInit {
         .attr('width', width)
         .attr('height', height);
 
-      this.graphEditor = new GraphCreator(svg, this.appService);
+      try {
+        this.graphEditor = new GraphCreator(svg, this.appService);
+      } catch (err) {
+        console.error('error in creating graph editor : ' , err);
+      }
       this.graphEditor.updateGraph();
 
       // listen for resize

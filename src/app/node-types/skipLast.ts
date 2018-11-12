@@ -3,7 +3,6 @@ import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
 export class SkipLast extends RxNode {
   protected static title = 'SkipLast';
-  protected static link = 'http://reactivex.io/documentation/operators/skiplast.html';
   protected static desc = 'Suppress the final n items emitted by an Observable';
   protected static maxInput = 1;
   protected static minInput = 1;

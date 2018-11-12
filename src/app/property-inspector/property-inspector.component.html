@@ -4,7 +4,7 @@
   <div *ngIf="selectedItem.data">
     <div class="operatorInfo">
       <button (click)="removeSelectedItem()" title="remove selected item" class="remove"><i class="material-icons">delete</i></button>
-      <a [href]="selectedItem.data.link" target="_blank"><strong>{{selectedItem.data.title}}</strong></a>
+      <a [href]="getLink()" target="_blank"><strong>{{selectedItem.data.title}}</strong></a>
       <p>{{selectedItem.data.desc}}</p>
     </div>
     <div class="properiesEditor" *ngIf="selectedItem.data.propertiesType">

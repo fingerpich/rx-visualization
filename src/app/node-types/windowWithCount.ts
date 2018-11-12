@@ -4,7 +4,6 @@ import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 export class WindowWithCount extends RxNode {
   protected static title = 'WindowWithCount';
-  protected static link = 'http://reactivex.io/documentation/operators/window.html';
   protected static desc = 'periodically subdivide items from an Observable into Observable windows and emit these' +
     ' windows rather than emitting the items one at a time';
   protected static maxInput = 1;

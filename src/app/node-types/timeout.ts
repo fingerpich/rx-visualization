@@ -5,7 +5,6 @@ import {SampleFunctions} from './sample-functions';
 
 export class Timeout extends RxNode {
   protected static title = 'Timeout';
-  protected static link = 'http://reactivex.io/documentation/operators/timeout.html';
   protected static desc = 'mirror the source Observable, but issue an error notification if a particular' +
     ' period of time elapses without any emitted items';
   protected static maxInput = 2;

@@ -1,11 +1,10 @@
-import {Observable} from 'rxjs/Observable';
+import {range} from 'rxjs';
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 
 export class Range extends RxNode {
   protected static title = 'Range';
-  protected static link = 'http://reactivex.io/documentation/operators/range.html';
   protected static desc = 'create an Observable that emits a particular range of sequential integers';
   protected static maxInput = 0;
   protected static minInput = 0;
@@ -22,9 +21,9 @@ export class Range extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return Observable.range(this.properties.start, this.properties.count);
+    return range(this.properties.start, this.properties.count);
   }
   public toString = () => {
-    return 'Observable.range(' + this.properties.start + ', ' + this.properties.count + ')';
+    return 'range(${this.properties.start}, ${this.properties.count})';
   }
 }

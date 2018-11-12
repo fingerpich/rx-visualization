@@ -4,7 +4,6 @@ import {PropertyTypeEnum} from './propertyType.enum';
 
 export class Windowed extends RxNode {
   protected static title = 'Windowed';
-  protected static link = 'http://reactivex.io/documentation/operators/backpressure.html';
   protected static desc = 'allows the ControlledObservable to run somewhat ahead of the observer from time to time';
   protected static maxInput = 1;
   protected static minInput = 1;

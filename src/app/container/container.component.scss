@@ -1,8 +1,4 @@
 @import '../../common';
-$headColor:#746;
-$rxColor:#ec0c8e;
-$borderColor:#eee;
-$backColor:#fff;
 
 .app{
   height:100%;
@@ -10,11 +6,11 @@ $backColor:#fff;
   overflow: hidden;
 
   .header{
-    background: $primaryColor;;
+    background: $headColor;;
     text-align: right;
     button{
       border: none;
-      background: $primaryColor;
+      background: $headColor;
       outline: none;
       color: #ffffff;
       font-weight: bold;
@@ -26,7 +22,7 @@ $backColor:#fff;
         font-size:inherit;
       }
       &:hover{
-        background: lighten($primaryColor,10%);
+        background: lighten($headColor,10%);
       }
     }
   }
@@ -51,6 +47,16 @@ $backColor:#fff;
         right:0;
         background: none;
         color: $primaryColor;
+        margin: 1rem;
+        width: 3rem;
+        height: 3rem;
+        padding: 0;
+        i{
+          font-size: 3rem;
+        }
+        &:hover{
+          color:lighten($primaryColor, 10%)
+        }
       }
       &.add{
         right:15px;

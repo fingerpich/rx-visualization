@@ -1,7 +1,7 @@
 import {RxNode} from './rxNode';
+
 export class Catch extends RxNode {
   protected static title = 'Catch';
-  protected static link = 'http://reactivex.io/documentation/operators/catch.html';
   protected static desc = 'recover from an onError notification by continuing the sequence without error';
   protected static maxInput = 1;
   protected static minInput = 1;
@@ -17,6 +17,6 @@ export class Catch extends RxNode {
     });
   }
   public toString = ({}) => {
-    return `.catch((err)=>{return 'err:'+err;});`;
+    return `.catch((err)=>{return 'err:' + err;});`;
   }
 }

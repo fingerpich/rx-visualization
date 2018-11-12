@@ -2,7 +2,7 @@
 :host{
 
   border-top: 1px solid #f1f1f1;
-  padding: 10px;
+  padding: 1.6rem;
 
   .notSelected{
     color:#666;
@@ -23,7 +23,8 @@
   p{
     font-size: 13px;
     color: #444;
-    margin: 0 auto 1rem;
+    margin: 0 0 1rem;
+    max-width: 300px;
   }
   a{
     text-decoration: underline;

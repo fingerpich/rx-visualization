@@ -4,7 +4,6 @@ import {PropertyType} from './property-type';
 
 export class Pluck extends RxNode {
   protected static title = 'Pluck';
-  protected static link = 'http://reactivex.io/documentation/operators/map.html';
   protected static desc = 'It transforms the elements emitted by the source Observable by ' +
     'extracting a single named property from those elements and emitting that property in their place';
   protected static maxInput = 1;

@@ -4,7 +4,6 @@ import {PropertyTypeEnum} from './propertyType.enum';
 
 export class TakeLast extends RxNode {
   protected static title = 'TakeLast';
-  protected static link = 'http://reactivex.io/documentation/operators/takelast.html';
   protected static desc = 'emit only the final n items emitted by an Observable';
   protected static maxInput = 1;
   protected static minInput = 1;

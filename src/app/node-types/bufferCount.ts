@@ -4,7 +4,6 @@ import {PropertyTypeEnum} from './propertyType.enum';
 
 export class BufferCount extends RxNode {
   protected static title = 'BufferCount';
-  protected static link = 'http://reactivex.io/documentation/operators/buffer.html';
   protected static desc = 'periodically gather items from an Observable into bundles and ' +
     'emit these bundles rather than emitting the items one at a time';
   protected static maxInput = 1;
@@ -26,6 +25,6 @@ export class BufferCount extends RxNode {
   }
 
   public toString = () => {
-    return '.bufferCount(' + this.properties.count + ', ' + this.properties.skip + ')';
+    return `.bufferCount(${this.properties.count}, ${this.properties.skip})`;
   }
 }

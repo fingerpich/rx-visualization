@@ -2,9 +2,10 @@ import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
+import {filter} from 'rxjs/operators';
+
 export class Filter extends RxNode {
   protected static title = 'Filter';
-  protected static link = 'http://reactivex.io/documentation/operators/filter.html';
   protected static desc = 'transform the items emitted by an Observable by applying a function to each item';
   protected static maxInput = 1;
   protected static minInput = 1;
@@ -20,9 +21,9 @@ export class Filter extends RxNode {
   };
   public graphInputs = [];
   public runner = () => {
-    return this.graphInputs[0].observable.filter(Filter.propertiesType.params[this.properties.filter].func);
+    return this.graphInputs[0].observable.pipe(filter(Filter.propertiesType.params[this.properties.filter].func));
   }
   public toString = () => {
-    return '.filter(' + Filter.propertiesType.params[this.properties.filter].text + ')';
+    return `.pipe(filter(${Filter.propertiesType.params[this.properties.filter].text}))`;
   }
 }

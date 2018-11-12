@@ -2,10 +2,10 @@ import {RxNode} from './rxNode';
 import {SampleFunctions} from './sample-functions';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import {flatMap} from 'rxjs/operators';
 
 export class FlatMap extends RxNode {
   protected static title = 'FlatMap';
-  protected static link = 'http://reactivex.io/documentation/operators/flatmap.html';
   protected static desc = 'transform the items emitted by an Observable into Observables,' +
     ' then flatten the emissions from those into a single Observable';
   protected static maxInput = 1;
@@ -23,7 +23,7 @@ export class FlatMap extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.flatMap(FlatMap.propertiesType.params[this.properties.observabler].func);
+    return this.graphInputs[0].observable.pipe(flatMap(FlatMap.propertiesType.params[this.properties.observabler].func));
   }
   public toString = () => {
     return '.flatMap(' + FlatMap.propertiesType.params[this.properties.observabler].text + ')';

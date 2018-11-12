@@ -10,8 +10,8 @@ body{
 
 .git-link{
   width: 100px;
-  top: 23px;
-  left: -53px;
+  top: 25px;
+  left: -47px;
   background-color: white;
   font-size: 9px;
   text-align: center;
@@ -34,16 +34,16 @@ body{
 .project-name{
   margin: 0;
   text-align: center;
-  width: 40px;
+  width: 66px;
   padding: 40px 30px 15px;
-  left: -45px;
-  top: -32px;
+  left: -49px;
+  top: -26px;
   position: absolute;
   z-index: 10;
-  background: $primaryColor;
+  background: $headColor;
   font-size: 0.7rem;
   transform: rotate(-45deg);
-  color: #333;
+  color: #ffffff;
   text-shadow: 0 0 6px #fff;
 }
 

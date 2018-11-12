@@ -1,8 +1,8 @@
 import {RxNode} from './rxNode';
+import {map} from 'rxjs/operators';
 
 export class Subscribe extends RxNode {
   protected static title = 'Subscribe';
-  protected static link = 'http://reactivex.io/documentation/operators/subscribe.html';
   protected static desc = 'operate upon the emissions and notifications from an Observable';
   protected static maxInput = 1;
   protected static minInput = 1;
@@ -14,10 +14,10 @@ export class Subscribe extends RxNode {
 
   public runner = () => {
     // const thisObservable = this.graphInputs[0];
-    const thisObservable = this.graphInputs[0].observable.map((x) => {
+    const thisObservable = this.graphInputs[0].observable.pipe(map((x: any) => {
       x.subscribed = true;
       return x;
-    });
+    }));
     setTimeout(() => {
       this.rxo = this.rx.subscribe(
         function (x) {

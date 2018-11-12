@@ -4,7 +4,6 @@ import {PropertyType} from './property-type';
 
 export class Repeat extends RxNode {
   protected static title = 'Repeat';
-  protected static link = 'http://reactivex.io/documentation/operators/repeat.html';
   protected static desc = 'create an Observable that emits a particular item multiple times';
   protected static maxInput = 1;
   protected static minInput = 1;

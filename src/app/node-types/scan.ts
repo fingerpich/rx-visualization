@@ -4,7 +4,6 @@ import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
 export class Scan extends RxNode {
   protected static title = 'Scan';
-  protected static link = 'http://reactivex.io/documentation/operators/scan.html';
   protected static desc = 'Apply a function to each item emitted by an Observable, sequentially, and emit each successive value';
   protected static maxInput = 1;
   protected static minInput = 1;

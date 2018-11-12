@@ -4,7 +4,6 @@ import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
 export class Replay extends RxNode {
   protected static title = 'Replay';
-  protected static link = 'http://reactivex.io/documentation/operators/replay.html';
   protected static desc = 'Ensure that all observers see the same sequence of emitted items, ' +
     'even if they subscribe after the Observable has begun emitting items';
   protected static maxInput = 1;

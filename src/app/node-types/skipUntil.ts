@@ -1,7 +1,6 @@
 import {RxNode} from './rxNode';
 export class SkipUntil extends RxNode {
   protected static title = 'SkipUntil';
-  protected static link = 'http://reactivex.io/documentation/operators/SkipUntil.html';
   protected static desc = 'Discard items emitted by an Observable until a second Observable emits an item';
   protected static maxInput = 2;
   protected static minInput = 2;

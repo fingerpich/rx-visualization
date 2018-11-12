@@ -1,11 +1,10 @@
-import {Observable} from 'rxjs/Observable';
+import {timer} from 'rxjs';
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
 
 export class Timer extends RxNode {
   protected static title = 'Timer';
-  protected static link = 'http://reactivex.io/documentation/operators/timer.html';
   protected static desc = 'create an Observable that emits a particular item after a given delay';
   protected static maxInput = 0;
   protected static minInput = 0;
@@ -22,12 +21,9 @@ export class Timer extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return Observable.timer(this.properties.delay, this.properties.interval);
+    return timer(this.properties.delay, this.properties.interval);
   }
   public toString = () => {
-    return 'Observable.timer(' + this.properties.delay + ', ' + this.properties.interval + ')';
+    return `timer(${this.properties.delay}, ${this.properties.interval})`;
   }
-
-
-
 }

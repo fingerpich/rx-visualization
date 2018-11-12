@@ -2,10 +2,10 @@ import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
+import {forkJoin, of} from 'rxjs';
 
 export class Join extends RxNode {
-  protected static title = 'Join';
-  protected static link = 'http://reactivex.io/documentation/operators/join.html';
+  protected static title = 'forkJoin';
   protected static desc = 'combine items emitted by two Observables whenever an item from one Observable is emitted ' +
     'during a time window defined according to an item emitted by the other Observable';
   protected static maxInput = 2;

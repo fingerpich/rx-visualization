@@ -1,4 +1,4 @@
-import {Observable} from 'rxjs/Observable';
+import {zip, of} from 'rxjs';
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
@@ -6,7 +6,6 @@ import {SampleFunctions} from './sample-functions';
 
 export class Zip extends RxNode {
   protected static title = 'Zip';
-  protected static link = 'http://reactivex.io/documentation/operators/zip.html';
   protected static desc = 'combine the emissions of multiple Observables together via a specified function and emit ' +
     'single items for each combination based on the results of this function';
   protected static maxInput = 300;
@@ -22,11 +21,10 @@ export class Zip extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return Observable.zip(...this.graphInputs.map(gi => gi.observable), Zip.propertiesType.params[this.properties.zipFunction].func);
+    return zip(of(...this.graphInputs.map(gi => gi.observable), Zip.propertiesType.params[this.properties.zipFunction].func));
   }
   public toString = ({}) => {
-    return 'Observable.zip(' +
-      this.graphInputs.map(gi => gi.node.data.title).join(',') + ', ' +
-      Zip.propertiesType.params[this.properties.zipFunction].text + ')';
+    return `zip(of(' +
+      ${this.graphInputs.map(gi => gi.node.data.title).join(',')}, ${Zip.propertiesType.params[this.properties.zipFunction].text}))`;
   }
 }

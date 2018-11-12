@@ -1,5 +1,6 @@
 import {PropertyType} from './property-type';
 import {Observable} from 'rxjs/Observable';
+import {map} from 'rxjs/operators';
 
 export class RxNode {
   protected static title: string;
@@ -35,13 +36,13 @@ export class RxNode {
   }
 
   public run(node, level, subscribeItem) {
-    this.rx = this.runner().map((x) => {
+    this.rx = this.runner().pipe(map((x: any) => {
       if (!x.id) {
         x = {x: x, id: RxNode.cntr++};
       }
       subscribeItem(node, JSON.parse(JSON.stringify(x)));
       return x;
-    });
+    }));
     this.level = level;
   }
 

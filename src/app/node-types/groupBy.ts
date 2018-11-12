@@ -2,9 +2,9 @@ import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
+import {groupBy} from 'rxjs/operators';
 export class GroupBy extends RxNode {
   protected static title = 'GroupBy';
-  protected static link = 'http://reactivex.io/documentation/operators/groupBy.html';
   protected static desc = 'divide an Observable into a set of Observables that each emit a ' +
     'different subset of items from the original Observable';
   protected static maxInput = 1;
@@ -35,13 +35,13 @@ export class GroupBy extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.groupBy(
+    return this.graphInputs[0].observable.pipe(groupBy(
       GroupBy.propertiesType.params[0].params[this.properties.keySelector].func,
       GroupBy.propertiesType.params[1].params[this.properties.elementSelector].func,
-      GroupBy.propertiesType.params[2].params[this.properties.durationSelector].func);
+      GroupBy.propertiesType.params[2].params[this.properties.durationSelector].func));
   }
   public toString = () => {
-    return '.groupBy(' +
+    return '.pipe(groupBy(' +
       GroupBy.propertiesType.params[0].params[this.properties.keySelector].text + ', ' +
       GroupBy.propertiesType.params[1].params[this.properties.elementSelector].text + ', ' +
       GroupBy.propertiesType.params[2].params[this.properties.durationSelector].text +

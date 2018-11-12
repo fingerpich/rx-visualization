@@ -1,7 +1,6 @@
 import {RxNode} from './rxNode';
 export class Switch extends RxNode {
   protected static title = 'Switch';
-  protected static link = 'http://reactivex.io/documentation/operators/switch.html';
   protected static desc = 'convert an Observable that emits Observables into a single Observable that emits the items' +
     ' emitted by the most-recently-emitted of those Observables';
   protected static maxInput = 1;

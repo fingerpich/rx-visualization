@@ -1,6 +1,6 @@
 import {AppService} from '../app.service';
 import * as NodeTypes from '../node-types';
-declare var d3: any;
+import * as d3 from 'd3';
 
 export class GraphCreator {
   public static animateTime = 400;

@@ -3,7 +3,6 @@ import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
 export class StartWith extends RxNode {
   protected static title = 'StartWith';
-  protected static link = 'http://reactivex.io/documentation/operators/startwith.html';
   protected static desc = 'emit a specified sequence of items before beginning to emit the items from the source Observable';
   protected static maxInput = 1;
   protected static minInput = 1;

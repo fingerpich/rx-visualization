@@ -1,7 +1,8 @@
 import {RxNode} from './rxNode';
+import { distinct } from 'rxjs/operators';
+
 export class Distinct extends RxNode {
   protected static title = 'Distinct';
-  protected static link = 'http://reactivex.io/documentation/operators/distinct.html';
   protected static desc = 'suppress duplicate items emitted by an Observable';
   protected static maxInput = 1;
   protected static minInput = 1;
@@ -12,9 +13,9 @@ export class Distinct extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.distinct();
+    return this.graphInputs[0].observable.pipe(distinct());
   }
   public toString = () => {
-    return `.distinct()`;
+    return `.pipe(distinct())`;
   }
 }

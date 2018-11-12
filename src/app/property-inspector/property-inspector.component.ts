@@ -19,4 +19,8 @@ export class PropertyInspectorComponent implements OnInit {
   removeSelectedItem() {
     this.appService.removeSelectedItem();
   }
+
+  getLink() {
+    return 'https://www.learnrxjs.io/operators/' + this.selectedItem.data.title.toLowerCase();
+  }
 }
