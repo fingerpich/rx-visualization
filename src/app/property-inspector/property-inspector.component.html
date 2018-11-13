@@ -8,7 +8,7 @@
       <p>{{selectedItem.data.desc}}</p>
     </div>
     <div class="properiesEditor" *ngIf="selectedItem.data.propertiesType">
-        <rxstudio-property-component [properties]="selectedItem.data.properties" [type]="selectedItem.data.propertiesType"></rxstudio-property-component>
+        <rxstudio-property-component [properties]="selectedItem.data.properties" [propertyType]="selectedItem.data.propertiesType"></rxstudio-property-component>
     </div>
     <div class="codeGenerated">
         <code>{{selectedItem.data.toString()}}</code>

@@ -1,7 +1,4 @@
 @import "../../common";
-$linkColor: #555;
-$borderColor: $linkColor;
-$outerCircleHoverColor: #eee;
 
 $hoveredLink: lighten($primaryColor, 20%);
 
@@ -18,7 +15,7 @@ $selectedBorder: lighten($primaryColor, 50%);
 
     .resultItems{
       circle{
-        fill: #07f;
+        fill: $primaryColor;
       }
       text{
         fill:white;
@@ -39,7 +36,7 @@ $selectedBorder: lighten($primaryColor, 50%);
         &.outerCircle{
           transition:all 0.3s ease;
           stroke-width: 1px;
-          stroke: $borderColor;
+          stroke: $nodeBorderColor;
           &:hover{
             fill:$outerCircleHoverColor;
             stroke: $outerCircleHoverColor;
@@ -47,7 +44,7 @@ $selectedBorder: lighten($primaryColor, 50%);
         }
       }
       text {
-        fill:$borderColor;
+        fill:$nodeBorderColor;
       }
       &:hover {
 

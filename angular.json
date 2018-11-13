@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rx-diag": {
+    "rx-visualization": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/rx-diag",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "rx-diag:build"
+            "browserTarget": "rx-visualization:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "rx-diag:build:production"
+              "browserTarget": "rx-visualization:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "rx-diag:build"
+            "browserTarget": "rx-visualization:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "rx-diag-e2e": {
+    "rx-visualization-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -115,11 +115,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "rx-diag:serve"
+            "devServerTarget": "rx-visualization:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "rx-diag:serve:production"
+              "devServerTarget": "rx-visualization:serve:production"
             }
           }
         },
@@ -135,5 +135,5 @@
       }
     }
   },
-  "defaultProject": "rx-diag"
+  "defaultProject": "rx-visualization"
 }

@@ -8,11 +8,11 @@ import {AppService} from "../app.service";
 })
 export class PropertyInspectorComponent implements OnInit {
   selectedItem;
-  constructor(private appService:AppService ) { }
+  constructor(private appService: AppService ) { }
 
   ngOnInit() {
-    this.appService.getSelectedItem().subscribe(data =>{
-      this.selectedItem=data;
+    this.appService.getSelectedItem().subscribe(data => {
+      this.selectedItem = data;
     });
   }
 

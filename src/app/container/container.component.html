@@ -1,20 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="stretch" class="app">
-  <div class="header">
-
-    <button (click)="share()"  title="share">share <i class="material-icons">share</i></button>
-    <div class="overlay" *ngIf="serializedUrl" (click)="serializedUrl='';">
-      <div class="shareBox" (click)="$event.stopPropagation();">
-        <div class="shareBoxContainer">
-          <h5>Copy the link</h5>
-          <div class="copyBox">
-            <input #inputTarget (click)="inputTarget.select()" [value]="serializedUrl">
-            <button [ngxClipboard]="inputTarget">copy</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--<rxstudio-control-scene></rxstudio-control-scene>-->
+  <app-header [sceneComponent]="sceneComponent"></app-header>
   <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
     <div fxFlex class="sceneContainer">
       <button (click)="showCreationMenuToggle()" [class.active]="showCreationMenu" title="show tools" class="add">
@@ -26,5 +11,4 @@
     </div>
     <rxstudio-property-inspector fxFlex="30%"></rxstudio-property-inspector>
   </div>
-  <!--<rxstudio-status></rxstudio-status>-->
 </div>

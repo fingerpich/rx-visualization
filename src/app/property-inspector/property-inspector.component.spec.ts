@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PropertyInspectorComponent } from './property-inspector.component';
+import {AppService} from '../app.service';
+import {FormsModule} from '@angular/forms';
+import {PropertyComponentComponent} from './property-component/property-component.component';
 
 describe('PropertyInspectorComponent', () => {
   let component: PropertyInspectorComponent;
@@ -8,7 +11,9 @@ describe('PropertyInspectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PropertyInspectorComponent ]
+      declarations: [ PropertyInspectorComponent, PropertyComponentComponent ],
+      providers: [AppService],
+      imports: [FormsModule],
     })
     .compileComponents();
   }));

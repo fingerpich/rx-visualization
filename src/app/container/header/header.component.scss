@@ -1,0 +1,64 @@
+@import '../../../common';
+
+.header{
+  background: $headColor;;
+  text-align: right;
+  button{
+    border: none;
+    background: $headColor;
+    outline: none;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    margin: 4px;
+    padding: 12px 15px;
+    i{
+      font-size:inherit;
+    }
+    &:hover{
+      background: lighten($headColor,10%);
+    }
+  }
+}
+.overlay{
+  position:fixed;
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  z-index: 20;
+  background: rgba(0,0,0,0.2);
+  .shareBox{
+    position: absolute;
+    width: 300px;
+    right: 0;
+    top: 30px;
+    background: #fff;
+    border:1px solid silver;
+    border-radius: 3px;
+    .shareBoxContainer{
+      padding: 20px 30px;
+      h5{
+        margin:0 0 2px;
+        text-align: left;
+        color:#888;
+      }
+      div.copyBox {
+        display:flex;
+        input {
+          flex: 1 1 auto;
+          padding: 12px 7px;
+          border: 1px solid $primaryColor;
+          color:#444;
+        }
+        button {
+          padding: 12px;
+          margin: 0;
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SceneComponent } from './scene.component';
+import {AppService} from '../app.service';
 
 describe('SceneComponent', () => {
   let component: SceneComponent;
@@ -8,7 +9,8 @@ describe('SceneComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SceneComponent ]
+      declarations: [ SceneComponent ],
+      providers: [AppService]
     })
     .compileComponents();
   }));

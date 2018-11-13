@@ -9,12 +9,14 @@ import {AppService} from '../../app.service';
 })
 export class PropertyComponentComponent implements OnInit {
   @Input() properties: any;
-  @Input('type') propertyType: PropertyType;
-  optionIndex;
+  @Input() propertyType: PropertyType;
+  optionIndex = 0;
+
   constructor(private appService: AppService ) { }
 
   ngOnInit() {
   }
+
   dataChanged() {
     this.appService.refreshRxObjects();
   }

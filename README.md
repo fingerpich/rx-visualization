@@ -1,16 +1,10 @@
-# Rx Flow
+# Rx Visualization
 
-Visualizing Reactive Programming Using RxJs.
+Learn to use Rx (RxJs, RxJava, RxSwift , ...) library with super intuitive interactive diagrams.
 
 [![dependencies-quality]( https://david-dm.org/fingerpich/rx-flow.svg)](https://david-dm.org/fingerpich/rx-flow)
 [![development-dependencies-quality](https://david-dm.org/fingerpich/rx-flow/dev-status.svg)](https://david-dm.org/fingerpich/rx-flow#info=devDependencies)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a50eeb043584886b60f961426032030)](https://www.codacy.com/app/zarei-bs/rx-studio?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fingerpich/rx-studio&amp;utm_campaign=Badge_Grade)
-
-## Learn reactive programming using Rx (RxJs, RxJava, RxSwift , ...) 
-
-Reactivex is an API for asynchronous programming with observable streams and it is getting a lot of attention these days
-But there’s a sizeable learning curve.
-This web application tries to visualize Rx operators and their actions to make it easy to understand.
 
 ## Samples
 

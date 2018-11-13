@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreationMenuComponent } from './creation-menu.component';
+import {AppService} from '../app.service';
 
 describe('CreationMenuComponent', () => {
   let component: CreationMenuComponent;
@@ -8,7 +9,8 @@ describe('CreationMenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreationMenuComponent ]
+      declarations: [ CreationMenuComponent ],
+      providers: [AppService]
     })
     .compileComponents();
   }));
