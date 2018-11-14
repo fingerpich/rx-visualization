@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:demo": "ng build --prod --output-path dist --base-href rx-visualization;git add .; git commit -m 'update demo' -a; git add .;git subtree push --prefix dist origin gh-pages"
+    "build:demo": "ng build --prod --output-path dist --base-href https://fingerpich.github.io/rx-visualization/;git add .; git commit -m 'update demo' -a;git subtree push --prefix dist origin gh-pages"
   },
   "private": true,
   "dependencies": {

@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   }
   share() {
     const serialized = this.sceneComponent.serialize();
-    this.serializedUrl = 'https://fingerpich.github.io/rx-flow/load/' + this.shortenURL(serialized);
+    this.serializedUrl = 'https://fingerpich.github.io/rx-visualization/load/' + this.shortenURL(serialized);
   }
 
 }
