@@ -1,6 +1,7 @@
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import {pluck} from 'rxjs/operators';
 
 export class Pluck extends RxNode {
   protected static title = 'Pluck';
@@ -17,9 +18,9 @@ export class Pluck extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.pluck(this.properties.propName);
+    return this.graphInputs[0].observable.pipe(pluck(this.properties.propName));
   }
   public toString = () => {
-    return '.pluck(' + this.properties.propName + '))';
+    return `.pipe(pluck(${this.properties.propName}))`;
   }
 }

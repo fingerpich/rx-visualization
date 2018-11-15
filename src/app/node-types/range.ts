@@ -24,6 +24,6 @@ export class Range extends RxNode {
     return range(this.properties.start, this.properties.count);
   }
   public toString = () => {
-    return 'range(${this.properties.start}, ${this.properties.count})';
+    return `range(${this.properties.start}, ${this.properties.count})`;
   }
 }

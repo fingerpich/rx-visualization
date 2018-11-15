@@ -2,6 +2,8 @@ import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
+import {shareReplay} from 'rxjs/operators';
+
 export class Replay extends RxNode {
   protected static title = 'Replay';
   protected static desc = 'Ensure that all observers see the same sequence of emitted items, ' +
@@ -10,11 +12,6 @@ export class Replay extends RxNode {
   protected static minInput = 1;
 
   protected static propertiesType = new PropertyType('object', PropertyTypeEnum.Object, [
-    new PropertyType('transFunc', PropertyTypeEnum.Method, [
-      SampleFunctions.TRANS2,
-      SampleFunctions.TRANS3,
-    ], 'a transforming function that takes an item emitted by the source Observable as its parameter and ' +
-      'returns an item to be emitted by the resulting Observable'),
     new PropertyType('bufferSize', PropertyTypeEnum.Number, null, 'the maximum number of items to buffer' +
       ' and replay to subsequent observers'),
     new PropertyType('window', PropertyTypeEnum.Number, null, 'the maximum number of items to buffer and ' +
@@ -31,11 +28,10 @@ export class Replay extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.replay(Replay.propertiesType.params[this.properties.transFunc].func,
-      this.properties.bufferSize, this.properties.window, this.properties.scheduler);
+    return this.graphInputs[0].observable.pipe(shareReplay(
+      this.properties.bufferSize, this.properties.window, this.properties.scheduler));
   }
   public toString = () => {
-    return '.replay(' + Replay.propertiesType.params[this.properties.transFunc].text + ', ' +
-      this.properties.bufferSize + ', ' + this.properties.window + ', ' + this.properties.scheduler + ')';
+    return `.pipe(replay(${this.properties.bufferSize}, ${this.properties.window}, ${this.properties.scheduler}))`;
   }
 }

@@ -1,6 +1,7 @@
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import {retry} from 'rxjs/operators';
 
 export class Retry extends RxNode {
   protected static title = 'Retry';
@@ -17,9 +18,9 @@ export class Retry extends RxNode {
   public graphInputs = [];
 
   public runner = ({retryCount}) => {
-    return this.graphInputs[0].observable.retry(retryCount);
+    return this.graphInputs[0].observable.pipe(retry(retryCount));
   }
   public toString = ({}) => {
-    return '.retry(' + this.properties.retryCount + ');';
+    return `.pipe(retry(${this.properties.retryCount})`;
   }
 }

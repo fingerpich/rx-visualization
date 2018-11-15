@@ -1,4 +1,4 @@
-import {zip, of} from 'rxjs';
+import {zip} from 'rxjs';
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
@@ -21,10 +21,9 @@ export class Zip extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return zip(of(...this.graphInputs.map(gi => gi.observable), Zip.propertiesType.params[this.properties.zipFunction].func));
+    return zip(this.graphInputs.map(gi => gi.observable), Zip.propertiesType.params[this.properties.zipFunction].func);
   }
   public toString = ({}) => {
-    return `zip(of(' +
-      ${this.graphInputs.map(gi => gi.node.data.title).join(',')}, ${Zip.propertiesType.params[this.properties.zipFunction].text}))`;
+    return `zip(${this.graphInputs.map(gi => gi.node.data.title).join(',')}, ${Zip.propertiesType.params[this.properties.zipFunction].text}))`;
   }
 }

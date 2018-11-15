@@ -1,4 +1,5 @@
 import {RxNode} from './rxNode';
+import {min} from 'rxjs/operators';
 
 export class Min extends RxNode {
   protected static title = 'Min';
@@ -12,9 +13,9 @@ export class Min extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.min();
+    return this.graphInputs[0].observable.pipe(min());
   }
   public toString = () => {
-    return '.min()';
+    return '.pipe(min())';
   }
 }

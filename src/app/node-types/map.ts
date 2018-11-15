@@ -2,6 +2,8 @@ import {RxNode} from './rxNode';
 import {SampleFunctions} from './sample-functions';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import {map} from 'rxjs/operators';
+
 export class Map extends RxNode {
   protected static title = 'Map';
   protected static desc = 'transform the items emitted by an Observable by applying a function to each item';
@@ -21,9 +23,9 @@ export class Map extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.map(Map.propertiesType.params[this.properties.mapFunc].func);
+    return this.graphInputs[0].observable.pipe(map(Map.propertiesType.params[this.properties.mapFunc].func));
   }
   public toString = () => {
-    return '.map(' + Map.propertiesType.params[this.properties.mapFunc].text + ')';
+    return `.pipe(map(${Map.propertiesType.params[this.properties.mapFunc].text})`;
   }
 }

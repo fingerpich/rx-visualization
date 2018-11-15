@@ -1,6 +1,8 @@
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
+import {sample} from 'rxjs/operators';
+import {timer} from 'rxjs';
 
 export class Sample extends RxNode {
   protected static title = 'Sample';
@@ -16,10 +18,9 @@ export class Sample extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].observable.sample(this.properties.periodicTimeIntervals);
+    return this.graphInputs[0].observable.pipe(sample(timer(this.properties.periodicTimeIntervals)));
   }
   public toString = ({}) => {
-    return '.sample(' + this.properties.periodicTimeIntervals + '))';
+    return `.pipe(sample(timer(${this.properties.periodicTimeIntervals})))`;
   }
-
 }

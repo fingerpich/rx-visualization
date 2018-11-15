@@ -2,6 +2,7 @@ import {RxNode} from './rxNode';
 import {SampleFunctions} from './sample-functions';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
+import {last} from 'rxjs/operators';
 
 export class Last extends RxNode {
   protected static title = 'Last';
@@ -22,9 +23,9 @@ export class Last extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.last(Last.propertiesType.params[this.properties.filter].func);
+    return this.graphInputs[0].observable.pipe(last(Last.propertiesType.params[this.properties.filter].func));
   }
   public toString = () => {
-    return '.last(' + Last.propertiesType.params[this.properties.filter].text + ')';
+    return `.pipe(last(${Last.propertiesType.params[this.properties.filter].text}))`;
   }
 }

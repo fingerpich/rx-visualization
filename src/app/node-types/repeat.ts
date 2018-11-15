@@ -1,6 +1,7 @@
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import {repeat} from 'rxjs/operators';
 
 export class Repeat extends RxNode {
   protected static title = 'Repeat';
@@ -18,9 +19,9 @@ export class Repeat extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.repeat(this.properties.count);
+    return this.graphInputs[0].observable.pipe(repeat(this.properties.count));
   }
   public toString = () => {
-    return '.repeat(' + this.properties.count + ')';
+    return `.pipe(repeat(${this.properties.count}))`;
   }
 }
