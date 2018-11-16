@@ -2,6 +2,7 @@ import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
+import {takeWhile} from 'rxjs/operators';
 
 export class TakeWhile extends RxNode {
   protected static title = 'TakeWhile';
@@ -21,9 +22,9 @@ export class TakeWhile extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].observable.takeWhile(TakeWhile.propertiesType.params[this.properties.whileFilter].func);
+    return this.graphInputs[0].observable.pipe(takeWhile(TakeWhile.propertiesType.params[this.properties.whileFilter].func));
   }
   public toString = ({}) => {
-    return '.takeWhile(' + TakeWhile.propertiesType.params[this.properties.whileFilter].text + ')';
+    return `.pipe(takeWhile(${TakeWhile.propertiesType.params[this.properties.whileFilter].text}))`;
   }
 }

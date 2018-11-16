@@ -21,7 +21,7 @@ export class Zip extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return zip(this.graphInputs.map(gi => gi.observable), Zip.propertiesType.params[this.properties.zipFunction].func);
+    return zip(...this.graphInputs.map(gi => gi.observable), Zip.propertiesType.params[this.properties.zipFunction].func);
   }
   public toString = ({}) => {
     return `zip(${this.graphInputs.map(gi => gi.node.data.title).join(',')}, ${Zip.propertiesType.params[this.properties.zipFunction].text}))`;

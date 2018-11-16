@@ -1,7 +1,9 @@
 import * as NodeTypes from './node-types';
+import {RxNode} from './node-types/rxNode';
 export class RxHelper {
   public static operators = [
     {
+      link: 'creation',
       name: 'Creating Observables',
       desc: 'Operators that originate new Observables.',
       list: [
@@ -18,6 +20,7 @@ export class RxHelper {
       ]
     },
     {
+      link: 'transformation',
       name: 'Transforming Observables',
       desc: 'Operators that transform items that are emitted by an Observable.',
       list: [
@@ -28,10 +31,11 @@ export class RxHelper {
         NodeTypes.Pluck,
         NodeTypes.Repeat,
         NodeTypes.GroupBy,
-        NodeTypes.WindowWithCount,
+        NodeTypes.WindowCount,
       ]
     },
     {
+      link: 'filtering',
       name: 'Filtering Observables',
       desc: 'Operators that selectively emit items from a source Observable.',
       list: [
@@ -50,6 +54,7 @@ export class RxHelper {
       ]
     },
     {
+      link: 'combination',
       name: 'Combining Observables',
       desc: 'Operators that work with multiple source Observables to create a single Observable',
       list: [
@@ -63,6 +68,7 @@ export class RxHelper {
       ]
     },
     {
+      link: 'error_handling',
       name: 'Error Handling Operators',
       desc: 'Operators that help to recover from error notifications from an Observable',
       list: [
@@ -71,6 +77,7 @@ export class RxHelper {
       ]
     },
     {
+      link: 'utility',
       name: 'Observable Utility Operators',
       desc: 'A toolbox of useful Operators for working with Observables',
       list: [
@@ -88,6 +95,7 @@ export class RxHelper {
       ]
     },
     {
+      link: '',
       name: 'Conditional and Boolean Operators',
       desc: 'Operators that evaluate one or more Observables or items emitted by Observables',
       list: [
@@ -102,6 +110,7 @@ export class RxHelper {
       ]
     },
     {
+      link: '',
       name: 'Mathematical and Aggregate Operators',
       desc: 'Operators that operate on the entire sequence of items emitted by an Observable',
       list: [
@@ -111,10 +120,11 @@ export class RxHelper {
         NodeTypes.Max,
         NodeTypes.Min,
         // NodeTypes.Reduce,
-        NodeTypes.Sum,
+        // NodeTypes.Sum,
       ]
     },
     {
+      link: 'multicasting',
       name: 'Connectable Observable Operators',
       desc: 'Specialty Observables that have more precisely-controlled subscription dynamics',
       list: [
@@ -127,6 +137,12 @@ export class RxHelper {
   ];
   public static getRxOperators() {
     return this.operators;
+  }
+  public static getOperatorLink (operatorName) {
+    const cate = this.operators.find((cat: any) => {
+      return cat.list.find((nodeType: RxNode) => operatorName === nodeType.title);
+    });
+    return 'https://www.learnrxjs.io/operators/' + cate.link + '/' + operatorName.toLowerCase() + '.html';
   }
   constructor() {
   }

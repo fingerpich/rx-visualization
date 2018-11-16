@@ -1,6 +1,7 @@
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
+import {skip} from 'rxjs/operators';
 
 export class Skip extends RxNode {
   protected static title = 'Skip';
@@ -16,9 +17,9 @@ export class Skip extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].observable.skip(this.properties.itemCount);
+    return this.graphInputs[0].observable.pipe(skip(this.properties.itemCount));
   }
   public toString = ({}) => {
-    return '.skip(' + this.properties.itemCount + '))';
+    return `.skip(${this.properties.itemCount}))`;
   }
 }

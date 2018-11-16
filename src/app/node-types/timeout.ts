@@ -2,6 +2,7 @@ import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
+import {timeout} from 'rxjs/operators';
 
 export class Timeout extends RxNode {
   protected static title = 'Timeout';
@@ -12,22 +13,19 @@ export class Timeout extends RxNode {
 
   protected static propertiesType = new PropertyType('object', PropertyTypeEnum.Object, [
     new PropertyType('time', PropertyTypeEnum.Number),
-    new PropertyType('timeoutResult', PropertyTypeEnum.String)
   ], '');
 
   public properties = {
-    timeoutResult: 'Timeout has occurred.',
     time: 1000,
   };
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.timeout(
-      this.properties.time,
-      this.properties.timeoutResult,
-    );
+    return this.graphInputs[0].observable.pipe(timeout(
+      this.properties.time
+    ));
   }
   public toString = () => {
-    return '.timeout(' + this.properties.time + ', ' +  this.properties.timeoutResult + ')';
+    return `.pipe(timeout(${this.properties.time}))`;
   }
 }

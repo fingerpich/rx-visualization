@@ -2,6 +2,8 @@ import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {SampleFunctions} from './sample-functions';
+import {scan} from 'rxjs/operators';
+
 export class Scan extends RxNode {
   protected static title = 'Scan';
   protected static desc = 'Apply a function to each item emitted by an Observable, sequentially, and emit each successive value';
@@ -19,9 +21,9 @@ export class Scan extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.scan(Scan.propertiesType.params[this.properties.scanFunc].func);
+    return this.graphInputs[0].observable.pipe(scan(Scan.propertiesType.params[this.properties.scanFunc].func));
   }
   public toString = () => {
-    return '.scan(' + Scan.propertiesType.params[this.properties.scanFunc].text + ')';
+    return `.scan(${Scan.propertiesType.params[this.properties.scanFunc].text})`;
   }
 }

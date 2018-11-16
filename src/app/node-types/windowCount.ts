@@ -1,9 +1,10 @@
-
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
-export class WindowWithCount extends RxNode {
-  protected static title = 'WindowWithCount';
+import {windowCount} from 'rxjs/operators';
+
+export class WindowCount extends RxNode {
+  protected static title = 'WindowCount';
   protected static desc = 'periodically subdivide items from an Observable into Observable windows and emit these' +
     ' windows rather than emitting the items one at a time';
   protected static maxInput = 1;
@@ -21,10 +22,10 @@ export class WindowWithCount extends RxNode {
   public graphInputs = [];
 
   public runner = ({count, skip}) => {
-    return this.graphInputs[0].observable.windowWithCount(count, skip);
+    return this.graphInputs[0].observable.pipe(windowCount(count, skip));
   }
   public toString = () => {
     const {count, skip} = this.properties;
-    return '.windowWithCount(' + count + ', ' + skip + ')';
+    return `.pipe(windowCount(${count}, ${skip}))`;
   }
 }

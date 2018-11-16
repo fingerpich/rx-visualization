@@ -1,6 +1,7 @@
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
+import {takeLast} from 'rxjs/operators';
 
 export class TakeLast extends RxNode {
   protected static title = 'TakeLast';
@@ -16,9 +17,9 @@ export class TakeLast extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].observable.takeLast(this.properties.itemCount);
+    return this.graphInputs[0].observable.pipe(takeLast(this.properties.itemCount));
   }
   public toString = ({}) => {
-    return '.takeLast(' + this.properties.itemCount + '))';
+    return `.takeLast(${this.properties.itemCount}))`;
   }
 }

@@ -1,4 +1,6 @@
 import {RxNode} from './rxNode';
+import {publish, tap} from 'rxjs/operators';
+import {Observable} from 'rxjs/Observable';
 
 export class Publish extends RxNode {
   protected static title = 'Publish';
@@ -12,17 +14,17 @@ export class Publish extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    const thisObservable = this.graphInputs[0].observable.map((x) => {
+    const thisObsservable = this.graphInputs[0].observable.pipe(tap((x: any) => {
       x.published = true;
-      return x;
-    });
+      // return x;
+    }));
     setTimeout(() => {
-      this.rxo = this.rx.publish();
+      this.rxo = (this.rx as any).pipe(publish());
     });
-    return thisObservable;
+    return thisObsservable;
   }
 
   public toString = () => {
-    return '.publish()';
+    return '.pipe(publish())';
   }
 }

@@ -1,6 +1,7 @@
 import {RxNode} from './rxNode';
 import {PropertyType} from './property-type';
 import {PropertyTypeEnum} from './propertyType.enum';
+import {take} from 'rxjs/operators';
 
 export class Take extends RxNode {
   protected static title = 'Take';
@@ -16,9 +17,9 @@ export class Take extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].observable.take(this.properties.itemCount);
+    return this.graphInputs[0].observable.pipe(take(this.properties.itemCount));
   }
   public toString = ({}) => {
-    return '.take(' + this.properties.itemCount + '))';
+    return `.pipe(take(${this.properties.itemCount}))`;
   }
 }

@@ -48,7 +48,6 @@ export * from './skipUntil';
 export * from './skipWhile';
 export * from './startWith';
 export * from './subscribe';
-export * from './sum';
 export * from './switch';
 export * from './take';
 export * from './takeLast';
@@ -57,6 +56,6 @@ export * from './takeWhile';
 export * from './timeout';
 export * from './timer';
 export * from './windowed';
-export * from './windowWithCount';
+export * from './windowCount';
 export * from './zip';
 

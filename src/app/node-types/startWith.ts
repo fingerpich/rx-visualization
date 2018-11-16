@@ -1,6 +1,8 @@
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import {startWith} from 'rxjs/operators';
+
 export class StartWith extends RxNode {
   protected static title = 'StartWith';
   protected static desc = 'emit a specified sequence of items before beginning to emit the items from the source Observable';
@@ -15,9 +17,9 @@ export class StartWith extends RxNode {
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.startwith(this.properties.startWith);
+    return this.graphInputs[0].observable.pipe(startWith(this.properties.startWith));
   }
   public toString = () => {
-    return '.startwith(' + this.properties.startWith + ')';
+    return `.pipe(startWith(${this.properties.startWith}))`;
   }
 }

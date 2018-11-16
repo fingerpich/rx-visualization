@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AppService} from "../app.service";
+import {AppService} from '../app.service';
+import {RxHelper} from '../rx-helper';
 
 @Component({
   selector: 'rxstudio-property-inspector',
@@ -21,6 +22,6 @@ export class PropertyInspectorComponent implements OnInit {
   }
 
   getLink() {
-    return 'https://www.learnrxjs.io/operators/' + this.selectedItem.data.title.toLowerCase();
+    return RxHelper.getOperatorLink(this.selectedItem.data.title);
   }
 }

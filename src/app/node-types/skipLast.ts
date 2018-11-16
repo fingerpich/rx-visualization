@@ -1,6 +1,8 @@
 import {RxNode} from './rxNode';
 import {PropertyTypeEnum} from './propertyType.enum';
 import {PropertyType} from './property-type';
+import {skipLast} from 'rxjs/operators';
+
 export class SkipLast extends RxNode {
   protected static title = 'SkipLast';
   protected static desc = 'Suppress the final n items emitted by an Observable';
@@ -15,9 +17,9 @@ export class SkipLast extends RxNode {
   public graphInputs = [];
 
   public runner = ({}) => {
-    return this.graphInputs[0].observable.skipLast(this.properties.itemCount);
+    return this.graphInputs[0].observable.pipe(skipLast(this.properties.itemCount));
   }
   public toString = ({}) => {
-    return '.skipLast(' + this.properties.itemCount + '))';
+    return `.pipe(skipLast(${this.properties.itemCount}))`;
   }
 }

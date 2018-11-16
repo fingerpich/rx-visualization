@@ -8,7 +8,7 @@ export class TakeUntil extends RxNode {
   protected static propertiesType = null;
 
   public properties = {
-    fi: 0,
+    takeUntilFunction: 0,
   };
   public graphInputs = [];
 
@@ -18,6 +18,6 @@ export class TakeUntil extends RxNode {
     );
   }
   public toString = () => {
-    return '.takeUntil(' + TakeUntil.propertiesType.params[this.properties.fi].text + ')';
+    return '.takeUntil(' + TakeUntil.propertiesType.params[this.properties.takeUntilFunction].text + ')';
   }
 }
