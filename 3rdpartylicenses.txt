@@ -1807,6 +1807,9 @@ MIT
 @angular/http
 MIT
 
+@angular/service-worker
+MIT
+
 @angular/cdk
 MIT
 The MIT License

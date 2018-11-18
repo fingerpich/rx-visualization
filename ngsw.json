@@ -1,0 +1,111 @@
+{
+  "configVersion": 1,
+  "index": "https://fingerpich.github.io/rx-visualization/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://fingerpich.github.io/rx-visualization/favicon.ico",
+        "https://fingerpich.github.io/rx-visualization/index.html",
+        "https://fingerpich.github.io/rx-visualization/main.641143439127a8c21234.js",
+        "https://fingerpich.github.io/rx-visualization/polyfills.c6871e56cb80756a5498.js",
+        "https://fingerpich.github.io/rx-visualization/runtime.ec2944dd8b20ec099bf3.js",
+        "https://fingerpich.github.io/rx-visualization/styles.7bfbcc8226bf14c36f53.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/android-icon-144x144.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/android-icon-192x192.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/android-icon-36x36.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/android-icon-48x48.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/android-icon-72x72.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/android-icon-96x96.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-114x114.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-120x120.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-144x144.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-152x152.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-180x180.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-57x57.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-60x60.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-72x72.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-76x76.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-precomposed.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/browserconfig.xml",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/favicon-16x16.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/favicon-32x32.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/favicon-96x96.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/favicon.ico",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/manifest.json",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/ms-icon-144x144.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/ms-icon-150x150.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/ms-icon-310x310.png",
+        "https://fingerpich.github.io/rx-visualization/assets/favicons/ms-icon-70x70.png",
+        "https://fingerpich.github.io/rx-visualization/assets/manifest.json"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/android-icon-144x144.png": "4362121a33d9c93989e615a9c39abff04804e300",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/android-icon-192x192.png": "fa36a5e0a3f864e19d7590bcb502c9dfbbabc47f",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/android-icon-36x36.png": "2d70dc7934c3cb3207efb94a06647410c8eebe0e",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/android-icon-48x48.png": "dcc08fe43232fbb0d7491a84e8881fd77b1f1fe9",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/android-icon-72x72.png": "95c6d887a77ad0c5eba79dc60c1cf15f98f865d0",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/android-icon-96x96.png": "00967943614ddc55f7e94a389f0e43fc3b9296b9",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-114x114.png": "d241d18fd3766e841fbf84c606bff4031698ddb8",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-120x120.png": "1e0ccde63825c9f760239147c3958d141c35a41e",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-144x144.png": "4362121a33d9c93989e615a9c39abff04804e300",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-152x152.png": "67447550c41d5c829ef830fd39798ce957625b78",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-180x180.png": "c659f80fef6f400eac5dd4c65e4244bfb78c4836",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-57x57.png": "605455479a9b4919177bfd4f7f179c2760e7bf2a",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-60x60.png": "4f3cbb5391db8641d22c84545083b3bfb10aa643",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-72x72.png": "95c6d887a77ad0c5eba79dc60c1cf15f98f865d0",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-76x76.png": "31b65b5698da839aa6a11999886afe35bcf5f1a2",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon-precomposed.png": "13ba44dc84316871d5c7b8dccc132bd35156ac22",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/apple-icon.png": "13ba44dc84316871d5c7b8dccc132bd35156ac22",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/browserconfig.xml": "853389b6c4273965899eb1302d665eb91395fd0c",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/favicon-16x16.png": "b4a0e8e8a840ce4ac206c9dbe949d6c144345665",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/favicon-32x32.png": "79df7ee71c229251f7131ca351d3b3a74b2108ee",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/favicon-96x96.png": "00967943614ddc55f7e94a389f0e43fc3b9296b9",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/favicon.ico": "e61a63d1d0c13e83a18cbe24a1603a4b37f28bfd",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/manifest.json": "d11febf9e708a9e11baee37ed7dc5e99902580be",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/ms-icon-144x144.png": "4362121a33d9c93989e615a9c39abff04804e300",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/ms-icon-150x150.png": "60f1baf45815eafc76e482bd7ca4113bac04582e",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/ms-icon-310x310.png": "111dc328389d7e341a36d5f411a5f6de29e37e0c",
+    "https://fingerpich.github.io/rx-visualization/assets/favicons/ms-icon-70x70.png": "ff0057103e63417b6153f7b9e9b7b4a9b384949f",
+    "https://fingerpich.github.io/rx-visualization/assets/manifest.json": "193186750dde20667b627f0227588b8149fd509e",
+    "https://fingerpich.github.io/rx-visualization/favicon.ico": "e61a63d1d0c13e83a18cbe24a1603a4b37f28bfd",
+    "https://fingerpich.github.io/rx-visualization/index.html": "9f7114147b816cab7f1fcc9cc104ec2bec70b68e",
+    "https://fingerpich.github.io/rx-visualization/main.641143439127a8c21234.js": "713c18f6891dd1c025de7bb48273add7c11012e5",
+    "https://fingerpich.github.io/rx-visualization/polyfills.c6871e56cb80756a5498.js": "ce68d153e9b9b6d26b625069c0ee99ae09c6f255",
+    "https://fingerpich.github.io/rx-visualization/runtime.ec2944dd8b20ec099bf3.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "https://fingerpich.github.io/rx-visualization/styles.7bfbcc8226bf14c36f53.css": "d1e1216dc12de1a70afccc136ca4a7af7cc8ad28"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
