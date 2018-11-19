@@ -16,6 +16,8 @@ import { PropertyComponentComponent } from './property-inspector/property-compon
 import { ContainerComponent } from './container/container.component';
 import { HeaderComponent } from './container/header/header.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     HttpModule,
     ClipboardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     AppService
