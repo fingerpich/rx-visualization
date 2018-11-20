@@ -22,12 +22,12 @@ export class GraphCreator {
     selectedEdge: null,
     mouseDownNode: null,
     mouseDownLink: null,
-    justDragged: false,
-    justScaleTransGraph: false,
+    // justDragged: false,
+    // justScaleTransGraph: false,
     lastKeyDown: -1,
     shiftNodeDrag: false,
-    selectedText: null,
-    graphMouseDown: false,
+    // selectedText: null,
+    // graphMouseDown: false,
   };
 
   private nodes = [];
@@ -227,25 +227,31 @@ export class GraphCreator {
         }
         const dx = edge.target.x - edge.source.x;
         const dy = edge.target.y - edge.source.y;
-        const slope = dx ? (dy / dx) : (1000000000000 * ((dy > 0) ? 1 : -1));
-        const dslope = slope ? -1 / slope : -1000000000000;
-        // y = slope * x + b;
-        const lineB = edge.source.y - slope * edge.source.x;
+        let r;
+        if (!dx) {
+          const ymin = Math.min(edge.source.y, edge.target.y);
+          const ymax = Math.max(edge.source.y, edge.target.y);
+          r = (d.y > ymax || d.y < ymin) ? Number.MAX_SAFE_INTEGER : Math.abs(d.x - edge.target.x);
+        } else {
+          const slope = dx ? (dy / dx) : (1000000000000 * ((dy > 0) ? 1 : -1));
+          const dslope = slope ? -1 / slope : -1000000000000;
+          // y = slope * x + b;
+          const lineB = edge.source.y - slope * edge.source.x;
 
-        const pointB = d.y - dslope * d.x;
-        // slope * x + lineB = dslope * x + pointB
-        // slope * x - dslope * x  =  pointB - lineB
-        // slope * x - dslope * x  =  pointB - lineB
-        // (slope - dslope ) * x = pointB - lineB
-        const cx = (pointB - lineB) / (slope - dslope);
-        const cy = slope * cx + lineB;
-        // cx , cy is the nearest point on the line
+          const pointB = d.y - dslope * d.x;
+          // slope * x + lineB = dslope * x + pointB
+          // slope * x - dslope * x  =  pointB - lineB
+          // slope * x - dslope * x  =  pointB - lineB
+          // (slope - dslope ) * x = pointB - lineB
+          const cx = (pointB - lineB) / (slope - dslope);
+          const cy = slope * cx + lineB;
+          // cx , cy is the nearest point on the line
 
-        const xmin = Math.min(edge.source.x, edge.target.x);
-        const xmax = Math.max(edge.source.x, edge.target.x);
+          const xmin = Math.min(edge.source.x, edge.target.x);
+          const xmax = Math.max(edge.source.x, edge.target.x);
 
-        const r = (cx > xmax || cx < xmin) ? Number.MAX_SAFE_INTEGER : Math.pow((d.x - cx) * (d.x - cx) + (d.y - cy) * (d.y - cy), 0.5);
-
+          r = (cx > xmax || cx < xmin) ? Number.MAX_SAFE_INTEGER : Math.pow((d.x - cx) * (d.x - cx) + (d.y - cy) * (d.y - cy), 0.5);
+        }
         return {edge, r};
       }).sort((a, b) => a.r - b.r);
 
