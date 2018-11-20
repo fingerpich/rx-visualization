@@ -33,11 +33,16 @@ export class GraphCreator {
   private nodes = [];
   private edges = [];
   private connectorLine;
+  private suggestedLink1;
+  private suggestedLink2;
+  private suggestedConnection;
+  private delSuggested;
   private connectTarget;
   private svg;
   private svgG;
   private circles;
   private paths;
+  private suggestedLinks;
   private resultCircles;
   private lastResultList;
   private drag;
@@ -105,12 +110,29 @@ export class GraphCreator {
       .attr('d', 'M0,0L0,0')
       .style('marker-end', 'url(#mark-end-arrow)');
   }
+  private createSuggestions() {
+    this.suggestedLink1 = this.suggestedLinks.append('svg:path')
+      .attr('class', 'link suggested hidden')
+      .attr('d', 'M0,0L0,0')
+      .style('marker-end', 'url(#end-arrow)');
+    this.suggestedLink2 = this.suggestedLinks.append('svg:path')
+      .attr('class', 'link suggested hidden')
+      .attr('d', 'M0,0L0,0')
+      .style('marker-end', 'url(#end-arrow)');
+    this.delSuggested = this.suggestedLinks.append('svg:path')
+      .attr('class', 'link suggestDel hidden')
+      .attr('d', 'M0,0L0,0')
+      .style('marker-end', 'url(#end-arrow)');
+  }
   private bindEvents() {
     const thisGraph = this;
     // svg nodes and edges
     thisGraph.resultCircles = this.svgG.append('g').attr('class', 'resultItems');
     thisGraph.paths = this.svgG.append('g');
+    thisGraph.suggestedLinks = this.svgG.append('g');
     thisGraph.circles = this.svgG.append('g');
+
+    this.createSuggestions();
 
     // handle circle drag
     thisGraph.drag = d3.drag()
@@ -189,14 +211,85 @@ export class GraphCreator {
     thisGraph.updateGraph();
   };
 
+  private closeSuggestions() {
+    this.suggestedConnection = null;
+    this.suggestedLink1.classed('hidden', true);
+    this.suggestedLink2.classed('hidden', true);
+    this.delSuggested.classed('hidden', true);
+  }
+  private suggestLinks = (d) => {
+    const thisGraph = this;
+    this.closeSuggestions();
+    if (d.data.graphInputs.length < d.data.maxInput) {
+      const edge_R = thisGraph.edges.map((edge) => {
+        if (edge.source === d || edge.target === d) {
+          return {edge, r: Number.MAX_SAFE_INTEGER};
+        }
+        const dx = edge.target.x - edge.source.x;
+        const dy = edge.target.y - edge.source.y;
+        const slope = dx ? (dy / dx) : (1000000000000 * ((dy > 0) ? 1 : -1));
+        const dslope = slope ? -1 / slope : -1000000000000;
+        // y = slope * x + b;
+        const lineB = edge.source.y - slope * edge.source.x;
+
+        const pointB = d.y - dslope * d.x;
+        // slope * x + lineB = dslope * x + pointB
+        // slope * x - dslope * x  =  pointB - lineB
+        // slope * x - dslope * x  =  pointB - lineB
+        // (slope - dslope ) * x = pointB - lineB
+        const cx = (pointB - lineB) / (slope - dslope);
+        const cy = slope * cx + lineB;
+        // cx , cy is the nearest point on the line
+
+        const xmin = Math.min(edge.source.x, edge.target.x);
+        const xmax = Math.max(edge.source.x, edge.target.x);
+
+        const r = (cx > xmax || cx < xmin) ? Number.MAX_SAFE_INTEGER : Math.pow((d.x - cx) * (d.x - cx) + (d.y - cy) * (d.y - cy), 0.5);
+
+        return {edge, r};
+      }).sort((a, b) => a.r - b.r);
+
+      if (edge_R[0].r < this.consts.nodeRadius) {
+        this.suggestedLink1.classed('hidden', false)
+          .attr('d', 'M' + edge_R[0].edge.source.x + ',' + edge_R[0].edge.source.y + 'L' + d.x + ',' + d.y);
+        this.suggestedLink2.classed('hidden', false)
+          .attr('d', 'M' + d.x + ',' + d.y + 'L' + edge_R[0].edge.target.x + ',' + edge_R[0].edge.target.y);
+        this.delSuggested.classed('hidden', false)
+          .attr('d', 'M' + edge_R[0].edge.source.x + ',' + edge_R[0].edge.source.y + 'L' + edge_R[0].edge.target.x + ',' + edge_R[0].edge.target.y);
+        this.suggestedConnection = edge_R[0].edge;
+      }
+    }
+    if (!this.suggestedConnection) {
+
+      const firstNearNode = thisGraph.nodes.find((n) => {
+        if (n !== d && (n.data.maxInput > n.data.graphInputs.length)) {
+          if (thisGraph.edges.find(e => (e.source === d && e.target === n) || (e.target === d && e.source === n) )) {
+            return false;
+          }
+          const dx = n.x - d.x;
+          const dy = n.y - d.y;
+          const r = Math.pow(dx * dx + dy * dy, .5);
+          return (r < (this.consts.nodeRadius * 2.61));
+        }
+      });
+      if (firstNearNode) {
+        this.closeSuggestions();
+        this.suggestedConnection = {target: firstNearNode};
+        this.suggestedLink2.classed('hidden', false)
+          .attr('d', 'M' + d.x + ',' + d.y + 'L' + firstNearNode.x + ',' + firstNearNode.y);
+      }
+    }
+  }
+
   private dragMove = (d) => {
-    this.state.justDragged = true;
+    // this.state.justDragged = true;
     if (this.state.shiftNodeDrag) {
       const gMousePos = d3.mouse(this.svgG.node());
       this.connectorLine.attr('d', 'M' + d.x + ',' + d.y + 'L' + gMousePos[0] + ',' + gMousePos[1]);
     } else {
       d.x += d3.event.dx;
       d.y +=  d3.event.dy;
+      this.suggestLinks(d);
       this.updateGraph();
     }
   };
@@ -212,6 +305,24 @@ export class GraphCreator {
       thisGraph.state.shiftNodeDrag = false;
       thisGraph.connectorLine.classed('hidden', true);
     } else {
+      if (this.suggestedConnection) {
+        if (this.suggestedConnection.source) {
+          const newEdge1 = {source: this.suggestedConnection.source, target: d};
+          const newEdge2 = {source: d, target: this.suggestedConnection.target};
+          thisGraph.edges.splice(thisGraph.edges.indexOf(this.suggestedConnection), 1);
+          thisGraph.edges.push(newEdge1);
+          thisGraph.edges.push(newEdge2);
+          thisGraph.updateGraph();
+          thisGraph.appService.refreshRxObjects();
+          this.closeSuggestions();
+        } else if (this.suggestedConnection.target) {
+          const newEdge = {source: d, target: this.suggestedConnection.target};
+          thisGraph.edges.push(newEdge);
+          thisGraph.updateGraph();
+          thisGraph.appService.refreshRxObjects();
+          this.closeSuggestions();
+        }
+      }
       this.showResults(null);
     }
   };

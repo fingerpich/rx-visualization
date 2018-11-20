@@ -88,5 +88,23 @@ $selectedBorder: lighten($primaryColor, 50%);
     path.link.selected {
       stroke: $selectedLink;
     }
+
+    path.link.suggested {
+      stroke: #33ff009e;
+      stroke-dasharray: 10,2;
+      stroke-dashoffset: 0;
+      animation-name: dashofset;
+      animation-duration: 0.5s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    @keyframes dashofset {
+      from {stroke-dashoffset: 0;}
+      to {stroke-dashoffset: -12;}
+    }
+    path.link.suggestDel {
+      stroke: #c005;
+    }
   }
 }
+
