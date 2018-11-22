@@ -138,6 +138,7 @@ export class AppService {
       const nodesNeedsRx = nodes.filter(n => !n.data.rx);
       for (const eachNode of nodesNeedsRx) {
         const nodeInputs = edges.filter(e => e.target === eachNode).map(e => e.source);
+        eachNode.data.graphInputs = [];
         if (eachNode.data.areInputsReady(nodeInputs)) {
           eachNode.data.graphInputs = nodeInputs.map(node => { return {observable: node.data.rx , node: node}; } );
           eachNode.data.run(eachNode, levelcounter, this.subscribeItem);

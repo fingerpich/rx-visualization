@@ -3,7 +3,10 @@
   <!--Node Properties-->
   <div *ngIf="selectedItem.data">
     <div class="operatorInfo">
-      <button (click)="removeSelectedItem()" title="remove selected item" class="remove"><i class="material-icons">delete</i></button>
+      <button (click)="removeSelectedItem()" title="remove selected item" class="remove">
+        <!--<i class="material-icons">delete</i>-->
+        <svg id="deletebtnlayer" data-name="delete btn layer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 176.84 227.21"><defs><style>.cls-1{fill:none;}.cls-2{clip-path:url(#clip-path);}</style><clipPath id="clip-path" transform="translate(-594 -270.55)"><rect class="cls-1" x="594" y="270" width="176.88" height="228.72"/></clipPath></defs><title>delete</title><g class="cls-2"><path d="M757.4,323.52,735,312.88l1.16-2.44A21.51,21.51,0,0,0,726,281.81l-19.29-9.17A21.49,21.49,0,0,0,678,282.83l-1.17,2.45-22.4-10.64a23.57,23.57,0,0,0-31.36,11.16l-5.73,12.08a8,8,0,0,0-.32,6.11,8,8,0,0,0,4.11,4.55l59.37,28.19H602a8,8,0,0,0-8,8.67l10.51,126.16A28.74,28.74,0,0,0,633,497.76h58.83a28.73,28.73,0,0,0,28.47-26.2L729.61,360l22.56,10.71A8,8,0,0,0,762.83,367l5.74-12.07a23.59,23.59,0,0,0-11.17-31.37ZM692.49,289.7a5.48,5.48,0,0,1,7.31-2.61l19.3,9.17a5.49,5.49,0,0,1,2.6,7.31L720.54,306l-29.21-13.88Zm11.88,180.53a12.65,12.65,0,0,1-12.53,11.53H633a12.64,12.64,0,0,1-12.52-11.53l-9.8-117.5H714.16ZM754.11,348l-2.3,4.85L635.26,297.51l2.3-4.85a7.55,7.55,0,0,1,10-3.57L750.54,338a7.56,7.56,0,0,1,3.57,10Zm0,0" transform="translate(-594 -270.55)"/></g></svg>
+      </button>
       <a [href]="getLink()" target="_blank"><strong>{{selectedItem.data.title}}</strong></a>
       <p>{{selectedItem.data.desc}}</p>
     </div>
@@ -18,7 +21,10 @@
 
   <!--EDGE Properties-->
   <div *ngIf="selectedItem.source">
-    <button (click)="removeSelectedItem()" title="remove selected item" class="remove"><i class="material-icons">delete</i></button>
+    <button (click)="removeSelectedItem()" title="remove selected item" class="remove">
+      <!--<i class="material-icons">delete</i>-->
+      <svg id="deletebtnlayer" data-name="delete btn layer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 176.84 227.21"><defs><style>.cls-1{fill:none;}.cls-2{clip-path:url(#clip-path);}</style><clipPath id="clip-path" transform="translate(-594 -270.55)"><rect class="cls-1" x="594" y="270" width="176.88" height="228.72"/></clipPath></defs><title>delete</title><g class="cls-2"><path d="M757.4,323.52,735,312.88l1.16-2.44A21.51,21.51,0,0,0,726,281.81l-19.29-9.17A21.49,21.49,0,0,0,678,282.83l-1.17,2.45-22.4-10.64a23.57,23.57,0,0,0-31.36,11.16l-5.73,12.08a8,8,0,0,0-.32,6.11,8,8,0,0,0,4.11,4.55l59.37,28.19H602a8,8,0,0,0-8,8.67l10.51,126.16A28.74,28.74,0,0,0,633,497.76h58.83a28.73,28.73,0,0,0,28.47-26.2L729.61,360l22.56,10.71A8,8,0,0,0,762.83,367l5.74-12.07a23.59,23.59,0,0,0-11.17-31.37ZM692.49,289.7a5.48,5.48,0,0,1,7.31-2.61l19.3,9.17a5.49,5.49,0,0,1,2.6,7.31L720.54,306l-29.21-13.88Zm11.88,180.53a12.65,12.65,0,0,1-12.53,11.53H633a12.64,12.64,0,0,1-12.52-11.53l-9.8-117.5H714.16ZM754.11,348l-2.3,4.85L635.26,297.51l2.3-4.85a7.55,7.55,0,0,1,10-3.57L750.54,338a7.56,7.56,0,0,1,3.57,10Zm0,0" transform="translate(-594 -270.55)"/></g></svg>
+    </button>
     <div class="navigate">
       <span>{{selectedItem.source.data.constructor.name}}</span>
       <i class="material-icons">arrow_forward</i>

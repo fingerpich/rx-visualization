@@ -16,30 +16,34 @@
     button {
       border: none;
       border-radius: 50%;
-      padding: 8px 9px 8px 10px;
       outline: none;
       position: absolute;
       z-index: 1;
       width: 3rem;
       height: 3rem;
+      fill: #444;
+      padding: 0.3rem;
+      cursor: pointer;
+      -webkit-transition: padding 0.3s;
+      -moz-transition: padding 0.3s;
+      -ms-transition: padding 0.3s;
+      -o-transition: padding 0.3s;
+      transition: padding 0.3s;
+      &:hover{
+        //color:lighten($primaryColor, 10%);
+        fill:$primaryColor;
+        padding: 0rem;
+      }
       &.replay{
-        right:0;
-        background: none;
-        color: $primaryColor;
-        margin: 1rem;
-        padding: 0;
+        right: 1rem;
+        top: 1rem;
         i{
           font-size: 3rem;
-        }
-        &:hover{
-          color:lighten($primaryColor, 10%)
         }
       }
       &.add{
         right: 1rem;
         bottom: 1rem;
-        background: $primaryColor;
-        color: #ffffff;
       }
     }
   }

@@ -1,5 +1,5 @@
 <div class="header">
-  <button (click)="share()"  title="share">share <i class="material-icons">share</i></button>
+  <button (click)="share()"  title="share">share</button>
   <div class="overlay" *ngIf="serializedUrl" (click)="serializedUrl='';">
     <div class="shareBox" (click)="$event.stopPropagation();">
       <div class="shareBoxContainer">
