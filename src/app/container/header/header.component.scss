@@ -30,6 +30,7 @@
   z-index: 20;
   background: rgba(0,0,0,0.2);
   .shareBox{
+    text-align: left;
     position: absolute;
     width: 300px;
     right: 0;
@@ -58,6 +59,9 @@
           border-bottom-left-radius: 0;
           border-top-left-radius: 0;
         }
+      }
+      .prhint{
+        margin: 1rem 0 0;
       }
     }
   }

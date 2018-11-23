@@ -255,7 +255,7 @@ export class GraphCreator {
         return {edge, r};
       }).sort((a, b) => a.r - b.r);
 
-      if (edge_R[0].r < this.consts.nodeRadius) {
+      if (edge_R.length && edge_R[0].r < this.consts.nodeRadius) {
         this.suggestedLink1.classed('hidden', false)
           .attr('d', 'M' + edge_R[0].edge.source.x + ',' + edge_R[0].edge.source.y + 'L' + d.x + ',' + d.y);
         this.suggestedLink2.classed('hidden', false)
@@ -266,7 +266,6 @@ export class GraphCreator {
       }
     }
     if (!this.suggestedConnection) {
-
       const firstNearNode = thisGraph.nodes.find((n) => {
         if (n !== d && (n.data.maxInput > n.data.graphInputs.length)) {
           if (thisGraph.edges.find(e => (e.source === d && e.target === n) || (e.target === d && e.source === n) )) {

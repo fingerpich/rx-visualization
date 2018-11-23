@@ -1,13 +1,13 @@
-<div fxLayout="column" fxLayoutAlign="stretch" class="app">
+<div fxLayout="column" fxLayoutAlign="stretch" class="app" >
   <app-header [sceneComponent]="sceneComponent"></app-header>
-  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+  <div fxLayout="row" fxLayout.xs="column" fxFlex>
     <div fxFlex class="sceneContainer">
-      <button (click)="showCreationMenuToggle()" [class.active]="showCreationMenu" title="show tools" class="add">
-        <svg id="Layer_1" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.74 44.75"><title>plus-sign-in-circle</title><path d="M682.37,362a22.38,22.38,0,1,0,22.37,22.37A22.4,22.4,0,0,0,682.37,362Zm0,40.59a18.22,18.22,0,1,1,18.22-18.22,18.24,18.24,0,0,1-18.22,18.22Zm0,0" transform="translate(-660 -362)"/><path d="M692.64,382.47h-8.37V374.1a1.9,1.9,0,1,0-3.8,0v8.37H672.1a1.9,1.9,0,0,0,0,3.8h8.37v8.37a1.9,1.9,0,0,0,3.8,0v-8.37h8.37a1.9,1.9,0,0,0,0-3.8Zm0,0" transform="translate(-660 -362)"/></svg>
+      <button (click)="showCreationMenuToggle()" [class.active]="showCreationMenu" title="Tools (shortcut : Shift)" class="add">
+        <svg id="Layer_1" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.74 44.75"><title>Tools (shortcut : Shift)</title><path d="M682.37,362a22.38,22.38,0,1,0,22.37,22.37A22.4,22.4,0,0,0,682.37,362Zm0,40.59a18.22,18.22,0,1,1,18.22-18.22,18.24,18.24,0,0,1-18.22,18.22Zm0,0" transform="translate(-660 -362)"/><path d="M692.64,382.47h-8.37V374.1a1.9,1.9,0,1,0-3.8,0v8.37H672.1a1.9,1.9,0,0,0,0,3.8h8.37v8.37a1.9,1.9,0,0,0,3.8,0v-8.37h8.37a1.9,1.9,0,0,0,0-3.8Zm0,0" transform="translate(-660 -362)"/></svg>
         <!--<i class="material-icons">add</i>-->
       </button>
-      <button (click)="replay()" title="replay" class="replay">
-        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 226 226"><title>icon</title><path d="M150.27,108.56,103.34,74.48a5.63,5.63,0,0,0-9,4.56v68.2a5.58,5.58,0,0,0,5.66,5.65,5.59,5.59,0,0,0,3.3-1.1l46.93-34.08a5.56,5.56,0,0,0,2.35-4.55,5.67,5.67,0,0,0-2.35-4.6Zm0,0" transform="translate(0)"/><path d="M113,0A113,113,0,1,0,226,113,113,113,0,0,0,113,0Zm0,207.13A94.13,94.13,0,1,1,207.12,113,94.12,94.12,0,0,1,113,207.13Zm0,0" transform="translate(0)"/></svg>
+      <button (click)="replay()" title="Replay(shortcut : Enter)" class="replay">
+        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 226 226"><title>Replay(shortcut : Enter)</title><path d="M150.27,108.56,103.34,74.48a5.63,5.63,0,0,0-9,4.56v68.2a5.58,5.58,0,0,0,5.66,5.65,5.59,5.59,0,0,0,3.3-1.1l46.93-34.08a5.56,5.56,0,0,0,2.35-4.55,5.67,5.67,0,0,0-2.35-4.6Zm0,0" transform="translate(0)"/><path d="M113,0A113,113,0,1,0,226,113,113,113,0,0,0,113,0Zm0,207.13A94.13,94.13,0,1,1,207.12,113,94.12,94.12,0,0,1,113,207.13Zm0,0" transform="translate(0)"/></svg>
         <!--<i class="material-icons">play_circle_outline</i>-->
       </button>
       <rxstudio-scene fxFlex></rxstudio-scene>

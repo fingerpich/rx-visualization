@@ -1,7 +1,15 @@
 import * as NodeTypes from './node-types';
 import {RxNode} from './node-types/rxNode';
+
+interface OperatorsKind {
+  link: string;
+  name: string;
+  desc: string;
+  list: Array<any>;
+}
+
 export class RxHelper {
-  public static operators = [
+  public static operators: Array<OperatorsKind> = [
     {
       link: 'creation',
       name: 'Creating Observables',
