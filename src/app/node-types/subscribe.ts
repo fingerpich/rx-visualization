@@ -1,5 +1,6 @@
 import {RxNode} from './rxNode';
 import {map} from 'rxjs/operators';
+import {NumberInfo} from '../number-info';
 
 export class Subscribe extends RxNode {
   protected static title = 'Subscribe';
@@ -14,7 +15,7 @@ export class Subscribe extends RxNode {
 
   public runner = () => {
     // const thisObservable = this.graphInputs[0];
-    const thisObservable = this.graphInputs[0].observable.pipe(map((x: any) => {
+    const thisObservable = this.graphInputs[0].observable.pipe(map((x: NumberInfo) => {
       x.subscribed = true;
       return x;
     }));

@@ -138,6 +138,7 @@ export class RxHelper {
       list: [
         NodeTypes.Connect,
         NodeTypes.Publish,
+        NodeTypes.Share,
         NodeTypes.RefCount,
         NodeTypes.Replay,
       ]

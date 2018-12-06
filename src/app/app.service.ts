@@ -1,17 +1,30 @@
 import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
-import * as NodeTypes from './node-types';
 import {GraphCreator} from './scene/graph-creator';
+import {Operator} from './operator';
+import {NumberInfo} from './number-info';
+import {DiagramNode} from './scene/diagram-node';
+
+interface ResultPath {
+  node: any;
+  data: NumberInfo;
+  nexts: Array<Result>;
+}
+interface Result {
+  data: NumberInfo;
+  node: DiagramNode;
+}
+
 
 @Injectable()
 export class AppService {
-  private selectedCreationOption;
-  private selectItemSubject;
-  private controlSubject;
-  private itemSubscriptor;
-  private resultsArray = [];
+  private selectedCreationOption: any;
+  private selectItemSubject: Subject<Operator>;
+  private controlSubject: Subject<string>;
+  private itemSubscriptor: Subject<Array<ResultPath>>;
+  private resultsArray: Array<ResultPath> = [];
   private resultTimeouts = [];
-  private nodesList = [];
+  private nodesList: Array<DiagramNode> = [];
   private edgeList = [];
 
   public removeItemSubject;
@@ -65,24 +78,21 @@ export class AppService {
       clearTimeout(rt);
     }
   }
-  private addNextResult(index, nextResult) {
-    const resultsArray = this.resultsArray;
-    resultsArray[index].nexts.push(nextResult);
-    this.resultTimeouts.push(setTimeout(() => {
-      const firstNext = resultsArray[index].nexts.shift();
-      resultsArray[index].node = firstNext.node;
-      resultsArray[index].data = firstNext.data;
 
-      this.itemSubscriptor.next(resultsArray);
-    }, GraphCreator.animateTime * resultsArray[index].nexts.length));
-  }
-  public subscribeItem = (node, data) => {
+  public subscribeItem = (node: DiagramNode, numberInfo: NumberInfo) => {
     const resultsArray = this.resultsArray;
-    const index = resultsArray.findIndex(d => (d.data.id === data.id));
-    if (index > -1) {
-      this.addNextResult(index, {node, data});
+    const matchedNumInfo = resultsArray.find(d => (d.data.id === numberInfo.id));
+    if (matchedNumInfo) {
+      matchedNumInfo.nexts.push(<Result>{node, data: numberInfo});
+      this.resultTimeouts.push(setTimeout(() => {
+        const firstNext = matchedNumInfo.nexts.shift();
+        matchedNumInfo.node = firstNext.node;
+        matchedNumInfo.data = firstNext.data;
+
+        this.itemSubscriptor.next(resultsArray);
+      }, GraphCreator.animateTime * matchedNumInfo.nexts.length));
     } else {
-      resultsArray.push({node, data, nexts: []});
+      resultsArray.push({node, data: numberInfo, nexts: []});
     }
     this.itemSubscriptor.next(resultsArray);
   }
@@ -140,7 +150,7 @@ export class AppService {
         const nodeInputs = edges.filter(e => e.target === eachNode).map(e => e.source);
         eachNode.data.graphInputs = [];
         if (eachNode.data.areInputsReady(nodeInputs)) {
-          eachNode.data.graphInputs = nodeInputs.map(node => { return {observable: node.data.rx , node: node}; } );
+          eachNode.data.graphInputs = nodeInputs.map(node => ({observable: node.data.rx , node: node}));
           eachNode.data.run(eachNode, levelcounter, this.subscribeItem);
           notFinished = true;
           break;

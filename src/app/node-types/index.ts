@@ -42,6 +42,7 @@ export * from './retry';
 export * from './sample';
 export * from './scan';
 export * from './sequenceEqual';
+export * from './share';
 export * from './skip';
 export * from './skipLast';
 export * from './skipUntil';

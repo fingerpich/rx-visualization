@@ -1,6 +1,7 @@
 import {AppService} from '../app.service';
 import * as NodeTypes from '../node-types';
 import * as d3 from 'd3';
+import {DiagramNode} from './diagram-node';
 
 export class GraphCreator {
   public static animateTime = 400;
@@ -30,7 +31,7 @@ export class GraphCreator {
     // graphMouseDown: false,
   };
 
-  private nodes = [];
+  private nodes: Array<DiagramNode> = [];
   private edges = [];
   private connectorLine;
   private suggestedLink1;
@@ -179,7 +180,7 @@ export class GraphCreator {
     thisGraph.edges.forEach(function (val, i) {
       saveEdges.push({source: val.source.id, target: val.target.id});
     });
-    const nodesData = thisGraph.nodes.map(node => {
+    const nodesData = thisGraph.nodes.map((node: DiagramNode) => {
       return {
         id: node.id,
         x: node.x || 0,

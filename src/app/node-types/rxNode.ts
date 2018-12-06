@@ -1,13 +1,16 @@
 import {PropertyType} from './property-type';
 import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators';
+import {Operator} from '../operator';
+import {NumberInfo} from '../number-info';
+import {DiagramNode} from '../scene/diagram-node';
 
-export class RxNode {
+export class RxNode implements Operator {
   protected static title: string;
   protected static link: string;
   protected static desc: string;
-  protected static maxInput: Number;
-  protected static minInput: Number;
+  protected static maxInput: number;
+  protected static minInput: number;
 
   protected static propertiesType: PropertyType;
 
@@ -17,16 +20,17 @@ export class RxNode {
   public level: any;
   public rx: any;
   public properties: Object;
-  public graphInputs: Array<Object>;
+  public graphInputs: Array<any>;
   public runner;
+  public data: RxNode;
 
   get title(): string {
     return (<typeof RxNode>this.constructor).title;
   }
-  get maxInput(): Number {
+  get maxInput(): number {
     return (<typeof RxNode>this.constructor).maxInput;
   }
-  get minInput(): Number {
+  get minInput(): number {
     return (<typeof RxNode>this.constructor).minInput;
   }
   get link(): string { return (<typeof RxNode>this.constructor).link; }
@@ -35,13 +39,20 @@ export class RxNode {
     return (<typeof RxNode>this.constructor).propertiesType;
   }
 
-  public run(node, level, subscribeItem) {
-    this.rx = this.runner().pipe(map((x: any) => {
-      if (!x.id) {
-        x = {x: x, id: RxNode.cntr++};
+  public run(node: DiagramNode, level, subscribeItem) {
+    const res = this.runner();
+    this.rx = res.pipe(map((x: NumberInfo | number) => {
+      let xx: NumberInfo;
+      if (!(<NumberInfo>x).id) {
+        xx = <NumberInfo>{x: x, id: RxNode.cntr++};
+      } else {
+        xx = JSON.parse(JSON.stringify(x)); // cloned to save x during the result animation
+        if (node.node_type === 'Share' && (<NumberInfo>x).shared > 1) {
+          xx.id = RxNode.cntr++;
+        }
       }
-      subscribeItem(node, JSON.parse(JSON.stringify(x)));
-      return x;
+      subscribeItem(node, xx);
+      return xx;
     }));
     this.level = level;
   }
