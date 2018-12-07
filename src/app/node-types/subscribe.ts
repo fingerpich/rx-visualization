@@ -1,6 +1,6 @@
 import {RxNode} from './rxNode';
 import {map} from 'rxjs/operators';
-import {NumberInfo} from '../number-info';
+import {NumberInfo} from '../scene/number-info';
 
 export class Subscribe extends RxNode {
   protected static title = 'Subscribe';

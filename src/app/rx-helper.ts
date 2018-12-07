@@ -136,8 +136,8 @@ export class RxHelper {
       name: 'Connectable Observable Operators',
       desc: 'Specialty Observables that have more precisely-controlled subscription dynamics',
       list: [
-        NodeTypes.Connect,
-        NodeTypes.Publish,
+        // NodeTypes.Connect,
+        // NodeTypes.Publish,
         NodeTypes.Share,
         NodeTypes.RefCount,
         NodeTypes.Replay,

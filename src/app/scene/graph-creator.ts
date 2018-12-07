@@ -2,6 +2,8 @@ import {AppService} from '../app.service';
 import * as NodeTypes from '../node-types';
 import * as d3 from 'd3';
 import {DiagramNode} from './diagram-node';
+import resultAnimator from './result-animator';
+import {Result} from './result';
 
 export class GraphCreator {
   public static animateTime = 400;
@@ -71,7 +73,7 @@ export class GraphCreator {
     this.edges = edges;
     this.svg = svg;
     this.svgG = svg.append('g').classed(thisGraph.consts.graphClass, true);
-    this.appService.getItemSubscribe().subscribe(this.showResults);
+    resultAnimator.resultChanged.subscribe(this.showResults)
     this.setIdCounterByNodes();
     this.defineArrows();
     this.bindEvents();
@@ -468,10 +470,12 @@ export class GraphCreator {
     if (nodeClass) {
       const creationElement = new (nodeClass)();
       const xycoords = d3.mouse(this.svgG.node()),
-        d = {
+        d = <DiagramNode> {
           id: this.idct++,
           data: creationElement,
-          x: xycoords[0], y: xycoords[1]
+          x: xycoords[0],
+          y: xycoords[1],
+          node_type: ''
         };
       this.nodes.push(d);
       this.updateGraph();
@@ -562,7 +566,7 @@ export class GraphCreator {
     circles.exit().remove();
   };
 
-  private showResults = (resultList) => {
+  private showResults = (resultList: Array<Result>) => {
     // {node, data}
     // update existing nodes
     resultList = resultList || this.lastResultList;
@@ -571,22 +575,22 @@ export class GraphCreator {
     }
     this.lastResultList = resultList;
     const thisGraph = this;
-    const resultCircle = thisGraph.resultCircles.selectAll('g').data(resultList, d => d.data.id);
+    const resultCircle = thisGraph.resultCircles.selectAll('g').data(resultList, (d: Result) => d.numberInfo.id);
     const cornerDistance = thisGraph.consts.nodeRadius + thisGraph.consts.nodeRadius / 1.618;
-    const getTranslate = (d, isStart) => {
+    const getTranslate = (d: Result, isStart) => {
       const distance = isStart ? thisGraph.consts.nodeRadius : cornerDistance;
       let x = d.node.x;
-      x += distance * Math.sin(d.data.id / 5);
+      x += distance * Math.sin(d.numberInfo.id / 5);
       let y = d.node.y;
-      y += distance * Math.cos(d.data.id / 5);
+      y += distance * Math.cos(d.numberInfo.id / 5);
       return 'translate(' + x + ',' + y + ')';
     };
     resultCircle
       .transition()
       .duration(GraphCreator.animateTime / 2)
-      .attr('transform', d => getTranslate(d, false))
+      .attr('transform', (d: Result) => getTranslate(d, false))
       .attr('opacity', 0.6)
-      .select('text').text(d => d.data.x);
+      .select('text').text((d: Result) => d.numberInfo.x);
 
     resultCircle.exit().remove();
 
@@ -594,16 +598,16 @@ export class GraphCreator {
       .append('g');
     newGs
       .attr('opacity', 1)
-      .attr('transform', d => getTranslate(d, true))
+      .attr('transform', (d: Result) => getTranslate(d, true))
       .transition()
       .duration(GraphCreator.animateTime / 2)
-      .attr('transform', d => getTranslate(d, false))
+      .attr('transform', (d: Result) => getTranslate(d, false))
       .attr('opacity', 0.6);
     const circle = newGs
       .append('circle')
       .attr('r', String(this.consts.nodeRadius / 2.618));
-    newGs.each(function (d) {
-      GraphCreator.insertTitleLinebreaks(d3.select(this), d.data.x);
+    newGs.each(function (d: Result) {
+      GraphCreator.insertTitleLinebreaks(d3.select(this), d.numberInfo.x);
     });
   };
 

@@ -2,8 +2,10 @@ import {PropertyType} from './property-type';
 import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators';
 import {Operator} from '../operator';
-import {NumberInfo} from '../number-info';
+import {NumberInfo} from '../scene/number-info';
 import {DiagramNode} from '../scene/diagram-node';
+import resultAnimator from '../scene/result-animator';
+import {Result} from '../scene/result';
 
 export class RxNode implements Operator {
   protected static title: string;
@@ -39,19 +41,21 @@ export class RxNode implements Operator {
     return (<typeof RxNode>this.constructor).propertiesType;
   }
 
-  public run(node: DiagramNode, level, subscribeItem) {
+  public run(node: DiagramNode, level) {
     const res = this.runner();
     this.rx = res.pipe(map((x: NumberInfo | number) => {
       let xx: NumberInfo;
+      let timeoutStep = 1;
       if (!(<NumberInfo>x).id) {
         xx = <NumberInfo>{x: x, id: RxNode.cntr++};
       } else {
         xx = JSON.parse(JSON.stringify(x)); // cloned to save x during the result animation
-        if (node.node_type === 'Share' && (<NumberInfo>x).shared > 1) {
+        if (node.data.title === 'Share' && (<NumberInfo>x).shared > 1) {
           xx.id = RxNode.cntr++;
+          timeoutStep = level;
         }
       }
-      subscribeItem(node, xx);
+      resultAnimator.add(<Result>{node, numberInfo: xx, timeoutStep});
       return xx;
     }));
     this.level = level;

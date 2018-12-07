@@ -2,30 +2,18 @@ import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {GraphCreator} from './scene/graph-creator';
 import {Operator} from './operator';
-import {NumberInfo} from './number-info';
 import {DiagramNode} from './scene/diagram-node';
-
-interface ResultPath {
-  node: any;
-  data: NumberInfo;
-  nexts: Array<Result>;
-}
-interface Result {
-  data: NumberInfo;
-  node: DiagramNode;
-}
-
+import resultAnimator from './scene/result-animator';
+import {DiagramEdge} from './scene/diagram-edge';
 
 @Injectable()
 export class AppService {
   private selectedCreationOption: any;
   private selectItemSubject: Subject<Operator>;
   private controlSubject: Subject<string>;
-  private itemSubscriptor: Subject<Array<ResultPath>>;
-  private resultsArray: Array<ResultPath> = [];
-  private resultTimeouts = [];
+
   private nodesList: Array<DiagramNode> = [];
-  private edgeList = [];
+  private edgeList: Array<DiagramEdge> = [];
 
   public removeItemSubject;
 
@@ -33,7 +21,6 @@ export class AppService {
     this.selectItemSubject = new Subject();
     this.removeItemSubject = new Subject();
     this.controlSubject = new Subject();
-    this.itemSubscriptor = new Subject();
   }
 
   public setCreationOption(selectedCreation) {
@@ -68,35 +55,6 @@ export class AppService {
     return this.controlSubject;
   }
 
-  public getItemSubscribe() {
-    return this.itemSubscriptor;
-  }
-
-  private distroyTimeouts() {
-    let rt = 0;
-    while (rt = this.resultTimeouts.pop()) {
-      clearTimeout(rt);
-    }
-  }
-
-  public subscribeItem = (node: DiagramNode, numberInfo: NumberInfo) => {
-    const resultsArray = this.resultsArray;
-    const matchedNumInfo = resultsArray.find(d => (d.data.id === numberInfo.id));
-    if (matchedNumInfo) {
-      matchedNumInfo.nexts.push(<Result>{node, data: numberInfo});
-      this.resultTimeouts.push(setTimeout(() => {
-        const firstNext = matchedNumInfo.nexts.shift();
-        matchedNumInfo.node = firstNext.node;
-        matchedNumInfo.data = firstNext.data;
-
-        this.itemSubscriptor.next(resultsArray);
-      }, GraphCreator.animateTime * matchedNumInfo.nexts.length));
-    } else {
-      resultsArray.push({node, data: numberInfo, nexts: []});
-    }
-    this.itemSubscriptor.next(resultsArray);
-  }
-
   public getData() {
     return {edges: this.edgeList, nodes: this.nodesList};
   }
@@ -123,20 +81,20 @@ export class AppService {
   public refreshRxObjects() {
     const nodes = this.nodesList;
     const edges = this.edgeList;
-    this.resultsArray = [];
 
     // DISPOSE created rx objects
     for (const node of nodes) {
       node.data.dispose();
     }
-    while (this.resultsArray.pop()) {}
-    this.distroyTimeouts();
+
+    resultAnimator.reset();
+    resultAnimator.start(this.delay);
 
     let levelcounter = 1;
     // Make Creator Observables
     for (const node of nodes) {
       if (!node.data.rx && node.data.maxInput === 0) {
-        node.data.run(node, levelcounter, this.subscribeItem);
+        node.data.run(node, levelcounter);
       }
     }
 
@@ -151,7 +109,7 @@ export class AppService {
         eachNode.data.graphInputs = [];
         if (eachNode.data.areInputsReady(nodeInputs)) {
           eachNode.data.graphInputs = nodeInputs.map(node => ({observable: node.data.rx , node: node}));
-          eachNode.data.run(eachNode, levelcounter, this.subscribeItem);
+          eachNode.data.run(eachNode, levelcounter);
           notFinished = true;
           break;
         }

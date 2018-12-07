@@ -1,6 +1,6 @@
 import {RxNode} from './rxNode';
 import {share, tap} from 'rxjs/operators';
-import {NumberInfo} from '../number-info';
+import {NumberInfo} from '../scene/number-info';
 
 export class Share extends RxNode {
   protected static title = 'Share';
