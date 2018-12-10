@@ -27,17 +27,20 @@ class ResultAnimator {
   }
 
   start(delay = 400) {
-    this.subscription = timer(100, delay).subscribe(() => {
-      const resultArray: Array<Result> = this.resultPathArray
-        .map(resultPath => resultPath.getThisClockResult())
-        .filter(result => !!result);
-      this.resultChanged.next(resultArray);
-    });
+    this.tick(true, delay);
+  }
+
+  tick(keepOn, delay) {
+    const resultArray: Array<Result> = this.resultPathArray
+      .map(resultPath => resultPath.getThisClockResult())
+      .filter(result => !!result);
+    this.resultChanged.next(resultArray);
+    this.subscription = setTimeout(() => this.tick(true, delay), delay);
   }
 
   stop() {
     if (this.subscription) {
-      this.subscription.unsubscribe();
+      clearTimeout(this.subscription);
     }
   }
 }
