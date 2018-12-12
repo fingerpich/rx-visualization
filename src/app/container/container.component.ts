@@ -22,7 +22,9 @@ export class ContainerComponent implements OnInit {
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
     console.log(event);
-
+    if ((<HTMLElement>event.target).tagName === 'INPUT') {
+      return false;
+    }
     if (!this.showCreationMenu && (event.key === 'Backspace' || event.key === 'Delete')) {
       this.appService.removeSelectedItem();
     } else if (!this.showCreationMenu && event.key === 'Enter') {
