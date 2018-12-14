@@ -10,20 +10,24 @@ export class Scan extends RxNode {
   protected static maxInput = 1;
   protected static minInput = 1;
 
-  protected static propertiesType = new PropertyType('scanFunc', PropertyTypeEnum.Method, [
-    SampleFunctions.SCAN_SUM,
-    SampleFunctions.SCAN_TIME,
+  protected static propertiesType = new PropertyType('', PropertyTypeEnum.Object, [
+    new PropertyType('accumulator', PropertyTypeEnum.Method, [
+      SampleFunctions.SCAN_SUM,
+      SampleFunctions.SCAN_Multiply,
+    ], ''),
+    new PropertyType('seed', PropertyTypeEnum.Number)
   ], '');
 
   public properties = {
-    scanFunc: 0,
+    accumulator: 0,
+    seed: 0,
   };
   public graphInputs = [];
 
   public runner = () => {
-    return this.graphInputs[0].observable.pipe(scan(Scan.propertiesType.params[this.properties.scanFunc].func));
+    return this.graphInputs[0].observable.pipe(scan(Scan.propertiesType.params[0].params[this.properties.accumulator].func, this.properties.seed));
   }
   public toString = () => {
-    return `.scan(${Scan.propertiesType.params[this.properties.scanFunc].text})`;
+    return `.scan(${Scan.propertiesType.params[0].params[this.properties.accumulator].text}, ${this.properties.seed})`;
   }
 }

@@ -36,7 +36,7 @@ export class SampleFunctions {
   public static XplusY = new SampleFunction('x+y', (x, y) => x.x + y.x, '(x,y) => x + y');
   public static TRANS2 = new SampleFunction('transform1', (x) => x.pipe(take(2)).pipe(repeat(2)), '(x) => x.pipe(take(2)).pipe(repeat(2)');
   public static TRANS3 = new SampleFunction('transform1', (x) => x.pipe(take(2)).pipe(repeat(3)), '(x) => x.take(2).repeat(3)');
-  public static SCAN_SUM = new SampleFunction('scanSum', (acc, x) => acc + x.x, '(acc,x) => acc + x');
-  public static SCAN_TIME = new SampleFunction('scanTime', (acc, x) => acc * x.x, '(acc,x) => acc * x');
+  public static SCAN_SUM = new SampleFunction('scanSum', (acc, inp) => ({id: inp.id, x: (acc.hasOwnProperty('x') ? acc.x : acc) + inp.x}), '(acc, x) => acc + x');
+  public static SCAN_Multiply = new SampleFunction('scanMultiply', (acc, inp) => ({id: inp.id, x: (acc.hasOwnProperty('x') ? acc.x : acc) * inp.x}), '(acc, x) => acc * x');
   public static ZIP1 = new SampleFunction('scanTime', (...args) => args.map(x => x.x).join(','), '(...args) => args.join(",")');
 }

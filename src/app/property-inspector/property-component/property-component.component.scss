@@ -1,11 +1,6 @@
 @import '../../../common';
 .simpleInput{
   text-align: center;
-  b{
-    color: #6f6f6f;
-    font-weight: 100;
-    font-size: 12px;
-  }
   input{
     min-width: 40px;
     max-width: 100px;
@@ -22,6 +17,13 @@
     outline:0;
     color:#0af;
     border-bottom: 1px solid #0af;
+  }
+}
+.methodInput, .simpleInput{
+  b{
+    color: #6f6f6f;
+    font-weight: 100;
+    font-size: 12px;
   }
 }
 .listInput{
