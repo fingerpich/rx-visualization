@@ -3,7 +3,12 @@
 .header{
   background: $headColor;;
   text-align: right;
-  button{
+  a{
+    text-decoration: none;
+    font-family: Arial;
+  }
+  button, .examples{
+    cursor: pointer;
     border: none;
     background: $headColor;
     outline: none;

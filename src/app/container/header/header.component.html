@@ -1,5 +1,6 @@
 <div class="header">
-  <button (click)="share()"  title="share">share</button>
+  <button (click)="share()"  title="share">Share</button>
+  <a href="https://github.com/fingerpich/rx-visualization#visualizing-examples" class="examples">Examples</a>
   <div class="overlay" *ngIf="serializedUrl" (click)="serializedUrl='';">
     <div class="shareBox" (click)="$event.stopPropagation();">
       <div class="shareBoxContainer">
