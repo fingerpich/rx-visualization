@@ -5,4 +5,5 @@ export interface Result {
   numberInfo: NumberInfo;
   node: DiagramNode;
   timeoutStep: number;
+  lastTicks: number;
 }

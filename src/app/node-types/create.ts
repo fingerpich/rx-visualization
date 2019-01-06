@@ -9,8 +9,7 @@ export class Create extends RxNode {
   protected static maxInput = 0;
   protected static minInput = 0;
 
-  // protected static propertiesType = [{name:'list',type: 'list', params:[{name:'time',type:'Number'},{name:'value',type:'Number'}]}];
-  protected static propertiesType = new PropertyType('list', PropertyTypeEnum.List,
+  protected static propertiesType = new PropertyType('items', PropertyTypeEnum.List,
     new PropertyType('', PropertyTypeEnum.Object, [
       new PropertyType('time', PropertyTypeEnum.Number),
       new PropertyType('value', PropertyTypeEnum.Number)
@@ -18,26 +17,30 @@ export class Create extends RxNode {
   , '');
 
   public properties = {
-    list: [
+    items: [
       {time: 0, value: 1}
     ]
   };
   public graphInputs = [];
 
   public runner = () => {
-    const delay = (observer, delayTime, value) => {
+    const delay = (observer, delayTime, value, isLastOne) => {
       setTimeout(() => {
         observer.next(value);
+        if (isLastOne) {
+          observer.complete();
+        }
       }, delayTime || 0);
     };
     return Observable.create((observer) => {
-      for (const l of this.properties.list) {
-        delay(observer, l.time, l.value);
+      const maxTimeItem = this.properties.items.reduce((max, item) => max.time <= item.time ? item : max, {time: 0});
+      for (const item of this.properties.items) {
+        delay(observer, item.time, item.value, maxTimeItem === item);
       }
     });
   }
   public toString = () => {
-    const list = this.properties.list;
+    const list = this.properties.items;
     const getNext = ({value, time}) => {
       return time ? `setTimeout(function(){ observer.next(${value});}, ${time})` : `observer.next(${value});`;
     };

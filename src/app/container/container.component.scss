@@ -4,7 +4,10 @@
   height:100%;
   padding:0;
   overflow: hidden;
-
+  .close{
+    cursor: pointer;
+    float: right;
+  }
   .sceneContainer {
     position: relative;
     border:1px solid $borderColor;
@@ -12,6 +15,14 @@
       width: 100%;
       height: 100%;
       position: absolute;
+    }
+    .slider-container{
+      width: 300px;
+      right: 0;
+      position: absolute;
+      top: 0;
+      background: white;
+      z-index: 1;
     }
     button {
       border: none;
@@ -29,10 +40,14 @@
       -ms-transition: padding 0.3s;
       -o-transition: padding 0.3s;
       transition: padding 0.3s;
-      &:hover{
-        //color:lighten($primaryColor, 10%);
-        fill:$primaryColor;
-        padding: 0rem;
+      &.showTimeSetting{
+        right: 0;
+        top: 0;
+        padding: 4px;
+        height: 1.6rem;
+        box-sizing: border-box;
+        width: 1.6rem;
+        border-radius: 16px;
       }
       &.replay{
         right: 1rem;
@@ -45,6 +60,12 @@
         right: 1rem;
         bottom: 1rem;
       }
+      &:hover{
+        //color:lighten($primaryColor, 10%);
+        fill:$primaryColor;
+        padding: 0rem;
+      }
+
     }
   }
   rxstudio-creation-menu{

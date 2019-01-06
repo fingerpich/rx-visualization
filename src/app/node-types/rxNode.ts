@@ -55,7 +55,7 @@ export class RxNode implements Operator {
           timeoutStep = level;
         }
       }
-      resultAnimator.add(<Result>{node, numberInfo: xx, timeoutStep});
+      resultAnimator.add(<Result>{node, numberInfo: xx, timeoutStep, });
       return xx;
     }));
     this.level = level;

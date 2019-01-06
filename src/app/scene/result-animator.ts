@@ -1,18 +1,19 @@
 import {ResultPath} from './result-path';
 import {Result} from './result';
-import {timer} from 'rxjs';
 import {Subject} from 'rxjs/Subject';
 
 class ResultAnimator {
   resultPathArray: Array<ResultPath>;
   resultChanged = new Subject();
-  subscription;
+  hasFinished = new Subject();
+  timeoutRef;
 
   constructor() {
     this.reset();
   }
 
   add (res: Result) {
+    res.lastTicks = 0;
     const matchedNumInfo = this.resultPathArray.find(resPath => (resPath.id === res.numberInfo.id));
     if (matchedNumInfo) {
       matchedNumInfo.add(res);
@@ -35,12 +36,18 @@ class ResultAnimator {
       .map(resultPath => resultPath.getThisClockResult())
       .filter(result => !!result);
     this.resultChanged.next(resultArray);
-    this.subscription = setTimeout(() => this.tick(true, delay), delay);
+    this.timeoutRef = setTimeout(() => this.tick(true, delay), delay);
+    const hasFinished = this.resultPathArray.length && this.resultPathArray.reduce((acc, result) => {
+      return result.hasFinished() && acc;
+    }, true);
+    if (hasFinished) {
+      this.hasFinished.next({finished: true});
+    }
   }
 
   stop() {
-    if (this.subscription) {
-      clearTimeout(this.subscription);
+    if (this.timeoutRef) {
+      clearTimeout(this.timeoutRef);
     }
   }
 }

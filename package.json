@@ -25,6 +25,7 @@
     "@angular/service-worker": "^7.1.1",
     "core-js": "^2.4.1",
     "d3": "^5.7.0",
+    "ng5-slider": "^1.1.11",
     "ngx-clipboard": "^11.1.9",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.0.0-rc.0",

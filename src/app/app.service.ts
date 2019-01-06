@@ -5,12 +5,17 @@ import {Operator} from './operator';
 import {DiagramNode} from './scene/diagram-node';
 import resultAnimator from './scene/result-animator';
 import {DiagramEdge} from './scene/diagram-edge';
+import {Subscribe} from './node-types';
+import {zip} from 'rxjs';
+import {take} from 'rxjs/operators';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AppService {
   private selectedCreationOption: any;
   private selectItemSubject: Subject<Operator>;
   private controlSubject: Subject<string>;
+  private animationHasFinished: Boolean = false;
 
   private nodesList: Array<DiagramNode> = [];
   private edgeList: Array<DiagramEdge> = [];
@@ -62,7 +67,7 @@ export class AppService {
     const xLoc = window.innerWidth / (window.innerWidth < 600 ? 2 : 3);
     const yLoc = 100;
     const nodes = [
-      {id: 0, x: xLoc, y: yLoc, node_type: 'Create', properties: {list: [{time: 0, value: 1}]}},
+      {id: 0, x: xLoc, y: yLoc, node_type: 'Create', properties: {items: [{time: 0, value: 1}]}},
       {id: 1, x: xLoc, y: yLoc + 200, node_type: 'Subscribe', properties: {}}
     ];
     const edges = [{source: 0, target: 1}];
@@ -74,13 +79,15 @@ export class AppService {
   }
   public set delay(value) {
     GraphCreator.animateTime = value;
-    this.refreshRxObjects();
+    if (this.animationHasFinished) {
+      this.refreshRxObjects();
+    }
   }
-
 
   public refreshRxObjects() {
     const nodes = this.nodesList;
     const edges = this.edgeList;
+    this.animationHasFinished = false;
 
     // DISPOSE created rx objects
     for (const node of nodes) {
@@ -115,5 +122,15 @@ export class AppService {
         }
       }
     }
+
+    const finishSubjects: Array<Subject<object>> = nodes
+      .filter(n => n.data.title === 'Subscribe')
+      .map(subscribeNode => (subscribeNode.data as Subscribe).finishSubject);
+
+    zip(...finishSubjects).pipe(take(1)).subscribe(() => {
+      resultAnimator.hasFinished.pipe(take(1)).subscribe(() => {
+        this.animationHasFinished = true;
+      });
+    });
   }
 }

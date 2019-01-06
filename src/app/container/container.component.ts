@@ -15,8 +15,20 @@ export class ContainerComponent implements OnInit {
 
   showColdStream;
   showCreationMenu = false;
-
+  showSlider = false;
+  speed = {
+    value: 6,
+    options: {
+      floor: 1,
+      ceil: 10
+    }
+  }
   constructor(private appService: AppService, private route: ActivatedRoute) {
+    this.sliderChanged();
+  }
+
+  sliderChanged () {
+    this.appService.delay = Math.ceil(Math.pow(1.24, this.speed.value * 3 + 10));
   }
 
   @HostListener('window:keyup', ['$event'])

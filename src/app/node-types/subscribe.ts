@@ -1,6 +1,7 @@
 import {RxNode} from './rxNode';
 import {map} from 'rxjs/operators';
 import {NumberInfo} from '../scene/number-info';
+import {Subject} from 'rxjs/Subject';
 
 export class Subscribe extends RxNode {
   protected static title = 'Subscribe';
@@ -12,6 +13,7 @@ export class Subscribe extends RxNode {
 
   public properties = {};
   public graphInputs = [];
+  public finishSubject = new Subject();
 
   public runner = () => {
     // const thisObservable = this.graphInputs[0];
@@ -20,16 +22,13 @@ export class Subscribe extends RxNode {
       return x;
     }));
     setTimeout(() => {
-      this.rxo = this.rx.subscribe(
-        function (x) {
-          console.log('Next: %s', x);
-        }, /* on next*/
-        function (err) {
-          console.log('Error: %s', err);
-        }, /* on error*/
-        function () {
-          console.log('Completed');
-          /* on complete*/
+      this.rxo = this.rx.subscribe((x) => {
+          console.log('asc');
+        },
+        (err) => {
+          // TODO: show errors in properties
+        }, () => {
+          this.finishSubject.next({finished: true});
         });
     });
     return thisObservable;

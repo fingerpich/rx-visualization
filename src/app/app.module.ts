@@ -12,6 +12,7 @@ import { SceneComponent } from './scene/scene.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {AppService} from './app.service';
 import { ClipboardModule } from 'ngx-clipboard';
+import { Ng5SliderModule } from 'ng5-slider';
 import { PropertyComponentComponent } from './property-inspector/property-component/property-component.component';
 import { ContainerComponent } from './container/container.component';
 import { HeaderComponent } from './container/header/header.component';
@@ -36,6 +37,7 @@ import { environment } from '../environments/environment';
     FormsModule,
     HttpModule,
     ClipboardModule,
+    Ng5SliderModule,
     FlexLayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
